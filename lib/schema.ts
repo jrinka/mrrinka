@@ -34,14 +34,15 @@ const photoUrl = z
   .max(2000)
   .refine((v) => {
     if (!v) return true;
-    if (/^\/images\/[a-zA-Z0-9_-]+\.(jpg|png|webp)$/.test(v)) return true;
+    if (/^\/(images|archive)\/[a-zA-Z0-9_-]+\.(jpg|png|webp)$/.test(v))
+      return true;
     try {
       const u = new URL(v);
       return u.protocol === "https:" && u.hostname === "images.unsplash.com";
     } catch {
       return false;
     }
-  }, "Use a direct images.unsplash.com image URL.");
+  }, "Use a built-in image or a direct images.unsplash.com image URL.");
 export const resourceSchema = z.object({
   id: z.string().uuid(),
   title: z.string().trim().min(1).max(120),

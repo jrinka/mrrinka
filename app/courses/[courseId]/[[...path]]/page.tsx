@@ -15,6 +15,24 @@ import {
   type CourseItem,
 } from "@/lib/schema";
 type Props = { params: Promise<{ courseId: string; path?: string[] }> };
+
+function ImageCredit({ item }: { item: CourseItem }) {
+  const archival = item.image.startsWith("/archive/");
+  return (
+    <>
+      {archival ? "Public domain · " : "Photo by "}
+      {item.imageSource ? (
+        <a href={item.imageSource} rel="noopener noreferrer">
+          {item.imageCredit}
+        </a>
+      ) : (
+        item.imageCredit
+      )}
+      {!archival && " / Unsplash"}
+    </>
+  );
+}
+
 export async function generateMetadata({ params }: Props) {
   const { courseId } = await params;
   return {
@@ -61,11 +79,7 @@ export default async function CoursePage({ params }: Props) {
         </Link>
         {i.image && (
           <div className="card-credit">
-            Photo by{" "}
-            <a href={i.imageSource} rel="noopener noreferrer">
-              {i.imageCredit}
-            </a>{" "}
-            / Unsplash
+            <ImageCredit item={i} />
           </div>
         )}
       </article>
@@ -105,15 +119,7 @@ export default async function CoursePage({ params }: Props) {
               </div>
               {item.imageCredit && (
                 <figcaption>
-                  Photo by{" "}
-                  {item.imageSource ? (
-                    <a href={item.imageSource} rel="noopener noreferrer">
-                      {item.imageCredit}
-                    </a>
-                  ) : (
-                    item.imageCredit
-                  )}{" "}
-                  on Unsplash
+                  <ImageCredit item={item} />
                 </figcaption>
               )}
             </figure>
@@ -219,11 +225,7 @@ export default async function CoursePage({ params }: Props) {
                     priority
                   />
                   <figcaption>
-                    Photo by{" "}
-                    <a href={featured.imageSource} rel="noopener noreferrer">
-                      {featured.imageCredit}
-                    </a>{" "}
-                    / Unsplash
+                    <ImageCredit item={featured} />
                   </figcaption>
                 </figure>
               ) : (

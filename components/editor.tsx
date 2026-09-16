@@ -529,13 +529,13 @@ export default function Editor({ login, previewCourses }: Props) {
                     </label>
                   )}
                   <details className="editor-details">
-                    <summary>Banner image / Unsplash</summary>
+                    <summary>Banner image</summary>
                     <p className="muted">
-                      Use a photo from your Unsplash collection. Add its direct
-                      image address, alt text, and source credit.
+                      Use a built-in archival image or a photo from your Unsplash
+                      collection. Always include alt text and a source credit.
                     </p>
                     <label className="field">
-                      <span>Image URL (images.unsplash.com)</span>
+                      <span>Image URL</span>
                       <input
                         type="url"
                         value={item.image}
