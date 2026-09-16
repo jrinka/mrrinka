@@ -168,14 +168,23 @@ export default function Editor({ login, previewCourses }: Props) {
     setBusy(true);
     setError("");
     try {
-      const body = new FormData();
-      body.set("file", file);
+      if (!file.size || file.size > 50_000_000) throw new Error("Choose a file up to 50 MB.");
       const response = await fetch("/api/admin/upload", {
-        method: "POST",
-        body,
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "start", name: file.name, size: file.size }),
       });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
+      const upload = await response.json();
+      if (!response.ok) throw new Error(upload.error);
+      const transfer = await fetch(upload.uploadUrl, {
+        method: "PUT", headers: { "Content-Type": upload.type }, body: file,
+      });
+      if (!transfer.ok) throw new Error("File transfer failed. Please try again.");
+      const confirmation = await fetch("/api/admin/upload", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "complete", ticket: upload.ticket }),
+      });
+      const data = await confirmation.json();
+      if (!confirmation.ok) throw new Error(data.error);
       setCourse((current) =>
         current
           ? {
@@ -202,7 +211,7 @@ export default function Editor({ login, previewCourses }: Props) {
       editRevision.current++;
       setDirty(true);
       setMessage(
-        "File uploaded. Save this course to attach its link. Uploaded files are public once deployed, including files attached to draft pages.",
+        "File uploaded. Save this course to attach its link. Uploaded files are immediately public, including files attached to draft pages.",
       );
     } catch (e) {
       setError(e instanceof Error ? e.message : "Upload failed.");
@@ -664,7 +673,7 @@ export default function Editor({ login, previewCourses }: Props) {
                       />
                     </div>
                     <small className="hint">
-                      PDF, images, or plain text · Up to 2 MB. Use a
+                      PDF, images, or plain text · Up to 50 MB. Use a
                       shared-document link for larger files.
                     </small>
                   </section>

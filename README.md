@@ -21,7 +21,7 @@ Visit `http://127.0.0.1:3000`. For a stable local production preview, use `npm r
 - Saves create GitHub commits on `CONTENT_BRANCH`. Connect the repository to Vercel so those commits deploy automatically.
 - Saves compare the loaded file SHA with GitHub. If another edit landed, export your unsaved copy and reload to merge the changes rather than overwriting them.
 - Drafts are excluded from public course pages. This repository is public, so draft source text is still visible on GitHub. Do not store confidential material here.
-- Uploads support PDF, PNG, JPG, WebP, and TXT up to 2 MB. Uploaded files are public after deployment even if their page is a draft. Use HTTPS links to shared documents for other formats or larger files.
+- Uploads support PDF, PNG, JPG, WebP, and TXT up to 50 MB, uploaded directly to Cloudflare R2. Uploaded files are public immediately even if their page is a draft. Use HTTPS links to shared documents for other formats or larger files. Existing `/uploads/` links remain valid.
 - The starter close-reading and paragraph activities run in the browser. Writing is not submitted or persisted; students can download or copy it.
 - To add content with Codex, pull the latest repository first and edit the same course JSON files. Preserve stable IDs and existing user edits. New custom practice components can be added in code and registered in the schema/editor.
 
@@ -59,3 +59,12 @@ npm run build
 ```
 
 The repository includes starter teaching content, not a complete course or official IB assessment documentation. Add the actual class texts, tasks, and criteria through the editor.
+
+## Resource storage (Cloudflare R2)
+
+New uploads use the `mrrinka-resources` Standard bucket at `https://resources.mrrinka.com`.
+Set `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`, and `R2_PUBLIC_URL` in Vercel production. Keep credentials server-only and scoped to Object Read & Write for this bucket.
+
+Bucket CORS allows PUT, GET, HEAD from `https://mrrinka.com` and `https://mrrinka.vercel.app`, with content-type and x-amz-* headers. Upload URLs expire after ten minutes and fix the object key, content type, and size. Upload confirmation verifies size and a file signature before attaching the link. Only the authenticated teacher can initiate or confirm uploads. Interrupted uploads may remain in the bucket; remove unused files through Cloudflare.
+
+Files become public upon upload, including files attached to drafts. Deleting a link does not delete its file. Course pages still save to GitHub and deploy through Vercel; file bytes no longer enter the repository. PDF links open using their application/pdf content type. R2 Standard usage beyond free allowances is billed by Cloudflare.
