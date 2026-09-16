@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Michroma&family=Space+Grotesk:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Saira+Semi+Condensed:wght@400&family=Space+Grotesk:wght@400;500;600&display=swap");
 :root {
   --paper: #f5f5f3;
   --ink: #25282b;
@@ -8,7 +8,7 @@
   --white: #fff;
   --font-sans: "Space Grotesk", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
-  --font-accent: "Michroma", Arial, sans-serif;
+  --font-accent: "Saira Semi Condensed", Arial, sans-serif;
 }
 * {
   box-sizing: border-box;
