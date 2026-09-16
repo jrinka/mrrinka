@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Michroma&family=Space+Grotesk:wght@400;500;600&display=swap");
 :root {
   --paper: #f5f5f3;
   --ink: #25282b;
@@ -8,6 +8,7 @@
   --white: #fff;
   --font-sans: "Space Grotesk", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
+  --font-accent: "Michroma", Arial, sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -81,9 +82,20 @@ h3 {
   font-size: 1.25rem;
 }
 .mono {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.75rem;
   letter-spacing: 0.055em;
+}
+.breadcrumb.mono,
+.side-kicker.mono,
+.featured-copy > .mono,
+.section-heading > .mono,
+.footer.mono {
+  font-family: var(--font-accent);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.035em;
 }
 .muted,
 .hint {
@@ -147,7 +159,7 @@ h3 {
 }
 .top-note {
   margin-left: auto;
-  font: 400 0.75rem var(--font-mono);
+  font: 400 0.6875rem var(--font-accent);
   letter-spacing: 0.08em;
   color: #b3b9b9;
 }
