@@ -1,0 +1,90 @@
+{
+  "id": "literature",
+  "title": "IB English A: Literature",
+  "shortTitle": "IB Literature",
+  "eyebrow": "IB ENGLISH A",
+  "description": "Read across voices and perspectives. Build interpretations that are worth arguing for.",
+  "announcement": "",
+  "featuredId": "d36ddfe2-9ef9-4ea5-81ac-53646212029c",
+  "items": [
+    {
+      "id": "d36ddfe2-9ef9-4ea5-81ac-53646212029c",
+      "title": "Voice and perspective",
+      "section": "units",
+      "summary": "How does a narrator shape what we know\u2014and what we question?",
+      "body": "## Our guiding question\nHow does a narrator shape what we know\u2014and what we question?\n\n## Read and notice\nBring a passage or image from your current class text. Make three observations about the choices its creator has made.\n\n## Discuss\n- Which detail most strongly shapes your response?\n- How might another reader interpret it differently?\n- What evidence helps you explain your reading?\n\n## Make your thinking visible\nTry the close reading lab, then use the paragraph workshop to turn one interpretation into a developed response.",
+      "published": true,
+      "image": "/images/literature-photo.jpg",
+      "imageAlt": "Rows of books on wooden library shelves.",
+      "imageCredit": "Zoshua Colah",
+      "imageSource": "https://unsplash.com/es/fotos/estanterias-llenas-de-libros-de-colores-sdD9aUgSl2U",
+      "links": [],
+      "relatedIds": [
+        "b0e94ffc-e5fc-42c2-b2fa-38d415382634",
+        "4677f8b8-7908-4001-a7be-b8f450a46cfa",
+        "b7c7247e-f582-44f6-a201-9762fbec6339"
+      ],
+      "practiceKind": "none"
+    },
+    {
+      "id": "b7c7247e-f582-44f6-a201-9762fbec6339",
+      "title": "From observation to analysis",
+      "section": "resources",
+      "summary": "A short guide to building interpretations with evidence.",
+      "body": "## Start with a precise observation\nWhat word, image, pattern, or structural choice catches your attention? Quote briefly and accurately.\n\n## Explore a possible effect\nHow might that choice shape a reader\u2019s response? Consider the context before making a claim about its effect.\n\n## Connect detail to meaning\nExplain how the evidence supports your interpretation. A useful starting phrase is: \u201cThis choice suggests \u2026 because \u2026\u201d\n\n## Test your interpretation\nCan you find a second detail that supports your reading? Is there evidence that complicates it? Revise your idea if necessary.",
+      "published": true,
+      "image": "",
+      "imageAlt": "",
+      "imageCredit": "",
+      "imageSource": "",
+      "links": [],
+      "relatedIds": [],
+      "practiceKind": "none"
+    },
+    {
+      "id": "a718b887-02ee-4e53-acb5-808ef5214809",
+      "title": "Preparing an analytical response",
+      "section": "assessment",
+      "summary": "Plan, develop, and review a response to a text.",
+      "body": "## Plan your response\nIdentify the task, choose a focused interpretation, and collect relevant evidence.\n\n## Develop your analysis\nOrganize paragraphs around ideas. Explain how each detail contributes to your interpretation.\n\n## Review before sharing\n- Does my response address the question?\n- Have I explained my evidence?\n- Are my paragraphs connected and clearly organized?\n- Is my language precise?\n\nYour teacher will provide the specific task instructions and assessment criteria for each assignment.",
+      "published": true,
+      "image": "",
+      "imageAlt": "",
+      "imageCredit": "",
+      "imageSource": "",
+      "links": [],
+      "relatedIds": [],
+      "practiceKind": "none"
+    },
+    {
+      "id": "b0e94ffc-e5fc-42c2-b2fa-38d415382634",
+      "title": "Close reading lab",
+      "section": "practice",
+      "summary": "Notice a choice. Develop an interpretation. Explain its effect.",
+      "body": "## Before you begin\nChoose a short passage from a text you are studying. Use the prompts below to develop an interpretation supported by precise details.",
+      "published": true,
+      "image": "",
+      "imageAlt": "",
+      "imageCredit": "",
+      "imageSource": "",
+      "links": [],
+      "relatedIds": [],
+      "practiceKind": "close-reading"
+    },
+    {
+      "id": "4677f8b8-7908-4001-a7be-b8f450a46cfa",
+      "title": "Paragraph workshop",
+      "section": "practice",
+      "summary": "Connect your claim, evidence, and analysis.",
+      "body": "## Build a purposeful paragraph\nWork with a passage from your current text. Your goal is to explain how a particular choice creates meaning, rather than simply naming a technique.",
+      "published": true,
+      "image": "",
+      "imageAlt": "",
+      "imageCredit": "",
+      "imageSource": "",
+      "links": [],
+      "relatedIds": [],
+      "practiceKind": "paragraph"
+    }
+  ]
+}
