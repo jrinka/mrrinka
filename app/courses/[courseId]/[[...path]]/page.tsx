@@ -5,6 +5,7 @@ import { ArrowUpRight, ArrowLeft, Download } from "lucide-react";
 import Shell from "@/components/shell";
 import Markdown from "@/components/markdown";
 import Practice from "@/components/practice";
+import { ArchiveCardArt, ArchiveHero } from "@/components/archive-art";
 import { publicCourse, courses } from "@/lib/content";
 import {
   isCourseId,
@@ -181,8 +182,13 @@ export default async function CoursePage({ params }: Props) {
         </>
       ) : (
         <>
-          <h1>{course.title.replace("IB English A: ", "")}</h1>
-          <p className="intro">{course.description}</p>
+          <div className="course-hero">
+            <div className="course-hero-copy">
+              <h1>{course.title.replace("IB English A: ", "")}</h1>
+              <p className="intro">{course.description}</p>
+            </div>
+            <ArchiveHero courseId={courseId} />
+          </div>
           {course.announcement && (
             <div className="announcement">
               <span className="mono">CLASS NOTE</span>
@@ -249,20 +255,25 @@ export default async function CoursePage({ params }: Props) {
                 desc: "Short activities. Room to experiment.",
               },
             ].map((x, i) => (
-              <Link
-                className="content-card"
-                href={`${base}/${x.section}`}
+              <article
+                className="content-card archive-route-card"
                 key={x.section}
               >
-                <div className="card-copy">
-                  <span className="mono card-number">
-                    0{i + 1} / {sectionNames[x.section as Section]}
-                  </span>
-                  <h2>{x.title}</h2>
-                  <p>{x.desc}</p>
-                  <ArrowUpRight size={18} />
-                </div>
-              </Link>
+                <ArchiveCardArt
+                  courseId={courseId}
+                  section={x.section as Section}
+                />
+                <Link className="archive-route-link" href={`${base}/${x.section}`}>
+                  <div className="card-copy">
+                    <span className="mono card-number">
+                      0{i + 1} / {sectionNames[x.section as Section]}
+                    </span>
+                    <h2>{x.title}</h2>
+                    <p>{x.desc}</p>
+                    <ArrowUpRight size={18} />
+                  </div>
+                </Link>
+              </article>
             ))}
           </div>
         </>

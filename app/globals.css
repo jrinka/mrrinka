@@ -255,6 +255,87 @@ h3 {
   max-width: 700px;
   margin-bottom: 32px;
 }
+.course-hero {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(360px, 1.15fr);
+  gap: 42px;
+  align-items: end;
+  margin: 0 0 36px;
+}
+.course-hero-copy {
+  padding-bottom: 24px;
+}
+.course-hero-copy .intro {
+  margin-bottom: 0;
+}
+.archive-hero,
+.archive-card-art {
+  margin: 0;
+}
+.archive-image {
+  position: relative;
+  min-height: 350px;
+  overflow: hidden;
+  border: 1px solid #9fa49f;
+  background: #dddcd2;
+}
+.archive-image::after,
+.archive-card-art > div::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(216, 237, 97, 0.18), transparent 52%);
+  mix-blend-mode: multiply;
+}
+.archive-image img,
+.archive-card-art img {
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.12) sepia(0.12);
+  mix-blend-mode: multiply;
+}
+.archive-image > span {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  padding: 7px 10px;
+  color: var(--ink);
+  background: var(--citron);
+  font: 400 0.625rem var(--font-accent);
+  letter-spacing: 0.08em;
+}
+.archive-hero figcaption,
+.archive-card-art figcaption {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+}
+.archive-hero figcaption a,
+.archive-card-art figcaption a {
+  text-decoration-color: #a5aa8c;
+}
+.archive-route-card {
+  display: flex;
+}
+.archive-route-link {
+  display: flex;
+  flex: 1;
+  text-decoration: none;
+}
+.archive-card-art > div {
+  position: relative;
+  height: 155px;
+  overflow: hidden;
+  background: #dddcd2;
+  border-bottom: 1px solid var(--line);
+}
+.archive-card-art figcaption {
+  min-height: 42px;
+  padding: 7px 12px 0;
+  margin: 0;
+}
 .announcement {
   border-left: 4px solid var(--citron);
   padding: 16px 20px;
@@ -784,6 +865,10 @@ h3 {
   .cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .course-hero {
+    grid-template-columns: minmax(220px, 0.8fr) minmax(300px, 1.2fr);
+    gap: 26px;
+  }
   .cards > .content-card:last-child:nth-child(3) {
     grid-column: 1/-1;
   }
@@ -818,6 +903,16 @@ h3 {
   }
   .cards {
     grid-template-columns: 1fr;
+  }
+  .course-hero {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .course-hero-copy {
+    padding-bottom: 0;
+  }
+  .archive-image {
+    min-height: 290px;
   }
   .cards > .content-card:last-child:nth-child(3) {
     grid-column: auto;
