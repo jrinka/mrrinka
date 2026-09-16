@@ -103,7 +103,12 @@ export default function Shell({
       </div>
       <footer className="footer mono">
         <span>MRRINKA.COM</span>
-        <span>READ CLOSELY. THINK FOR YOURSELF.</span>
+        <span>
+          “We read books to find out who we are.” —{" "}
+          <a href="https://www.theguardian.com/books/2018/jan/24/a-life-in-quotes-ursula-k-le-guin">
+            Ursula K. Le Guin
+          </a>
+        </span>
       </footer>
     </div>
   );
