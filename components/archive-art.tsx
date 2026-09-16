@@ -138,6 +138,17 @@ function Credit({ plate }: { plate: Plate }) {
   );
 }
 
+function ScanMarks({ plate }: { plate: Plate }) {
+  const openAccess = plate.collection.includes("Metropolitan");
+  return (
+    <div className="scan-marks" aria-hidden="true">
+      <span>ARCHIVE / {openAccess ? "CC0" : "PDM"}</span>
+      <i />
+      <b>{openAccess ? "OA" : "PD"}</b>
+    </div>
+  );
+}
+
 export function ArchiveHero({ courseId }: { courseId: CourseId }) {
   const plate = plates[courseId].hero;
   return (
@@ -151,6 +162,7 @@ export function ArchiveHero({ courseId }: { courseId: CourseId }) {
           priority
           style={{ objectPosition: plate.position }}
         />
+        <ScanMarks plate={plate} />
         <span aria-hidden="true">PLATE / 01</span>
       </div>
       <Credit plate={plate} />
@@ -175,6 +187,7 @@ export function ArchiveCardArt({
           fill
           sizes="(max-width: 800px) 100vw, 30vw"
         />
+        <ScanMarks plate={plate} />
       </div>
       <Credit plate={plate} />
     </figure>

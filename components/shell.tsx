@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -8,6 +9,8 @@ import {
   Library,
   Terminal,
   ArrowUpRight,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from "lucide-react";
 import type { CourseId } from "@/lib/schema";
 const fallbackChoices = [
@@ -39,6 +42,20 @@ export default function Shell({
   const path = usePathname();
   const course = choices.find((c) => c.id === courseId)!;
   const base = `/courses/${courseId}`;
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    setCollapsed(window.localStorage.getItem("mrrinka-sidebar") === "closed");
+  }, []);
+
+  function toggleSidebar() {
+    setCollapsed((current) => {
+      const next = !current;
+      window.localStorage.setItem("mrrinka-sidebar", next ? "closed" : "open");
+      return next;
+    });
+  }
+
   return (
     <div className="site">
       <a className="skip-link" href="#content">
@@ -61,10 +78,20 @@ export default function Shell({
         </nav>
         <span className="top-note">READ / THINK / MAKE</span>
       </header>
-      <div className="site-grid">
+      <div className={`site-grid ${collapsed ? "sidebar-is-collapsed" : ""}`}>
         <aside className="sidebar">
+          <button
+            className="side-toggle"
+            type="button"
+            onClick={toggleSidebar}
+            aria-label={collapsed ? "Expand course navigation" : "Collapse course navigation"}
+            aria-expanded={!collapsed}
+          >
+            {collapsed ? <PanelLeftOpen size={17} /> : <PanelLeftClose size={17} />}
+            <span>{collapsed ? "OPEN" : "CLOSE"}</span>
+          </button>
           <div className="mono side-kicker">
-            COURSE / 0{choices.indexOf(course) + 1}
+            <span>COURSE / </span>0{choices.indexOf(course) + 1}
           </div>
           <div className="side-title">{course.side}</div>
           <nav aria-label="Course sections">
@@ -77,6 +104,7 @@ export default function Shell({
                   key={n.label}
                   href={base + n.slug}
                   aria-current={active ? "page" : undefined}
+                  title={collapsed ? n.label : undefined}
                 >
                   <n.icon size={17} aria-hidden="true" />
                   <span>{n.label}</span>

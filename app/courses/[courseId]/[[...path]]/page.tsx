@@ -216,7 +216,9 @@ export default async function CoursePage({ params }: Props) {
                 </Link>
               </div>
               {featured.image ? (
-                <figure className="featured-photo">
+                <figure
+                  className={`featured-photo ${featured.image.startsWith("/archive/") ? "archival-photo" : ""}`}
+                >
                   <Image
                     src={featured.image}
                     alt={featured.imageAlt}
@@ -224,6 +226,11 @@ export default async function CoursePage({ params }: Props) {
                     sizes="(max-width: 700px) 90vw, 30vw"
                     priority
                   />
+                  {featured.image.startsWith("/archive/") && (
+                    <span className="archive-stamp" aria-hidden="true">
+                      OPEN ACCESS / SCAN
+                    </span>
+                  )}
                   <figcaption>
                     <ImageCredit item={featured} />
                   </figcaption>
