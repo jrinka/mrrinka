@@ -128,11 +128,21 @@ const plates: Record<CourseId, Record<"hero" | Section, Plate>> = {
 };
 
 function Credit({ plate }: { plate: Plate }) {
+  const met = plate.collection.includes("Metropolitan");
+  const license = met ? "CC0" : "PDM";
+  const collection = met ? "MET" : "WELLCOME";
+  const detail = `${plate.title}. ${license}. Source: ${plate.collection}.`;
   return (
     <figcaption>
-      {plate.title} · Public domain ·{" "}
-      <a href={plate.source} rel="noopener noreferrer">
-        {plate.collection}
+      <span className="credit-license">{license}</span>
+      <span aria-hidden="true"> / </span>
+      <a
+        href={plate.source}
+        rel="noopener noreferrer"
+        title={detail}
+        aria-label={detail}
+      >
+        {collection}
       </a>
     </figcaption>
   );

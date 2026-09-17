@@ -18,12 +18,28 @@ type Props = { params: Promise<{ courseId: string; path?: string[] }> };
 
 function ImageCredit({ item }: { item: CourseItem }) {
   const archival = item.image.startsWith("/archive/");
+  const met = item.imageSource.includes("metmuseum.org");
+  const license = met ? "CC0" : "PDM";
+  const collection = met ? "MET" : "WELLCOME";
+  const archivalDetail = `${item.imageCredit}. ${license}.`;
   return (
     <>
-      {archival ? "Public domain · " : "Photo by "}
+      {archival ? (
+        <>
+          <span className="credit-license">{license}</span>
+          <span aria-hidden="true"> / </span>
+        </>
+      ) : (
+        "Photo by "
+      )}
       {item.imageSource ? (
-        <a href={item.imageSource} rel="noopener noreferrer">
-          {item.imageCredit}
+        <a
+          href={item.imageSource}
+          rel="noopener noreferrer"
+          title={archival ? archivalDetail : undefined}
+          aria-label={archival ? archivalDetail : undefined}
+        >
+          {archival ? collection : item.imageCredit}
         </a>
       ) : (
         item.imageCredit
