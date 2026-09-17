@@ -5,7 +5,11 @@ import { ArrowUpRight, ArrowLeft, Download } from "lucide-react";
 import Shell from "@/components/shell";
 import Markdown from "@/components/markdown";
 import Practice from "@/components/practice";
-import { ArchiveCardArt, ArchiveHero } from "@/components/archive-art";
+import {
+  ArchiveCardArt,
+  ArchiveHero,
+  archiveKeyword,
+} from "@/components/archive-art";
 import { publicCourse, courses } from "@/lib/content";
 import {
   isCourseId,
@@ -244,7 +248,7 @@ export default async function CoursePage({ params }: Props) {
                   />
                   {featured.image.startsWith("/archive/") && (
                     <span className="archive-stamp" aria-hidden="true">
-                      OPEN ACCESS / SCAN
+                      {archiveKeyword(featured.image)}
                     </span>
                   )}
                   <figcaption>

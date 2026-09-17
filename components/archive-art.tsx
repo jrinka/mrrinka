@@ -10,6 +10,27 @@ type Plate = {
   position?: string;
 };
 
+const archiveKeywords: Record<string, string> = {
+  "/archive/babel-language-confounded.jpg": "BABEL",
+  "/archive/babel-detailed-survey.jpg": "EDIFICE",
+  "/archive/telegraph-network-components.jpg": "SIGNAL",
+  "/archive/magic-lantern-pedlar.jpg": "LANTERN",
+  "/archive/alchemy-emblem-philosophers-stone.jpg": "TRANSMUTE",
+  "/archive/man-sharpening-quill.jpg": "TECHNIQUE",
+  "/archive/woman-reading-snow.jpg": "REVERIE",
+  "/archive/don-quixote-dore.jpg": "ERRANTRY",
+  "/archive/melencolia-durer.jpg": "SATURN",
+  "/archive/radcliffe-library-scholars.jpg": "INDEX",
+  "/archive/alchemist-reading.jpg": "MAGI",
+  "/archive/printing-workshop-stradanus.jpg": "IMPRESS",
+  "/archive/ptolemy-euclid-armillary-sphere.jpg": "ORBIT",
+  "/archive/kircher-archangel-celestial-spheres.jpg": "ORACLE",
+};
+
+export function archiveKeyword(src: string) {
+  return archiveKeywords[src] ?? "ARCHIVE";
+}
+
 const plates: Record<CourseId, Record<"hero" | Section, Plate>> = {
   "language-literature": {
     hero: {
@@ -149,12 +170,12 @@ function Credit({ plate }: { plate: Plate }) {
 }
 
 function ScanMarks({ plate }: { plate: Plate }) {
-  const openAccess = plate.collection.includes("Metropolitan");
+  const keyword = archiveKeyword(plate.src);
   return (
     <div className="scan-marks" aria-hidden="true">
-      <span>ARCHIVE / {openAccess ? "CC0" : "PDM"}</span>
+      <span>{keyword}</span>
       <i />
-      <b>{openAccess ? "OA" : "PD"}</b>
+      <b>{keyword.slice(0, 2)}</b>
     </div>
   );
 }
