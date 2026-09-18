@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import GlobalShell from "@/components/global-shell";
 import { courses, publicCourse } from "@/lib/content";
 
@@ -10,6 +10,12 @@ export default function PracticePage() {
   return (
     <GlobalShell>
       <div className="global-page-head"><span className="mono">COMMON SYSTEM / PRACTICE</span><h1>Practice console</h1><p>Choose a course, try a skill, and keep the stakes low.</p></div>
+      <Link className="practice-feature" href="/practice/passages">
+        <span className="practice-feature-index mono">LIVE MODULE / 01</span>
+        <span className="practice-feature-icon"><Sparkles size={22} /></span>
+        <span><strong>Passage Practice</strong><small>Analyse a random extract from Project Gutenberg and receive focused feedback from MiniMax M3.</small></span>
+        <ArrowUpRight size={20} />
+      </Link>
       <div className="global-directory-list">
         {courses.map((course, index) => {
           const practice = publicCourse(course.id).items.filter((item) => item.section === "practice");
