@@ -23,9 +23,9 @@ export default function Home() {
         </div>
         <figure className="landing-plate">
           <div>
-            <Image src="/archive/babel-detailed-survey.jpg" alt="A detailed seventeenth-century engraving of the work surrounding the building of the Tower of Babel" fill sizes="(max-width: 800px) 100vw, 52vw" priority />
-            <span className="landing-plate-label">PLATE / 00 — EDIFICE</span>
-            <figcaption><span className="credit-license">PDM</span> / <a href="https://wellcomecollection.org/works/yyfny3c6" rel="noopener noreferrer" title="The building of Babel. Public Domain Mark. Source: Wellcome Collection.">WELLCOME</a></figcaption>
+            <Image src="/archive/printing-workshop-stradanus.jpg" alt="An engraving of compositors setting type, proofing copy, and operating a printing press" fill sizes="(max-width: 800px) 100vw, 52vw" priority />
+            <span className="landing-plate-label">PLATE / 00 — IMPRESS</span>
+            <figcaption><span className="credit-license">PDM</span> / <a href="https://wellcomecollection.org/works/czcn5src" rel="noopener noreferrer" title="The printing workshop. Public Domain Mark. Source: Wellcome Collection.">WELLCOME</a></figcaption>
           </div>
         </figure>
       </section>

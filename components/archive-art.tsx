@@ -25,6 +25,12 @@ const archiveKeywords: Record<string, string> = {
   "/archive/printing-workshop-stradanus.jpg": "IMPRESS",
   "/archive/ptolemy-euclid-armillary-sphere.jpg": "ORBIT",
   "/archive/kircher-archangel-celestial-spheres.jpg": "ORACLE",
+  "/archive/bookbinders-at-work.jpg": "BIND",
+  "/archive/camera-obscura-landscape-diagram.jpg": "FRAME",
+  "/archive/eye-star-spectrum-putti.jpg": "OPTIC",
+  "/archive/edison-wax-cylinder-recorder.jpg": "VOICE",
+  "/archive/ghost-in-the-stereoscope.jpg": "SPECTRE",
+  "/archive/blake-the-creation.jpg": "GENESIS",
 };
 
 export function archiveKeyword(src: string) {

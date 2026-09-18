@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, ArrowLeft, Download } from "lucide-react";
+import { ArrowUpRight, ArrowLeft, Download, Wrench } from "lucide-react";
 import Shell from "@/components/shell";
 import Markdown from "@/components/markdown";
 import Practice from "@/components/practice";
@@ -19,6 +19,89 @@ import {
   type CourseItem,
 } from "@/lib/schema";
 type Props = { params: Promise<{ courseId: string; path?: string[] }> };
+
+const assessmentCodes: Record<string, string> = {
+  "Paper 1": "P1",
+  "Paper 2": "P2",
+  "Individual Oral": "IO",
+  "Higher Level Essay": "HLE",
+};
+
+function AssessmentIndex({
+  courseId,
+  items,
+  href,
+}: {
+  courseId: string;
+  items: CourseItem[];
+  href: (item: CourseItem) => string;
+}) {
+  const ibCourse = courseId !== "english-10";
+  return (
+    <>
+      <div className="assessment-index-head">
+        <div>
+          <span className="mono">ASSESSMENT INDEX / ACTIVE DOSSIERS</span>
+          <h1>{ibCourse ? "Assessment dossiers" : "Workshop & sandbox"}</h1>
+          <p className="intro">
+            {ibCourse
+              ? "Start with the task in front of you. Each dossier gathers guidance, response-building tools, examples, and practice in one place."
+              : "A flexible space for current assignments, experiments, and selected tools from elsewhere on the site."}
+          </p>
+        </div>
+        {ibCourse && (
+          <Link className="assessment-toolkit-jump" href="/resources">
+            <Wrench size={18} />
+            <span>
+              <small className="mono">SHARED SYSTEM</small>
+              <strong>Analysis toolkit</strong>
+              <em>Methods used across assessments</em>
+            </span>
+            <ArrowUpRight size={18} />
+          </Link>
+        )}
+      </div>
+      <div className="assessment-grid">
+        {items.map((assessment, index) => (
+          <article className="assessment-card" key={assessment.id}>
+            <Link href={href(assessment)}>
+              {assessment.image && (
+                <div className="assessment-card-image">
+                  <Image
+                    src={assessment.image}
+                    alt={assessment.imageAlt}
+                    fill
+                    sizes="(max-width: 720px) 100vw, 40vw"
+                    loading={index < 2 ? "eager" : "lazy"}
+                  />
+                  <span className="mono">
+                    DOSSIER / {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+              )}
+              <div className="assessment-card-copy">
+                <span className="assessment-code">
+                  {assessmentCodes[assessment.title] ?? `W${index + 1}`}
+                </span>
+                <div>
+                  <h2>{assessment.title}</h2>
+                  <p>{assessment.summary}</p>
+                  <div className="assessment-stages mono">
+                    <span>ORIENT</span><span>BUILD</span><span>EXAMINE</span><span>PRACTISE</span>
+                  </div>
+                </div>
+                <ArrowUpRight size={20} aria-hidden="true" />
+              </div>
+            </Link>
+            {assessment.image && (
+              <div className="assessment-card-credit"><ImageCredit item={assessment} /></div>
+            )}
+          </article>
+        ))}
+      </div>
+    </>
+  );
+}
 
 function ImageCredit({ item }: { item: CourseItem }) {
   const archival = item.image.startsWith("/archive/");
@@ -126,6 +209,15 @@ export default async function CoursePage({ params }: Props) {
           </Link>
           <h1>{item.title}</h1>
           <p className="intro">{item.summary}</p>
+          {item.section === "assessment" && courseId !== "english-10" && (
+            <nav className="dossier-nav" aria-label="Dossier sections">
+              <span className="mono">DOSSIER MAP</span>
+              <a href="#understand-the-task">01 Understand</a>
+              <a href="#build-the-response">02 Build</a>
+              <a href="#study-examples">03 Examine</a>
+              <a href="#practice">04 Practise</a>
+            </nav>
+          )}
           {item.image && (
             <figure className="article-image">
               <div>
@@ -145,6 +237,16 @@ export default async function CoursePage({ params }: Props) {
             </figure>
           )}
           <Markdown>{item.body}</Markdown>
+          {item.section === "assessment" && courseId !== "english-10" && (
+            <aside className="dossier-toolkit">
+              <span className="mono">METHODS / SHARED</span>
+              <div>
+                <h2>Analysis toolkit</h2>
+                <p>Close reading, evidence, analytical verbs, comparison, and response-building methods shared across the IB courses.</p>
+              </div>
+              <Link href="/resources">Open the toolkit <ArrowUpRight size={17} /></Link>
+            </aside>
+          )}
           {item.links.length > 0 && (
             <section className="resource-links">
               <h2>Materials</h2>
@@ -181,6 +283,12 @@ export default async function CoursePage({ params }: Props) {
             </section>
           )}
         </>
+      ) : section === "assessment" ? (
+        <AssessmentIndex
+          courseId={courseId}
+          items={course.items.filter((i) => i.section === "assessment")}
+          href={href}
+        />
       ) : section ? (
         <>
           <h1>{sectionNames[section]}</h1>
