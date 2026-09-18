@@ -77,7 +77,7 @@ const plates: Record<CourseId, Record<"hero" | Section, Plate>> = {
       title: "Woman reading in the snow",
       source: "https://wellcomecollection.org/works/gzttkz2a",
       collection: "Wellcome Collection",
-      position: "50% 32%",
+      position: "50% 12%",
     },
     units: {
       src: "/archive/don-quixote-dore.jpg",
@@ -194,9 +194,9 @@ export function ArchiveHero({ courseId }: { courseId: CourseId }) {
           style={{ objectPosition: plate.position }}
         />
         <ScanMarks plate={plate} />
-        <span aria-hidden="true">PLATE / 01</span>
+        <span aria-hidden="true">PLATE / 01 — {archiveKeyword(plate.src)}</span>
+        <Credit plate={plate} />
       </div>
-      <Credit plate={plate} />
     </figure>
   );
 }
