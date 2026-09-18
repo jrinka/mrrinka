@@ -31,7 +31,9 @@ For a genuine attempt, write one compact paragraph of 3–5 sentences. Identify 
 
   let upstream: Response;
   try {
-    upstream = await fetch("https://api.minimax.io/v1/text/chatcompletion_v2", {
+    // This account uses a mainland-China subscription key, which authenticates
+    // against minimax.chat rather than the global minimax.io endpoint.
+    upstream = await fetch("https://api.minimax.chat/v1/text/chatcompletion_v2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,6 +57,10 @@ For a genuine attempt, write one compact paragraph of 3–5 sentences. Identify 
   }
 
   const data = await upstream.json();
+  if (data.base_resp?.status_code && data.base_resp.status_code !== 0) {
+    console.error("MiniMax API error", data.base_resp);
+    return Response.json({ error: "The feedback service rejected the request" }, { status: 502 });
+  }
   const feedback =
     data.choices?.[0]?.messages?.[0]?.content?.trim?.() ??
     data.choices?.[0]?.message?.content?.trim?.();
@@ -66,4 +72,3 @@ For a genuine attempt, write one compact paragraph of 3–5 sentences. Identify 
 
   return Response.json({ feedback, model: "MiniMax-M3" });
 }
-
