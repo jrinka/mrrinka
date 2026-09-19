@@ -254,6 +254,21 @@ h3 {
   flex-direction: column;
   gap: 8px;
 }
+.course-nav {
+  position: relative;
+}
+.course-nav::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: calc(var(--active-nav-index, 0) * 54px);
+  width: 4px;
+  height: 46px;
+  background: var(--citron);
+  pointer-events: none;
+  transition: top 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
 .sidebar nav a {
   display: flex;
   align-items: center;
@@ -263,13 +278,15 @@ h3 {
   text-decoration: none;
   color: #c9cdcf;
   font-size: 0.875rem;
+  min-height: 46px;
+  transition: background 140ms ease, color 140ms ease;
 }
 .sidebar nav a:hover {
   background: #34383b;
 }
 .sidebar nav a[aria-current] {
-  background: var(--citron);
-  color: var(--ink);
+  background: #34383b;
+  color: var(--citron);
 }
 .sidebar nav small {
   margin-left: auto;
@@ -585,6 +602,8 @@ h3 {
   font-size: 0.875rem;
   line-height: 1.5;
   font-weight: 500;
+  box-shadow: 0 3px 0 #151719;
+  transition: transform 100ms ease, box-shadow 100ms ease, background 140ms ease;
 }
 .button:hover:not(:disabled) {
   background: #3b4145;
@@ -593,9 +612,17 @@ h3 {
   background: transparent;
   color: var(--ink);
   border-color: #bfc5c4;
+  box-shadow: 0 3px 0 #bfc5c4;
 }
 .button.secondary:hover:not(:disabled) {
   background: #eceeeb;
+}
+.button:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #151719;
+}
+.button.secondary:active:not(:disabled) {
+  box-shadow: 0 1px 0 #bfc5c4;
 }
 .section-heading {
   display: flex;
@@ -629,6 +656,26 @@ h3 {
   transition:
     transform 0.15s,
     border-color 0.15s;
+  position: relative;
+}
+.content-card::before,
+.assessment-card::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 0;
+  background: var(--citron);
+  pointer-events: none;
+  transition: height 180ms ease;
+}
+.content-card:hover::before,
+.content-card:focus-within::before,
+.assessment-card:hover::before,
+.assessment-card:focus-within::before {
+  height: 100%;
 }
 .content-card:hover {
   border-color: #74804e;
@@ -707,6 +754,7 @@ h3 {
   gap: 18px;
 }
 .assessment-card {
+  position: relative;
   min-width: 0;
   overflow: hidden;
   border: 1px solid #858b88;
@@ -1103,6 +1151,29 @@ h3 {
   background: var(--panel-cool);
   padding-bottom: 18px;
 }
+.passage-response::after,
+.content-card::after,
+.assessment-card::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  right: 8px;
+  bottom: 8px;
+  width: 13px;
+  height: 13px;
+  border-right: 2px solid var(--citron);
+  border-bottom: 2px solid var(--citron);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(3px, 3px);
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+.passage-response:focus-within::after,
+.content-card:focus-within::after,
+.assessment-card:focus-within::after {
+  opacity: 1;
+  transform: translate(0, 0);
+}
 .passage-response .passage-panel-head {
   background: var(--ink);
   color: var(--paper);
@@ -1117,11 +1188,33 @@ h3 {
   color: var(--muted);
   font-size: 0.875rem;
 }
+.passage-writing-field {
+  position: relative;
+  width: calc(100% - 44px);
+  margin: 0 22px;
+  background:
+    linear-gradient(var(--citron), var(--citron)) 0 100% / 3px var(--writing-progress, 0%) no-repeat;
+  transition: background-size 180ms ease;
+}
+.passage-writing-field::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(var(--citron), var(--citron)) left top / 12px 2px no-repeat,
+    linear-gradient(var(--citron), var(--citron)) left top / 2px 12px no-repeat,
+    linear-gradient(var(--citron), var(--citron)) right bottom / 12px 2px no-repeat,
+    linear-gradient(var(--citron), var(--citron)) right bottom / 2px 12px no-repeat;
+  transition: opacity 140ms ease;
+}
+.passage-writing-field:focus-within::after { opacity: 1; }
 .passage-response textarea {
   display: block;
-  width: calc(100% - 44px);
+  width: 100%;
   min-height: 320px;
-  margin: 0 22px;
+  margin: 0;
   padding: 16px;
   resize: vertical;
   border: 1px solid #bfc5c4;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import { ArrowUpRight, Download, RefreshCw, Sparkles } from "lucide-react";
 import { passageBooks } from "@/lib/passage-books";
 
@@ -62,6 +63,8 @@ export default function PassagePractice() {
   const [loadingFeedback, setLoadingFeedback] = useState(false);
   const [error, setError] = useState("");
   const loadController = useRef<AbortController | null>(null);
+  const responseWordCount = wordCount(response);
+  const writingProgress = Math.min(responseWordCount / 250, 1);
 
   const loadPassage = useCallback(async () => {
     loadController.current?.abort();
@@ -147,9 +150,14 @@ export default function PassagePractice() {
       </section>
 
       <section className="passage-panel passage-response">
-        <header className="passage-panel-head"><div><span className="mono">ANALYSIS BAY / 01</span><h2>Your reading</h2></div><span className="mono">{wordCount(response)} WORDS</span></header>
+        <header className="passage-panel-head"><div><span className="mono">ANALYSIS BAY / 01</span><h2>Your reading</h2></div><span className="mono">{responseWordCount} WORDS</span></header>
         <label htmlFor="passage-response">Analyse how the writing creates meaning or effect.</label>
-        <textarea id="passage-response" rows={11} value={response} onChange={(event) => { setResponse(event.target.value); setFeedback(""); }} placeholder="Start with a detail: a word, image, pattern, shift, or structural choice…" />
+        <div
+          className="passage-writing-field"
+          style={{ "--writing-progress": `${writingProgress * 100}%` } as CSSProperties}
+        >
+          <textarea id="passage-response" rows={11} value={response} onChange={(event) => { setResponse(event.target.value); setFeedback(""); }} placeholder="Start with a detail: a word, image, pattern, shift, or structural choice…" />
+        </div>
         <div className="passage-actions"><button className="button" onClick={requestFeedback} disabled={!passage || !response.trim() || loadingFeedback}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> Request feedback</>}</button><button className="button secondary" onClick={download} disabled={!passage}><Download size={16} /> Export</button></div>
         <p className="passage-privacy">Your writing is sent to MiniMax for feedback. It is not stored by this site.</p>
       </section>

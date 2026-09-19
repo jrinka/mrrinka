@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -43,6 +44,9 @@ export default function Shell({
   const course = choices.find((c) => c.id === courseId)!;
   const base = `/courses/${courseId}`;
   const [collapsed, setCollapsed] = useState(false);
+  const activeNavIndex = nav.findIndex((item) =>
+    item.slug ? path.startsWith(base + item.slug) : path === base,
+  );
 
   useEffect(() => {
     setCollapsed(window.localStorage.getItem("mrrinka-sidebar") === "closed");
@@ -94,7 +98,11 @@ export default function Shell({
             <span>COURSE / </span>0{choices.indexOf(course) + 1}
           </div>
           <div className="side-title">{course.side}</div>
-          <nav aria-label="Course sections">
+          <nav
+            aria-label="Course sections"
+            className="course-nav"
+            style={{ "--active-nav-index": Math.max(activeNavIndex, 0) } as CSSProperties}
+          >
             {nav.map((n, i) => {
               const active = n.slug
                 ? path.startsWith(base + n.slug)
