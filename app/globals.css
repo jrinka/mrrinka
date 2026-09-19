@@ -381,8 +381,15 @@ h3 {
 .archive-image img,
 .archive-card-art img {
   object-fit: cover;
-  filter: grayscale(1) contrast(1.12) sepia(0.12);
+  filter: grayscale(1) contrast(1.07) sepia(0.14);
   mix-blend-mode: multiply;
+  scale: 1.015;
+  transition: filter 260ms ease, scale 260ms ease;
+}
+.archive-image:hover img,
+.archive-card-art:hover img {
+  filter: grayscale(1) contrast(1.15) sepia(0.08);
+  scale: 1.03;
 }
 .archive-image > span {
   position: absolute;
@@ -624,6 +631,11 @@ h3 {
 .button.secondary:active:not(:disabled) {
   box-shadow: 0 1px 0 #bfc5c4;
 }
+.button.secondary.is-confirmed {
+  border-color: #7d8848;
+  background: var(--panel-citron);
+  color: var(--ink);
+}
 .section-heading {
   display: flex;
   align-items: center;
@@ -785,8 +797,15 @@ h3 {
 }
 .assessment-card-image img {
   object-fit: cover;
-  filter: grayscale(1) contrast(1.12) sepia(0.1);
+  filter: grayscale(1) contrast(1.07) sepia(0.13);
   mix-blend-mode: multiply;
+  scale: 1.015;
+  transition: filter 260ms ease, scale 260ms ease;
+}
+.assessment-card:hover .assessment-card-image img,
+.assessment-card:focus-within .assessment-card-image img {
+  filter: grayscale(1) contrast(1.15) sepia(0.07);
+  scale: 1.03;
 }
 .assessment-card-image > span {
   position: absolute;
@@ -929,6 +948,33 @@ h3 {
 }
 .prose img {
   max-width: 100%;
+}
+.prose a,
+.back,
+.passage-source footer a,
+.archive-hero figcaption a,
+.archive-card-art figcaption a,
+.footer a {
+  text-decoration: none;
+  background-image: linear-gradient(var(--citron), var(--citron));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 2px;
+  transition: background-size 180ms ease;
+}
+.prose a:hover,
+.prose a:focus-visible,
+.back:hover,
+.back:focus-visible,
+.passage-source footer a:hover,
+.passage-source footer a:focus-visible,
+.archive-hero figcaption a:hover,
+.archive-hero figcaption a:focus-visible,
+.archive-card-art figcaption a:hover,
+.archive-card-art figcaption a:focus-visible,
+.footer a:hover,
+.footer a:focus-visible {
+  background-size: 100% 2px;
 }
 .article-image {
   margin: 0 0 30px;
@@ -1771,6 +1817,7 @@ h3 {
   * {
     scroll-behavior: auto !important;
     transition: none !important;
+    animation: none !important;
   }
 }
 .featured-photo {
@@ -1829,6 +1876,20 @@ h3 {
   margin: 0 auto;
   padding: 46px 48px 80px;
 }
+.main > *,
+.global-main > * {
+  animation: interface-arrival 320ms ease-out both;
+}
+.main > *:nth-child(2),
+.global-main > *:nth-child(2) { animation-delay: 45ms; }
+.main > *:nth-child(3),
+.global-main > *:nth-child(3) { animation-delay: 90ms; }
+.main > *:nth-child(n + 4),
+.global-main > *:nth-child(n + 4) { animation-delay: 125ms; }
+@keyframes interface-arrival {
+  from { opacity: 0; translate: 0 6px; }
+  to { opacity: 1; translate: 0 0; }
+}
 .landing-hero {
   display: grid;
   grid-template-columns: minmax(320px, 0.82fr) minmax(480px, 1.18fr);
@@ -1871,8 +1932,29 @@ h3 {
 .landing-plate img {
   object-fit: cover;
   object-position: 50% 40%;
-  filter: grayscale(1) contrast(1.12) sepia(0.12);
+  filter: grayscale(1) contrast(1.07) sepia(0.14);
   mix-blend-mode: multiply;
+  scale: 1.015;
+  transition: filter 260ms ease, scale 260ms ease;
+}
+.landing-plate:hover img {
+  filter: grayscale(1) contrast(1.15) sepia(0.08);
+  scale: 1.03;
+}
+
+@supports (animation-timeline: view()) {
+  .archive-image img,
+  .archive-card-art img,
+  .assessment-card-image img,
+  .landing-plate img {
+    animation: archive-drift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+  @keyframes archive-drift {
+    from { translate: 0 -5px; }
+    to { translate: 0 5px; }
+  }
 }
 .landing-plate-label,
 .landing-plate figcaption {

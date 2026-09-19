@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
-import { ArrowUpRight, Download, RefreshCw, Sparkles } from "lucide-react";
+import { ArrowUpRight, Check, Download, RefreshCw, Sparkles } from "lucide-react";
 import { passageBooks } from "@/lib/passage-books";
 
 type Passage = {
@@ -61,8 +61,10 @@ export default function PassagePractice() {
   const [feedback, setFeedback] = useState("");
   const [loadingPassage, setLoadingPassage] = useState(true);
   const [loadingFeedback, setLoadingFeedback] = useState(false);
+  const [exported, setExported] = useState(false);
   const [error, setError] = useState("");
   const loadController = useRef<AbortController | null>(null);
+  const exportReset = useRef<ReturnType<typeof setTimeout> | null>(null);
   const responseWordCount = wordCount(response);
   const writingProgress = Math.min(responseWordCount / 250, 1);
 
@@ -102,7 +104,10 @@ export default function PassagePractice() {
 
   useEffect(() => {
     loadPassage();
-    return () => loadController.current?.abort();
+    return () => {
+      loadController.current?.abort();
+      if (exportReset.current) clearTimeout(exportReset.current);
+    };
   }, [loadPassage]);
 
   async function requestFeedback() {
@@ -134,6 +139,9 @@ export default function PassagePractice() {
     anchor.download = `${passage.title.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-analysis.md`;
     anchor.click();
     URL.revokeObjectURL(url);
+    setExported(true);
+    if (exportReset.current) clearTimeout(exportReset.current);
+    exportReset.current = setTimeout(() => setExported(false), 1800);
   }
 
   return (
@@ -158,7 +166,7 @@ export default function PassagePractice() {
         >
           <textarea id="passage-response" rows={11} value={response} onChange={(event) => { setResponse(event.target.value); setFeedback(""); }} placeholder="Start with a detail: a word, image, pattern, shift, or structural choice…" />
         </div>
-        <div className="passage-actions"><button className="button" onClick={requestFeedback} disabled={!passage || !response.trim() || loadingFeedback}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> Request feedback</>}</button><button className="button secondary" onClick={download} disabled={!passage}><Download size={16} /> Export</button></div>
+        <div className="passage-actions"><button className="button" onClick={requestFeedback} disabled={!passage || !response.trim() || loadingFeedback}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> Request feedback</>}</button><button className={`button secondary ${exported ? "is-confirmed" : ""}`} onClick={download} disabled={!passage} aria-live="polite">{exported ? <><Check size={16} /> Exported / ready</> : <><Download size={16} /> Export</>}</button></div>
         <p className="passage-privacy">Your writing is sent to MiniMax for feedback. It is not stored by this site.</p>
       </section>
 
