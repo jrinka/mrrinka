@@ -74,9 +74,7 @@ function AssessmentIndex({
                     sizes="(max-width: 720px) 100vw, 40vw"
                     loading={index < 2 ? "eager" : "lazy"}
                   />
-                  <span className="mono">
-                    DOSSIER / {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <span className="mono">{archiveKeyword(assessment.image)}</span>
                 </div>
               )}
               <div className="assessment-card-copy">
