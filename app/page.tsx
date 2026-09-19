@@ -17,7 +17,7 @@ export default function Home() {
       <section className="landing-hero">
         <div className="landing-hero-copy">
           <span className="mono landing-kicker">ENGLISH / COURSE HUB</span>
-          <h1>Read closely.<br />Make meaning.</h1>
+          <h1>Welcome to<br />Mr. Rinka&apos;s Class</h1>
           <p>Courses, texts, reference tools, and deliberate practice for the work ahead.</p>
           <a className="button" href="#dispatch">Open quick access <ArrowDownRight size={17} /></a>
         </div>
