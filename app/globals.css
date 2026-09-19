@@ -6,6 +6,9 @@
   --muted: #60666a;
   --line: #d9dcda;
   --white: #fff;
+  --panel-cool: #e8ebe7;
+  --panel-citron: #edf2cf;
+  --panel-warm: #eee9dc;
   --font-sans: "Space Grotesk", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
   --font-accent: "Saira Semi Condensed", Arial, sans-serif;
@@ -707,10 +710,12 @@ h3 {
   min-width: 0;
   overflow: hidden;
   border: 1px solid #858b88;
-  background: var(--white);
+  background: var(--panel-cool);
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
+.assessment-card:nth-child(2n) { background: var(--panel-warm); }
+.assessment-card:nth-child(3n) { background: var(--panel-citron); }
 .assessment-card:hover {
   transform: translateY(-3px);
   box-shadow: 7px 7px 0 rgba(216, 237, 97, 0.55);
@@ -753,6 +758,12 @@ h3 {
   min-height: 190px;
   padding: 22px;
 }
+.assessment-card:nth-child(2n) .assessment-card-copy {
+  box-shadow: inset 0 5px 0 rgba(37, 40, 43, 0.08);
+}
+.assessment-card:nth-child(3n) .assessment-card-copy {
+  box-shadow: inset 0 5px 0 rgba(216, 237, 97, 0.8);
+}
 .assessment-code {
   min-width: 56px;
   padding: 5px 7px;
@@ -767,7 +778,7 @@ h3 {
 .assessment-stages { display: flex; gap: 5px; flex-wrap: wrap; }
 .assessment-stages span {
   padding: 3px 6px;
-  background: #eceeea;
+  background: rgba(255, 255, 255, 0.62);
   color: #555b5e;
   font: 400 0.56rem var(--font-accent);
   letter-spacing: 0.06em;
@@ -780,13 +791,14 @@ h3 {
   font-size: 0.66rem;
   letter-spacing: 0.055em;
   text-transform: uppercase;
+  background: rgba(37, 40, 43, 0.045);
 }
 .dossier-nav {
   display: flex;
   gap: 0;
   margin: 0 0 28px;
   border: 1px solid #858b88;
-  background: var(--white);
+  background: var(--panel-cool);
   overflow-x: auto;
 }
 .dossier-nav > * { padding: 10px 14px; white-space: nowrap; }
@@ -911,7 +923,7 @@ h3 {
 .practice-box {
   padding: 28px;
   margin-top: 40px;
-  background: #fff;
+  background: var(--panel-cool);
   border: 1px solid var(--line);
   border-radius: 5px;
   max-width: 850px;
@@ -1007,11 +1019,13 @@ h3 {
   gap: 18px;
   align-items: start;
   margin-top: 32px;
+  position: relative;
 }
 .passage-panel {
   min-width: 0;
-  border: 1px solid var(--line);
-  background: var(--white);
+  border: 1px solid #858b88;
+  background: var(--panel-warm);
+  clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 0 100%);
 }
 .passage-panel-head {
   display: flex;
@@ -1019,7 +1033,12 @@ h3 {
   gap: 20px;
   align-items: flex-start;
   padding: 20px 22px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid #858b88;
+  background: var(--panel-citron);
+}
+.passage-panel-head > div > .mono {
+  color: #59621f;
+  font-family: var(--font-accent);
 }
 .passage-panel-head h2 {
   margin: 4px 0 0;
@@ -1035,6 +1054,9 @@ h3 {
   font-family: var(--font-literary);
   font-size: 1.12rem;
   line-height: 1.85;
+  background:
+    linear-gradient(rgba(37, 40, 43, 0.035) 1px, transparent 1px) 0 0 / 100% 32px,
+    #f3f0e7;
 }
 .passage-source footer {
   display: flex;
@@ -1043,6 +1065,7 @@ h3 {
   padding: 14px 22px;
   border-top: 1px solid var(--line);
   font-size: 0.75rem;
+  background: #dfe3de;
 }
 .passage-source footer span:first-child {
   font-family: var(--font-literary);
@@ -1077,8 +1100,17 @@ h3 {
   position: sticky;
   top: 18px;
   border-top: 5px solid var(--citron);
+  background: var(--panel-cool);
   padding-bottom: 18px;
 }
+.passage-response .passage-panel-head {
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom-color: #4a4f52;
+}
+.passage-response .passage-panel-head > div > .mono,
+.passage-response .passage-panel-head > .mono { color: var(--citron); }
+.passage-response .passage-panel-head h2 { font-family: var(--font-sans); }
 .passage-response label {
   display: block;
   padding: 18px 22px 10px;
@@ -1094,9 +1126,12 @@ h3 {
   resize: vertical;
   border: 1px solid #bfc5c4;
   border-radius: 0;
-  background: #fbfbfa;
+  background:
+    linear-gradient(90deg, transparent 0, transparent 31px, rgba(216, 237, 97, 0.42) 31px, rgba(216, 237, 97, 0.42) 33px, transparent 33px),
+    #f7f7f2;
   color: var(--ink);
   font: 1rem/1.65 var(--font-sans);
+  padding-left: 46px;
 }
 .passage-actions {
   display: flex;
@@ -1940,6 +1975,12 @@ h3 {
   padding: 16px 20px;
   border-bottom: 1px solid var(--line);
   text-decoration: none;
+}
+.global-directory-group > div:last-child > a:nth-child(odd) {
+  background: var(--panel-cool);
+}
+.global-directory-group > div:last-child > a:nth-child(even) {
+  background: var(--panel-warm);
 }
 .global-directory-group > div:last-child > a:hover { background: var(--citron); }
 .global-directory-group a > span { display: grid; gap: 5px; }
