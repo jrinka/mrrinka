@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import RefineryLinks from "./refinery-links";
+import type { RefineryKind } from "@/lib/refineries";
 import Markdown from "./markdown";
 
 const steps = [
@@ -13,7 +15,7 @@ const steps = [
 ];
 const source = "https://www.cdc.gov/tobacco/campaign/tips/resources/ads/pdf-print-ads/beckys-tip-print-ad-7x10.pdf";
 
-export default function PaperOneDossier({ body, workedExample = true }: { body: string; workedExample?: boolean }) {
+export default function PaperOneDossier({ body, workedExample = true, refinery }: { body: string; workedExample?: boolean; refinery?:RefineryKind }) {
   const sections = body.split(/^## /m).filter(Boolean).map((part) => {
     const [title, ...text] = part.split("\n");
     return { title, id: title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, ""), text: text.join("\n") };
@@ -49,6 +51,7 @@ export default function PaperOneDossier({ body, workedExample = true }: { body: 
             <div id={`${section.id}-body`} hidden={!open.includes(section.id)} className="p1-section-body">
               {workedExample && <a className="p1-companion-jump" href="#worked-example" onClick={() => setActive(section.id)}>See this in the advertisement ↓</a>}
               <Markdown>{section.text}</Markdown>
+              {section.id === "practice" && refinery && <RefineryLinks kind={refinery} />}
             </div>
           </section>
         ))}

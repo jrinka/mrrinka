@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
+import RefineryLinks from "@/components/refinery-links";
 import GlobalShell from "@/components/global-shell";
 import { courses, publicCourse } from "@/lib/content";
 
@@ -29,6 +30,7 @@ export default function PracticePage() {
         <span><strong>Passage Practice</strong><small>Read a supplied passage, develop your analysis, and receive focused AI feedback to help you revise.</small></span>
         <ArrowUpRight size={20} />
       </Link>
+      <section className="refinery-directory"><h2>Refineries</h2><p>Develop your own thinking with task-specific questions and feedback.</p><RefineryLinks /></section>
       <div className="global-directory-list">
         <section className="global-directory-group">
           <div className="global-directory-course"><span>01</span><h2>Bring your own text</h2></div>

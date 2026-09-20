@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { ArrowUpRight, Check, Download, RefreshCw, Sparkles } from "lucide-react";
+import { downloadRecord, formatPracticeRecord, type PracticeRecord } from "@/lib/practice-record";
 import { passageBooks } from "@/lib/passage-books";
 
 type Passage = {
@@ -59,6 +60,7 @@ export default function PassagePractice() {
   const [passage, setPassage] = useState<Passage | null>(null);
   const [response, setResponse] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [records, setRecords] = useState<PracticeRecord[]>([]);
   const [loadingPassage, setLoadingPassage] = useState(true);
   const [loadingFeedback, setLoadingFeedback] = useState(false);
   const [exported, setExported] = useState(false);
@@ -123,6 +125,7 @@ export default function PassagePractice() {
       const data = await result.json();
       if (!result.ok) throw new Error(data.error);
       setFeedback(data.feedback);
+      setRecords(current => [...current, {tool:"Passage Practice", createdAt:data.createdAt,model:data.model,policyVersion:data.policyVersion,evidence:`${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}`,draft:response,feedback:data.feedback,refused:data.refused}]);
     } catch (caught) {
       setError((caught as Error).message || "Feedback is unavailable right now.");
     } finally {
@@ -132,13 +135,8 @@ export default function PassagePractice() {
 
   function download() {
     if (!passage) return;
-    const content = `# ${passage.title}\n\n**${passage.author}** · [Project Gutenberg](${passage.sourceUrl})\n\n> ${passage.text.replaceAll("\n", "\n> ")}\n\n## Analysis\n\n${response || "(No analysis written)"}${feedback ? `\n\n## Feedback\n\n${feedback}` : ""}`;
-    const url = URL.createObjectURL(new Blob([content], { type: "text/markdown" }));
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = `${passage.title.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-analysis.md`;
-    anchor.click();
-    URL.revokeObjectURL(url);
+    const content = `${formatPracticeRecord(records)}\n\n## Current working passage and draft (may not have feedback)\n\n${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}\n\n${response || "(No analysis written)"}`;
+    downloadRecord(content, "passage-practice-record.md");
     setExported(true);
     if (exportReset.current) clearTimeout(exportReset.current);
     exportReset.current = setTimeout(() => setExported(false), 1800);
@@ -164,10 +162,10 @@ export default function PassagePractice() {
           className="passage-writing-field"
           style={{ "--writing-progress": `${writingProgress * 100}%` } as CSSProperties}
         >
-          <textarea id="passage-response" rows={11} value={response} onChange={(event) => { setResponse(event.target.value); setFeedback(""); }} placeholder="Start with a detail: a word, image, pattern, shift, or structural choice…" />
+          <textarea id="passage-response" rows={11} disabled={loadingFeedback || loadingPassage} maxLength={8000} value={response} onChange={(event) => { setResponse(event.target.value); setFeedback(""); }} placeholder="Start with a detail: a word, image, pattern, shift, or structural choice…" />
         </div>
-        <div className="passage-actions"><button className="button" onClick={requestFeedback} disabled={!passage || !response.trim() || loadingFeedback}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> Request feedback</>}</button><button className={`button secondary ${exported ? "is-confirmed" : ""}`} onClick={download} disabled={!passage} aria-live="polite">{exported ? <><Check size={16} /> Exported / ready</> : <><Download size={16} /> Export</>}</button></div>
-        <p className="passage-privacy">Your writing is sent to MiniMax for feedback. It is not stored by this site.</p>
+        <div className="passage-actions"><button className="button" onClick={requestFeedback} disabled={!passage || !response.trim() || loadingFeedback || loadingPassage}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> Request feedback</>}</button><button className={`button secondary ${exported ? "is-confirmed" : ""}`} onClick={download} disabled={!passage} aria-live="polite">{exported ? <><Check size={16} /> Exported / ready</> : <><Download size={16} /> Save record</>}</button></div>
+        <p className="passage-privacy">Feedback stays focused on your analysis of this passage. This tool cannot generate assessment work or act as a chatbot. Your writing is sent to MiniMax and is not stored by this site. Save a record for teacher review or documentation; nothing is sent to your teacher automatically.</p>
       </section>
 
       {error && <p className="error" role="alert">{error}</p>}

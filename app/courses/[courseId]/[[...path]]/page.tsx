@@ -4,6 +4,8 @@ import { notFound, redirect } from "next/navigation";
 import { ArrowUpRight, ArrowLeft, Download, Wrench } from "lucide-react";
 import Shell from "@/components/shell";
 import Markdown from "@/components/markdown";
+import RefineryLinks from "@/components/refinery-links";
+import { assessmentRefinery } from "@/lib/refineries";
 import Practice from "@/components/practice";
 import PaperOneDossier from "@/components/paper-one-dossier";
 import {
@@ -229,7 +231,7 @@ export default async function CoursePage({ params }: Props) {
               )}
             </figure>
           )}
-          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} /> : <Markdown>{item.body}</Markdown>}
+          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} refinery={assessmentRefinery(item.title)} /> : <Markdown>{item.body}</Markdown>}
           {item.section === "assessment" && courseId !== "english-10" && (
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>
@@ -298,6 +300,7 @@ export default async function CoursePage({ params }: Props) {
               }[section]
             }
           </p>
+          {section === "practice" && <RefineryLinks kind={courseId === "english-10" ? "analysis" : undefined} />}
           <div className="cards">
             {course.items.filter((i) => i.section === section).map(card)}
           </div>
@@ -380,6 +383,7 @@ export default async function CoursePage({ params }: Props) {
             <h2>Make your next move.</h2>
             <span className="mono">EXPLORE THE COURSE</span>
           </div>
+
           <div className="cards">
             {[
               {

@@ -2328,3 +2328,21 @@ h3 {
 .practice-course-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; }
 .practice-course-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; font-size: .85rem; }
 .practice-course-links a:hover, .practice-skill-title:hover { color: var(--ink); background: var(--citron); }
+
+.refinery-directory { margin: 40px 0; }
+.refinery-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 24px 0; }
+.refinery-links a { display: grid; gap: 10px; padding: 22px; border: 1px solid var(--line); background: var(--panel-cool); text-decoration: none; }
+.refinery-links a:nth-child(even) { background: var(--panel-citron); }
+.refinery-links a:hover { border-color: var(--ink); }
+.refinery-links strong { font-family: var(--font-literary); font-size: 1.5rem; font-weight: 400; }
+.refinery-links .mono, .refinery-links small { font-size: .7rem; color: var(--muted); }
+.refinery-workspace { max-width: 900px; }
+.refinery-boundary { padding: 24px; border-left: 4px solid var(--citron); background: var(--ink); color: var(--paper); margin: 24px 0; }
+.refinery-boundary h2 { margin-top: 0; }
+.refinery-boundary a { color: var(--citron); }
+.refinery-boundary p { line-height: 1.6; }
+.refinery-fields { border: 0; margin: 0; padding: 0; min-width: 0; }
+.refinery-ack { display: flex; gap: 12px; align-items: flex-start; padding: 16px 0; line-height: 1.5; }
+.refinery-ack input { width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px; }
+.refinery-save { padding: 24px 0; }
+@media (max-width: 700px) { .refinery-links { grid-template-columns: 1fr; } }
