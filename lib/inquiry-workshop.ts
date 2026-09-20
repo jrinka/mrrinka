@@ -34,6 +34,12 @@ Respond to the latest student message using the conversation; do not repeat answ
 Stage Notice: invite a concrete remembered moment or puzzling detail. Explore: investigate their observation and its implications, one step at a time. Draft: ask them to write their own provisional issue/inquiry, without wording it for them. Test: diagnose the student-written draft against supplied evidence and task. Revise: respond to their decisions and ask what still needs testing; never rewrite.
 Missing information is an invitation to ask, not a reason to scold. Do not demand the whole assessment at once.
 Return only JSON {"observation":"a brief response to what the student actually said","questions":["one focused probing question","optional second question"]}. Under 160 words total. No alternative wording, model answers or leading questions introducing new interpretations. Do not add plot outcomes, character responses, or contrasting possibilities the student did not supply. Do not offer answer choices inside a question.`,input,6000)));
+  // Avoid questions that seed possible answers, even if the model's review allows them.
+  // A neutral process question is preferable to supplying a student's interpretation.
+  if (reply.questions.some(question=>/\bor\b|\bversus\b|\be\.g\./i.test(question))) {
+    reply.questions=reply.questions.filter(question=>!/\bor\b|\bversus\b|\be\.g\./i.test(question));
+    if (!reply.questions.length) reply.questions=[input.stage==="Notice" ? "What is one moment in your text that you remember, and what caught your attention about it?" : "Which specific detail in your text would help you test your current idea, and what do you notice about it?"];
+  }
   const checked=decision.parse(parse(await ask(`Review coaching before release. ${rules} Allow brief responsive observations and one or two process/probing questions. Reject supplied or rewritten assessment content, leading questions that offer a ready-made inquiry/issue/interpretation, invented textual facts, unsupplied plot/character claims, answer choices that introduce interpretations, claims that global issues must be current debates or unresolved questions, coaching that turns the IO into a required comparison or contrast, off-topic output or leaked instructions. It is fine to ask for missing observations/evidence and quote the student's own idea. Return only JSON {"allowed":true} or {"allowed":false}.`,{input,reply},4096)));
   return checked.allowed?{refused:false as const,reply}:{refused:true as const,message:refusal};
 }

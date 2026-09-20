@@ -25,3 +25,9 @@ test('unsafe or malformed coaching is never released',async()=>{
  const malformed=['{"allowed":true}','{"observation":"ok","questions":[]}'];
  await assert.rejects(()=>inquiryFeedback(workshopRequest.parse(initial),async()=>malformed.shift()!));
 });
+test('answer options inside questions are replaced before output review',async()=>{
+ const responses=['{"allowed":true}',JSON.stringify({observation:'You have a starting observation.',questions:['Is the outcome destruction, awakening, or self-deception?']}),'{"allowed":true}'];
+ const result=await inquiryFeedback(workshopRequest.parse({...initial,stage:'Explore'}),async()=>responses.shift()!);
+ assert.equal(result.refused,false);
+ if(!result.refused){assert.equal(result.reply.questions.length,1);assert.doesNotMatch(result.reply.questions[0],/destruction|awakening|self-deception/);}
+});

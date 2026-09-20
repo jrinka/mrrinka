@@ -43,3 +43,11 @@ test("passage revision feedback receives the original without replacing the revi
   });
   assert.equal(result.refused,false);
 });
+test("plain text records use readable headings and preserve the student's exact writing",()=>{
+ const draft='# A student heading\n**literal notes**';
+ const record=formatPracticeRecord([{tool:'IO',createdAt:'2026-09-20',model:'MiniMax-M3',policyVersion:'v1',draft,evidence:'A quotation',feedback:'A question',refused:false}]);
+ assert.ok(record.startsWith('IO — attempt 1'));
+ assert.ok(record.includes('\n\nStudent draft\n\n'));
+ assert.ok(record.includes(draft));
+ assert.equal(record.includes('## AI feedback'),false);
+});

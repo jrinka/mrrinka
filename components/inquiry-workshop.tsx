@@ -28,7 +28,7 @@ export default function InquiryWorkshop({kind}:{kind:"global-issue"|"line-of-inq
   }catch(error){setError(error instanceof Error&&error.name!=="TimeoutError"?error.message:"The response took too long. Your writing is still here; please try again.");}
   finally{setBusy(false);}
  }
- function save(){downloadRecord(`${formatPracticeRecord(records)}\n\nIB policy: ${ibAiPolicy}\n\n## Current working notes (student-authored)\n\nTexts: ${texts}\nField: ${field}\nStage: ${stage}\n\n${evidence}\n\nWorking idea: ${draft}\n\nUnsent message: ${message}`,`${kind}-workshop-record.md`);}
+ function save(){downloadRecord(`${formatPracticeRecord(records)}\n\nIB policy: ${ibAiPolicy}\n\nCurrent working notes (student-authored)\n\nTexts: ${texts}\nField: ${field}\nStage: ${stage}\n\n${evidence}\n\nWorking idea: ${draft}\n\nUnsent message: ${message}`,`${kind}-workshop-record.txt`);}
  return <div className="refinery-workspace">
   <aside className="refinery-boundary"><h2>Your thinking, your decisions</h2><p>You can begin uncertain. This workshop asks questions to help you develop your own direction; you choose the text and write the issue or inquiry. It cannot supply or rewrite assessed work.</p><p>Follow your teacher’s and school’s rules. Acknowledge AI material used in assessed work; citing it does not make it your own. <a href={ibAiPolicy} target="_blank" rel="noreferrer">IB academic integrity policy — AI guidance ↗</a></p></aside>
   {kind==="global-issue"&&<aside className="lens-intro"><h2>What makes an issue global?</h2><p>Its significance extends widely, crosses national boundaries, and affects everyday life in local settings. Choose a specific issue you can explore through authorial choices in your texts.</p><p>The IO is not a comparative task. Explore how each text presents the same issue, giving both balanced attention; you do not need a compare-and-contrast argument.</p><a href="https://ibo.org/globalassets/new-structure/university-admission/pdfs/subject-guides/language-a-language-literature-guide.pdf">IB guide: determining the global issue ↗</a></aside>}
@@ -55,6 +55,6 @@ export default function InquiryWorkshop({kind}:{kind:"global-issue"|"line-of-inq
   {error&&<p role="alert" className="error">{error}</p>}
   {exhausted&&<p role="status">You have reached 12 exchanges. Save your record and take stock before starting a fresh conversation.</p>}
   <p className="passage-privacy">Entries are sent to MiniMax. This site does not store the conversation; leaving or refreshing clears it. AI can be mistaken—check its questions against your texts. Records are not sent to your teacher automatically.</p>
-  <div className="refinery-save"><button type="button" className="button secondary" disabled={busy||(!turns.length&&!draft&&!message&&!texts)} onClick={save}>Save record for teacher review</button><p className="hint">Includes every exchange, draft snapshots, your current notes, dates and model details.</p></div>
+  <div className="refinery-save"><button type="button" className="button secondary" disabled={busy||(!turns.length&&!draft&&!message&&!texts)} onClick={save}>Save record for teacher review (.txt)</button><p className="hint">Includes every exchange, draft snapshots, your current notes, dates and model details.</p></div>
  </div>;
 }

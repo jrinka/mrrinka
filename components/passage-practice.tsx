@@ -146,8 +146,8 @@ export default function PassagePractice() {
 
   function download() {
     if (!passage) return;
-    const content = `${formatPracticeRecord(records)}\n\n## Current working passage and draft (may not have feedback)\n\n${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}\n\n${response || "(No analysis written)"}\n\n## Current refined draft (may not have feedback)\n\n${revision || "(No revision written)"}`;
-    downloadRecord(content, "passage-practice-record.md");
+    const content = `${formatPracticeRecord(records)}\n\nCurrent working passage and draft (may not have feedback)\n\n${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}\n\n${response || "(No analysis written)"}\n\nCurrent refined draft (may not have feedback)\n\n${revision || "(No revision written)"}`;
+    downloadRecord(content, "passage-practice-record.txt");
     setExported(true);
     if (exportReset.current) clearTimeout(exportReset.current);
     exportReset.current = setTimeout(() => setExported(false), 1800);
