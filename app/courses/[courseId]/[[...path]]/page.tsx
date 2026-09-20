@@ -153,6 +153,8 @@ export default async function CoursePage({ params }: Props) {
     : undefined;
   if (path[1] && !item) notFound();
   const base = `/courses/${courseId}`;
+  const isLangLitPaperOne =
+    courseId === "language-literature" && item?.title === "Paper 1";
   const href = (i: CourseItem) => `${base}/${i.section}/${i.id}`;
   const featured = course.items.find((i) => i.id === course.featuredId);
   function card(i: CourseItem, n: number) {
@@ -210,10 +212,24 @@ export default async function CoursePage({ params }: Props) {
           {item.section === "assessment" && courseId !== "english-10" && (
             <nav className="dossier-nav" aria-label="Dossier sections">
               <span className="mono">DOSSIER MAP</span>
-              <a href="#understand-the-task">01 Understand</a>
-              <a href="#build-the-response">02 Build</a>
-              <a href="#study-examples">03 Examine</a>
-              <a href="#practice">04 Practise</a>
+              {isLangLitPaperOne ? (
+                <>
+                  <a href="#briefing">01 Briefing</a>
+                  <a href="#method">02 Method</a>
+                  <a href="#avoid">03 Avoid</a>
+                  <a href="#criteria">04 Criteria</a>
+                  <a href="#practice">05 Practise</a>
+                  <a href="#field-tools">06 Tools</a>
+                  <a href="#models">07 Models</a>
+                </>
+              ) : (
+                <>
+                  <a href="#understand-the-task">01 Understand</a>
+                  <a href="#build-the-response">02 Build</a>
+                  <a href="#study-examples">03 Examine</a>
+                  <a href="#practice">04 Practise</a>
+                </>
+              )}
             </nav>
           )}
           {item.image && (
