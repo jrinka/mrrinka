@@ -6,7 +6,7 @@ import { courses, publicCourse } from "@/lib/content";
 
 const dispatches = [
   { index: "01", title: "My calendar", note: "Eight-day cycle, class meetings, and the days ahead.", tag: "8-DAY CYCLE", href: "/calendar" },
-  { index: "02", title: "Course directory", note: "Enter a course and continue from its current unit.", tag: "03 COURSES", href: "#courses" },
+  { index: "02", title: "Course directory", note: "Assessment guidance, shared methods, and practice.", tag: "03 COURSES", href: "#courses" },
   { index: "03", title: "Writing & reference", note: "Analysis guides, models, and tools shared across classes.", tag: "COMMON TOOLS", href: "/resources" },
   { index: "04", title: "Practice console", note: "Short, guided activities for close reading and writing.", tag: "SKILL LAB", href: "/practice" },
 ];
@@ -55,7 +55,7 @@ export default function Home() {
                 <span className="course-gateway-index">COURSE / {String(index + 1).padStart(2, "0")}</span>
                 <h2>{course.title.replace("IB English A: ", "")}</h2>
                 <p>{course.description}</p>
-                <div className="course-gateway-current"><span>CURRENT FOCUS</span><strong>{featured?.title ?? "Course overview"}</strong></div>
+                <div className="course-gateway-current"><span>{course.id === "english-10" ? "CURRENT FOCUS" : "START HERE"}</span><strong>{course.id === "english-10" ? featured?.title ?? "Course overview" : "Assessment guides"}</strong></div>
                 <ArrowUpRight size={20} aria-hidden="true" />
               </Link>
             );

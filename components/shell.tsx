@@ -44,7 +44,12 @@ export default function Shell({
   const course = choices.find((c) => c.id === courseId)!;
   const base = `/courses/${courseId}`;
   const [collapsed, setCollapsed] = useState(false);
-  const activeNavIndex = nav.findIndex((item) =>
+  const courseNav = courseId === "english-10" ? nav : [
+    { slug: "/assessment", label: "Assessments", icon: FilePenLine },
+    { slug: "/resources", label: "Skills & methods", icon: Library },
+    { slug: "/practice", label: "Practice", icon: Terminal },
+  ];
+  const activeNavIndex = courseNav.findIndex((item) =>
     item.slug ? path.startsWith(base + item.slug) : path === base,
   );
 
@@ -103,7 +108,7 @@ export default function Shell({
             className="course-nav"
             style={{ "--active-nav-index": Math.max(activeNavIndex, 0) } as CSSProperties}
           >
-            {nav.map((n, i) => {
+            {courseNav.map((n, i) => {
               const active = n.slug
                 ? path.startsWith(base + n.slug)
                 : path === base;

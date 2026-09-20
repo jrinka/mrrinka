@@ -56,6 +56,7 @@ export const itemSchema = z
     section: z.enum(sections),
     summary: z.string().max(500),
     body: z.string().max(50000),
+    sharedFrom: z.object({ courseId: z.enum(courseIds), itemId: z.string().uuid() }).optional(),
     published: z.boolean(),
     image: photoUrl,
     imageAlt: z.string().max(200),

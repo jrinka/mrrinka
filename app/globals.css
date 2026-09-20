@@ -2285,3 +2285,23 @@ h3 {
 .p1-model p:first-of-type { margin-top: 14px; }
 @media (max-width: 1050px) { .p1-workbench { grid-template-columns: minmax(0, 1fr); } .p1-ad img { max-height: 600px; } }
 @media print { .p1-section-body[hidden] { display: block; } .p1-workbench { display: block; } .p1-panel-heading button, .p1-step-buttons { display: none; } }
+
+/* Assessment reading system: quiet labels and a section-aware companion. */
+:root { --reading-gap: 28px; --reading-rule: #b4bab5; --control-transition: 160ms ease; }
+.p1-workbench { gap: var(--reading-gap); }
+.p1-guidance-only { display: block; max-width: 900px; }
+.p1-example { position: sticky; top: 16px; max-height: calc(100dvh - 32px); overflow-y: auto; scrollbar-width: thin; }
+.p1-ad img { max-height: 300px; }
+.p1-panel-heading .mono { font-size: .7rem; }
+.p1-context { font-size: .8rem; border-bottom: 1px solid var(--reading-rule); padding-bottom: 10px; }
+.p1-example-notes { font: .95rem/1.75 Arial, sans-serif; }
+.p1-example-notes section + section { border-top: 1px solid var(--reading-rule); padding-top: 16px; }
+.p1-example-notes h3 { font: 500 1rem/1.4 var(--font-sans); margin-bottom: 8px; }
+.p1-step-buttons button { min-height: 44px; transition: background var(--control-transition), color var(--control-transition); }
+.p1-section h2 button { min-height: 60px; transition: background var(--control-transition); }
+.p1-model summary { min-height: 44px; padding-block: 8px; }
+@media (max-width: 1050px) { .p1-example { position: static; max-height: none; overflow: visible; } .p1-ad img { max-height: 440px; } }
+@media (prefers-reduced-motion: reduce) { .p1-step-buttons button, .p1-section h2 button { transition: none; } }
+@media print { .p1-example { position: static; max-height: none; overflow: visible; } }
+.p1-companion-jump { display: none; }
+@media (max-width: 1050px) { .p1-companion-jump { display: inline-block; padding: 12px 0 0; font-size: .86rem; } #worked-example { scroll-margin-top: 16px; } }

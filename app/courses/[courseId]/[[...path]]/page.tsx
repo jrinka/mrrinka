@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ArrowUpRight, ArrowLeft, Download, Wrench } from "lucide-react";
 import Shell from "@/components/shell";
 import Markdown from "@/components/markdown";
@@ -42,11 +42,11 @@ function AssessmentIndex({
     <>
       <div className="assessment-index-head">
         <div>
-          <span className="mono">ASSESSMENT INDEX / ACTIVE DOSSIERS</span>
-          <h1>{ibCourse ? "Assessment dossiers" : "Workshop & sandbox"}</h1>
+          <span className="mono">IB ENGLISH A / ASSESSMENT INDEX</span>
+          <h1>{ibCourse ? "Assessments" : "Workshop & sandbox"}</h1>
           <p className="intro">
             {ibCourse
-              ? "Start with the task in front of you. Each dossier gathers guidance, response-building tools, examples, and practice in one place."
+              ? "Start with an assessment. Find the method, criteria, practice, and tools you need to develop your response."
               : "A flexible space for current assignments, experiments, and selected tools from elsewhere on the site."}
           </p>
         </div>
@@ -146,6 +146,7 @@ export async function generateMetadata({ params }: Props) {
 export default async function CoursePage({ params }: Props) {
   const { courseId, path = [] } = await params;
   if (!isCourseId(courseId) || path.length > 2) notFound();
+  if (!path.length && courseId !== "english-10") redirect(`/courses/${courseId}/assessment`);
   const course = publicCourse(courseId);
   const section = path[0] as Section | undefined;
   if (section && !(sections as readonly string[]).includes(section)) notFound();
@@ -210,30 +211,7 @@ export default async function CoursePage({ params }: Props) {
           </Link>
           <h1>{item.title}</h1>
           <p className="intro">{item.summary}</p>
-          {item.section === "assessment" && courseId !== "english-10" && (
-            <nav className="dossier-nav" aria-label="Dossier sections">
-              <span className="mono">DOSSIER MAP</span>
-              {isLangLitPaperOne ? (
-                <>
-                  <a href="#briefing">01 Briefing</a>
-                  <a href="#method">02 Method</a>
-                  <a href="#avoid">03 Avoid</a>
-                  <a href="#criteria">04 Criteria</a>
-                  <a href="#practice">05 Practise</a>
-                  <a href="#field-tools">06 Tools</a>
-                  <a href="#models">07 Models</a>
-                </>
-              ) : (
-                <>
-                  <a href="#understand-the-task">01 Understand</a>
-                  <a href="#build-the-response">02 Build</a>
-                  <a href="#study-examples">03 Examine</a>
-                  <a href="#practice">04 Practise</a>
-                </>
-              )}
-            </nav>
-          )}
-          {item.image && !isLangLitPaperOne && (
+          {item.image && item.section !== "assessment" && (
             <figure className="article-image">
               <div>
                 <Image
@@ -251,7 +229,7 @@ export default async function CoursePage({ params }: Props) {
               )}
             </figure>
           )}
-          {isLangLitPaperOne ? <PaperOneDossier body={item.body} /> : <Markdown>{item.body}</Markdown>}
+          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} /> : <Markdown>{item.body}</Markdown>}
           {item.section === "assessment" && courseId !== "english-10" && (
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>

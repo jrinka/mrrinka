@@ -56,3 +56,30 @@ test("images cannot be saved without visible credit and a source link", () => {
   item.imageSource = "";
   assert.equal(itemSchema.safeParse(item).success, false);
 });
+
+test("shared IB pages read the canonical source and respect publication", () => {
+  const sourceCourse = courses.find(c => c.id === "language-literature")!;
+  const source = sourceCourse.items.find(i => i.title === "Paper 2")!;
+  const reference = courses.find(c => c.id === "literature")!.items.find(i => i.title === "Paper 2")!;
+  assert.equal(reference.sharedFrom?.itemId, source.id);
+  assert.equal(reference.body, "");
+  const previous = { body: source.body, published: source.published };
+  try {
+    source.body = "A teacher revision to the shared source";
+    assert.equal(publicCourse("literature").items.find(i => i.id === reference.id)?.body, source.body);
+    source.published = false;
+    assert.equal(publicCourse("literature").items.some(i => i.id === reference.id), false);
+  } finally {
+    Object.assign(source, previous);
+  }
+});
+
+test("shared references point directly to existing canonical pages", () => {
+  for (const course of courses) for (const item of course.items) {
+    if (!item.sharedFrom) continue;
+    const target = courses.find(c => c.id === item.sharedFrom!.courseId)?.items.find(i => i.id === item.sharedFrom!.itemId);
+    assert.ok(target, `${item.title}: missing shared source`);
+    assert.equal(target.sharedFrom, undefined, "Shared references must not form chains or cycles");
+    assert.equal(target.section, item.section);
+  }
+});

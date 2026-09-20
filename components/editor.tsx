@@ -442,6 +442,18 @@ export default function Editor({ login, previewCourses }: Props) {
                     </select>
                   </label>
                 </>
+              ) : item?.sharedFrom ? (
+                <>
+                  <h1>{item.title}</h1>
+                  <p>This page uses shared material. Edit the source once to update every course that uses it.</p>
+                  <button type="button" className="button" onClick={async () => {
+                    if (dirty && !window.confirm("Discard unsaved changes before opening the shared source?")) return;
+                    const source = item.sharedFrom!;
+                    setCourseId(source.courseId);
+                    await load(source.courseId);
+                    setSelected(source.itemId);
+                  }}>Edit shared source</button>
+                </>
               ) : item ? (
                 <>
                   <div className="section-heading">
