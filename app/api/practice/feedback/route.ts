@@ -8,7 +8,8 @@ export async function POST(request: Request) {
   try {
     const result = await safeFeedback({kind:"passage", evidence:parsed.data.passage, draft:parsed.data.response});
     return Response.json({feedback:result.refused ? result.message : result.feedback, refused:result.refused, model, policyVersion, createdAt:new Date().toISOString()}, {headers:{"Cache-Control":"no-store"}});
-  } catch {
+  } catch (error) {
+    console.error("Feedback failure", error instanceof SyntaxError ? "Invalid model JSON" : error instanceof Error && error.name === "ZodError" ? "Invalid model schema" : error instanceof Error ? error.message : "Unknown error");
     return Response.json({error:"Feedback could not be safely completed. Please try again."}, {status:502});
   }
 }

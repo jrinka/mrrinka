@@ -30,11 +30,11 @@ export async function askM3(system: string, material: unknown, maxTokens = 700):
     body: JSON.stringify({ model, messages: [{role:"system",content:system},{role:"user",content:JSON.stringify(material)}], max_tokens:maxTokens }),
     signal: AbortSignal.timeout(30000),
   });
-  if (!response.ok) throw new Error("Feedback is temporarily unavailable. Please try again.");
+  if (!response.ok) throw new Error(`Provider HTTP status ${response.status}`);
   const data = await response.json();
-  if (data.base_resp?.status_code) throw new Error("Feedback is temporarily unavailable. Please try again.");
+  if (data.base_resp?.status_code) throw new Error(`Provider API status ${Number(data.base_resp.status_code)}`);
   const content = data.choices?.[0]?.messages?.[0]?.content ?? data.choices?.[0]?.message?.content;
-  if (typeof content !== "string" || !content.trim()) throw new Error("No feedback was returned. Please try again.");
+  if (typeof content !== "string" || !content.trim()) throw new Error(`Provider empty content; finish reason ${String(data.choices?.[0]?.finish_reason).slice(0,30)}`);
   return content.trim();
 }
 function json(text: string) { return JSON.parse(text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "")); }
