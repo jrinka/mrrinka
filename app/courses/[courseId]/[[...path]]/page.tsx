@@ -239,7 +239,7 @@ export default async function CoursePage({ params }: Props) {
                 <h2>Skills & Methods</h2>
                 <p>Close reading, evidence, analytical verbs, comparison, and response-building methods shared across the IB courses.</p>
               </div>
-              <Link href="/resources">Explore skills & methods <ArrowUpRight size={17} /></Link>
+              <div><Link href="/resources">Explore skills & methods <ArrowUpRight size={17} /></Link><br /><Link href="/resources/critical-lenses">Critical Lenses <ArrowUpRight size={17} /></Link></div>
             </aside>
           )}
           {item.links.length > 0 && (
@@ -300,6 +300,7 @@ export default async function CoursePage({ params }: Props) {
               }[section]
             }
           </p>
+          {section === "resources" && <p className="intro"><Link href="/resources/critical-lenses">Critical Lenses — explore different ways of reading ↗</Link></p>}
           {section === "practice" && <RefineryLinks kind={courseId === "english-10" ? "analysis" : undefined} />}
           <div className="cards">
             {course.items.filter((i) => i.section === section).map(card)}

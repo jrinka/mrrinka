@@ -1,0 +1,16 @@
+import Link from "next/link";
+import GlobalShell from "@/components/global-shell";
+import { lenses } from "@/lib/critical-lenses";
+export const metadata={title:"Critical Lenses"};
+function Lens({lens}:{lens:typeof lenses[number]}) {return <details className="lens-section" id={lens.id}>
+ <summary><span>{lens.title}</span><small>{lens.focus}</small></summary>
+ <div className="lens-body prose"><p>{lens.idea}</p><h3>What might this help us notice?</h3><ul>{lens.questions.map(q=><li key={q}>{q}</li>)}</ul><h3>Try the perspective</h3><p>{lens.example}</p><h3>What might this reading overlook?</h3><p>{lens.limit}</p><h3>Read further</h3><ul>{lens.bioUrl && <li><a href={lens.bioUrl} rel="noopener noreferrer">{lens.bio} ↗</a><p>{lens.bioNote}</p></li>}{lens.lecture && <li><a href={`https://oyc.yale.edu/english/engl-300/lecture-${lens.lecture}`} rel="noopener noreferrer">Open Yale Courses · Paul Fry, lecture {lens.lecture} ↗</a><p>A university-level lecture with transcript for deeper exploration.</p></li>}</ul></div>
+ </details>;}
+export default function CriticalLenses() {return <GlobalShell>
+ <Link className="back" href="/resources">← Skills &amp; Methods</Link>
+ <div className="global-page-head"><span className="mono">INTERPRETATION / PERSPECTIVES</span><h1>Critical Lenses</h1><p>Ways to think differently about a text—not labels to attach to it.</p></div>
+ <div className="lens-intro prose"><p>Begin with something the text makes you notice. Borrow a question from a perspective, test it against precise evidence, and ask what it reveals or leaves out. Move between approaches when useful; you do not have to choose one and stay there.</p><p>The short examples below are invented teaching illustrations. They model a question and a possible inference, not conclusions to transfer to every text.</p><ol><li><strong>Notice:</strong> identify a detail or pattern.</li><li><strong>Ask:</strong> try a question that makes you see it differently.</li><li><strong>Test:</strong> find supporting and complicating evidence.</li><li><strong>Reconsider:</strong> what would another perspective reveal?</li></ol></div>
+ <section aria-labelledby="classroom-lenses"><h2 id="classroom-lenses">Classroom approaches</h2>{lenses.filter(l=>!l.extra).map(l=><Lens lens={l} key={l.id}/>)}</section>
+ <section className="lens-further" aria-labelledby="further-lenses"><h2 id="further-lenses">Further perspectives</h2><p>Additional ways into a text, if they help you ask a productive question.</p>{lenses.filter(l=>l.extra).map(l=><Lens lens={l} key={l.id}/>)}</section>
+ <aside className="lens-intro prose"><h2>Using a lens in your work</h2><p><strong>Paper 2 and HLE:</strong> use a perspective to develop and challenge an interpretation. <strong>IO:</strong> consider how it sharpens your understanding of a global issue. <strong>Paper 1:</strong> stay grounded in the supplied text; theory is optional, not a substitute for analysis. <strong>English 10:</strong> start with one useful question and a specific detail.</p><p>You do not need a theorist’s name in every paragraph. If you use a critic’s particular idea or wording, acknowledge the source. These traditions contain disagreements; the linked thinkers are entry points, not sole authorities.</p></aside>
+ </GlobalShell>;}

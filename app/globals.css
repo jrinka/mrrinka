@@ -2389,3 +2389,50 @@ h3 {
 .passage-reading-column .passage-feedback { margin-top: 18px; overflow-wrap: anywhere; }
 .passage-writing-column .passage-response { position: relative; top: auto; }
 .passage-writing-column textarea[readonly] { background: #e4e8e1; }
+
+/* Shared interior navigation. The landing page remains its own front door. */
+.interior-site { display: grid; grid-template-columns: 240px minmax(0,1fr); min-height:100vh; }
+.interior-sidebar { position:sticky; top:0; height:100dvh; overflow:auto; background:var(--ink); color:var(--paper); padding:24px 16px; display:flex; flex-direction:column; gap:22px; }
+.interior-home { display:flex; gap:10px; align-items:center; font-size:1.45rem; letter-spacing:-.05em; text-decoration:none; }
+.interior-collapse { align-self:flex-end; background:transparent; color:var(--paper); border:1px solid #636865; min-width:44px; min-height:44px; display:grid; place-items:center; }
+.interior-course { display:grid; gap:10px; }
+.interior-course > span, .interior-nav-label { color:#b7bdb9; font-size:.63rem; letter-spacing:.08em; }
+.interior-course select { width:100%; padding:10px 7px; background:#34383a; border:1px solid #686e69; color:var(--paper); font:inherit; font-size:.83rem; min-height:44px; }
+.interior-context { font-family:var(--font-literary); font-size:1.6rem; line-height:1.12; margin:0; }
+.interior-sidebar nav { display:grid; gap:5px; }
+.interior-sidebar nav a, .interior-admin, .interior-course-shortcut { display:flex; align-items:center; gap:12px; padding:12px 9px; min-height:44px; font-size:.85rem; text-decoration:none; }
+.interior-sidebar nav a svg, .interior-sidebar > a svg { flex-shrink:0; }
+.interior-sidebar a:hover, .interior-sidebar a[aria-current] { background:var(--citron); color:var(--ink); }
+.interior-admin { margin-top:auto; }
+.interior-body { min-width:0; }
+.interior-main { width:100%; max-width:1440px; margin:0 auto; min-width:0; padding:40px clamp(22px,3vw,48px) 60px; }
+.interior-mobile, .interior-course-shortcut { display:none; }
+.interior-collapsed { grid-template-columns:76px minmax(0,1fr); }
+.interior-collapsed .interior-sidebar { padding-inline:12px; }
+.interior-collapsed .interior-sidebar a span, .interior-collapsed .interior-course, .interior-collapsed .interior-context, .interior-collapsed .interior-nav-label { display:none; }
+.interior-collapsed .interior-course-shortcut { display:flex; }
+.interior-collapsed .interior-home { min-height:44px; padding:9px; }
+@media (max-width:760px) {
+ .interior-site, .interior-site.interior-collapsed { display:block; }
+ .interior-mobile { display:flex; justify-content:space-between; align-items:center; padding:12px 18px; background:var(--ink); color:var(--paper); }
+ .interior-mobile button { display:flex; align-items:center; gap:8px; min-height:44px; background:transparent; border:1px solid #636865; color:var(--paper); padding:8px 12px; }
+ .interior-sidebar { display:none; position:static; height:auto; padding:20px 18px; }
+ .interior-sidebar.mobile-open { display:flex; }
+ .interior-sidebar .interior-home, .interior-sidebar .interior-collapse { display:none; }
+ .interior-collapsed .interior-sidebar a span, .interior-collapsed .interior-course, .interior-collapsed .interior-context, .interior-collapsed .interior-nav-label { display:revert; }
+ .interior-collapsed .interior-course-shortcut { display:none; }
+ .interior-main { padding:28px 18px 45px; }
+}
+@media (min-width:761px) and (max-width:1200px) {
+ .interior-main .passage-console { grid-template-columns:1fr; }
+ .interior-main .global-directory-group { grid-template-columns:1fr; }
+}
+.lens-intro { padding:24px; background:var(--panel-cool); margin:28px 0; }
+.lens-section { border:1px solid var(--line); background:var(--panel-warm); margin:10px 0; }
+.lens-section summary { cursor:pointer; padding:20px 24px; min-height:44px; }
+.lens-section summary > span { font-family:var(--font-literary); font-size:1.55rem; }
+.lens-section summary small { display:block; margin:7px 0 0 20px; color:var(--muted); }
+.lens-section[open] summary { border-bottom:1px solid var(--line); background:var(--panel-citron); }
+.lens-body { padding:4px 26px 24px; }
+.lens-body li p { margin:5px 0 12px; font-size:.85rem; color:var(--muted); }
+.lens-further { margin-top:36px; }
