@@ -13,8 +13,8 @@ export const sections = [
 export const sectionNames = {
   units: "Units & texts",
   assessment: "Assessment",
-  resources: "Resources",
-  practice: "Interactive practice",
+  resources: "Skills & Methods",
+  practice: "Practice",
 };
 const safeUrl = z
   .string()

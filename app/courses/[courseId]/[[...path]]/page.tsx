@@ -55,7 +55,7 @@ function AssessmentIndex({
             <Wrench size={18} />
             <span>
               <small className="mono">SHARED SYSTEM</small>
-              <strong>Analysis toolkit</strong>
+              <strong>Skills & Methods</strong>
               <em>Methods used across assessments</em>
             </span>
             <ArrowUpRight size={18} />
@@ -234,10 +234,10 @@ export default async function CoursePage({ params }: Props) {
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>
               <div>
-                <h2>Analysis toolkit</h2>
+                <h2>Skills & Methods</h2>
                 <p>Close reading, evidence, analytical verbs, comparison, and response-building methods shared across the IB courses.</p>
               </div>
-              <Link href="/resources">Open the toolkit <ArrowUpRight size={17} /></Link>
+              <Link href="/resources">Explore skills & methods <ArrowUpRight size={17} /></Link>
             </aside>
           )}
           {item.links.length > 0 && (

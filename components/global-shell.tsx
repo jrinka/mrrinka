@@ -9,7 +9,7 @@ export default function GlobalShell({ children }: { children: React.ReactNode })
         <nav aria-label="Main navigation">
           <Link href="/#courses">Courses</Link>
           <Link href="/calendar">My calendar</Link>
-          <Link href="/resources">Resources</Link>
+          <Link href="/resources">Skills &amp; Methods</Link>
           <Link href="/practice">Practice</Link>
         </nav>
         <span className="top-note">READ / THINK / MAKE</span>

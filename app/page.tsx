@@ -7,8 +7,8 @@ import { courses, publicCourse } from "@/lib/content";
 const dispatches = [
   { index: "01", title: "My calendar", note: "Eight-day cycle, class meetings, and the days ahead.", tag: "8-DAY CYCLE", href: "/calendar" },
   { index: "02", title: "Course directory", note: "Assessment guidance, shared methods, and practice.", tag: "03 COURSES", href: "#courses" },
-  { index: "03", title: "Writing & reference", note: "Analysis guides, models, and tools shared across classes.", tag: "COMMON TOOLS", href: "/resources" },
-  { index: "04", title: "Practice console", note: "Short, guided activities for close reading and writing.", tag: "SKILL LAB", href: "/practice" },
+  { index: "03", title: "Skills & Methods", note: "Analysis guides, models, and tools shared across classes.", tag: "COMMON TOOLS", href: "/resources" },
+  { index: "04", title: "Practice", note: "Short, guided activities for close reading and writing.", tag: "SKILL LAB", href: "/practice" },
 ];
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
         <div className="landing-hero-copy">
           <span className="mono landing-kicker">ENGLISH / COURSE HUB</span>
           <h1>Welcome to<br />Mr. Rinka&apos;s Class</h1>
-          <p>Courses, texts, reference tools, and deliberate practice for the work ahead.</p>
+          <p>Assessment guidance, shared methods, and deliberate practice for the work ahead.</p>
           <a className="button" href="#dispatch">Open quick access <ArrowDownRight size={17} /></a>
         </div>
         <figure className="landing-plate">
@@ -31,7 +31,7 @@ export default function Home() {
       </section>
 
       <section className="dispatch-section" id="dispatch">
-        <div className="landing-section-label"><span className="mono">QUICK ACCESS / 01—04</span><p>Common systems</p></div>
+        <div className="landing-section-label"><span className="mono">QUICK ACCESS / 01—04</span><p>Useful starting points</p></div>
         <div className="dispatch-board">
           {dispatches.map((item) => (
             <Link className="dispatch-row" href={item.href} key={item.index}>

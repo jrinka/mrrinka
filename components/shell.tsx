@@ -27,8 +27,8 @@ const nav = [
   { slug: "", label: "Overview", icon: LayoutDashboard },
   { slug: "/units", label: "Units & texts", icon: BookOpen },
   { slug: "/assessment", label: "Assessment", icon: FilePenLine },
-  { slug: "/resources", label: "Resources", icon: Library },
-  { slug: "/practice", label: "Interactive practice", icon: Terminal },
+  { slug: "/resources", label: "Skills & Methods", icon: Library },
+  { slug: "/practice", label: "Practice", icon: Terminal },
 ];
 export default function Shell({
   courseId,
@@ -46,7 +46,7 @@ export default function Shell({
   const [collapsed, setCollapsed] = useState(false);
   const courseNav = courseId === "english-10" ? nav : [
     { slug: "/assessment", label: "Assessments", icon: FilePenLine },
-    { slug: "/resources", label: "Skills & methods", icon: Library },
+    { slug: "/resources", label: "Skills & Methods", icon: Library },
     { slug: "/practice", label: "Practice", icon: Terminal },
   ];
   const activeNavIndex = courseNav.findIndex((item) =>
