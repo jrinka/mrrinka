@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { Sparkles, RefreshCw } from "lucide-react";
 import { refineries, ibAiPolicy, type RefineryKind } from "@/lib/refineries";
 import { downloadRecord, formatPracticeRecord, type PracticeRecord } from "@/lib/practice-record";
 
@@ -41,7 +42,7 @@ export default function Refinery({kind}: {kind:RefineryKind}) {
         <label className="field">{config.draft}<textarea required minLength={20} maxLength={8000} rows={6} value={draft} onChange={e => {setDraft(e.target.value);setResult(null);}} /></label>
         {previous && <label className="field">What did you change, and why?<span className="hint">Revise your draft above, then explain the decision you made.</span><textarea maxLength={2000} rows={3} value={reflection} onChange={e => setReflection(e.target.value)} /></label>}
         <label className="refinery-ack"><input type="checkbox" required checked={acknowledged} onChange={e=>setAcknowledged(e.target.checked)} /> I am submitting my own thinking for feedback, and my teacher permits this use of AI.</label>
-        <button className="button" disabled={!course || !acknowledged || draft.trim().length < 20 || evidence.trim().length < 40}>{busy ? "Checking your work…" : previous ? "Request revision feedback" : "Request feedback"}</button>
+        <button className="button" disabled={!course || !acknowledged || draft.trim().length < 20 || evidence.trim().length < 40}>{busy ? <><RefreshCw className="spin" size={16} aria-hidden="true" /> Checking your work…</> : <><Sparkles size={16} aria-hidden="true" />{previous ? "Request revision feedback" : "Request feedback"}</>}</button>
       </fieldset>
     </form>
     <p className="passage-privacy">Your entries are sent to MiniMax for feedback. This site does not store them. Keep a record before leaving this page; it is not sent to your teacher automatically.</p>

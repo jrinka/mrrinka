@@ -1,67 +1,49 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
-import GlobalShell from "@/components/global-shell";
-import { courses, publicCourse } from "@/lib/content";
+import { ArrowUpRight } from "lucide-react";
+import { courses } from "@/lib/content";
 
-const dispatches = [
-  { index: "01", title: "My calendar", note: "Eight-day cycle, class meetings, and the days ahead.", tag: "8-DAY CYCLE", href: "/calendar" },
-  { index: "02", title: "Course directory", note: "Assessment guidance, shared methods, and practice.", tag: "03 COURSES", href: "#courses" },
-  { index: "03", title: "Skills & Methods", note: "Analysis guides, models, and tools shared across classes.", tag: "COMMON TOOLS", href: "/resources" },
-  { index: "04", title: "Practice", note: "Short, guided activities for close reading and writing.", tag: "SKILL LAB", href: "/practice" },
+const sharedLinks = [
+  { title: "Skills & Methods", note: "Guides to reading, analysis, and writing.", label: "SHARED GUIDANCE", href: "/resources" },
+  { title: "Practice", note: "Passages, workshops, and refineries.", label: "READ / WRITE / REVISE", href: "/practice" },
+  { title: "My calendar", note: "The day cycle and class meetings.", label: "8-DAY CYCLE", href: "/calendar" },
 ];
 
 export default function Home() {
+  const links = [
+    ...courses.map(course => ({
+      title: course.title.replace("IB English A: ", ""),
+      note: course.id === "english-10" ? "Novel, poetry, drama, and essay." : course.id === "literature" ? "Paper 1, Paper 2, IO, and HLE." : "Paper 1, Paper 2, and the Individual Oral.",
+      label: course.id === "english-10" ? "ENGLISH 10" : "IB ENGLISH A",
+      href: `/courses/${course.id}`,
+    })),
+    ...sharedLinks,
+  ];
   return (
-    <GlobalShell>
-      <section className="landing-hero">
-        <div className="landing-hero-copy">
-          <span className="mono landing-kicker">ENGLISH / COURSE HUB</span>
-          <h1>Welcome to<br />Mr. Rinka&apos;s Class</h1>
-          <p>Assessment guidance, shared methods, and deliberate practice for the work ahead.</p>
-          <a className="button" href="#dispatch">Open quick access <ArrowDownRight size={17} /></a>
-        </div>
-        <figure className="landing-plate">
+    <div className="global-site entry-site">
+      <a className="skip-link" href="#content">Skip to content</a>
+      <header className="entry-header">
+        <h1>Mr. Rinka<span aria-hidden="true">_</span></h1>
+        <p><span lang="la">LEGE · SCRIBE · COGITA</span><small>Read · Write · Think</small></p>
+      </header>
+      <main id="content" className="entry-main">
+        <nav id="courses" className="entry-links" aria-label="Courses and shared tools">
+          {links.map((link,index) => <Link className="entry-link" href={link.href} key={link.href}>
+            <span className="entry-link-meta mono"><span>{String(index+1).padStart(2,"0")}</span>{link.label}</span>
+            <h2>{link.title}</h2>
+            <p>{link.note}</p>
+            <ArrowUpRight size={19} aria-hidden="true" />
+          </Link>)}
+        </nav>
+        <figure className="landing-plate entry-plate">
           <div>
-            <Image src="/archive/printing-workshop-stradanus.jpg" alt="An engraving of compositors setting type, proofing copy, and operating a printing press" fill sizes="(max-width: 800px) 100vw, 52vw" priority />
+            <Image src="/archive/printing-workshop-stradanus.jpg" alt="An engraving of compositors setting type, proofing copy, and operating a printing press" fill sizes="(max-width: 900px) 100vw, 40vw" priority />
             <span className="landing-plate-label">PLATE / 00 — IMPRESS</span>
-            <figcaption><span className="credit-license">PDM</span> / <a href="https://wellcomecollection.org/works/czcn5src" rel="noopener noreferrer" title="The printing workshop. Public Domain Mark. Source: Wellcome Collection.">WELLCOME</a></figcaption>
+            <figcaption><a href="https://wellcomecollection.org/works/czcn5src" rel="noopener noreferrer" title="The printing workshop. Public Domain Mark. Source: Wellcome Collection.">WELLCOME</a></figcaption>
           </div>
         </figure>
-      </section>
-
-      <section className="dispatch-section" id="dispatch">
-        <div className="landing-section-label"><span className="mono">QUICK ACCESS / 01—04</span><p>Useful starting points</p></div>
-        <div className="dispatch-board">
-          {dispatches.map((item) => (
-            <Link className="dispatch-row" href={item.href} key={item.index}>
-              <span className="dispatch-index">{item.index}</span>
-              <span className="dispatch-copy"><strong>{item.title}</strong><small>{item.note}</small></span>
-              <span className="dispatch-tag">{item.tag}</span>
-              <ArrowUpRight size={19} aria-hidden="true" />
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="course-directory" id="courses">
-        <div className="landing-section-label"><span className="mono">COURSE DIRECTORY / 01—03</span><p>Choose your course</p></div>
-        <div className="course-gateways">
-          {courses.map((course, index) => {
-            const visible = publicCourse(course.id);
-            const featured = visible.items.find((item) => item.id === visible.featuredId);
-            return (
-              <Link className="course-gateway" href={`/courses/${course.id}`} key={course.id}>
-                <span className="course-gateway-index">COURSE / {String(index + 1).padStart(2, "0")}</span>
-                <h2>{course.title.replace("IB English A: ", "")}</h2>
-                <p>{course.description}</p>
-                <div className="course-gateway-current"><span>{course.id === "english-10" ? "CURRENT FOCUS" : "START HERE"}</span><strong>{course.id === "english-10" ? featured?.title ?? "Course overview" : "Assessment guides"}</strong></div>
-                <ArrowUpRight size={20} aria-hidden="true" />
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-    </GlobalShell>
+      </main>
+      <footer className="entry-footer mono"><span>ENGLISH / LANGUAGE / LITERATURE</span><Link href="/admin">Teacher editor ↗</Link></footer>
+    </div>
   );
 }
