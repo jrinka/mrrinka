@@ -2248,3 +2248,40 @@ h3 {
   font-size: 0.75rem;
   color: var(--muted);
 }
+
+/* Paper 1: a quiet reading desk with a companion example. */
+.p1-workbench { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .95fr); gap: 28px; align-items: start; }
+.p1-guidance, .p1-example { min-width: 0; border: 1px solid #b4bab5; }
+.p1-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 16px; background: var(--ink); color: var(--citron); }
+.p1-panel-heading .mono { font-family: var(--font-mono); font-size: .64rem; }
+.p1-panel-heading button { background: transparent; color: var(--paper); border: 0; text-decoration: underline; font-size: .75rem; padding: 4px; }
+.p1-section { scroll-margin-top: 20px; border-top: 1px solid #b4bab5; }
+.p1-section h2 { margin: 0; }
+.p1-section h2 button { width: 100%; display: flex; align-items: center; text-align: left; gap: 16px; border: 0; padding: 19px 18px; background: var(--panel-cool); color: var(--ink); font-size: 1.12rem; }
+.p1-section h2 button[aria-expanded="true"] { background: var(--panel-citron); }
+.p1-section h2 button:hover { box-shadow: inset 4px 0 var(--citron); }
+.p1-section h2 button .mono { color: var(--muted); }
+.p1-toggle { margin-left: auto; font: 1.4rem var(--font-mono); }
+.p1-section-body { padding: 4px 22px 20px; }
+.p1-section-body .prose { font-size: .98rem; line-height: 1.75; }
+.p1-section-body .prose > p:first-child { margin-top: 18px; }
+.p1-section-body .prose h3 { font-size: 1.05rem; }
+.p1-section-body .prose ul, .p1-section-body .prose ol { padding-left: 22px; }
+.p1-example { background: #e8ebe7; }
+.p1-example-inner { padding: 18px; }
+.p1-question { font-size: .86rem; }
+.p1-question strong { display: block; font-size: .73rem; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+.p1-ad { margin: 0 0 18px; }
+.p1-ad img { display: block; width: 100%; height: auto; max-height: 470px; object-fit: contain; background: #202123; }
+.p1-ad figcaption { margin-top: 8px; font-size: .68rem; color: var(--muted); }
+.p1-step-buttons { display: flex; flex-wrap: wrap; gap: 5px; }
+.p1-step-buttons button { padding: 8px; color: var(--ink); background: transparent; border: 1px solid #9fa6a0; font-size: .72rem; }
+.p1-step-buttons button[aria-pressed="true"] { background: var(--ink); color: var(--citron); border-color: var(--ink); }
+.p1-step { padding: 18px 0 4px; font: .95rem/1.75 Arial, sans-serif; }
+.p1-step h3 { font-family: var(--font-sans); margin-bottom: 10px; }
+.p1-evidence { border-left: 3px solid #839039; padding-left: 14px; font-size: .85rem; }
+.p1-model { border-top: 1px solid #b4bab5; padding: 14px 0; font: .92rem/1.75 Arial, sans-serif; }
+.p1-model summary { cursor: pointer; font-family: var(--font-sans); font-size: .86rem; }
+.p1-model p:first-of-type { margin-top: 14px; }
+@media (max-width: 1050px) { .p1-workbench { grid-template-columns: minmax(0, 1fr); } .p1-ad img { max-height: 600px; } }
+@media print { .p1-section-body[hidden] { display: block; } .p1-workbench { display: block; } .p1-panel-heading button, .p1-step-buttons { display: none; } }

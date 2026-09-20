@@ -5,6 +5,7 @@ import { ArrowUpRight, ArrowLeft, Download, Wrench } from "lucide-react";
 import Shell from "@/components/shell";
 import Markdown from "@/components/markdown";
 import Practice from "@/components/practice";
+import PaperOneDossier from "@/components/paper-one-dossier";
 import {
   ArchiveCardArt,
   ArchiveHero,
@@ -232,7 +233,7 @@ export default async function CoursePage({ params }: Props) {
               )}
             </nav>
           )}
-          {item.image && (
+          {item.image && !isLangLitPaperOne && (
             <figure className="article-image">
               <div>
                 <Image
@@ -250,7 +251,7 @@ export default async function CoursePage({ params }: Props) {
               )}
             </figure>
           )}
-          <Markdown>{item.body}</Markdown>
+          {isLangLitPaperOne ? <PaperOneDossier body={item.body} /> : <Markdown>{item.body}</Markdown>}
           {item.section === "assessment" && courseId !== "english-10" && (
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>

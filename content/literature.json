@@ -130,6 +130,21 @@
       "links": [],
       "relatedIds": [],
       "practiceKind": "paragraph"
+    },
+    {
+      "id": "81a5570b-6369-4557-b98b-9d8fa1be2f52",
+      "title": "TPCASTT: a poetry reading scaffold",
+      "section": "resources",
+      "summary": "A second way into a poem, from literal understanding to an evidence-based interpretation.",
+      "body": "## When to use it\nUse TPCASTT when you need a more guided first reading of a poem. It helps generate observations; your eventual argument should follow the guiding question and the poem’s particular choices.\n\n## The seven prompts\n1. **Title:** record an initial possibility suggested by the title. Treat it as a hypothesis.\n2. **Paraphrase:** establish the literal meaning in your own words before interpreting symbolism.\n3. **Connotation:** explore significant language, imagery, sound, and form. Explain their contributions rather than collecting device names.\n4. **Attitude:** examine the speaker’s attitude and its complexity. The speaker is not automatically the poet.\n5. **Shifts:** look for changes in argument, tone, perspective, or form. Test their significance through surrounding details.\n6. **Title revisited:** reconsider the title in light of the whole poem. Revise your first hypothesis if needed.\n7. **Theme:** formulate a claim about what the poem explores or suggests, supported by its choices.\n\n## Turn notes into analysis\nSelect a revealing pattern or shift, connect precise details, and formulate a thesis that answers the guiding question. The seven prompts do not prescribe seven paragraphs.\n\nBased on the TPCASTT framework in the class v2 poetry template.",
+      "published": true,
+      "image": "",
+      "imageAlt": "",
+      "imageCredit": "",
+      "imageSource": "",
+      "links": [],
+      "relatedIds": [],
+      "practiceKind": "none"
     }
   ]
 }
