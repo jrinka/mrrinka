@@ -1,3 +1,4 @@
+import { GuidePlate } from "@/components/archive-art";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -33,7 +34,7 @@ export default function ResourcesPage() {
 
   return (
     <GlobalShell>
-      <div className="global-page-head"><span className="mono">SHARED SKILLS / METHODS</span><h1>Skills & Methods</h1><p>Methods, guides, and models that can be used across courses and assessment tasks.</p></div>
+      <div className="illustrated-guide-head"><div className="global-page-head"><span className="mono">SHARED SKILLS / METHODS</span><h1>Skills & Methods</h1><p>Methods, guides, and models that can be used across courses and assessment tasks.</p></div><GuidePlate kind="methods" /></div>
       <div className="global-directory-list">
         <section className="global-directory-group">
           <div className="global-directory-course"><span>01</span><h2>Shared methods</h2></div>

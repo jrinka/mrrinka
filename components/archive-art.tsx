@@ -230,3 +230,18 @@ export function ArchiveCardArt({
     </figure>
   );
 }
+
+// Small editorial plates reuse the same source metadata as the course artwork.
+export function GuidePlate({ kind }: { kind: "methods" | "lenses" | "practice" }) {
+  const plate = kind === "methods" ? plates["language-literature"].assessment
+    : kind === "lenses" ? plates.literature.hero : plates.literature.practice;
+  return (
+    <figure className="guide-plate">
+      <Image src={plate.src} alt={plate.alt} fill
+        sizes="(max-width: 600px) 160px, 240px"
+        style={{ objectPosition: kind === "lenses" ? "50% 0%" : "50% 40%" }} />
+      <span className="guide-plate-keyword mono">{archiveKeyword(plate.src)}</span>
+      <Credit plate={plate} />
+    </figure>
+  );
+}

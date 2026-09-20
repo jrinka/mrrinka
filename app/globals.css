@@ -2436,3 +2436,23 @@ h3 {
 .lens-body { padding:4px 26px 24px; }
 .lens-body li p { margin:5px 0 12px; font-size:.85rem; color:var(--muted); }
 .lens-further { margin-top:36px; }
+
+/* A single archival accent at the entrance to shared guides. */
+.illustrated-guide-head { display:grid; grid-template-columns:minmax(0,1fr) 240px; align-items:center; gap:32px; border-bottom:1px solid var(--ink); }
+.illustrated-guide-head .global-page-head { border:0; padding:28px 0; }
+.illustrated-guide-head h1 { font-size:clamp(2.8rem,4.6vw,4.6rem); }
+.guide-plate { position:relative; width:240px; height:200px; margin:0; overflow:hidden; border:1px solid var(--line); background:var(--panel-warm); }
+.guide-plate img { object-fit:cover; filter:grayscale(1); }
+.guide-plate-keyword { position:absolute; bottom:8px; right:8px; padding:6px 9px; font-size:.6rem; background:var(--citron); color:var(--ink); }
+.guide-plate figcaption { position:absolute; bottom:8px; left:8px; padding:5px 8px; background:var(--ink); color:var(--paper); font-size:.58rem; font-family:var(--font-mono); }
+.guide-plate .credit-license, .guide-plate figcaption > span { display:none; }
+.guide-plate a { text-underline-offset:3px; }
+@media (max-width:1000px) {
+ .illustrated-guide-head { gap:20px; grid-template-columns:minmax(0,1fr) 180px; }
+ .guide-plate { width:180px; height:180px; }
+}
+@media (max-width:600px) {
+ .illustrated-guide-head { grid-template-columns:1fr; gap:0; padding-bottom:22px; }
+ .illustrated-guide-head .global-page-head { padding-bottom:12px; }
+ .guide-plate { width:160px; height:140px; }
+}

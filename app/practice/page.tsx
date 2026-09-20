@@ -1,3 +1,4 @@
+import { GuidePlate } from "@/components/archive-art";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
@@ -23,7 +24,7 @@ export default function PracticePage() {
   }
   return (
     <GlobalShell>
-      <div className="global-page-head"><span className="mono">READ / WRITE / REVISE</span><h1>Practice</h1><p>Choose a skill to work on. Start with a supplied passage or bring a text from class.</p></div>
+      <div className="illustrated-guide-head"><div className="global-page-head"><span className="mono">READ / WRITE / REVISE</span><h1>Practice</h1><p>Choose a skill to work on. Start with a supplied passage or bring a text from class.</p></div><GuidePlate kind="practice" /></div>
       <Link className="practice-feature" href="/practice/passages">
         <span className="practice-feature-index mono">AI FEEDBACK</span>
         <span className="practice-feature-icon"><Sparkles size={22} /></span>
