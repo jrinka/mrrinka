@@ -2386,3 +2386,9 @@ h3 {
   .entry-link h2 { font-size: 1.45rem; }
   .entry-link > svg { width: 13px; top: 14px; right: 10px; }
 }
+
+/* Passage and feedback share the left column; drafts flow in the right. */
+.passage-reading-column, .passage-writing-column { min-width: 0; display: grid; gap: 18px; }
+.passage-reading-column .passage-feedback { margin-top: 18px; overflow-wrap: anywhere; }
+.passage-writing-column .passage-response { position: relative; top: auto; }
+.passage-writing-column textarea[readonly] { background: #e4e8e1; }

@@ -60,6 +60,9 @@ export default function PassagePractice() {
   const [passage, setPassage] = useState<Passage | null>(null);
   const [response, setResponse] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [revision, setRevision] = useState("");
+  const [revisionFeedback, setRevisionFeedback] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const [records, setRecords] = useState<PracticeRecord[]>([]);
   const [loadingPassage, setLoadingPassage] = useState(true);
   const [loadingFeedback, setLoadingFeedback] = useState(false);
@@ -78,6 +81,9 @@ export default function PassagePractice() {
     setError("");
     setFeedback("");
     setResponse("");
+    setRevision("");
+    setRevisionFeedback("");
+    setSubmitted(false);
 
     const attempted = new Set<number>();
     try {
@@ -112,20 +118,25 @@ export default function PassagePractice() {
     };
   }, [loadPassage]);
 
-  async function requestFeedback() {
-    if (!passage || !response.trim()) return;
+  async function requestFeedback(refined = false) {
+    const draft = refined ? revision : response;
+    if (!passage || !draft.trim()) return;
     setLoadingFeedback(true);
     setError("");
     try {
       const result = await fetch("/api/practice/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ passage: passage.text, response }),
+        body: JSON.stringify({ passage: passage.text, response: draft, previousResponse: refined ? response : "" }),
       });
       const data = await result.json();
       if (!result.ok) throw new Error(data.error);
-      setFeedback(data.feedback);
-      setRecords(current => [...current, {tool:"Passage Practice", createdAt:data.createdAt,model:data.model,policyVersion:data.policyVersion,evidence:`${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}`,draft:response,feedback:data.feedback,refused:data.refused}]);
+      if (refined) setRevisionFeedback(data.feedback);
+      else {
+        setFeedback(data.feedback);
+        if (!data.refused) { setSubmitted(true); setRevision(draft); }
+      }
+      setRecords(current => [...current, {tool:"Passage Practice", createdAt:data.createdAt,model:data.model,policyVersion:data.policyVersion,evidence:`${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}`,draft,reflection:refined ? "Revision of the original response to this passage." : "",feedback:data.feedback,refused:data.refused}]);
     } catch (caught) {
       setError((caught as Error).message || "Feedback is unavailable right now.");
     } finally {
@@ -135,7 +146,7 @@ export default function PassagePractice() {
 
   function download() {
     if (!passage) return;
-    const content = `${formatPracticeRecord(records)}\n\n## Current working passage and draft (may not have feedback)\n\n${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}\n\n${response || "(No analysis written)"}`;
+    const content = `${formatPracticeRecord(records)}\n\n## Current working passage and draft (may not have feedback)\n\n${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}\n\n${response || "(No analysis written)"}\n\n## Current refined draft (may not have feedback)\n\n${revision || "(No revision written)"}`;
     downloadRecord(content, "passage-practice-record.md");
     setExported(true);
     if (exportReset.current) clearTimeout(exportReset.current);
@@ -144,6 +155,7 @@ export default function PassagePractice() {
 
   return (
     <div className="passage-console">
+      <div className="passage-reading-column">
       <section className="passage-panel passage-source" aria-busy={loadingPassage}>
         <header className="passage-panel-head">
           <div><span className="mono">ARCHIVE SIGNAL / RANDOM EXTRACT</span><h2>{loadingPassage ? "Locating passage…" : passage?.title}</h2></div>
@@ -155,6 +167,12 @@ export default function PassagePractice() {
         </>}
       </section>
 
+      <div aria-live="polite">
+        {feedback && <section className="passage-feedback"><span className="mono">FIRST RESPONSE</span><h2>Feedback</h2><p>{feedback}</p><small>AI feedback can be inaccurate. Check it against the passage.</small></section>}
+        {revisionFeedback && <section className="passage-feedback"><span className="mono">REFINED RESPONSE</span><h2>Revision feedback</h2><p>{revisionFeedback}</p><small>Keep testing your interpretation against the passage.</small></section>}
+      </div>
+      </div>
+      <div className="passage-writing-column">
       <section className="passage-panel passage-response">
         <header className="passage-panel-head"><div><span className="mono">ANALYSIS BAY / 01</span><h2>Your reading</h2></div><span className="mono">{responseWordCount} WORDS</span></header>
         <label htmlFor="passage-response">Analyse how the writing creates meaning or effect.</label>
@@ -162,14 +180,20 @@ export default function PassagePractice() {
           className="passage-writing-field"
           style={{ "--writing-progress": `${writingProgress * 100}%` } as CSSProperties}
         >
-          <textarea id="passage-response" rows={11} disabled={loadingFeedback || loadingPassage} maxLength={8000} value={response} onChange={(event) => { setResponse(event.target.value); setFeedback(""); }} placeholder="Start with a detail: a word, image, pattern, shift, or structural choice…" />
+          <textarea id="passage-response" rows={11} readOnly={submitted} disabled={loadingFeedback || loadingPassage} maxLength={8000} value={response} onChange={(event) => { setResponse(event.target.value); setFeedback(""); }} placeholder="Start with a detail: a word, image, pattern, shift, or structural choice…" />
         </div>
-        <div className="passage-actions"><button className="button" onClick={requestFeedback} disabled={!passage || !response.trim() || loadingFeedback || loadingPassage}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> Request feedback</>}</button><button className={`button secondary ${exported ? "is-confirmed" : ""}`} onClick={download} disabled={!passage} aria-live="polite">{exported ? <><Check size={16} /> Exported / ready</> : <><Download size={16} /> Save record</>}</button></div>
+        <div className="passage-actions"><button className="button" onClick={() => requestFeedback()} disabled={submitted || !passage || !response.trim() || loadingFeedback || loadingPassage}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> {submitted ? "Original submitted" : "Request feedback"}</>}</button><button className={`button secondary ${exported ? "is-confirmed" : ""}`} onClick={download} disabled={!passage} aria-live="polite">{exported ? <><Check size={16} /> Exported / ready</> : <><Download size={16} /> Save record</>}</button></div>
         <p className="passage-privacy">Feedback stays focused on your analysis of this passage. This tool cannot generate assessment work or act as a chatbot. Your writing is sent to MiniMax and is not stored by this site. Save a record for teacher review or documentation; nothing is sent to your teacher automatically.</p>
       </section>
 
+      {submitted && <section className="passage-panel passage-response passage-revision">
+        <header className="passage-panel-head"><div><span className="mono">REFINE / 02</span><h2>Your refined reading</h2></div><span className="mono">{wordCount(revision)} WORDS</span></header>
+        <label htmlFor="passage-revision">Use the feedback to revise your analysis. Your original stays above.</label>
+        <div className="passage-writing-field"><textarea id="passage-revision" rows={10} maxLength={8000} disabled={loadingFeedback || loadingPassage} value={revision} onChange={event => {setRevision(event.target.value);setRevisionFeedback("");}} /></div>
+        <div className="passage-actions"><button className="button" onClick={() => requestFeedback(true)} disabled={loadingFeedback || !revision.trim() || revision.trim() === response.trim()}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> Request revision feedback</>}</button><button className="button secondary" onClick={download}><Download size={16} /> Save record</button></div>
+      </section>}
       {error && <p className="error" role="alert">{error}</p>}
-      {feedback && <section className="passage-feedback" aria-live="polite"><span className="mono">M3 / FORMATIVE RESPONSE</span><h2>Feedback</h2><p>{feedback}</p><small>AI feedback can be inaccurate. Treat it as a second reader, not a final judgment.</small></section>}
+      </div>
     </div>
   );
 }

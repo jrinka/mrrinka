@@ -33,3 +33,13 @@ test("documentation preserves draft, source, model, time and refusal separately"
   const record=formatPracticeRecord([{tool:"Comparison Refinery",createdAt:"2026-09-20T12:00:00Z",model:"MiniMax-M3",policyVersion:"2026-09-20",draft:input.draft,evidence:input.evidence,feedback:"Which choice supports this?",refused:false},{tool:"Comparison Refinery",createdAt:"2026-09-20T12:01:00Z",model:"MiniMax-M3",policyVersion:"2026-09-20",draft:"Write it for me",evidence:input.evidence,feedback:"Scope redirect",refused:true}]);
   for(const expected of [input.draft,input.evidence,"MiniMax-M3","2026-09-20T12:00:00Z","attempt 2","Scope redirect","AI feedback (not student-authored)"]) assert.ok(record.includes(expected));
 });
+test("passage revision feedback receives the original without replacing the revised draft", async () => {
+  const revision = {kind:"passage" as const,evidence:input.evidence,draft:"My revised reading explains the contrast through the closing action.",previousDraft:input.draft};
+  const outputs=['{"allowed":true}',"Your revision now connects the contrast to an action. Check the detail supporting that connection.",'{"allowed":true}'];
+  let count=0;
+  const result=await safeFeedback(revision,async(system,material)=>{
+    if(count++===1){assert.match(system,/compare the revised draft/);assert.deepEqual(material,revision);}
+    return outputs.shift()!;
+  });
+  assert.equal(result.refused,false);
+});
