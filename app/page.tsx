@@ -24,7 +24,7 @@ export default function Home() {
       <a className="skip-link" href="#content">Skip to content</a>
       <header className="entry-header">
         <h1>Mr. Rinka<span aria-hidden="true">_</span></h1>
-        <p><span lang="la">LEGE · SCRIBE · COGITA</span><small>Read · Write · Think</small></p>
+        <p><span lang="la">LEGE · SCRIBE · COGITA</span></p>
       </header>
       <main id="content" className="entry-main">
         <nav id="courses" className="entry-links" aria-label="Courses and shared tools">
