@@ -42,12 +42,12 @@ function AssessmentIndex({
     <>
       <div className="assessment-index-head">
         <div>
-          <span className="mono">IB ENGLISH A / ASSESSMENT INDEX</span>
-          <h1>{ibCourse ? "Assessments" : "Workshop & sandbox"}</h1>
+          <span className="mono">{ibCourse ? "IB ENGLISH A / ASSESSMENT INDEX" : "ENGLISH 10 / TASK GUIDES"}</span>
+          <h1>{ibCourse ? "Assessments" : "Writing & discussion"}</h1>
           <p className="intro">
             {ibCourse
               ? "Start with an assessment. Find the method, criteria, practice, and tools you need to develop your response."
-              : "A flexible space for current assignments, experiments, and selected tools from elsewhere on the site."}
+              : "Return to these guides as the texts change and the tasks ask for more independent thinking."}
           </p>
         </div>
         {ibCourse && (
@@ -321,6 +321,19 @@ export default async function CoursePage({ params }: Props) {
               <span className="mono">CLASS NOTE</span>
               <p>{course.announcement}</p>
             </div>
+          )}
+          {courseId === "english-10" && (
+            <>
+              <div className="section-heading"><h2>Four ways into a text</h2><span className="mono">NOVEL / POETRY / DRAMA / ESSAY</span></div>
+              <div className="e10-unit-index">
+                {course.items.filter(i => i.section === "units").map((unit, index) => (
+                  <Link key={unit.id} href={href(unit)}><span className="mono">0{index + 1}</span><div><h2>{unit.title}</h2><p>{unit.summary}</p></div><ArrowUpRight size={18} /></Link>
+                ))}
+              </div>
+              <div className="section-heading"><h2>Writing & discussion</h2><span className="mono">RECURRING TASKS</span></div>
+              <div className="cards">{course.items.filter(i => i.section === "assessment").map(card)}</div>
+              <aside className="e10-progression"><span className="mono">CRA / DEVELOPING INDEPENDENCE</span><p>A supplied focus <span aria-hidden="true">→</span> Your choice of technique <span aria-hidden="true">→</span> Connected analysis across paragraphs</p><small>Support, length, and paragraph requirements depend on the task. Check the current task sheet.</small></aside>
+            </>
           )}
           {featured && (
             <section
