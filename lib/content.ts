@@ -5,6 +5,7 @@ import { courseSchema, type CourseId } from "./schema";
 export const courses = [language, literature, english].map((c) =>
   courseSchema.parse(c),
 );
+export const ibCourses = courses.filter(course => course.id !== "english-10");
 export function getCourse(id: CourseId) {
   return courses.find((c) => c.id === id)!;
 }

@@ -1,20 +1,21 @@
+import ThemeToggle from "@/components/theme-toggle";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { courses } from "@/lib/content";
+import { ibCourses } from "@/lib/content";
 
 const sharedLinks = [
-  { title: "Skills & Methods", note: "Guides to reading, analysis, and writing.", label: "SHARED GUIDANCE", href: "/resources" },
+  { title: "Skills & Methods", note: "General English resources for reading, analysis, and writing.", label: "FOR EVERY COURSE", href: "/resources" },
   { title: "Practice", note: "Passages, workshops, and refineries.", label: "READ / WRITE / REVISE", href: "/practice" },
   { title: "My calendar", note: "The day cycle and class meetings.", label: "8-DAY CYCLE", href: "/calendar" },
 ];
 
 export default function Home() {
   const links = [
-    ...courses.map(course => ({
+    ...ibCourses.map(course => ({
       title: course.title.replace("IB English A: ", ""),
-      note: course.id === "english-10" ? "Novel, poetry, drama, and essay." : course.id === "literature" ? "Paper 1, Paper 2, IO, and HLE." : "Paper 1, Paper 2, and the Individual Oral.",
-      label: course.id === "english-10" ? "ENGLISH 10" : "IB ENGLISH A",
+      note: course.id === "literature" ? "Paper 1, Paper 2, IO, and HLE." : "Paper 1, Paper 2, and the Individual Oral.",
+      label: "IB ENGLISH A",
       href: `/courses/${course.id}`,
     })),
     ...sharedLinks,
@@ -43,7 +44,7 @@ export default function Home() {
           </div>
         </figure>
       </main>
-      <footer className="entry-footer mono"><span>ENGLISH / LANGUAGE / LITERATURE</span><Link href="/admin">Teacher editor ↗</Link></footer>
+      <footer className="entry-footer mono"><ThemeToggle/><span>ENGLISH / LANGUAGE / LITERATURE</span><Link href="/admin">Teacher editor ↗</Link></footer>
     </div>
   );
 }

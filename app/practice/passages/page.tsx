@@ -10,7 +10,7 @@ export default function PassagePracticePage() {
       <div className="global-page-head passage-page-head">
         <span className="mono">PRACTICE CONSOLE / LITERARY ANALYSIS</span>
         <h1>Passage Practice</h1>
-        <p>Read an unfamiliar extract, make a claim about how it works, and get brief formative feedback.</p>
+        <p>Practise Literature Paper 1 close-reading skills with an unfamiliar literary extract. Write here for optional AI feedback, or download the extract and work offline. These short exercises are not full exam simulations.</p>
       </div>
       <PassagePractice />
     </GlobalShell>

@@ -156,6 +156,8 @@ export default async function CoursePage({ params }: Props) {
     ? course.items.find((i) => i.id === path[1] && i.section === section)
     : undefined;
   if (path[1] && !item) notFound();
+  const sharedGuides:Record<string,string>={"From observation to analysis":"/resources/observation-to-analysis","SOAPSTone: a rhetorical reading scaffold":"/resources/reading-methods/soapstone","TPCASTT: a poetry reading scaffold":"/resources/reading-methods/tpcastt"};
+  if(item?.section==="resources"&&sharedGuides[item.title])redirect(sharedGuides[item.title]);
   const base = `/courses/${courseId}`;
   const isLangLitPaperOne =
     courseId === "language-literature" && item?.title === "Paper 1";

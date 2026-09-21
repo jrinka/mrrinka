@@ -11,7 +11,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{__html:`try{var t=localStorage.getItem('mrrinka-theme');document.documentElement.dataset.theme=t==='dark'?'dark':'light';}catch{}`}} /></head>
       <body>{children}</body>
     </html>
   );
