@@ -44,6 +44,7 @@ select {
 }
 a {
   color: inherit;
+  text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
 }
@@ -334,7 +335,7 @@ h3 {
 .intro {
   font-size: 1.0625rem;
   line-height: 1.7;
-  color: #555b5e;
+  color: var(--muted);
   max-width: 700px;
   margin-bottom: 32px;
 }
@@ -662,7 +663,7 @@ h3 {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  background: white;
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: 4px;
   overflow: hidden;
@@ -1134,7 +1135,7 @@ h3 {
   background: var(--panel-citron);
 }
 .passage-panel-head > div > .mono {
-  color: #59621f;
+  color: var(--muted);
   font-family: var(--font-accent);
 }
 .passage-panel-head h2 {
@@ -2559,7 +2560,7 @@ h3 {
 /* Dark mode is opt-in; paper remains the default. */
 html[data-theme="dark"] { color-scheme:dark; --paper:#1c2022; --ink:#eeeae0; --muted:#bbc1bb; --line:#505952; --white:#252a2c; --panel-cool:#2c3432; --panel-citron:#353e29; --panel-warm:#34332e; --reading-rule:#505952; }
 html[data-theme="dark"] :focus-visible { outline-color:var(--citron); }
-html[data-theme="dark"] :is(.button:not(.secondary),.interior-sidebar a:hover,.interior-sidebar a[aria-current],.guide-plate-keyword,.assessment-code,.p1-step-buttons button[aria-pressed=true],.intro-example-tabs button[aria-selected=true],.practice-course-links a:hover,.practice-skill-title:hover) { color:var(--graphite); }
+html[data-theme="dark"] :is(.button:not(.secondary),.interior-sidebar a:hover,.interior-sidebar a[aria-current],.guide-plate-keyword,.intro-example-tabs button[aria-selected=true],.practice-course-links a:hover,.practice-skill-title:hover) { color:var(--graphite); }
 html[data-theme="dark"] .button:not(.secondary) { background:var(--citron); }
 html[data-theme="dark"] .button.secondary:hover { background:var(--panel-cool); }
 html[data-theme="dark"] :is(.content-card:hover,.p1-section h2 button[aria-expanded=true]) { color:var(--ink); }
@@ -2579,3 +2580,52 @@ html[data-theme="dark"] .course-mentor { --course-color:#c89cac; }
 @media(max-width:700px) { .reading-grid-row,.reference-grid,.sentence-fields,.calendar-picker { grid-template-columns:1fr; } .reading-grid-row > div:first-child { grid-column:auto; } .sentence-lab { padding:20px; } .inquiry-draft { position:static; } .entry-footer { flex-wrap:wrap; } }
 
 html[data-theme="dark"] :is(.entry-link:hover,.entry-link:focus-visible,.skip-link), html[data-theme="dark"] :is(.entry-link:hover,.entry-link:focus-visible) :is(p,.entry-link-meta) { color:var(--graphite); }
+
+/* Persistent link cues: underline the destination, keeping card descriptions quiet. */
+:is(.entry-link h2, .assessment-card-copy h2, .card-link h2,
+    .resource-link strong, .practice-feature strong, .assessment-toolkit-jump strong,
+    .breadcrumb a, .dossier-nav a) {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  text-underline-offset: .18em;
+  text-decoration-skip-ink: auto;
+}
+:is(.entry-link, .assessment-card > a, .card-link, .resource-link,
+    .practice-feature, .assessment-toolkit-jump):is(:hover, :focus-visible) :is(h2, strong) {
+  text-decoration-thickness: 2px;
+}
+/* Focus rings stay inside clipped cards. */
+:is(.assessment-card > a, .card-link, .entry-link):focus-visible { outline-offset: -4px; }
+/* Selected and hovered controls must remain legible in both palettes. */
+html[data-theme="dark"] .assessment-code { color:var(--ink); }
+html[data-theme="dark"] .p1-step-buttons button[aria-pressed="true"] { color:var(--citron); }
+html[data-theme="dark"] .global-directory-group > div:last-child > a:is(:hover,:focus-visible) {
+  background:var(--citron);
+  color:var(--graphite);
+}
+html[data-theme="dark"] .global-directory-group > div:last-child > a:is(:hover,:focus-visible) small { color:#424a39; }
+html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--graphite); background:var(--citron); }
+
+/* Working pages: reach the task quickly without hiding the ethical boundary. */
+.refinery-page-head { padding:20px 0 18px; }
+.refinery-page-head h1 { font-size:clamp(2.1rem,4vw,3.3rem); margin:12px 0 8px; }
+.refinery-page-head p { margin:0; }
+.refinery-boundary-compact { padding:16px 20px; margin:18px 0; }
+.refinery-boundary-compact p { margin:0 0 8px; }
+.refinery-boundary-compact summary { cursor:pointer; font-size:.85rem; text-decoration:underline; text-underline-offset:3px; }
+.refinery-boundary-compact details[open] p { margin:12px 0 0; }
+.inquiry-start { margin:18px 0 12px; }
+.inquiry-mode-note { margin:0 0 18px; padding:0; background:none; color:var(--muted); }
+.inquiry-send-mode { padding:12px 0; border-bottom:1px solid var(--line); }
+.inquiry-reset { padding:0 0 24px; }
+.transfer-notice { padding:18px 22px; margin:20px 0; background:var(--panel-citron); border:1px solid var(--line); }
+.transfer-notice p { margin:0; }
+.practice-handoff { margin:24px 0; padding-top:20px; border-top:1px solid var(--line); }
+
+.inquiry-setup { display:grid; grid-template-columns:minmax(230px,.75fr) minmax(0,1.25fr); gap:24px; align-items:start; }
+.inquiry-setup > * { min-width:0; }
+@media(max-width:700px) { .inquiry-setup { grid-template-columns:1fr; gap:0; } }
+.export-format { display:flex; flex-direction:column; gap:6px; font-size:.8rem; color:var(--muted); margin:12px 0; }
+.export-format select { padding:10px 12px; border:1px solid var(--line); color:var(--ink); background:var(--white); font:inherit; max-width:100%; }
+.tool-actions .export-format { margin:0; }

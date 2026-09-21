@@ -1,15 +1,20 @@
 "use client";
+import ExportFormatSelect from "./export-format";
+import type {ExportFormat} from "@/lib/practice-record";
 import { nextPrompt } from "@/lib/comparison-prompts";
+import {ImportPractice} from "./practice-transfer";
+import RefineryBoundary from "./refinery-boundary";
 import { useState } from "react";
 import { Sparkles, RefreshCw } from "lucide-react";
 import { refineries, ibAiPolicy, type RefineryKind } from "@/lib/refineries";
 import { downloadRecord, formatPracticeRecord, type PracticeRecord } from "@/lib/practice-record";
 
 type Result = {refused:boolean; message?:string; feedback?:{strength:string; concern:string; nextMove:string}; model:string; policyVersion:string; createdAt:string};
-export default function Refinery({kind}: {kind:RefineryKind}) {
+export default function Refinery({kind,initialCourse="",transferId=""}: {kind:RefineryKind;initialCourse?:string;transferId?:string}) {
+ const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
   const config = refineries[kind];
   const [prompt,setPrompt] = useState("");
-  const [course,setCourse] = useState("");
+  const [course,setCourse] = useState(initialCourse);
   const [evidence,setEvidence] = useState("");
   const [draft,setDraft] = useState("");
   const [reflection,setReflection] = useState("");
@@ -32,11 +37,8 @@ export default function Refinery({kind}: {kind:RefineryKind}) {
     finally {setBusy(false);}
   }
   return <div className="refinery-workspace">
-    <aside className="refinery-boundary">
-      <h2>Your thinking, your decisions</h2>
-      <p>Guardrails informed by the IB academic integrity policy keep this guidance focused on your own thinking. Bring your own attempt. This tool asks questions and identifies what to test; it does not write or rewrite assessed work, choose your argument, or predict marks.</p>
-      <p>Follow your teacher’s and school’s rules for the assessment. AI-generated material used in assessed work needs acknowledgment; citing AI does not make its work your own. <a href={ibAiPolicy} target="_blank" rel="noreferrer">IB academic integrity policy — AI guidance ↗</a></p>
-    </aside>
+    <RefineryBoundary/>
+    <ImportPractice disabled={busy} id={transferId} kind={kind} onImport={value=>{setPrompt(value.prompt);setEvidence(value.evidence);setDraft(value.draft);setResult(null);setReflection("");}}/>
     <form onSubmit={submit}>
       <fieldset disabled={busy} className="refinery-fields">
         <label className="field">Course<select required value={course} onChange={e => {setCourse(e.target.value);setResult(null);}}><option value="" disabled>Choose your course</option><option value="language-literature">IB Language & Literature</option><option value="literature">IB Literature</option>{kind === "analysis" && <option value="english-10">General English</option>}</select></label>
@@ -48,9 +50,9 @@ export default function Refinery({kind}: {kind:RefineryKind}) {
         <button className="button" disabled={!course || !acknowledged || draft.trim().length < 20 || evidence.trim().length < 40}>{busy ? <><RefreshCw className="spin" size={16} aria-hidden="true" /> Checking your work…</> : <><Sparkles size={16} aria-hidden="true" />{previous ? "Request revision feedback" : "Request feedback"}</>}</button>
       </fieldset>
     </form>
-    <p className="passage-privacy">Your entries are sent to MiniMax and processed by M3. Do not include names, contact details, student IDs or other personally identifiable information. This site does not store them. Keep a record before leaving this page; it is not sent to your teacher automatically.</p>
+    <p className="passage-privacy">Your entries are sent to MiniMax and processed by M3. Do not include names, contact details, student IDs or other personally identifiable information. Entries are not saved on this site’s server. Keep a record before leaving this page; it is not sent to your teacher automatically.</p>
     {error && <p role="alert" className="error">{error}</p>}
     <div aria-live="polite" aria-busy={busy}>{result && <section className="passage-feedback"><span className="mono">FEEDBACK / {records.length.toString().padStart(2,"0")}</span>{result.refused ? <p>{result.message}</p> : <>{[["What holds up",result.feedback?.strength],["What needs testing",result.feedback?.concern],["Your next move",result.feedback?.nextMove]].map(([heading,text])=><section key={heading}><h2>{heading}</h2><p>{text}</p></section>)}</>}<small>AI feedback can be mistaken. Check it against your texts and discuss uncertainties with your teacher.</small></section>}</div>
-    <div className="refinery-save"><button type="button" className="button secondary" disabled={!records.length || busy} onClick={()=>downloadRecord(`${formatPracticeRecord(records)}\n\nIB policy: ${ibAiPolicy}\n\nCurrent working notes (may not have feedback)\n\nQuestion: ${prompt || "Not provided"}\n\nEvidence: ${evidence}\n\nDraft: ${draft}\n\nRevision note: ${reflection || "Not provided"}`,`${kind}-refinery-record.txt`)}>Save record for teacher review (.txt)</button><p className="hint">Downloads all attempts and AI feedback from this visit, with dates, source details, and model information.</p></div>
+    <div className="refinery-save"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button type="button" className="button secondary" disabled={(!records.length && !draft && !evidence && !prompt && !reflection) || busy} onClick={()=>downloadRecord(`${formatPracticeRecord(records)}\n\nIB policy: ${ibAiPolicy}\n\nCurrent working notes (may not have feedback)\n\nQuestion: ${prompt || "Not provided"}\n\nEvidence: ${evidence}\n\nDraft: ${draft}\n\nRevision note: ${reflection || "Not provided"}`,`${kind}-refinery-record.txt`,exportFormat)}>Save record for teacher review</button><p className="hint">Downloads your current notes and any feedback from this visit, with dates and model details for completed requests.</p></div>
   </div>;
 }

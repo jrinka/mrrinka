@@ -1,4 +1,6 @@
 "use client";
+import ExportFormatSelect from "./export-format";
+import type {ExportFormat} from "@/lib/practice-record";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
@@ -57,6 +59,7 @@ function extractPassage(raw: string) {
 }
 
 export default function PassagePractice() {
+ const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
   const [passage, setPassage] = useState<Passage | null>(null);
   const [response, setResponse] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -148,12 +151,11 @@ export default function PassagePractice() {
     if (!passage) return;
     const source=`${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}`;
     const writing=`Your analysis\n${response||"(No analysis written)"}\n\nYour revision\n${revision||"(No revision written)"}`;
-    downloadRecord(["Passage Practice — Literature Paper 1 skills",mode!=="writing"?source:"",mode!=="extract"?writing:""].filter(Boolean).join("\n\n"),`passage-${mode}.txt`);
+    downloadRecord(["Passage Practice — Literature Paper 1 skills",mode!=="writing"?source:"",mode!=="extract"?writing:""].filter(Boolean).join("\n\n"),`passage-${mode}.txt`,exportFormat);
   }
   function download() {
-    if (!passage) return;
-    const content = `${formatPracticeRecord(records)}\n\nCurrent working passage and draft (may not have feedback)\n\n${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}\n\n${response || "(No analysis written)"}\n\nCurrent refined draft (may not have feedback)\n\n${revision || "(No revision written)"}`;
-    downloadRecord(content, "passage-practice-record.txt");
+    const content = `${formatPracticeRecord(records)}\n\nCurrent working passage and draft (may not have feedback)\n\n${passage ? `${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}` : "No passage loaded"}\n\n${response || "(No analysis written)"}\n\nCurrent refined draft (may not have feedback)\n\n${revision || "(No revision written)"}`;
+    downloadRecord(content, "passage-practice-record.txt",exportFormat);
     setExported(true);
     if (exportReset.current) clearTimeout(exportReset.current);
     exportReset.current = setTimeout(() => setExported(false), 1800);
@@ -173,7 +175,7 @@ export default function PassagePractice() {
         </>}
       </section>
 
-      <section className="offline-tools"><h3>Work offline</h3><div className="tool-actions"><button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("extract")}>Extract (.txt)</button><button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("writing")}>My writing (.txt)</button><button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("both")}>Extract + writing (.txt)</button></div></section>
+      <section className="offline-tools"><h3>Work offline</h3><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><div className="tool-actions"><button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("extract")}>Extract</button><button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("writing")}>My writing</button><button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("both")}>Extract + writing</button></div></section>
       <div aria-live="polite">
         {feedback && <section className="passage-feedback"><span className="mono">FIRST RESPONSE</span><h2>Feedback</h2><p>{feedback}</p><small>AI feedback can be inaccurate. Check it against the passage.</small></section>}
         {revisionFeedback && <section className="passage-feedback"><span className="mono">REFINED RESPONSE</span><h2>Revision feedback</h2><p>{revisionFeedback}</p><small>Keep testing your interpretation against the passage.</small></section>}
@@ -189,7 +191,7 @@ export default function PassagePractice() {
         >
           <textarea id="passage-response" rows={11} readOnly={submitted} disabled={loadingFeedback || loadingPassage} maxLength={8000} value={response} onChange={(event) => { setResponse(event.target.value); setFeedback(""); }} placeholder="Start with a detail: a word, image, pattern, shift, or structural choice…" />
         </div>
-        <div className="passage-actions"><button className="button" onClick={() => requestFeedback()} disabled={submitted || !passage || !response.trim() || loadingFeedback || loadingPassage}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> {submitted ? "Original submitted" : "Request feedback"}</>}</button><button className={`button secondary ${exported ? "is-confirmed" : ""}`} onClick={download} disabled={!passage} aria-live="polite">{exported ? <><Check size={16} /> Exported / ready</> : <><Download size={16} /> Save record</>}</button></div>
+        <div className="passage-actions"><button className="button" onClick={() => requestFeedback()} disabled={submitted || !passage || !response.trim() || loadingFeedback || loadingPassage}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> {submitted ? "Original submitted" : "Request feedback"}</>}</button><button className={`button secondary ${exported ? "is-confirmed" : ""}`} onClick={download} disabled={!passage&&!response&&!revision} aria-live="polite">{exported ? <><Check size={16} /> Exported / ready</> : <><Download size={16} /> Save record</>}</button></div>
         <p className="passage-privacy">Feedback stays focused on your analysis of this passage. This tool cannot generate assessment work or act as a chatbot. Your writing is sent to MiniMax and processed by M3; it is not stored by this site. Do not include names, contact details, student IDs or other personally identifiable information. Save a record for teacher review or documentation; nothing is sent to your teacher automatically.</p>
       </section>
 

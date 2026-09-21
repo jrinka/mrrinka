@@ -1,4 +1,6 @@
 "use client";
+import ExportFormatSelect from "./export-format";
+import {downloadRecord,type ExportFormat} from "@/lib/practice-record";
 import { useState } from "react";
 export default function Practice({
   kind,
@@ -51,6 +53,7 @@ export default function Practice({
             hint: "How might someone interpret the detail differently?",
           },
         ];
+  const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
   const [values, setValues] = useState<Record<string, string>>({});
   const [review, setReview] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -59,12 +62,7 @@ export default function Practice({
     .filter(Boolean)
     .join(kind === "paragraph" ? " " : "\n\n");
   function download() {
-    const a = document.createElement("a");
-    const url = URL.createObjectURL(new Blob([result], { type: "text/plain" }));
-    a.href = url;
-    a.download = `${kind}-notes.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadRecord(`${kind === "paragraph" ? "Paragraph workshop" : "Close reading notes"}\n\n${prompts.map(p=>`${p.label}\n${values[p.key]||"(Not yet written)"}`).join("\n\n")}\n\nAssembled writing\n${result}`,`${kind}-notes.txt`,exportFormat);
   }
   return (
     <section className="practice-box">
@@ -99,8 +97,9 @@ export default function Practice({
         disabled={!result}
         onClick={() => setReview(true)}
       >
-        Review my writing
+        Assemble & self-check
       </button>
+      <div className="tool-actions"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button type="button" className="button secondary" onClick={download}>Export my writing</button></div>
       {review && (
         <div className="practice-result" aria-live="polite">
           <h3>
@@ -118,9 +117,6 @@ export default function Practice({
             </li>
           </ul>
           <div className="actions">
-            <button className="button secondary" onClick={download}>
-              Download writing
-            </button>
             <button
               className="button secondary"
               onClick={async () => {
