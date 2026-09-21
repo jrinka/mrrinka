@@ -38,7 +38,7 @@ export default function ResourcesPage() {
       <div className="global-directory-list">
         <section className="global-directory-group">
           <div className="global-directory-course"><span>01</span><h2>Shared methods</h2></div>
-          <div><Link href="/resources/critical-lenses"><span><strong>Critical Lenses</strong><small>Questions that open up a reading, with examples, further reading, and thinkers’ biographies.</small></span><ArrowUpRight size={18} /></Link>{[...shared.values()].map(({ item, courseId, courses: usedIn }) => <Link href={`/courses/${courseId}/resources/${item.id}`} key={item.title}><span><strong>{item.title}</strong><small>{item.summary} · Used in {usedIn.join(", ")}</small></span><ArrowUpRight size={18} /></Link>)}</div>
+          <div><Link href="/resources/paper-1-introductions"><span><strong>Paper 1: Introductions &amp; thesis statements</strong><small>A shared step-by-step method, with separate literary and non-literary worked examples.</small></span><ArrowUpRight size={18} /></Link><Link href="/resources/critical-lenses"><span><strong>Critical Lenses</strong><small>Questions that open up a reading, with examples, further reading, and thinkers’ biographies.</small></span><ArrowUpRight size={18} /></Link>{[...shared.values()].map(({ item, courseId, courses: usedIn }) => <Link href={`/courses/${courseId}/resources/${item.id}`} key={item.title}><span><strong>{item.title}</strong><small>{item.summary} · Used in {usedIn.join(", ")}</small></span><ArrowUpRight size={18} /></Link>)}</div>
         </section>
       </div>
     </GlobalShell>
