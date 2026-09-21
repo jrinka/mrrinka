@@ -3,14 +3,14 @@ import {useState} from "react";
 import {useRouter} from "next/navigation";
 import {Sparkles} from "lucide-react";
 import {readTransfer,transferKey,type PracticeTransfer} from "@/lib/practice-transfer";
-export function ContinueToRefinery({kind,source,prompt="",evidence,draft,disabled=false}:{kind:"analysis"|"comparison";source:string;prompt?:string;evidence:string;draft:string;disabled?:boolean}){
+export function ContinueToRefinery({kind,source,prompt="",evidence,draft,disabled=false,course}:{course?:"literature"|"language-literature";kind:"analysis"|"comparison";source:string;prompt?:string;evidence:string;draft:string;disabled?:boolean}){
  const router=useRouter();const [error,setError]=useState("");
  function proceed(){try{
   const id=crypto.randomUUID();
   const transfer:PracticeTransfer={version:1,id,createdAt:Date.now(),kind,source,prompt,evidence,draft};
   if(!readTransfer(JSON.stringify(transfer),id,kind)){setError("These notes exceed the Refinery’s input limit. Save your complete work as a text file, then bring a shorter selection for feedback.");return;}
   sessionStorage.setItem(transferKey,JSON.stringify(transfer));
-  router.push(`/practice/refineries/${kind}?transfer=${id}`);
+  router.push(`/practice/refineries/${kind}?transfer=${id}${course ? `&course=${course}` : ""}`);
  }catch{setError("Your browser could not carry the notes across. Save them as a text file, then copy them into the Refinery.");}}
  return <div className="practice-handoff"><button className="button secondary" type="button" disabled={disabled} onClick={proceed}><Sparkles size={16} aria-hidden="true"/>Continue in the {kind==="analysis"?"Analysis":"Comparison"} Refinery →</button><p className="hint">Carries this exercise into an editable form using temporary storage in this browser tab. Nothing is sent to AI until you request feedback. Save a text copy to keep your work.</p>{error&&<p role="alert">{error}</p>}</div>;
 }

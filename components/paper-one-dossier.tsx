@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import {LiteratureCompanion,LiteraturePractice} from "./literature-paper-one";
 import RefineryLinks from "./refinery-links";
 import type { RefineryKind } from "@/lib/refineries";
 import Markdown from "./markdown";
@@ -15,7 +16,7 @@ const steps = [
 ];
 const source = "https://www.cdc.gov/tobacco/campaign/tips/resources/ads/pdf-print-ads/beckys-tip-print-ad-7x10.pdf";
 
-export default function PaperOneDossier({ body, workedExample = true, refinery }: { body: string; workedExample?: boolean; refinery?:RefineryKind }) {
+export default function PaperOneDossier({ body, workedExample = true, literatureExample = false, refinery }: { body: string; workedExample?: boolean; literatureExample?:boolean; refinery?:RefineryKind }) {
   const sections = body.split(/^## /m).filter(Boolean).map((part) => {
     const [title, ...text] = part.split("\n");
     return { title, id: title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, ""), text: text.join("\n") };
@@ -42,20 +43,22 @@ export default function PaperOneDossier({ body, workedExample = true, refinery }
     };
   }, []);
   return (
-    <div className={`p1-workbench ${workedExample ? "" : "p1-guidance-only"}`}>
+    <div className={`p1-workbench ${workedExample || literatureExample ? "" : "p1-guidance-only"}`}>
       <div className="p1-guidance">
         <div className="p1-panel-heading"><span className="mono">ASSESSMENT GUIDE</span><button type="button" onClick={() => setOpen(open.length === sections.length ? [] : sections.map(s => s.id))}>{open.length === sections.length ? "Collapse all" : "Expand all"}</button></div>
         {sections.map((section, index) => (
           <section className="p1-section" id={section.id} key={section.id}>
             <h2><button type="button" aria-expanded={open.includes(section.id)} aria-controls={`${section.id}-body`} onClick={() => { setActive(section.id); setOpen(previous => previous.includes(section.id) ? previous.filter(id => id !== section.id) : [...previous, section.id]); }}><span className="mono">{String(index + 1).padStart(2, "0")}</span>{section.title}<span className="p1-toggle" aria-hidden="true">{open.includes(section.id) ? "−" : "+"}</span></button></h2>
             <div id={`${section.id}-body`} hidden={!open.includes(section.id)} className="p1-section-body">
-              {workedExample && <a className="p1-companion-jump" href="#worked-example" onClick={() => setActive(section.id)}>See this in the advertisement ↓</a>}
+              {(workedExample || literatureExample) && <a className="p1-companion-jump" href="#worked-example" onClick={() => setActive(section.id)}>See this in the {literatureExample ? "poem" : "advertisement"} ↓</a>}
               <Markdown>{section.text}</Markdown>
-              {section.id === "practice" && refinery && <RefineryLinks kind={refinery} />}
+              {section.id === "practice" && literatureExample && <LiteraturePractice/>}
+              {section.id === "practice" && refinery && !literatureExample && <RefineryLinks kind={refinery} />}
             </div>
           </section>
         ))}
       </div>
+      {literatureExample && <LiteratureCompanion section={active} title={sections.find(s=>s.id===active)?.title??"Briefing"}/>}
       {workedExample && <aside id="worked-example" className="p1-example" aria-label="Worked example: Becky’s CDC advertisement">
         <div className="p1-panel-heading"><span className="mono">WORKED EXAMPLE</span><span className="mono">CDC · BECKY</span></div>
         <div className="p1-example-inner">

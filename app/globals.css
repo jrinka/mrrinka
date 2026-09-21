@@ -2629,3 +2629,20 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .export-format { display:flex; flex-direction:column; gap:6px; font-size:.8rem; color:var(--muted); margin:12px 0; }
 .export-format select { padding:10px 12px; border:1px solid var(--line); color:var(--ink); background:var(--white); font:inherit; max-width:100%; }
 .tool-actions .export-format { margin:0; }
+
+/* Literature Paper 1: keep the text within reach while the reading develops. */
+.lit-poem { background:var(--panel-warm); padding:14px; border:1px solid var(--line); }
+.lit-poem summary { cursor:pointer; font-size:.9rem; text-decoration:underline; text-underline-offset:3px; }
+.lit-poem h3 { margin-bottom:4px; font-family:var(--font-literary); font-size:1.6rem; }
+.lit-poet { font-size:.82rem; margin-top:0; color:var(--muted); }
+.lit-stanza { margin:18px 0; font-family:var(--font-literary); font-size:1.05rem; line-height:1.6; }
+.lit-line { display:grid; grid-template-columns:22px minmax(0,1fr); gap:6px; }
+.lit-line-number { color:var(--muted); font: .6rem/2.8 var(--font-mono); user-select:none; }
+.lit-answer > span:last-child { padding-left:14px; }
+.lit-source { font-size:.7rem; line-height:1.6; color:var(--muted); }
+.lit-model { font-size:.95rem; line-height:1.75; }
+.lit-model blockquote { margin:12px 0; padding-left:14px; border-left:3px solid var(--citron); }
+.lit-practice { border-top:1px solid var(--line); margin-top:24px; padding-top:20px; }
+.lit-practice > .mono { font-size:.7rem; }
+.lit-practice blockquote { margin:18px 0; padding:14px; background:var(--panel-warm); font-family:var(--font-literary); }
+.lit-practice .p1-model { margin-bottom:20px; }

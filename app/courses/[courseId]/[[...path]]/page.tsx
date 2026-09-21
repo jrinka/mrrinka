@@ -233,7 +233,7 @@ export default async function CoursePage({ params }: Props) {
               )}
             </figure>
           )}
-          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} refinery={assessmentRefinery(item.title)} /> : <Markdown>{item.body}</Markdown>}
+          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : <Markdown>{item.body}</Markdown>}
           {item.section === "assessment" && courseId !== "english-10" && (
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>
