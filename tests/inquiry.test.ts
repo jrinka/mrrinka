@@ -31,3 +31,15 @@ test('answer options inside questions are replaced before output review',async()
  assert.equal(result.refused,false);
  if(!result.refused){assert.equal(result.reply.questions.length,1);assert.doesNotMatch(result.reply.questions[0],/destruction|awakening|self-deception/);}
 });
+
+test('one malformed format retries, then guidance still requires output review',async()=>{
+ const outputs=['{"allowed":true}','not JSON',JSON.stringify({observation:'You noticed a locked door.',questions:['What words describe it?']}),'{"allowed":true}'];
+ let calls=0;
+ const result=await inquiryFeedback(workshopRequest.parse(initial),async(system)=>{calls++;assert.match(system,/matching this schema/);return outputs.shift()!;});
+ assert.equal(result.refused,false);assert.equal(calls,4);
+});
+test('format retry budget is shared and never bypasses output review',async()=>{
+ const outputs=['bad scope','{"allowed":true}',JSON.stringify({observation:'A starting point.',questions:['What did you notice?']}),'bad review'];let calls=0;
+ await assert.rejects(()=>inquiryFeedback(workshopRequest.parse(initial),async()=>{calls++;return outputs.shift()!;}),/output-review/);
+ assert.equal(calls,4);
+});

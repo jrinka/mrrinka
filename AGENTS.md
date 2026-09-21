@@ -18,3 +18,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Never commit credentials, private student data, or confidential teaching material. This repository is public.
 - Drafts are omitted from course pages but visible in repository source. Uploads are public assets.
 - Validate content, TypeScript, and the production build after relevant changes. Verify user flows in a browser.
+
+# Teaching and layout priorities
+
+- Desktop and school laptops are the primary experience (one-to-one school). Preserve useful side-by-side models, grids, and working space; mobile is a usable fallback, not a reason to remove desktop functionality.
+- Public course navigation is IB Language & Literature and IB Literature. Skills & Methods provides general English resources, including for English 10. Keep English 10 editor data and legacy routes; do not create a third actively maintained course space.

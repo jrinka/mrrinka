@@ -23,13 +23,13 @@ export const coachingSchema = z.object({
 }).strict();
 export type Coaching = z.infer<typeof coachingSchema>;
 
-export async function askM3(system: string, material: unknown, maxTokens = 4096): Promise<string> {
+export async function askM3(system: string, material: unknown, maxTokens = 4096, timeoutMs = 30000): Promise<string> {
   const apiKey = process.env.MINIMAX_APIKEY;
   if (!apiKey) throw new Error("Feedback service is not configured.");
   const response = await fetch("https://api.minimax.chat/v1/text/chatcompletion_v2", {
     method: "POST", headers: {"Content-Type":"application/json", Authorization:`Bearer ${apiKey}`},
     body: JSON.stringify({ model, messages: [{role:"system",content:system},{role:"user",content:JSON.stringify(material)}], max_tokens:maxTokens }),
-    signal: AbortSignal.timeout(30000),
+    signal: AbortSignal.timeout(timeoutMs),
   });
   if (!response.ok) throw new Error(`Provider HTTP status ${response.status}`);
   const data = await response.json();

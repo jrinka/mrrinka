@@ -8,7 +8,7 @@ export default function ReadingGrid({method}:{method:ReadingMethod}) {
  const [notes,setNotes]=useState<string[]>(guide.steps.map(()=>""));
  const [text,setText]=useState("");
  return <section className="reading-workshop">
-  <div className="tool-actions"><a className="button secondary" href={`/downloads/${method}-grid.html`} download><Download size={16}/> Download blank grid (.html)</a><button className="button secondary" type="button" onClick={()=>downloadRecord(`${guide.title} reading notes\nText: ${text}\n\n${guide.steps.map((s,i)=>`${s.title}\n${notes[i]||"(Not yet recorded)"}`).join("\n\n")}`,`${method}-notes.txt`)}>Save my notes (.txt)</button></div>
+  <div className="tool-actions"><a className="button secondary" href={`/downloads/${method}-grid.html`} download><Download size={16}/> Download blank grid (.html)</a><button className="button secondary" type="button" onClick={()=>downloadRecord(`${guide.title} reading notes\nText: ${text || guide.work}\n\n${guide.steps.map((s,i)=>`${s.title}\n${notes[i]||"(Not yet recorded)"}`).join("\n\n")}`,`${method}-notes.txt`)}>Save my notes (.txt)</button></div>
   <p className="hint">The download opens in a browser for printing or offline use. Notes typed here stay on this page only; save them before leaving. No AI is used.</p>
   <label className="field">Your text and author (if trying a different text)<input value={text} onChange={e=>setText(e.target.value)} maxLength={300}/></label>
   <div className="reading-grid-head mono"><span>READING MOVE</span><span>WORKED EXAMPLE / {guide.work}</span><span>YOUR NOTES</span></div>

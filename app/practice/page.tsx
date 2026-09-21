@@ -5,7 +5,7 @@ import { ArrowUpRight, Sparkles } from "lucide-react";
 import {ibAiPolicy} from "@/lib/refineries";
 import RefineryLinks from "@/components/refinery-links";
 import GlobalShell from "@/components/global-shell";
-import { courses, publicCourse } from "@/lib/content";
+import { ibCourses, publicCourse } from "@/lib/content";
 
 export const metadata: Metadata = { title: "Practice" };
 
@@ -15,7 +15,7 @@ export default function PracticePage() {
     item: ReturnType<typeof publicCourse>["items"][number];
     versions: { href: string; course: string }[];
   }>();
-  for (const course of courses) {
+  for (const course of ibCourses) {
     for (const item of publicCourse(course.id).items.filter(item => item.section === "practice")) {
       const key = JSON.stringify([item.title, item.summary, item.body, item.practiceKind, item.links]);
       const activity = activities.get(key) ?? { item, versions: [] };
