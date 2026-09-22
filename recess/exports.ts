@@ -16,7 +16,7 @@ export function activityText(root:HTMLElement,title:string) {
     if(!(node instanceof Element))return '';
     const style=getComputedStyle(node);
     if(style.display==='none'||style.visibility==='hidden'||node.matches('[hidden],[aria-hidden="true"],header,footer,.play-title,.activity-export,.drawing-mode,.drawing-pad,.source-note,.keyboard,.actions,.mini-clock-controls,.timer,.mini-finish,.teacher-dialog,svg'))return '';
-    if(node.matches('button')&&!node.matches('.ryl-grid button,.big-letter,.word-trail button'))return '';
+    if(node.matches('button')&&!node.matches('.ryl-grid button,.big-letter,.word-trail button,.odds-options button'))return '';
     if(node instanceof HTMLInputElement||node instanceof HTMLTextAreaElement){
       if(node instanceof HTMLInputElement&&['password','hidden','checkbox','radio'].includes(node.type))return '';
       return node.value?`\n${node.getAttribute('aria-label')||'Response'}: ${node.value}\n`:'';
@@ -29,7 +29,7 @@ export function activityText(root:HTMLElement,title:string) {
     return block?'\n'+content+'\n':content+' ';
   };
   const content=read(root).replace(/[ \t]+/g,' ').replace(/ *\n */g,'\n').replace(/\n{3,}/g,'\n\n').trim();
-  return `BRAIN BREAK / Mr. Rinka\n${title}\n\n${content}\n\nDrawings can be downloaded separately with Save drawing.\n`;
+  return `BRAIN BREAK / Mr. Rinka\n${title}\n\n${content}${root.querySelector('.drawing-pad')?'\n\nDrawings can be downloaded separately with Save drawing.':''}\n`;
 }
 
 export async function drawingPng(svg:SVGSVGElement,title:string):Promise<Blob> {
@@ -56,4 +56,12 @@ export async function drawingPng(svg:SVGSVGElement,title:string):Promise<Blob> {
     context.drawImage(image,0,header,900,450);
     return await new Promise<Blob>((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error('Drawing could not be saved.')),'image/png'));
   } finally {URL.revokeObjectURL(url);}
+}
+
+// Keep mathematical operators and student Markdown literal in a Markdown viewer.
+export function activityRecord(content:string,title:string,format:'txt'|'md') {
+  if(format==='txt')return content;
+  const longest=Math.max(0,...(content.match(/`+/g)||[]).map(run=>run.length));
+  const fence='`'.repeat(Math.max(3,longest+1));
+  return `# ${title}\n\n${fence}text\n${content}\n${fence}\n`;
 }
