@@ -1,0 +1,6 @@
+:root {
+  --font-geist-sans: 'DM Sans Variable';
+  --font-geist-mono: 'Space Mono';
+  --font-zine-title: 'Archivo Black';
+}
+.home-link { color: inherit; text-decoration: underline; text-underline-offset: 4px; }

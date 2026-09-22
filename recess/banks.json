@@ -1,0 +1,2642 @@
+{
+  "ryl": [
+    {
+      "name": "A food",
+      "examples": [
+        "apple",
+        "avocado",
+        "bagel",
+        "banana",
+        "burger",
+        "cheese",
+        "chicken",
+        "chocolate",
+        "cookie",
+        "donut",
+        "egg",
+        "fish",
+        "grape",
+        "hamburger",
+        "ice cream",
+        "lemon",
+        "mango",
+        "nacho",
+        "orange",
+        "pasta",
+        "pizza",
+        "popcorn",
+        "potato",
+        "pretzel",
+        "rice",
+        "salad",
+        "sandwich",
+        "soup",
+        "spaghetti",
+        "steak",
+        "strawberry",
+        "sushi",
+        "taco",
+        "toast",
+        "waffle",
+        "watermelon",
+        "yogurt"
+      ]
+    },
+    {
+      "name": "A movie",
+      "examples": [
+        "avatar",
+        "avengers",
+        "aladdin",
+        "batman",
+        "coco",
+        "dune",
+        "frozen",
+        "gravity",
+        "jaws",
+        "moana",
+        "nemo",
+        "rocky",
+        "shrek",
+        "titanic",
+        "up",
+        "wicked"
+      ]
+    },
+    {
+      "name": "A book title",
+      "examples": [
+        "animal farm",
+        "alice in wonderland",
+        "anne of green gables",
+        "charlotte's web",
+        "dune",
+        "frankenstein",
+        "hamlet",
+        "it",
+        "matilda",
+        "moby dick",
+        "pride and prejudice",
+        "romeo and juliet",
+        "the giver",
+        "the hobbit",
+        "wonder"
+      ]
+    },
+    {
+      "name": "An animal",
+      "examples": [
+        "aardvark",
+        "alligator",
+        "antelope",
+        "alpaca",
+        "bear",
+        "bat",
+        "cat",
+        "cow",
+        "deer",
+        "dog",
+        "dolphin",
+        "eagle",
+        "elephant",
+        "fox",
+        "goat",
+        "horse",
+        "kangaroo",
+        "lion",
+        "monkey",
+        "owl",
+        "panda",
+        "rabbit",
+        "shark",
+        "snake",
+        "tiger",
+        "whale",
+        "wolf",
+        "zebra"
+      ]
+    },
+    {
+      "name": "A place",
+      "examples": [
+        "argentina",
+        "amsterdam",
+        "atlanta",
+        "arizona",
+        "brazil",
+        "canada",
+        "chicago",
+        "denmark",
+        "egypt",
+        "florida",
+        "germany",
+        "hawaii",
+        "india",
+        "japan",
+        "london",
+        "mexico",
+        "norway",
+        "paris",
+        "rome",
+        "spain",
+        "texas",
+        "venice"
+      ]
+    },
+    {
+      "name": "A famous person",
+      "examples": [
+        "aristotle",
+        "amelia earhart",
+        "albert einstein",
+        "beethoven",
+        "chopin",
+        "cleopatra",
+        "darwin",
+        "disney",
+        "edison",
+        "franklin",
+        "galileo",
+        "hemingway",
+        "lincoln",
+        "mandela",
+        "mozart",
+        "newton",
+        "oprah",
+        "picasso",
+        "shakespeare",
+        "washington"
+      ]
+    },
+    {
+      "name": "A song title",
+      "examples": [
+        "always",
+        "all star",
+        "apologize",
+        "bad romance",
+        "believer",
+        "clocks",
+        "dynamite",
+        "happy",
+        "hello",
+        "imagine",
+        "jolene",
+        "levitating",
+        "perfect",
+        "roar",
+        "shake it off",
+        "uptown funk",
+        "yellow"
+      ]
+    },
+    {
+      "name": "A TV show",
+      "examples": [
+        "arrested development",
+        "avatar the last airbender",
+        "breaking bad",
+        "friends",
+        "game of thrones",
+        "office",
+        "parks and recreation",
+        "stranger things",
+        "the mandalorian",
+        "wednesday"
+      ]
+    },
+    {
+      "name": "Something in a classroom",
+      "examples": [
+        "apple",
+        "atlas",
+        "artwork",
+        "alphabet chart",
+        "backpack",
+        "book",
+        "calculator",
+        "chair",
+        "chalk",
+        "clock",
+        "desk",
+        "eraser",
+        "globe",
+        "marker",
+        "notebook",
+        "pencil",
+        "poster",
+        "projector",
+        "ruler",
+        "whiteboard"
+      ]
+    },
+    {
+      "name": "A superhero or villain",
+      "examples": [
+        "aquaman",
+        "ant-man",
+        "apocalypse",
+        "batman",
+        "captain marvel",
+        "deadpool",
+        "flash",
+        "green lantern",
+        "harley quinn",
+        "iron man",
+        "joker",
+        "magneto",
+        "spider-man",
+        "superman",
+        "thanos",
+        "wonder woman"
+      ]
+    },
+    {
+      "name": "An emotion",
+      "examples": [
+        "anger",
+        "admiration",
+        "anxiety",
+        "amazement",
+        "boredom",
+        "curiosity",
+        "embarrassment",
+        "envy",
+        "excitement",
+        "fear",
+        "gratitude",
+        "happiness",
+        "jealousy",
+        "joy",
+        "love",
+        "pride",
+        "relief",
+        "sadness",
+        "surprise"
+      ]
+    },
+    {
+      "name": "A color",
+      "examples": [
+        "amber",
+        "aqua",
+        "amethyst",
+        "azure",
+        "beige",
+        "black",
+        "blue",
+        "brown",
+        "crimson",
+        "cyan",
+        "emerald",
+        "gold",
+        "green",
+        "indigo",
+        "ivory",
+        "lavender",
+        "magenta",
+        "maroon",
+        "navy",
+        "olive",
+        "orange",
+        "pink",
+        "purple",
+        "red",
+        "scarlet",
+        "silver",
+        "teal",
+        "violet",
+        "white",
+        "yellow"
+      ]
+    },
+    {
+      "name": "A sport",
+      "examples": [
+        "archery",
+        "aquatics",
+        "athletics",
+        "badminton",
+        "baseball",
+        "basketball",
+        "boxing",
+        "cricket",
+        "cycling",
+        "fencing",
+        "football",
+        "golf",
+        "hockey",
+        "lacrosse",
+        "rugby",
+        "soccer",
+        "swimming",
+        "tennis",
+        "volleyball",
+        "wrestling"
+      ]
+    },
+    {
+      "name": "A hobby",
+      "examples": [
+        "astronomy",
+        "acting",
+        "animation",
+        "baking",
+        "birdwatching",
+        "chess",
+        "dancing",
+        "drawing",
+        "fishing",
+        "gardening",
+        "hiking",
+        "knitting",
+        "painting",
+        "photography",
+        "reading",
+        "running",
+        "singing",
+        "skateboarding",
+        "writing"
+      ]
+    },
+    {
+      "name": "A job",
+      "examples": [
+        "architect",
+        "astronaut",
+        "artist",
+        "accountant",
+        "baker",
+        "chef",
+        "carpenter",
+        "dentist",
+        "doctor",
+        "engineer",
+        "farmer",
+        "firefighter",
+        "judge",
+        "lawyer",
+        "mechanic",
+        "nurse",
+        "pilot",
+        "plumber",
+        "police officer",
+        "teacher",
+        "veterinarian",
+        "writer"
+      ]
+    },
+    {
+      "name": "A body part",
+      "examples": [
+        "ankle",
+        "arm",
+        "abdomen",
+        "artery",
+        "back",
+        "brain",
+        "cheek",
+        "chin",
+        "ear",
+        "elbow",
+        "eye",
+        "finger",
+        "foot",
+        "hand",
+        "heart",
+        "knee",
+        "leg",
+        "lip",
+        "liver",
+        "mouth",
+        "nose",
+        "shoulder",
+        "stomach",
+        "toe",
+        "tongue",
+        "tooth",
+        "wrist"
+      ]
+    },
+    {
+      "name": "A musical instrument",
+      "examples": [
+        "accordion",
+        "acoustic guitar",
+        "banjo",
+        "cello",
+        "clarinet",
+        "drum",
+        "flute",
+        "guitar",
+        "harp",
+        "keyboard",
+        "piano",
+        "saxophone",
+        "trombone",
+        "trumpet",
+        "violin",
+        "xylophone"
+      ]
+    },
+    {
+      "name": "A vehicle",
+      "examples": [
+        "airplane",
+        "ambulance",
+        "airship",
+        "bicycle",
+        "boat",
+        "bus",
+        "canoe",
+        "car",
+        "helicopter",
+        "kayak",
+        "motorcycle",
+        "rocket",
+        "scooter",
+        "ship",
+        "skateboard",
+        "submarine",
+        "taxi",
+        "train",
+        "truck",
+        "van"
+      ]
+    },
+    {
+      "name": "A holiday",
+      "examples": [
+        "april fools day",
+        "armed forces day",
+        "christmas",
+        "easter",
+        "halloween",
+        "hanukkah",
+        "independence day",
+        "labor day",
+        "new year",
+        "thanksgiving",
+        "valentine's day"
+      ]
+    },
+    {
+      "name": "A weather condition",
+      "examples": [
+        "arctic blast",
+        "afternoon sun",
+        "blizzard",
+        "cloud",
+        "drought",
+        "fog",
+        "hail",
+        "hurricane",
+        "rain",
+        "snow",
+        "sunshine",
+        "thunderstorm",
+        "tornado",
+        "wind"
+      ]
+    },
+    {
+      "name": "A planet or celestial body",
+      "examples": [
+        "asteroid",
+        "andromeda",
+        "comet",
+        "earth",
+        "jupiter",
+        "mars",
+        "mercury",
+        "moon",
+        "neptune",
+        "pluto",
+        "saturn",
+        "star",
+        "sun",
+        "venus"
+      ]
+    },
+    {
+      "name": "A type of clothing",
+      "examples": [
+        "apron",
+        "ascot",
+        "athletic wear",
+        "belt",
+        "blouse",
+        "coat",
+        "dress",
+        "gloves",
+        "hat",
+        "jacket",
+        "jeans",
+        "pants",
+        "scarf",
+        "shirt",
+        "shoes",
+        "shorts",
+        "skirt",
+        "socks",
+        "sweater",
+        "tie"
+      ]
+    },
+    {
+      "name": "A household item",
+      "examples": [
+        "alarm clock",
+        "appliance",
+        "armchair",
+        "blanket",
+        "broom",
+        "candle",
+        "chair",
+        "clock",
+        "cup",
+        "dish",
+        "fork",
+        "glass",
+        "lamp",
+        "mirror",
+        "napkin",
+        "pillow",
+        "plate",
+        "spoon",
+        "table",
+        "towel",
+        "vacuum",
+        "vase"
+      ]
+    },
+    {
+      "name": "A natural disaster",
+      "examples": [
+        "avalanche",
+        "aftershock",
+        "blizzard",
+        "drought",
+        "earthquake",
+        "flood",
+        "hurricane",
+        "landslide",
+        "tornado",
+        "tsunami",
+        "wildfire"
+      ]
+    },
+    {
+      "name": "A school subject",
+      "examples": [
+        "algebra",
+        "art",
+        "astronomy",
+        "anthropology",
+        "biology",
+        "calculus",
+        "chemistry",
+        "drama",
+        "geography",
+        "geometry",
+        "history",
+        "literature",
+        "music",
+        "physics",
+        "psychology",
+        "spanish"
+      ]
+    },
+    {
+      "name": "A word from Shakespeare",
+      "examples": [
+        "arrant",
+        "auspicious",
+        "fair",
+        "fie",
+        "hither",
+        "knave",
+        "perchance",
+        "thee",
+        "thou",
+        "wherefore",
+        "yonder"
+      ]
+    },
+    {
+      "name": "A mythological figure",
+      "examples": [
+        "apollo",
+        "aphrodite",
+        "artemis",
+        "atlas",
+        "achilles",
+        "hercules",
+        "medusa",
+        "odin",
+        "poseidon",
+        "thor",
+        "zeus"
+      ]
+    },
+    {
+      "name": "A thing that is loud",
+      "examples": [
+        "airhorn",
+        "amplifier",
+        "applause",
+        "cannon",
+        "explosion",
+        "firework",
+        "jet",
+        "siren",
+        "thunder",
+        "trumpet"
+      ]
+    },
+    {
+      "name": "A thing that is quiet",
+      "examples": [
+        "ant",
+        "ash",
+        "afternoon nap",
+        "butterfly",
+        "cloud",
+        "ghost",
+        "library",
+        "mouse",
+        "snowfall",
+        "whisper"
+      ]
+    },
+    {
+      "name": "A thing that turns bad",
+      "examples": [
+        "apple",
+        "avocado",
+        "attitude",
+        "banana",
+        "egg",
+        "friendship",
+        "milk",
+        "mood",
+        "situation"
+      ]
+    },
+    {
+      "name": "A part of a car",
+      "examples": [
+        "bumper",
+        "dashboard",
+        "engine",
+        "fender",
+        "gear",
+        "horn",
+        "ignition",
+        "jack",
+        "mirror",
+        "pedal",
+        "radiator",
+        "seat",
+        "tire",
+        "wheel",
+        "windshield",
+        "wiper"
+      ]
+    },
+    {
+      "name": "Something on a farm",
+      "examples": [
+        "barn",
+        "chicken",
+        "cow",
+        "tractor",
+        "fence",
+        "harvest",
+        "irrigation",
+        "pig",
+        "sheep",
+        "silo",
+        "stable",
+        "tractor"
+      ]
+    },
+    {
+      "name": "Something in a bathroom",
+      "examples": [
+        "bathtub",
+        "brush",
+        "faucet",
+        "mirror",
+        "shampoo",
+        "shower",
+        "soap",
+        "toilet",
+        "towel",
+        "toothbrush"
+      ]
+    },
+    {
+      "name": "Something in a kitchen",
+      "examples": [
+        "blender",
+        "cabinet",
+        "dishwasher",
+        "fork",
+        "kettle",
+        "microwave",
+        "oven",
+        "plate",
+        "refrigerator",
+        "sink",
+        "spoon",
+        "stove"
+      ]
+    },
+    {
+      "name": "Something in a hospital",
+      "examples": [
+        "bandage",
+        "doctor",
+        "emergency",
+        "gauze",
+        "nurse",
+        "patient",
+        "scalpel",
+        "stethoscope",
+        "surgery",
+        "wheelchair",
+        "x-ray"
+      ]
+    },
+    {
+      "name": "Something red",
+      "examples": [
+        "apple",
+        "cherry",
+        "fire truck",
+        "lipstick",
+        "rose",
+        "stop sign",
+        "strawberry",
+        "tomato"
+      ]
+    },
+    {
+      "name": "Something orange",
+      "examples": [
+        "carrot",
+        "cheetah",
+        "monarch butterfly",
+        "pumpkin",
+        "traffic cone",
+        "tiger"
+      ]
+    },
+    {
+      "name": "Something yellow",
+      "examples": [
+        "banana",
+        "bee",
+        "chick",
+        "lemon",
+        "sunflower",
+        "taxi"
+      ]
+    },
+    {
+      "name": "Something green",
+      "examples": [
+        "broccoli",
+        "cactus",
+        "clover",
+        "emerald",
+        "frog",
+        "grass",
+        "leaf",
+        "lime"
+      ]
+    },
+    {
+      "name": "Someone who wears a uniform",
+      "examples": [
+        "athlete",
+        "chef",
+        "firefighter",
+        "nurse",
+        "pilot",
+        "police officer",
+        "soldier",
+        "student"
+      ]
+    },
+    {
+      "name": "A name of a store",
+      "examples": [
+        "bakery",
+        "bookstore",
+        "butcher",
+        "pharmacy",
+        "supermarket",
+        "boutique",
+        "grocery store",
+        "hardware store"
+      ]
+    },
+    {
+      "name": "Something that flies",
+      "examples": [
+        "airplane",
+        "bat",
+        "bird",
+        "butterfly",
+        "drone",
+        "eagle",
+        "helicopter",
+        "mosquito",
+        "rocket"
+      ]
+    },
+    {
+      "name": "Something that swims",
+      "examples": [
+        "dolphin",
+        "fish",
+        "frog",
+        "manta ray",
+        "otter",
+        "penguin",
+        "shark",
+        "whale"
+      ]
+    },
+    {
+      "name": "Something that runs",
+      "examples": [
+        "athlete",
+        "cheetah",
+        "dog",
+        "horse",
+        "rabbit",
+        "river",
+        "train"
+      ]
+    },
+    {
+      "name": "Something with wheels",
+      "examples": [
+        "bicycle",
+        "bus",
+        "car",
+        "skateboard",
+        "train",
+        "truck",
+        "wagon",
+        "wheelchair"
+      ]
+    },
+    {
+      "name": "Something sharp",
+      "examples": [
+        "knife",
+        "needle",
+        "pin",
+        "razor",
+        "scissors",
+        "sword",
+        "thorn"
+      ]
+    },
+    {
+      "name": "Something soft",
+      "examples": [
+        "blanket",
+        "cloud",
+        "cotton",
+        "feather",
+        "kitten",
+        "pillow",
+        "puppy",
+        "sponge"
+      ]
+    },
+    {
+      "name": "Something cold",
+      "examples": [
+        "antarctica",
+        "freezer",
+        "ice",
+        "igloo",
+        "popsicle",
+        "snow",
+        "winter"
+      ]
+    },
+    {
+      "name": "Something hot",
+      "examples": [
+        "campfire",
+        "desert",
+        "oven",
+        "sauna",
+        "summer",
+        "sun",
+        "volcano"
+      ]
+    },
+    {
+      "name": "Something sweet",
+      "examples": [
+        "candy",
+        "chocolate",
+        "cookie",
+        "honey",
+        "sugar",
+        "syrup"
+      ]
+    },
+    {
+      "name": "Something sour",
+      "examples": [
+        "lemon",
+        "lime",
+        "pickle",
+        "vinegar",
+        "warhead"
+      ]
+    },
+    {
+      "name": "Something sticky",
+      "examples": [
+        "glue",
+        "honey",
+        "tape",
+        "taffy",
+        "gum"
+      ]
+    },
+    {
+      "name": "Something smooth",
+      "examples": [
+        "glass",
+        "marble",
+        "silk",
+        "water",
+        "pebble"
+      ]
+    },
+    {
+      "name": "Something rough",
+      "examples": [
+        "bark",
+        "gravel",
+        "sandpaper",
+        "stone",
+        "concrete"
+      ]
+    },
+    {
+      "name": "A type of fruit",
+      "examples": [
+        "apple",
+        "banana",
+        "cherry",
+        "grape",
+        "lemon",
+        "mango",
+        "orange",
+        "peach",
+        "pear",
+        "pineapple",
+        "strawberry",
+        "watermelon"
+      ]
+    },
+    {
+      "name": "A type of vegetable",
+      "examples": [
+        "broccoli",
+        "carrot",
+        "celery",
+        "corn",
+        "cucumber",
+        "lettuce",
+        "onion",
+        "pepper",
+        "potato",
+        "spinach",
+        "tomato",
+        "zucchini"
+      ]
+    },
+    {
+      "name": "A type of dessert",
+      "examples": [
+        "cake",
+        "cookie",
+        "cupcake",
+        "donut",
+        "ice cream",
+        "pie",
+        "pudding",
+        "brownie"
+      ]
+    },
+    {
+      "name": "A type of bread",
+      "examples": [
+        "bagel",
+        "baguette",
+        "croissant",
+        "muffin",
+        "pretzel",
+        "roll",
+        "sourdough",
+        "toast"
+      ]
+    },
+    {
+      "name": "A type of pasta",
+      "examples": [
+        "fettuccine",
+        "lasagna",
+        "macaroni",
+        "penne",
+        "ravioli",
+        "spaghetti"
+      ]
+    },
+    {
+      "name": "A type of drink",
+      "examples": [
+        "coffee",
+        "juice",
+        "lemonade",
+        "milk",
+        "soda",
+        "tea",
+        "water",
+        "smoothie"
+      ]
+    },
+    {
+      "name": "A type of juice",
+      "examples": [
+        "apple",
+        "cranberry",
+        "grape",
+        "orange",
+        "pineapple",
+        "tomato"
+      ]
+    },
+    {
+      "name": "A season",
+      "examples": [
+        "autumn",
+        "fall",
+        "spring",
+        "summer",
+        "winter"
+      ]
+    },
+    {
+      "name": "A month",
+      "examples": [
+        "april",
+        "august",
+        "december",
+        "february",
+        "january",
+        "july",
+        "june",
+        "march",
+        "may",
+        "november",
+        "october",
+        "september"
+      ]
+    },
+    {
+      "name": "A day of the week",
+      "examples": [
+        "friday",
+        "monday",
+        "saturday",
+        "sunday",
+        "thursday",
+        "tuesday",
+        "wednesday"
+      ]
+    },
+    {
+      "name": "A type of building",
+      "examples": [
+        "apartment",
+        "barn",
+        "castle",
+        "hospital",
+        "hotel",
+        "library",
+        "museum",
+        "school",
+        "skyscraper",
+        "warehouse"
+      ]
+    },
+    {
+      "name": "A room in a house",
+      "examples": [
+        "bathroom",
+        "bedroom",
+        "dining room",
+        "garage",
+        "kitchen",
+        "laundry room",
+        "living room",
+        "office"
+      ]
+    },
+    {
+      "name": "A piece of furniture",
+      "examples": [
+        "bed",
+        "bookshelf",
+        "chair",
+        "couch",
+        "desk",
+        "dresser",
+        "lamp",
+        "shelf",
+        "table",
+        "wardrobe"
+      ]
+    },
+    {
+      "name": "An appliance",
+      "examples": [
+        "blender",
+        "dishwasher",
+        "dryer",
+        "fan",
+        "heater",
+        "microwave",
+        "oven",
+        "refrigerator",
+        "toaster",
+        "washer"
+      ]
+    },
+    {
+      "name": "A tool",
+      "examples": [
+        "hammer",
+        "level",
+        "pliers",
+        "saw",
+        "screwdriver",
+        "wrench",
+        "drill"
+      ]
+    },
+    {
+      "name": "A type of boat",
+      "examples": [
+        "canoe",
+        "cruise ship",
+        "kayak",
+        "sailboat",
+        "submarine",
+        "yacht",
+        "ferry"
+      ]
+    },
+    {
+      "name": "Something you'd find at a carnival",
+      "examples": [
+        "balloon",
+        "carousel",
+        "cotton candy",
+        "ferris wheel",
+        "game booth",
+        "ride",
+        "ticket"
+      ]
+    },
+    {
+      "name": "Something you'd find at a zoo",
+      "examples": [
+        "cage",
+        "elephant",
+        "giraffe",
+        "lion",
+        "monkey",
+        "penguin",
+        "ticket booth",
+        "zebra"
+      ]
+    },
+    {
+      "name": "Something you'd find at an airport",
+      "examples": [
+        "boarding pass",
+        "gate",
+        "luggage",
+        "passport",
+        "plane",
+        "runway",
+        "security",
+        "suitcase"
+      ]
+    },
+    {
+      "name": "Something scary",
+      "examples": [
+        "ghost",
+        "monster",
+        "shadow",
+        "skeleton",
+        "spider",
+        "vampire",
+        "werewolf",
+        "zombie"
+      ]
+    },
+    {
+      "name": "Something cute",
+      "examples": [
+        "baby",
+        "kitten",
+        "puppy",
+        "teddy bear",
+        "bunny"
+      ]
+    },
+    {
+      "name": "Something fast",
+      "examples": [
+        "bullet train",
+        "cheetah",
+        "jet",
+        "motorcycle",
+        "rocket",
+        "sports car"
+      ]
+    },
+    {
+      "name": "Something slow",
+      "examples": [
+        "sloth",
+        "snail",
+        "tortoise",
+        "traffic jam",
+        "turtle"
+      ]
+    },
+    {
+      "name": "Something big",
+      "examples": [
+        "elephant",
+        "mountain",
+        "ocean",
+        "skyscraper",
+        "whale",
+        "giant"
+      ]
+    },
+    {
+      "name": "Something small",
+      "examples": [
+        "ant",
+        "atom",
+        "bee",
+        "flea",
+        "germ",
+        "pebble",
+        "seed",
+        "grain"
+      ]
+    },
+    {
+      "name": "Something expensive",
+      "examples": [
+        "diamond",
+        "house",
+        "jewelry",
+        "mansion",
+        "yacht",
+        "sports car"
+      ]
+    },
+    {
+      "name": "Something fragile",
+      "examples": [
+        "egg",
+        "glass",
+        "mirror",
+        "porcelain",
+        "vase"
+      ]
+    },
+    {
+      "name": "Something strong",
+      "examples": [
+        "athlete",
+        "bear",
+        "elephant",
+        "hippo",
+        "lion",
+        "steel",
+        "weightlifter"
+      ]
+    },
+    {
+      "name": "Something funny",
+      "examples": [
+        "clown",
+        "joke",
+        "meme",
+        "penguin",
+        "pun",
+        "slapstick"
+      ]
+    },
+    {
+      "name": "Something boring",
+      "examples": [
+        "lecture",
+        "math homework",
+        "waiting room",
+        "commercial",
+        "assembly"
+      ]
+    },
+    {
+      "name": "Something exciting",
+      "examples": [
+        "concert",
+        "rollercoaster",
+        "surprise party",
+        "vacation",
+        "championship"
+      ]
+    },
+    {
+      "name": "Something dangerous",
+      "examples": [
+        "fire",
+        "hurricane",
+        "lion",
+        "poison",
+        "shark",
+        "volcano"
+      ]
+    },
+    {
+      "name": "Something safe",
+      "examples": [
+        "blanket",
+        "home",
+        "helmet",
+        "seatbelt",
+        "shelter",
+        "hug"
+      ]
+    },
+    {
+      "name": "Something you can read",
+      "examples": [
+        "book",
+        "magazine",
+        "newspaper",
+        "poem",
+        "sign",
+        "comic"
+      ]
+    },
+    {
+      "name": "Something you can write with",
+      "examples": [
+        "crayon",
+        "marker",
+        "pen",
+        "pencil",
+        "chalk"
+      ]
+    },
+    {
+      "name": "Something you can ride",
+      "examples": [
+        "bicycle",
+        "bus",
+        "horse",
+        "skateboard",
+        "train",
+        "rollercoaster"
+      ]
+    },
+    {
+      "name": "Something you can throw",
+      "examples": [
+        "ball",
+        "boomerang",
+        "frisbee",
+        "snowball",
+        "dart"
+      ]
+    },
+    {
+      "name": "Something you can catch",
+      "examples": [
+        "ball",
+        "cold",
+        "fish",
+        "frisbee",
+        "wave"
+      ]
+    },
+    {
+      "name": "Something you can fold",
+      "examples": [
+        "blanket",
+        "clothes",
+        "napkin",
+        "origami",
+        "paper",
+        "towel"
+      ]
+    },
+    {
+      "name": "Something you can cut",
+      "examples": [
+        "bread",
+        "hair",
+        "paper",
+        "rope",
+        "vegetable"
+      ]
+    },
+    {
+      "name": "Something you can open",
+      "examples": [
+        "book",
+        "door",
+        "gift",
+        "jar",
+        "window",
+        "envelope"
+      ]
+    },
+    {
+      "name": "Something you can break",
+      "examples": [
+        "bone",
+        "glass",
+        "heart",
+        "promise",
+        "record",
+        "silence"
+      ]
+    },
+    {
+      "name": "Something you can fix",
+      "examples": [
+        "bike",
+        "car",
+        "leak",
+        "mistake",
+        "toy",
+        "relationship"
+      ]
+    },
+    {
+      "name": "Something you can build",
+      "examples": [
+        "block tower",
+        "house",
+        "lego set",
+        "sandcastle",
+        "bridge"
+      ]
+    },
+    {
+      "name": "Something you can grow",
+      "examples": [
+        "flower",
+        "garden",
+        "hair",
+        "plant",
+        "beard"
+      ]
+    },
+    {
+      "name": "Something you can wash",
+      "examples": [
+        "car",
+        "clothes",
+        "dish",
+        "hair",
+        "hands",
+        "dog"
+      ]
+    },
+    {
+      "name": "Something you can cook",
+      "examples": [
+        "egg",
+        "pasta",
+        "rice",
+        "soup",
+        "steak",
+        "pancake"
+      ]
+    },
+    {
+      "name": "Something you can bake",
+      "examples": [
+        "bread",
+        "cake",
+        "cookies",
+        "muffin",
+        "pie",
+        "brownie"
+      ]
+    },
+    {
+      "name": "Something you'd find at the beach",
+      "examples": [
+        "bucket",
+        "crab",
+        "sand",
+        "sandcastle",
+        "seashell",
+        "sunscreen",
+        "towel",
+        "umbrella",
+        "wave"
+      ]
+    },
+    {
+      "name": "Something you'd find in space",
+      "examples": [
+        "asteroid",
+        "astronaut",
+        "comet",
+        "galaxy",
+        "meteor",
+        "planet",
+        "rocket",
+        "satellite",
+        "star"
+      ]
+    },
+    {
+      "name": "Something you'd find in a forest",
+      "examples": [
+        "bear",
+        "deer",
+        "fern",
+        "fox",
+        "mushroom",
+        "owl",
+        "pinecone",
+        "squirrel",
+        "tree",
+        "wolf"
+      ]
+    },
+    {
+      "name": "Something made of wood",
+      "examples": [
+        "bench",
+        "cabinet",
+        "desk",
+        "door",
+        "floor",
+        "pencil",
+        "table",
+        "tree"
+      ]
+    },
+    {
+      "name": "Something made of metal",
+      "examples": [
+        "can",
+        "coin",
+        "fork",
+        "key",
+        "nail",
+        "pan",
+        "ring",
+        "spoon"
+      ]
+    },
+    {
+      "name": "Something made of glass",
+      "examples": [
+        "bottle",
+        "cup",
+        "mirror",
+        "vase",
+        "window",
+        "eyeglasses"
+      ]
+    },
+    {
+      "name": "Something that grows",
+      "examples": [
+        "flower",
+        "hair",
+        "nail",
+        "plant",
+        "tree",
+        "moss"
+      ]
+    },
+    {
+      "name": "Something that melts",
+      "examples": [
+        "butter",
+        "chocolate",
+        "ice",
+        "ice cream",
+        "snow",
+        "wax"
+      ]
+    },
+    {
+      "name": "Something that floats",
+      "examples": [
+        "balloon",
+        "boat",
+        "cork",
+        "duck",
+        "feather",
+        "leaf",
+        "raft"
+      ]
+    },
+    {
+      "name": "Something with a tail",
+      "examples": [
+        "alligator",
+        "cat",
+        "dog",
+        "fox",
+        "horse",
+        "lizard",
+        "monkey",
+        "whale"
+      ]
+    },
+    {
+      "name": "Something with wings",
+      "examples": [
+        "airplane",
+        "angel",
+        "bat",
+        "bee",
+        "bird",
+        "butterfly",
+        "dragonfly",
+        "eagle"
+      ]
+    },
+    {
+      "name": "A type of dog",
+      "examples": [
+        "beagle",
+        "bulldog",
+        "collie",
+        "husky",
+        "poodle",
+        "retriever"
+      ]
+    },
+    {
+      "name": "A type of bird",
+      "examples": [
+        "eagle",
+        "falcon",
+        "flamingo",
+        "hawk",
+        "owl",
+        "parrot",
+        "penguin",
+        "robin",
+        "sparrow"
+      ]
+    },
+    {
+      "name": "A type of insect",
+      "examples": [
+        "ant",
+        "bee",
+        "beetle",
+        "butterfly",
+        "cricket",
+        "dragonfly",
+        "fly",
+        "mosquito"
+      ]
+    },
+    {
+      "name": "A type of flower",
+      "examples": [
+        "daisy",
+        "lily",
+        "orchid",
+        "rose",
+        "sunflower",
+        "tulip"
+      ]
+    },
+    {
+      "name": "A type of tree",
+      "examples": [
+        "birch",
+        "maple",
+        "oak",
+        "palm",
+        "pine",
+        "willow"
+      ]
+    },
+    {
+      "name": "A type of cheese",
+      "examples": [
+        "brie",
+        "cheddar",
+        "feta",
+        "gouda",
+        "mozzarella",
+        "parmesan",
+        "swiss"
+      ]
+    },
+    {
+      "name": "A type of pizza topping",
+      "examples": [
+        "bacon",
+        "basil",
+        "cheese",
+        "mushroom",
+        "olive",
+        "onion",
+        "pepper",
+        "pepperoni",
+        "sausage"
+      ]
+    },
+    {
+      "name": "A type of ice cream flavor",
+      "examples": [
+        "chocolate",
+        "mint",
+        "strawberry",
+        "vanilla",
+        "cookie dough"
+      ]
+    },
+    {
+      "name": "A type of candy",
+      "examples": [
+        "chocolate",
+        "gummy bear",
+        "jawbreaker",
+        "lollipop",
+        "skittle"
+      ]
+    },
+    {
+      "name": "A board game",
+      "examples": [
+        "chess",
+        "checkers",
+        "monopoly",
+        "scrabble",
+        "clue",
+        "risk",
+        "catan"
+      ]
+    },
+    {
+      "name": "A video game character",
+      "examples": [
+        "mario",
+        "luigi",
+        "link",
+        "zelda",
+        "sonic",
+        "pikachu",
+        "master chief"
+      ]
+    },
+    {
+      "name": "Something in a backpack",
+      "examples": [
+        "binder",
+        "book",
+        "calculator",
+        "eraser",
+        "laptop",
+        "lunch",
+        "notebook",
+        "pencil",
+        "water bottle"
+      ]
+    },
+    {
+      "name": "A reason to be late",
+      "examples": [
+        "alarm",
+        "flat tire",
+        "missed bus",
+        "traffic",
+        "overslept"
+      ]
+    },
+    {
+      "name": "An excuse for not doing homework",
+      "examples": [
+        "dog ate it",
+        "forgot it",
+        "lost it",
+        "printer broke",
+        "sick"
+      ]
+    },
+    {
+      "name": "A thing that is round",
+      "examples": [
+        "ball",
+        "coin",
+        "globe",
+        "orange",
+        "planet",
+        "ring",
+        "wheel"
+      ]
+    },
+    {
+      "name": "A thing that is square",
+      "examples": [
+        "brownie",
+        "chessboard",
+        "cracker",
+        "sticky note",
+        "tile"
+      ]
+    },
+    {
+      "name": "A thing that is triangle",
+      "examples": [
+        "dorito",
+        "pizza slice",
+        "pyramid",
+        "traffic cone"
+      ]
+    },
+    {
+      "name": "A grammar term",
+      "examples": [
+        "adjective",
+        "adverb",
+        "conjunction",
+        "noun",
+        "preposition",
+        "pronoun",
+        "verb"
+      ]
+    },
+    {
+      "name": "A literary device",
+      "examples": [
+        "alliteration",
+        "foreshadowing",
+        "irony",
+        "metaphor",
+        "personification",
+        "simile",
+        "symbolism"
+      ]
+    },
+    {
+      "name": "A book genre",
+      "examples": [
+        "biography",
+        "fantasy",
+        "horror",
+        "mystery",
+        "romance",
+        "science fiction",
+        "thriller"
+      ]
+    },
+    {
+      "name": "A fictional character",
+      "examples": [
+        "alice",
+        "batman",
+        "cinderella",
+        "harry potter",
+        "sherlock holmes",
+        "spider-man"
+      ]
+    },
+    {
+      "name": "A setting in a novel",
+      "examples": [
+        "castle",
+        "city",
+        "countryside",
+        "desert",
+        "forest",
+        "haunted house",
+        "island",
+        "kingdom",
+        "spaceship"
+      ]
+    },
+    {
+      "name": "A vocabulary word",
+      "examples": [
+        "abundant",
+        "benevolent",
+        "candid",
+        "diligent",
+        "ephemeral",
+        "frugal",
+        "gregarious",
+        "humble",
+        "illuminate",
+        "jubilant"
+      ]
+    },
+    {
+      "name": "Something teachers say",
+      "examples": [
+        "be quiet",
+        "eyes up here",
+        "i'll wait",
+        "pay attention",
+        "take out a pencil"
+      ]
+    },
+    {
+      "name": "Something with a handle",
+      "examples": [
+        "basket",
+        "bucket",
+        "drawer",
+        "hammer",
+        "mug",
+        "suitcase"
+      ]
+    },
+    {
+      "name": "Something with a lid",
+      "examples": [
+        "bin",
+        "box",
+        "jar",
+        "kettle",
+        "pot",
+        "trunk"
+      ]
+    },
+    {
+      "name": "Something you can stack",
+      "examples": [
+        "books",
+        "bowls",
+        "bricks",
+        "chairs",
+        "cups",
+        "plates"
+      ]
+    },
+    {
+      "name": "Something you can charge",
+      "examples": [
+        "camera",
+        "laptop",
+        "phone",
+        "tablet",
+        "toothbrush",
+        "watch"
+      ]
+    },
+    {
+      "name": "Something that uses batteries",
+      "examples": [
+        "calculator",
+        "camera",
+        "clock",
+        "flashlight",
+        "radio",
+        "remote"
+      ]
+    },
+    {
+      "name": "Something that moves without an engine",
+      "examples": [
+        "bicycle",
+        "canoe",
+        "kite",
+        "skateboard",
+        "sled",
+        "wheelbarrow"
+      ]
+    },
+    {
+      "name": "Something you can tie",
+      "examples": [
+        "apron",
+        "bow",
+        "knot",
+        "ribbon",
+        "shoelace",
+        "tie"
+      ]
+    },
+    {
+      "name": "Something you can hang up",
+      "examples": [
+        "coat",
+        "curtain",
+        "hammock",
+        "picture",
+        "towel",
+        "uniform"
+      ]
+    },
+    {
+      "name": "Something you can measure",
+      "examples": [
+        "angle",
+        "distance",
+        "height",
+        "speed",
+        "temperature",
+        "weight"
+      ]
+    },
+    {
+      "name": "Something found in a workshop",
+      "examples": [
+        "clamp",
+        "drill",
+        "hammer",
+        "nail",
+        "saw",
+        "vice"
+      ]
+    },
+    {
+      "name": "Something found in a library",
+      "examples": [
+        "bookmark",
+        "chair",
+        "dictionary",
+        "librarian",
+        "novel",
+        "shelf"
+      ]
+    },
+    {
+      "name": "Something found backstage",
+      "examples": [
+        "costume",
+        "curtain",
+        "ladder",
+        "makeup",
+        "prop",
+        "wig"
+      ]
+    },
+    {
+      "name": "Something in a first aid kit",
+      "examples": [
+        "bandage",
+        "gauze",
+        "gloves",
+        "scissors",
+        "tape",
+        "tweezers"
+      ]
+    },
+    {
+      "name": "Something useful on a camping trip",
+      "examples": [
+        "compass",
+        "flashlight",
+        "hammock",
+        "map",
+        "rope",
+        "tent"
+      ]
+    },
+    {
+      "name": "Something you might repair",
+      "examples": [
+        "bicycle",
+        "chair",
+        "clock",
+        "fence",
+        "radio",
+        "shoe"
+      ]
+    },
+    {
+      "name": "Something you might collect",
+      "examples": [
+        "coins",
+        "comics",
+        "leaves",
+        "postcards",
+        "shells",
+        "stamps"
+      ]
+    },
+    {
+      "name": "Something you can recycle",
+      "examples": [
+        "aluminum",
+        "cardboard",
+        "glass",
+        "newspaper",
+        "paper",
+        "steel"
+      ]
+    },
+    {
+      "name": "Something made from fabric",
+      "examples": [
+        "apron",
+        "blanket",
+        "curtain",
+        "flag",
+        "shirt",
+        "tent"
+      ]
+    },
+    {
+      "name": "Something you can inflate",
+      "examples": [
+        "ball",
+        "balloon",
+        "boat",
+        "mattress",
+        "pool",
+        "tire"
+      ]
+    },
+    {
+      "name": "Something with a hinge",
+      "examples": [
+        "cabinet",
+        "door",
+        "gate",
+        "laptop",
+        "locker",
+        "trunk"
+      ]
+    },
+    {
+      "name": "Something you might donate",
+      "examples": [
+        "blankets",
+        "books",
+        "clothes",
+        "food",
+        "money",
+        "toys"
+      ]
+    },
+    {
+      "name": "Something you might see on a map",
+      "examples": [
+        "border",
+        "city",
+        "island",
+        "lake",
+        "river",
+        "road"
+      ]
+    },
+    {
+      "name": "Something that casts a shadow",
+      "examples": [
+        "building",
+        "chair",
+        "fence",
+        "person",
+        "statue",
+        "tree"
+      ]
+    },
+    {
+      "name": "Something a detective might examine",
+      "examples": [
+        "alibi",
+        "clue",
+        "footprint",
+        "letter",
+        "photograph",
+        "receipt"
+      ]
+    },
+    {
+      "name": "Something a robot might misunderstand",
+      "examples": [
+        "compliment",
+        "gesture",
+        "irony",
+        "joke",
+        "poem",
+        "sarcasm"
+      ]
+    },
+    {
+      "name": "Something a dragon might keep",
+      "examples": [
+        "blanket",
+        "coins",
+        "diary",
+        "gems",
+        "helmet",
+        "treasure"
+      ]
+    },
+    {
+      "name": "Something a pigeon might object to",
+      "examples": [
+        "broom",
+        "cat",
+        "door",
+        "net",
+        "rain",
+        "umbrella"
+      ]
+    },
+    {
+      "name": "Something a tiny museum could display",
+      "examples": [
+        "button",
+        "coin",
+        "feather",
+        "key",
+        "seed",
+        "stamp"
+      ]
+    },
+    {
+      "name": "Something an unhelpful vending machine could sell",
+      "examples": [
+        "dust",
+        "gravel",
+        "homework",
+        "mud",
+        "sand",
+        "weeds"
+      ]
+    },
+    {
+      "name": "Something a cloud might resemble",
+      "examples": [
+        "castle",
+        "dragon",
+        "elephant",
+        "face",
+        "ship",
+        "whale"
+      ]
+    },
+    {
+      "name": "Something that deserves a warning label",
+      "examples": [
+        "cactus",
+        "chili",
+        "glue",
+        "ladder",
+        "paint",
+        "scissors"
+      ]
+    },
+    {
+      "name": "Something you would not lend a raccoon",
+      "examples": [
+        "camera",
+        "diary",
+        "keys",
+        "lunch",
+        "phone",
+        "wallet"
+      ]
+    },
+    {
+      "name": "Something for a very small celebration",
+      "examples": [
+        "balloon",
+        "biscuit",
+        "candle",
+        "confetti",
+        "cupcake",
+        "ribbon"
+      ]
+    },
+    {
+      "name": "Something that could be a secret door",
+      "examples": [
+        "bookcase",
+        "cabinet",
+        "curtain",
+        "fireplace",
+        "mirror",
+        "wardrobe"
+      ]
+    },
+    {
+      "name": "Something a lost astronaut might need",
+      "examples": [
+        "compass",
+        "food",
+        "map",
+        "oxygen",
+        "radio",
+        "water"
+      ]
+    },
+    {
+      "name": "Something a polite monster might say",
+      "examples": [
+        "after you",
+        "excuse me",
+        "hello",
+        "pardon me",
+        "sorry",
+        "thanks"
+      ]
+    },
+    {
+      "name": "A verb for making a sound",
+      "examples": [
+        "buzz",
+        "clap",
+        "hum",
+        "ring",
+        "sing",
+        "whisper"
+      ]
+    },
+    {
+      "name": "A word that describes a texture",
+      "examples": [
+        "bumpy",
+        "fuzzy",
+        "gritty",
+        "rough",
+        "silky",
+        "smooth"
+      ]
+    },
+    {
+      "name": "A word that describes a shape",
+      "examples": [
+        "circular",
+        "curved",
+        "flat",
+        "oval",
+        "round",
+        "square"
+      ]
+    },
+    {
+      "name": "A word that describes movement",
+      "examples": [
+        "brisk",
+        "erratic",
+        "graceful",
+        "rapid",
+        "slow",
+        "steady"
+      ]
+    },
+    {
+      "name": "A word about teamwork",
+      "examples": [
+        "cooperate",
+        "discuss",
+        "help",
+        "listen",
+        "plan",
+        "share"
+      ]
+    },
+    {
+      "name": "A word about time",
+      "examples": [
+        "ancient",
+        "brief",
+        "early",
+        "future",
+        "late",
+        "recent"
+      ]
+    },
+    {
+      "name": "An object with an interesting name",
+      "examples": [
+        "abacus",
+        "boomerang",
+        "colander",
+        "kaleidoscope",
+        "periscope",
+        "thermometer"
+      ]
+    }
+  ],
+  "scatter": [
+    "Author",
+    "Book Title",
+    "Literary Device",
+    "Vocabulary Word",
+    "Fictional Character",
+    "Place in a Story",
+    "Something a Hero Would Say",
+    "Something You'd Find in a Dystopian Novel",
+    "Meme",
+    "Things That Turn Bad",
+    "Something Loud",
+    "Something Quiet",
+    "Movie Title",
+    "Song Title",
+    "Band or Musician",
+    "TV Show",
+    "Video Game",
+    "Historical Figure",
+    "Mythological Character",
+    "Superhero or Villain",
+    "Emotion",
+    "Color Shade",
+    "Food or Snack",
+    "Drink",
+    "Animal",
+    "Body Part",
+    "Clothing Item",
+    "Room in a House",
+    "School Subject",
+    "Job or Profession",
+    "Hobby",
+    "Sport",
+    "Something Round",
+    "Something Sharp",
+    "Something Sticky",
+    "Something Cold",
+    "Something Hot",
+    "Something You Do at a Party",
+    "Reason to Be Late",
+    "Excuse for Not Doing Homework",
+    "Something You'd Find in a Backpack",
+    "Something That Melts",
+    "Something That Floats",
+    "Famous Quote",
+    "Word from Shakespeare",
+    "Poetry Topic",
+    "Grammar Term",
+    "Figurative Language Example",
+    "Genre of Literature",
+    "Something Teachers Say",
+    "Part of a Car",
+    "Something on a Farm",
+    "Something in a Bathroom",
+    "Something in a Kitchen",
+    "Something in a Hospital",
+    "Something Red",
+    "Something That Flies",
+    "Something That Swims",
+    "Something With Wheels",
+    "A Type of Weather",
+    "A Natural Disaster",
+    "A Type of Fruit",
+    "A Type of Vegetable",
+    "A Type of Dessert",
+    "A Piece of Furniture",
+    "An Appliance",
+    "A Tool",
+    "A Type of Boat",
+    "Something You'd Find at the Beach",
+    "Something You'd Find in Space",
+    "Something You'd Find in a Forest",
+    "Something Made of Wood",
+    "Something Made of Metal",
+    "Something That Grows",
+    "Something With Wings",
+    "Something Fast",
+    "Something Slow",
+    "Something Big",
+    "Something Small",
+    "A scientific discovery",
+    "A word with a silent letter",
+    "A persuasive adjective",
+    "An invention",
+    "A city outside your country",
+    "A character flaw",
+    "A verb for moving",
+    "A word about justice",
+    "An unreliable narrator might say…",
+    "A solution to boredom",
+    "A sound effect",
+    "A word borrowed from another language",
+    "A reason to celebrate",
+    "A headline from the future",
+    "A fictional technology",
+    "A word with a prefix",
+    "A word with a suffix",
+    "A form of communication",
+    "A problem worth solving",
+    "A word associated with freedom",
+    "A public place",
+    "A character motivation",
+    "An environmental issue",
+    "A surprising gift",
+    "A word describing tension",
+    "An alternative to said",
+    "An abstract noun",
+    "A science term",
+    "A historical event",
+    "A word associated with travel",
+    "A personality trait",
+    "A word for an argument",
+    "A symbol of hope",
+    "An object in a mystery",
+    "A word with double letters",
+    "A word for happiness",
+    "A reason a character lies",
+    "A challenge for a hero",
+    "A word for a small amount",
+    "A word for a large amount",
+    "Something with a handle",
+    "Something with a lid",
+    "Something you can stack",
+    "Something you can charge",
+    "Something that uses batteries",
+    "Something you can tie",
+    "Something you can hang up",
+    "Something you can measure",
+    "Something in a workshop",
+    "Something in a library",
+    "Something found backstage",
+    "Something in a first aid kit",
+    "Something useful on a camping trip",
+    "Something you might repair",
+    "Something you might collect",
+    "Something you can recycle",
+    "Something made from fabric",
+    "Something you can inflate",
+    "Something with a hinge",
+    "Something you might donate",
+    "Something you might see on a map",
+    "Something that casts a shadow",
+    "Something a detective might examine",
+    "Something a robot might misunderstand",
+    "Something a dragon might keep",
+    "Something a pigeon might object to",
+    "Something a tiny museum could display",
+    "Something an unhelpful vending machine could sell",
+    "Something a cloud might resemble",
+    "Something that deserves a warning label",
+    "Something you would not lend a raccoon",
+    "Something for a very small celebration",
+    "Something that could be a secret door",
+    "Something a lost astronaut might need",
+    "Something a polite monster might say",
+    "A texture",
+    "A shape",
+    "A kind of movement",
+    "A word about teamwork",
+    "A word about time",
+    "A tool for making art",
+    "A job on a film crew",
+    "A way to communicate without speaking",
+    "A way to improve a waiting room",
+    "An item in a lost property box",
+    "A useful invention for a rainy day",
+    "An unusual museum exhibit",
+    "A reason a robot might apologize",
+    "A terrible name for a restaurant",
+    "A good name for a tiny planet",
+    "A title for a very boring film",
+    "A rule for a city of cats",
+    "A gift for someone who has everything",
+    "A sound you might hear at night",
+    "A smell that reminds you of a place",
+    "A detail that makes a setting memorable",
+    "A question worth asking a time traveler",
+    "An unlikely item on a treasure map",
+    "A small act of kindness",
+    "A problem that could be solved with string",
+    "A compliment for an ordinary object"
+  ]
+}

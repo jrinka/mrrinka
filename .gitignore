@@ -7,3 +7,8 @@ playwright-report/
 test-results/
 *.tsbuildinfo
 .DS_Store
+
+# Generated from the versioned Brain Break source by build:recess
+public/recess-assets/
+public/recess.html
+recess/.generated.css

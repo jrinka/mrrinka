@@ -8,7 +8,7 @@ const sharedLinks = [
   { title: "Skills & Methods", note: "General English resources for reading, analysis, and writing.", label: "FOR EVERY COURSE", href: "/resources" },
   { title: "Practice", note: "Passages, workshops, and refineries.", label: "READ / WRITE / REVISE", href: "/practice" },
   { title: "My calendar", note: "The day cycle and class meetings.", label: "8-DAY CYCLE", href: "/calendar" },
-  { title: "Recess", note: "Quick word games, drawing challenges, and classroom brain breaks by Mr. Rinka.", label: "CLASSROOM / BRAIN BREAKS", href: "https://brain-break-classroom.jrinka.chatgpt.site" },
+  { title: "Recess", note: "Quick word games, drawing challenges, and classroom brain breaks by Mr. Rinka.", label: "CLASSROOM / BRAIN BREAKS", href: "/recess" },
 ];
 
 export default function Home() {
@@ -30,12 +30,16 @@ export default function Home() {
       </header>
       <main id="content" className="entry-main">
         <nav id="courses" className="entry-links" aria-label="Courses and shared tools">
-          {links.map((link,index) => <Link className="entry-link" href={link.href} key={link.href}>
+          {links.map((link,index) => {
+            // Recess is an independent document: load its own styles and runtime.
+            const Destination = link.href === "/recess" ? "a" : Link;
+            return <Destination className="entry-link" href={link.href} key={link.href}>
             <span className="entry-link-meta mono"><span>{String(index+1).padStart(2,"0")}</span>{link.label}</span>
             <h2>{link.title}</h2>
             <p>{link.note}</p>
             <ArrowUpRight size={19} aria-hidden="true" />
-          </Link>)}
+          </Destination>;
+          })}
         </nav>
         <figure className="landing-plate entry-plate">
           <div>
