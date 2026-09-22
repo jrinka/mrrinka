@@ -8,6 +8,7 @@ const sharedLinks = [
   { title: "Skills & Methods", note: "General English resources for reading, analysis, and writing.", label: "FOR EVERY COURSE", href: "/resources" },
   { title: "Practice", note: "Passages, workshops, and refineries.", label: "READ / WRITE / REVISE", href: "/practice" },
   { title: "My calendar", note: "The day cycle and class meetings.", label: "8-DAY CYCLE", href: "/calendar" },
+  { title: "Recess", note: "Quick word games, drawing challenges, and classroom brain breaks by Mr. Rinka.", label: "CLASSROOM / BRAIN BREAKS", href: "https://brain-break-classroom.jrinka.chatgpt.site" },
 ];
 
 export default function Home() {
