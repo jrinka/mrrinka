@@ -1,7 +1,13 @@
 import { z } from "zod";
 import { refineryKinds } from "./refineries";
 
-export const model = "MiniMax-M3";
+const minimaxModel = "MiniMax-M3";
+const fireworksModel = "accounts/fireworks/models/kimi-k3";
+export function feedbackProvider() {
+  return process.env.FIREWORKS_API_KEY?.trim()
+    ? { model: fireworksModel, name: "Kimi K3", host: "Fireworks" }
+    : { model: minimaxModel, name: "M3", host: "MiniMax" };
+}
 export const policyVersion = "2026-09-21";
 export const refusal = "This tool gives feedback on your own thinking. It cannot generate assessment content, rewrite your work, or act as a chatbot. Add your own attempt and supporting textual details.";
 export const refineryRequest = z.object({
@@ -23,18 +29,21 @@ export const coachingSchema = z.object({
 }).strict();
 export type Coaching = z.infer<typeof coachingSchema>;
 
-export async function askM3(system: string, material: unknown, maxTokens = 4096, timeoutMs = 30000): Promise<string> {
-  const apiKey = process.env.MINIMAX_APIKEY;
+export async function askModel(system: string, material: unknown, maxTokens = 4096, timeoutMs = 30000): Promise<string> {
+  const provider = feedbackProvider();
+  const fireworks = provider.host === "Fireworks";
+  const apiKey = fireworks ? process.env.FIREWORKS_API_KEY?.trim() : process.env.MINIMAX_APIKEY;
   if (!apiKey) throw new Error("Feedback service is not configured.");
-  const response = await fetch("https://api.minimax.chat/v1/text/chatcompletion_v2", {
+  const response = await fetch(fireworks ? "https://api.fireworks.ai/inference/v1/chat/completions" : "https://api.minimax.chat/v1/text/chatcompletion_v2", {
     method: "POST", headers: {"Content-Type":"application/json", Authorization:`Bearer ${apiKey}`},
-    body: JSON.stringify({ model, messages: [{role:"system",content:system},{role:"user",content:JSON.stringify(material)}], max_tokens:maxTokens }),
+    body: JSON.stringify({ model:provider.model, messages: [{role:"system",content:system},{role:"user",content:JSON.stringify(material)}], max_tokens:maxTokens }),
     signal: AbortSignal.timeout(timeoutMs),
   });
   if (!response.ok) throw new Error(`Provider HTTP status ${response.status}`);
   const data = await response.json();
   if (data.base_resp?.status_code) throw new Error(`Provider API status ${Number(data.base_resp.status_code)}`);
-  const content = data.choices?.[0]?.messages?.[0]?.content ?? data.choices?.[0]?.message?.content;
+  const content = fireworks ? data.choices?.[0]?.message?.content : data.choices?.[0]?.messages?.[0]?.content ?? data.choices?.[0]?.message?.content;
+  if (data.choices?.[0]?.finish_reason === "length") throw new Error("Provider response truncated");
   if (typeof content !== "string" || !content.trim()) throw new Error(`Provider empty content; finish reason ${String(data.choices?.[0]?.finish_reason).slice(0,30)}`);
   return content.trim();
 }
@@ -47,7 +56,7 @@ const taskInstructions = {
   "global-issue": "A global issue has broad significance, crosses national boundaries, and affects everyday local life; it need not be a current debate or affect every country. The IO is not a comparative task: examine each text independently through the same issue; do not demand similarities, differences or a comparative thesis. Evaluate the student's proposed global issue for focus, wider significance, transnational relevance and local manifestation, and grounding in BOTH selections and their wider works/bodies of work. A theme alone is insufficient. For language-literature, the IO uses literary and non-literary material; for literature, an originally English work and a work in translation. Ask for missing eligibility information; do not assume it. Do not suggest or reformulate an issue, select extracts, construct an oral outline or script, or require comparison as an IO criterion. Do not demand that the two works represent different national cultures or that the student conduct contemporary sociological research; wider significance can be explained without either. Do not infer a work's setting from its author's nationality.",
   "line-of-inquiry": "Evaluate the student's existing HLE inquiry for focus, authorial choices, analytical potential and manageable scope in a 1200–1500 word essay. Stay grounded in the supplied work/body of work and student evidence. Literature uses a literary work; language-literature may use an eligible literary work or non-literary body of work. Ask where eligibility is unclear. Do not generate questions, reformulate the student's question, choose the topic, suggest a thesis or plan, or rewrite any part of the assessed work.",
 };
-export async function safeFeedback(input: z.infer<typeof refineryRequest> | {kind:"passage"; evidence:string; draft:string; previousDraft?:string}, ask = askM3) {
+export async function safeFeedback(input: z.infer<typeof refineryRequest> | {kind:"passage"; evidence:string; draft:string; previousDraft?:string}, ask = askModel) {
   const gate = decision.parse(json(await ask(boundary, input, 4096)));
   if (!gate.allowed) return { refused: true as const, message: refusal };
   const isPassage = input.kind === "passage";

@@ -9,7 +9,7 @@ import { refineries, ibAiPolicy } from "@/lib/refineries";
 import { downloadRecord, formatPracticeRecord, type PracticeRecord } from "@/lib/practice-record";
 type Stage=typeof inquiryStages[number];
 type Turn={student:string;coach:string;stage:Stage;refused:boolean};
-export default function InquiryWorkshop({kind,initialCourse=""}:{kind:"global-issue"|"line-of-inquiry";initialCourse?:string}){
+export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"global-issue"|"line-of-inquiry";initialCourse?:string;provider:{name:string;host:string}}){
  const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
  const [course,setCourse]=useState(initialCourse);
  const startRef=useRef<HTMLFieldSetElement>(null);
@@ -60,12 +60,12 @@ export default function InquiryWorkshop({kind,initialCourse=""}:{kind:"global-is
     <button className="button" disabled={busy||exhausted||!course||!ack||texts.trim().length<2||(testing?draft.trim().length<10:message.trim().length<2)}>{busy?<><RefreshCw className="spin" size={16}/> Thinking and checking…</>:<><Sparkles size={16}/>{turns.length?"Send reply":testing?"Review my idea":"Start exploring"}</>}</button>
    </fieldset>
   </form>
-  {busy&&<p role="status">M3 is reading the conversation and checking its response. This can take up to a minute.</p>}
+  {busy&&<p role="status">{provider.name} is reading the conversation and checking its response. This can take up to a minute.</p>}
   {error&&<p role="alert" className="error">{error}</p>}
   {exhausted&&<p role="status">You have reached 12 exchanges. Save your record and take stock before starting a fresh conversation.</p>}
 
   <details className="inquiry-explainer"><summary>What is sent, and what do the boxes do?</summary><p>Each message sends your current texts, field (for IO), evidence and working idea, together with the earlier conversation. Editing a box alone does not request AI feedback. Use the starred button to send.</p><p>Exploring invites questions about your observations; refining asks for feedback on the idea you wrote. You can switch without losing this page’s notes. Nothing fills in your idea for you, and refreshing or leaving the page clears the conversation.</p></details>
-  <p className="passage-privacy">Entries are sent to MiniMax and processed by M3. Do not include names, contact details, student IDs or other personally identifiable information. This site does not store the conversation; leaving or refreshing clears it. AI can be mistaken—check its questions against your texts. Records are not sent to your teacher automatically.</p>
+  <p className="passage-privacy">Entries are sent to {provider.host} and processed by {provider.name}. Do not include names, contact details, student IDs or other personally identifiable information. This site does not store the conversation; leaving or refreshing clears it. AI can be mistaken—check its questions against your texts. Records are not sent to your teacher automatically.</p>
   <div className="refinery-save"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button type="button" className="button secondary" disabled={busy||(!turns.length&&!draft&&!message&&!texts&&!evidence)} onClick={save}>Save record for teacher review</button><p className="hint">Includes every exchange, draft snapshots, your current notes, dates and model details.</p></div>
   {(turns.length>0||texts||draft||message||evidence)&&<div className="inquiry-reset">{confirmReset?<><p>Start fresh? This clears your texts, working notes and conversation. Save your record first if you want to keep it.</p><div className="tool-actions"><button type="button" className="button secondary" disabled={busy} onClick={()=>{setTexts("");setEvidence("");setDraft("");setMessage("");setTurns([]);setRecords([]);setField(fieldsOfInquiry[0]);setStage("Notice");setMode("explore");setAck(false);setError("");setConfirmReset(false);startRef.current?.focus();}}>Clear and start fresh</button><button type="button" className="button secondary" onClick={()=>setConfirmReset(false)}>Keep working</button></div></>:<button type="button" className="button secondary" disabled={busy} onClick={()=>setConfirmReset(true)}>Start a fresh conversation</button>}</div>}
  </div>;
