@@ -27,7 +27,7 @@ test("task-specific coaching is reviewed before release",async()=>{
   const feedback={strength:"Your claim relates both works.",concern:"Your evidence does not yet identify authorial choices.",nextMove:"Which choice in each work supports the relationship you identify?"};
   const outputs=['{"allowed":true}',JSON.stringify(feedback),'{"allowed":true}'];
   const result=await safeFeedback(input,async(system)=>{prompts.push(system);return outputs.shift()!;});
-  assert.equal(result.refused,false);assert.match(prompts[1],/BOTH works/);assert.deepEqual(!result.refused && result.feedback,feedback);
+  assert.equal(result.refused,false);assert.match(prompts[1],/BOTH works/);assert.match(prompts[1],/B1.*B2/);assert.match(prompts[1],/verbatim quotation/);assert.deepEqual(!result.refused && result.feedback,feedback);
 });
 test("documentation preserves draft, source, model, time and refusal separately",()=>{
   const record=formatPracticeRecord([{tool:"Comparison Refinery",createdAt:"2026-09-20T12:00:00Z",model:"MiniMax-M3",policyVersion:"2026-09-20",draft:input.draft,evidence:input.evidence,feedback:"Which choice supports this?",refused:false},{tool:"Comparison Refinery",createdAt:"2026-09-20T12:01:00Z",model:"MiniMax-M3",policyVersion:"2026-09-20",draft:"Write it for me",evidence:input.evidence,feedback:"Scope redirect",refused:true}]);

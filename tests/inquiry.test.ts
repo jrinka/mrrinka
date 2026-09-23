@@ -11,7 +11,7 @@ test('exploration asks questions and includes prior turns without relaxing outpu
  const input=workshopRequest.parse({...initial,stage:'Explore',message:'The door is what interests me.',history:[{student:'I noticed a locked room.',coach:'What detail stood out?',stage:'Notice'}]});
  const reply={observation:'You have singled out the door.',questions:['What happens at that door?']};
  const responses=['{"allowed":true}',JSON.stringify(reply),'{"allowed":true}'];let calls=0;
- const result=await inquiryFeedback(input,async(system,material)=>{if(calls++===1){assert.match(system,/do not repeat answered questions/);assert.deepEqual(material,input);}return responses.shift()!;});
+ const result=await inquiryFeedback(input,async(system,material)=>{if(calls++===1){assert.match(system,/do not repeat answered questions/);assert.match(system,/cross national boundaries/);assert.match(system,/not assessed as a comparison/);assert.deepEqual(material,input);}return responses.shift()!;});
  assert.equal(result.refused,false);assert.equal(calls,3);
 });
 test('requests for supplied assessment work stop at scope gate',async()=>{
