@@ -58,7 +58,7 @@ function extractPassage(raw: string) {
   return candidates[Math.floor(Math.random() * candidates.length)] ?? null;
 }
 
-export default function PassagePractice({provider}:{provider:{name:string;host:string}}) {
+export default function PassagePractice({provider}:{provider:{name:string;disclosure:string}}) {
  const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
   const [passage, setPassage] = useState<Passage | null>(null);
   const [response, setResponse] = useState("");
@@ -139,7 +139,7 @@ export default function PassagePractice({provider}:{provider:{name:string;host:s
         setFeedback(data.feedback);
         if (!data.refused) { setSubmitted(true); setRevision(draft); }
       }
-      setRecords(current => [...current, {tool:"Passage Practice", createdAt:data.createdAt,model:data.model,policyVersion:data.policyVersion,evidence:`${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}`,draft,reflection:refined ? "Revision of the original response to this passage." : "",feedback:data.feedback,refused:data.refused}]);
+      setRecords(current => [...current, {tool:"Passage Practice", createdAt:data.createdAt,model:data.model,modelDisclosure:provider.disclosure,policyVersion:data.policyVersion,evidence:`${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}`,draft,reflection:refined ? "Revision of the original response to this passage." : "",feedback:data.feedback,refused:data.refused}]);
     } catch (caught) {
       setError((caught as Error).message || "Feedback is unavailable right now.");
     } finally {
@@ -192,7 +192,7 @@ export default function PassagePractice({provider}:{provider:{name:string;host:s
           <textarea id="passage-response" rows={11} readOnly={submitted} disabled={loadingFeedback || loadingPassage} maxLength={8000} value={response} onChange={(event) => { setResponse(event.target.value); setFeedback(""); }} placeholder="Start with a detail: a word, image, pattern, shift, or structural choice…" />
         </div>
         <div className="passage-actions"><button className="button" onClick={() => requestFeedback()} disabled={submitted || !passage || !response.trim() || loadingFeedback || loadingPassage}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> {submitted ? "Original submitted" : "Request feedback"}</>}</button><button className={`button secondary ${exported ? "is-confirmed" : ""}`} onClick={download} disabled={!passage&&!response&&!revision} aria-live="polite">{exported ? <><Check size={16} /> Exported / ready</> : <><Download size={16} /> Save record</>}</button></div>
-        <p className="passage-privacy">Feedback stays focused on your analysis of this passage. This tool cannot generate assessment work or act as a chatbot. Your writing is sent to {provider.host} and processed by {provider.name}; it is not stored by this site. Do not include names, contact details, student IDs or other personally identifiable information. Save a record for teacher review or documentation; nothing is sent to your teacher automatically.</p>
+        <p className="passage-privacy">Feedback stays focused on your analysis of this passage. This tool cannot generate assessment work or act as a chatbot. Your writing is processed by {provider.disclosure}; it is not stored by this site. Do not include names, contact details, student IDs or other personally identifiable information. Save a record for teacher review or documentation; nothing is sent to your teacher automatically.</p>
       </section>
 
       {submitted && <section className="passage-panel passage-response passage-revision">

@@ -27,7 +27,7 @@ test("a Fireworks key selects K3 and sends the key only to the server-side endpo
     assert.equal(body.messages[0].role, "system");
     return Response.json({ choices: [{ message: { content: '{"allowed":true}' }, finish_reason: "stop" }] });
   };
-  assert.deepEqual(feedbackProvider(), { model:"accounts/fireworks/models/kimi-k3", name:"Kimi K3", host:"Fireworks" });
+  assert.deepEqual(feedbackProvider(), { model:"accounts/fireworks/models/kimi-k3", name:"Kimi K3", disclosure:"Kimi K3, developed by Moonshot AI and hosted by Fireworks" });
   assert.equal(await askModel("scope", { draft:"test" }), '{"allowed":true}');
   assert.ok(called);
 });
@@ -41,7 +41,7 @@ test("without a Fireworks key the existing MiniMax path still works", async () =
     assert.equal(JSON.parse(String(init?.body)).model, "MiniMax-M3");
     return Response.json({ choices: [{ messages: [{ content: "Feedback" }] }] });
   };
-  assert.deepEqual(feedbackProvider(), { model:"MiniMax-M3", name:"M3", host:"MiniMax" });
+  assert.deepEqual(feedbackProvider(), { model:"MiniMax-M3", name:"M3", disclosure:"M3, developed and hosted by MiniMax" });
   assert.equal(await askModel("coach", { draft:"test" }), "Feedback");
 });
 

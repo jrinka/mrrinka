@@ -5,8 +5,8 @@ const minimaxModel = "MiniMax-M3";
 const fireworksModel = "accounts/fireworks/models/kimi-k3";
 export function feedbackProvider() {
   return process.env.FIREWORKS_API_KEY?.trim()
-    ? { model: fireworksModel, name: "Kimi K3", host: "Fireworks" }
-    : { model: minimaxModel, name: "M3", host: "MiniMax" };
+    ? { model: fireworksModel, name: "Kimi K3", disclosure: "Kimi K3, developed by Moonshot AI and hosted by Fireworks" }
+    : { model: minimaxModel, name: "M3", disclosure: "M3, developed and hosted by MiniMax" };
 }
 export const policyVersion = "2026-09-21";
 export const refusal = "This tool gives feedback on your own thinking. It cannot generate assessment content, rewrite your work, or act as a chatbot. Add your own attempt and supporting textual details.";
@@ -31,7 +31,7 @@ export type Coaching = z.infer<typeof coachingSchema>;
 
 export async function askModel(system: string, material: unknown, maxTokens = 4096, timeoutMs = 30000): Promise<string> {
   const provider = feedbackProvider();
-  const fireworks = provider.host === "Fireworks";
+  const fireworks = provider.model === fireworksModel;
   const apiKey = fireworks ? process.env.FIREWORKS_API_KEY?.trim() : process.env.MINIMAX_APIKEY;
   if (!apiKey) throw new Error("Feedback service is not configured.");
   const response = await fetch(fireworks ? "https://api.fireworks.ai/inference/v1/chat/completions" : "https://api.minimax.chat/v1/text/chatcompletion_v2", {

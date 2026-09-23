@@ -65,6 +65,7 @@ The repository includes starter teaching content, not a complete course or offic
 The three feedback routes (Passage Practice, Analysis/Comparison Refineries, and IO/HLE inquiry workshops) share one server-side model adapter. With `MINIMAX_APIKEY` alone, they use MiniMax M3. To switch them all to Kimi K3 on Fireworks, add `FIREWORKS_API_KEY` to the Vercel project's **Environment Variables** for Production and redeploy. A nonempty Fireworks key takes priority; removing it and redeploying returns to M3. The model and host shown to students and recorded in exports follow the selected provider. Never use a `NEXT_PUBLIC_` prefix or commit either key.
 
 Test with invented student work after adding the key, including an on-task inquiry and a request to write assessment content. The existing scope and output checks remain in place, but a new model can behave differently. The provider switch does not alter any student-facing assessment rules.
+The repeatable synthetic check and its human-review rubric are in [`docs/AI-CANARY.md`](docs/AI-CANARY.md).
 
 ## Resource storage (Cloudflare R2)
 

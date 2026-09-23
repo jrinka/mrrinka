@@ -51,3 +51,7 @@ test("plain text records use readable headings and preserve the student's exact 
  assert.ok(record.includes(draft));
  assert.equal(record.includes('## AI feedback'),false);
 });
+test("exported AI feedback identifies developer, host, date, and the student's input",()=>{
+ const record=formatPracticeRecord([{tool:"Global Issue Refinery",createdAt:"2026-09-23T12:00:00Z",model:"Kimi K3",modelDisclosure:"Kimi K3, developed by Moonshot AI and hosted by Fireworks",policyVersion:"v1",draft:"My own tentative issue",evidence:"My supplied text detail",reflection:"Student message: What should I examine?",feedback:"Which detail recurs?",refused:false}]);
+ for(const expected of ["AI feedback source:","Moonshot AI","Fireworks","2026-09-23T12:00:00Z","My own tentative issue","Student message: What should I examine?","IB guidance:"])assert.ok(record.includes(expected));
+});
