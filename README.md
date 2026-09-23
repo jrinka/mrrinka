@@ -69,6 +69,8 @@ The repeatable synthetic check and its human-review rubric are in [`docs/AI-CANA
 
 ## Resource storage (Cloudflare R2)
 
+Selected guides and AI tools have a small fixed-choice feedback control. Votes are saved as anonymous JSON objects under `site-feedback/v1/` in the existing R2 bucket; the teacher sees only 30-day totals at `/admin/feedback`. A browser cookie and conditional write allow one vote per tool or page per day. No student draft, AI response, note, contact detail, or per-vote notification is collected. This bucket has a public asset domain, so keep this feature limited to these non-sensitive choices; free-text reports would need separate private storage and abuse controls.
+
 New uploads use the `mrrinka-resources` Standard bucket at `https://resources.mrrinka.com`.
 Set `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`, and `R2_PUBLIC_URL` in Vercel production. Keep credentials server-only and scoped to Object Read & Write for this bucket.
 

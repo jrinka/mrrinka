@@ -7,6 +7,7 @@ import type { CSSProperties } from "react";
 import { ArrowUpRight, Check, Download, RefreshCw, Sparkles } from "lucide-react";
 import { downloadRecord, formatPracticeRecord, type PracticeRecord } from "@/lib/practice-record";
 import { passageBooks } from "@/lib/passage-books";
+import SiteFeedback from "./site-feedback";
 
 type Passage = {
   id: number | null;
@@ -179,6 +180,7 @@ export default function PassagePractice({provider}:{provider:{name:string;disclo
       <div aria-live="polite">
         {feedback && <section className="passage-feedback"><span className="mono">FIRST RESPONSE</span><h2>Feedback</h2><p>{feedback}</p><small>AI feedback can be inaccurate. Check it against the passage.</small></section>}
         {revisionFeedback && <section className="passage-feedback"><span className="mono">REFINED RESPONSE</span><h2>Revision feedback</h2><p>{revisionFeedback}</p><small>Keep testing your interpretation against the passage.</small></section>}
+        {(feedback || revisionFeedback) && <SiteFeedback target="passage-practice" />}
       </div>
       </div>
       <div className="passage-writing-column">

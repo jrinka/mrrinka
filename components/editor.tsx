@@ -236,6 +236,7 @@ export default function Editor({ login, previewCourses }: Props) {
         <span className="mono">TEACHER EDITOR</span>
         <div className="admin-account">
           {login && <span>{login}</span>}
+          {!preview && <Link href="/admin/feedback" onClick={event => { if (dirty && !window.confirm("Leave with unsaved changes?")) event.preventDefault(); }}>Feedback summary</Link>}
           {!preview && (
             <form
               action="/api/auth/logout"

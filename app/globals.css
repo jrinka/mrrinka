@@ -2646,3 +2646,26 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .lit-practice > .mono { font-size:.7rem; }
 .lit-practice blockquote { margin:18px 0; padding:14px; background:var(--panel-warm); font-family:var(--font-literary); }
 .lit-practice .p1-model { margin-bottom:20px; }
+/* Small, opt-in page feedback; votes never open an inbox or modal. */
+.site-feedback { width: min(100%, 330px); margin: 24px 0 8px auto; border-top: 1px solid var(--line, #b7bcb8); color: var(--ink, #25282b); }
+.site-feedback > summary { width: fit-content; margin: 8px 0 0 auto; cursor: pointer; font-family: var(--font-mono, monospace); font-size: .73rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; }
+.site-feedback > summary:hover, .site-feedback > summary:focus-visible { color: #5c6e0c; }
+.site-feedback-body { padding: 12px 0 0; }
+.site-feedback-body > p:first-child { margin: 0 0 9px; font-size: .88rem; }
+.site-feedback-choices { display: flex; flex-wrap: wrap; gap: 7px; }
+.site-feedback-choices button { border: 1px solid currentColor; border-radius: 0; background: transparent; color: inherit; padding: 6px 9px; font: inherit; font-size: .75rem; cursor: pointer; }
+.site-feedback-choices button:hover, .site-feedback-choices button:focus-visible { background: #d8ed61; color: #25282b; }
+.site-feedback-choices button:disabled { opacity: .5; cursor: default; }
+.site-feedback-body small { display: block; margin-top: 10px; font-size: .72rem; }
+.site-feedback-status { margin: 10px 0 0; font-size: .8rem; }
+.site-feedback-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.feedback-admin { min-height: 100vh; max-width: 1100px; padding: 30px clamp(20px, 4vw, 64px); margin: auto; }
+.feedback-admin-total { padding: 16px 0; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; font-family: var(--font-mono, monospace); }
+.feedback-admin-rows { display: grid; gap: 14px; margin: 24px 0; }
+.feedback-admin-row { display: grid; grid-template-columns: minmax(220px, 1fr) minmax(320px, 1.5fr); gap: 20px; padding: 18px; border: 1px solid currentColor; }
+.feedback-admin-row h2 { margin: 0 0 8px; font-size: 1.15rem; }
+.feedback-admin-row .mono { font-size: .72rem; }
+.feedback-admin-row dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; }
+.feedback-admin-row dt { font-size: .75rem; }
+.feedback-admin-row dd { margin: 7px 0 0; font-size: 1.3rem; font-weight: 700; }
+@media (max-width: 700px) { .feedback-admin-row { grid-template-columns: 1fr; } .feedback-admin-row dl { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

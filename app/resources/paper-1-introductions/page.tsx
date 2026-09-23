@@ -2,6 +2,7 @@ import Link from "next/link";
 import GlobalShell from "@/components/global-shell";
 import Markdown from "@/components/markdown";
 import IntroductionExamples from "@/components/introduction-examples";
+import SiteFeedback from "@/components/site-feedback";
 import sections from "@/lib/introduction-guide.json";
 export const metadata={title:"Paper 1: Introductions & thesis statements"};
 export default async function Introductions({searchParams}:{searchParams:Promise<{example?:string|string[]}>}){
@@ -15,5 +16,6 @@ export default async function Introductions({searchParams}:{searchParams:Promise
   <IntroductionExamples key={example} initialExample={example}/>
   {sections.slice(6).map(section=><section className="lens-intro" key={section.title}><h2>{section.title}</h2><Markdown>{section.body}</Markdown></section>)}
   <aside className="intro-sources prose"><h2>Sources &amp; further guidance</h2><p>Informed by David Giles and Andrew Cohen (IB English Guys), <em>Teaching Paper 1</em>, especially “Rudimentary Outline and Thesis” and “Teaching the Introduction.” This sequence and the worked introductions are newly written adaptations. The optional-hook advice and distinctions between the courses are editorial choices for this guide.</p><p><a href="https://ibenglishguys.com/paper-one/">IB English Guys · Paper One resources ↗</a> — see “Master Class – Introductions and Conclusions” and the accompanying sample.</p></aside>
+  <SiteFeedback target="introductions-guide" />
  </GlobalShell>;
 }

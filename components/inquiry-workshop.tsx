@@ -7,6 +7,7 @@ import { Sparkles, RefreshCw } from "lucide-react";
 import { fieldsOfInquiry, inquiryStages } from "@/lib/inquiry-options";
 import { refineries } from "@/lib/refineries";
 import { downloadRecord, formatPracticeRecord, type PracticeRecord } from "@/lib/practice-record";
+import SiteFeedback from "./site-feedback";
 type Stage=typeof inquiryStages[number];
 type Turn={student:string;coach:string;stage:Stage;refused:boolean};
 export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"global-issue"|"line-of-inquiry";initialCourse?:string;provider:{name:string;disclosure:string}}){
@@ -63,6 +64,7 @@ export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"
   {busy&&<p role="status">{provider.name} is reading the conversation and checking its response. This can take up to a minute.</p>}
   {error&&<p role="alert" className="error">{error}</p>}
   {exhausted&&<p role="status">You have reached 12 exchanges. Save your record and take stock before starting a fresh conversation.</p>}
+  {turns.length > 0 && <SiteFeedback target={`${kind}-refinery`} />}
 
   <details className="inquiry-explainer"><summary>What is sent, and what do the boxes do?</summary><p>Each message sends your current texts, field (for IO), evidence and working idea, together with the earlier conversation. Editing a box alone does not request AI feedback. Use the starred button to send.</p><p>Exploring invites questions about your observations; refining asks for feedback on the idea you wrote. You can switch without losing this page’s notes. Nothing fills in your idea for you, and refreshing or leaving the page clears the conversation.</p></details>
   <p className="passage-privacy">Entries are processed by {provider.disclosure}. Do not include names, contact details, student IDs or other personally identifiable information. This site does not store the conversation; leaving or refreshing clears it. AI can be mistaken—check its questions against your texts. Records are not sent to your teacher automatically.</p>

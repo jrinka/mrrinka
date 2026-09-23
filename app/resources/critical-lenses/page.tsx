@@ -2,6 +2,7 @@ import { GuidePlate } from "@/components/archive-art";
 import Link from "next/link";
 import GlobalShell from "@/components/global-shell";
 import { lenses } from "@/lib/critical-lenses";
+import SiteFeedback from "@/components/site-feedback";
 export const metadata={title:"Critical Lenses"};
 function Lens({lens}:{lens:typeof lenses[number]}) {return <details className="lens-section" id={lens.id}>
  <summary><span>{lens.title}</span><small>{lens.focus}</small></summary>
@@ -14,4 +15,5 @@ export default function CriticalLenses() {return <GlobalShell>
  <section aria-labelledby="classroom-lenses"><h2 id="classroom-lenses">Classroom approaches</h2>{lenses.filter(l=>!l.extra).map(l=><Lens lens={l} key={l.id}/>)}</section>
  <section className="lens-further" aria-labelledby="further-lenses"><h2 id="further-lenses">Further perspectives</h2><p>Additional ways into a text, if they help you ask a productive question.</p>{lenses.filter(l=>l.extra).map(l=><Lens lens={l} key={l.id}/>)}</section>
  <aside className="lens-intro prose"><h2>Using a lens in your work</h2><p><strong>Paper 2 and HLE:</strong> use a perspective to develop and challenge an interpretation. <strong>IO:</strong> consider how it sharpens your understanding of a global issue. <strong>Paper 1:</strong> stay grounded in the supplied text; theory is optional, not a substitute for analysis. <strong>English 10:</strong> start with one useful question and a specific detail.</p><p>You do not need a theorist’s name in every paragraph. If you use a critic’s particular idea or wording, acknowledge the source. These traditions contain disagreements; the linked thinkers are entry points, not sole authorities.</p></aside>
+ <SiteFeedback target="lenses-guide" />
  </GlobalShell>;}
