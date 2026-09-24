@@ -9,7 +9,7 @@ const examples = [
     sentences: [
       "In Robert Frost’s ‘Stopping by Woods on a Snowy Evening’, a traveller pauses to watch snow falling in a secluded wood.",
       "The pause draws attention to the appeal of stillness before the speaker recalls obligations beyond the scene.",
-      "Through this turn from sensory attention to the repeated reminder of the journey ahead, Frost presents the pull of the woods as something the speaker must negotiate rather than simply dismiss.",
+      "By shifting from the sights and sounds of the woods to a repeated reminder of the journey ahead, Frost shows the speaker weighing the desire to stay against the need to continue.",
     ],
     notes: [
       "Identifies poet, title and the immediate situation, without treating Frost and the speaker as the same person.",
@@ -63,8 +63,8 @@ export default function IntroductionExamples({initialExample}:{initialExample:st
       <blockquote>{example.sentences.join(" ")}</blockquote>
       <h3>What each sentence does</h3>
       <ol className="intro-sentence-notes">{example.sentences.map((sentence,i)=><li key={sentence}><p><strong>{sentence}</strong></p><p>{example.notes[i]}</p></li>)}</ol>
-      <aside className="lens-intro"><strong>Keep the interpretation accountable</strong><p>{example.evidence}</p></aside>
-      <p>The body must substantiate these claims with precise details. An introduction establishes a direction; it does not prove the argument on its own.</p>
+      <aside className="lens-intro"><strong>Check the interpretation against the text</strong><p>{example.evidence}</p></aside>
+      <p>The body must support these claims with precise details. An introduction establishes a direction; it does not prove the argument on its own.</p>
     </div>)}
   </section>;
 }

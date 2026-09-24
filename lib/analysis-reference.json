@@ -15,13 +15,13 @@
             "term": "Syntax",
             "definition": "The arrangement of words and the construction of sentences (length, order, fragmentation).",
             "example": "A clipped sentence after a long one: “She had planned every detail for months. It collapsed in an hour.”",
-            "analysis": "Controls pace and emphasis; abrupt syntax can enact tension or finality that the words alone don’t carry."
+            "analysis": "Controls pace and emphasis; abrupt syntax can convey tension or a sense of finality that the words alone don’t carry."
           },
           {
             "term": "Register",
             "definition": "The level of formality and variety of language appropriate to a context or audience.",
             "example": "“We regret to inform you” (formal) vs. “Sorry, bad news” (informal).",
-            "analysis": "Positions the text’s relationship to its audience, signalling authority, intimacy, or solidarity."
+            "analysis": "Shapes the relationship with the audience, suggesting authority, closeness or shared values."
           },
           {
             "term": "Tone",
@@ -39,13 +39,13 @@
             "term": "Connotation",
             "definition": "The associations and emotional overtones a word carries beyond its literal meaning.",
             "example": "“Home” often suggests belonging; “house” may emphasise the building. Context can make either word comforting or unsettling.",
-            "analysis": "Lets a writer load a neutral-seeming statement with attitude, doing persuasive work covertly."
+            "analysis": "Lets a writer suggest an attitude through a word’s associations, even when the statement appears neutral."
           },
           {
             "term": "Denotation",
             "definition": "The literal, dictionary meaning of a word.",
             "example": "“Snake” denotes a legless reptile.",
-            "analysis": "Establishes a baseline against which connotation operates; useful for showing how a text exploits the gap between the two."
+            "analysis": "Gives a starting point for comparing what a word literally means with the associations it carries."
           },
           {
             "term": "Colloquialism / Vernacular",
@@ -57,7 +57,7 @@
             "term": "Euphemism",
             "definition": "A mild or indirect expression substituted for one considered harsh or blunt.",
             "example": "“Collateral damage” for civilian deaths; “let go” for fired.",
-            "analysis": "Softens or obscures uncomfortable realities, often serving evasive or ideological ends—prime material for non-literary analysis."
+            "analysis": "Softens or hides uncomfortable realities. Ask what the wording avoids naming and whose interests that serves."
           }
         ]
       },
@@ -86,7 +86,7 @@
             "term": "Personification",
             "definition": "Attributing human qualities to non-human things or abstractions.",
             "example": "“The wind clawed at the windows.”",
-            "analysis": "Animates the inanimate, heightening engagement and often projecting a character’s inner state onto the world."
+            "analysis": "Makes non-human things seem alive and can connect the surroundings with a character’s feelings."
           },
           {
             "term": "Metonymy",
@@ -122,7 +122,7 @@
             "term": "Pathetic fallacy",
             "definition": "Projecting human emotion onto nature or weather.",
             "example": "A storm breaking as a character’s marriage collapses.",
-            "analysis": "Externalises inner turmoil, aligning the natural world with the emotional arc and intensifying mood."
+            "analysis": "Makes emotional conflict visible through the natural world, connecting changes in the surroundings with changes in feeling."
           }
         ]
       },
@@ -151,7 +151,7 @@
             "term": "Onomatopoeia",
             "definition": "Words that imitate the sounds they describe.",
             "example": "“buzz,” “crash,” “murmur.”",
-            "analysis": "Collapses the gap between word and thing, making description more sensory and immediate."
+            "analysis": "Makes description more immediate by letting the word echo the sound it names."
           },
           {
             "term": "Enjambment",
@@ -174,19 +174,19 @@
             "term": "Ethos",
             "definition": "A persuasive appeal based on the speaker’s credibility or character.",
             "example": "“As a doctor with twenty years’ experience…”",
-            "analysis": "Disposes the audience to trust the argument by establishing the speaker’s authority."
+            "analysis": "Invites trust by drawing on existing authority or building credibility through knowledge, honesty and attention to the audience’s concerns."
           },
           {
             "term": "Pathos",
             "definition": "A persuasive appeal to the audience’s emotions.",
             "example": "An image of a hungry child in a charity campaign.",
-            "analysis": "Moves the audience to care or act by engaging feeling rather than reason alone."
+            "analysis": "Name the emotion—such as protective concern, guilt or hope—and explain how particular choices create it and connect it to the request. Naming the subject alone is not enough."
           },
           {
             "term": "Logos",
             "definition": "A persuasive appeal based on logic, evidence, or reasoning.",
             "example": "“Three studies confirm the policy cut accidents by 40%.”",
-            "analysis": "Persuades through apparent rationality; can also create a veneer of objectivity worth scrutinising."
+            "analysis": "Connects evidence with a conclusion. Explain that reasoning and test its assumptions; a number alone does not make an argument logical."
           },
           {
             "term": "Anaphora",
@@ -216,7 +216,7 @@
             "term": "Rhetorical question",
             "definition": "A question posed for effect rather than for an answer.",
             "example": "“How long must we wait for change?”",
-            "analysis": "Steers the audience toward a presupposed conclusion while appearing to invite their reasoning."
+            "analysis": "Guides the audience towards an answer the wording already suggests, while appearing to invite them to decide."
           },
           {
             "term": "Hyperbole",
@@ -286,7 +286,7 @@
             "term": "Free indirect discourse",
             "definition": "Third-person narration that blends the narrator’s voice with a character’s thoughts.",
             "example": "“She would not cry. Not here, not in front of them.”",
-            "analysis": "Grants intimate access to a character’s interiority while preserving narrative distance, often producing irony."
+            "analysis": "Brings readers close to a character’s thoughts while keeping a third-person narrator. Differences between their voices can create irony."
           },
           {
             "term": "In medias res",
@@ -400,9 +400,9 @@
           },
           {
             "term": "Foreground / middle ground / background",
-            "definition": "The three depth planes of an image.",
+            "definition": "The areas that appear nearest to the viewer, between near and far, and furthest away.",
             "example": null,
-            "analysis": "Analyse layering: what relationship is set up between the planes?"
+            "analysis": "Explain how details at different distances relate to one another."
           },
           {
             "term": "Visual weight",
@@ -524,7 +524,7 @@
           },
           {
             "term": "Chiaroscuro",
-            "definition": "Strong light–dark modelling, borrowed from painting.",
+            "definition": "Strong contrasts of light and shadow that give shapes a sense of depth, a technique also used in painting.",
             "example": null,
             "analysis": "Lends drama and sculptural depth; often signals seriousness."
           },
@@ -653,7 +653,7 @@
           },
           {
             "term": "Icon / index / symbol (Peirce)",
-            "definition": "Icon resembles its object; index is causally linked (smoke --> fire); symbol is arbitrary or conventional.",
+            "definition": "An icon resembles what it represents; an index has a direct connection to it, as smoke does to fire; a symbol depends on a learned convention, as a flag does.",
             "example": null,
             "analysis": "Classify key signs to explain HOW they communicate."
           },
@@ -726,7 +726,7 @@
             "term": "Visual rhetoric (ethos / pathos / logos)",
             "definition": "Appeals to credibility, emotion, and logic made visually.",
             "example": null,
-            "analysis": "Identify the dominant appeal and the visual devices that build it."
+            "analysis": "Explain how visual choices build credibility, invite a particular emotion or support a line of reasoning. Connect the appeals where they work together."
           },
           {
             "term": "Representation",

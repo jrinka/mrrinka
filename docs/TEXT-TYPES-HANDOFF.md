@@ -69,3 +69,7 @@ Teaching stance: analyse how admiration and protective concern become a manageab
 Verification: isolated production build and TypeScript passed; all 60 existing tests passed, including the new guide in the course-reference test. Browser checks covered guide discovery, overview contents, all eight reading sections, keyboard focus, source image/links, enlarged view/Escape, reload/back/forward, note retention and TXT/MD export, 1280px and 1512px laptops, 1024px tablet landscape, narrow fallback, dark mode and printing. Existing Advertisement, Infographic and Poetry flows also passed.
 
 The user requested removal of the bottom-of-page “Continue exploring” cards. The shared course-item renderer no longer displays those recommendation sections. Primary navigation and in-content guidance links remain the routes between lessons.
+
+## Student-facing language
+
+Keep explanations accessible to grades 11–12 without simplifying the ideas. Retain useful analytical terminology, explain it where needed, and avoid ornate phrasing or abstract nouns that hide a straightforward relationship. The September 24 language pass revised the course guidance, worked examples, critical lenses, reading methods and reference explanations. Keep source quotations intact. Ethos/pathos/logos entries now match the contextual teaching guidance above.

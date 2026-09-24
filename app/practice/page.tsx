@@ -33,7 +33,7 @@ export default function PracticePage() {
         <ArrowUpRight size={20} />
       </Link>
       <Link className="practice-feature" href="/practice/what-changes"><span className="practice-feature-index mono">COMPARE &amp; INTERPRET</span><span><strong>What changes?</strong><small>Compare words, line breaks and visual choices. Explain the difference, reveal a possible reading, and try another version.</small></span><ArrowUpRight size={20} aria-hidden="true" /></Link>
-      <section className="refinery-directory"><h2>Refineries</h2><p>Task-specific AI guidance for your own thinking. Guardrails are informed by the IB academic integrity policy; they do not guarantee compliance or replace your teacher’s rules.</p><p><a href={ibAiPolicy}>Read the IB policy and AI guidance ↗</a></p><RefineryLinks /></section>
+      <section className="refinery-directory"><h2>Refineries</h2><p>AI guidance to help you develop your own work for each task. The tools’ limits are based on the IB academic integrity policy. Using them does not automatically make your work compliant: you still need to follow the policy and your teacher’s rules.</p><p><a href={ibAiPolicy}>Read the IB policy and AI guidance ↗</a></p><RefineryLinks /></section>
       <div className="global-directory-list">
         <section className="global-directory-group">
           <div className="global-directory-course"><h2>Bring your own text</h2></div>
