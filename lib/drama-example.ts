@@ -3,7 +3,7 @@ export const dramaExample = {
   pdf: "/examples/things-i-know-to-be-true-extract.pdf",
   question: "How is dialogue used to communicate the emotional tension in the relationship between Fran and Bob?",
   context: "Bob has just learned that his wife has secretly been saving money.",
-  credit: "Andrew Bovell, Things I Know To Be True. Extract and question from the supplied practice paper. Rights remain with their respective holders.",
+  credit: "Andrew Bovell, Things I Know To Be True. Extract and question from May 2026 Literature HL Paper 1, text 1. Source adapted by the examination paper. Rights remain with their respective holders.",
 };
 
 type Speech = { speaker?: string; text: string };
