@@ -20,3 +20,9 @@ Keep the guide body editable in `content/language-literature.json`, using its ex
 - `public/archive/sign-alphabet.jpg`: *Hands showing the sign language alphabet. Line engraving.* Wellcome Collection, work `awq9wceu`, reference 17990i. Public Domain Mark verified through the catalogue API. Original IIIF image `b11758697_0001.jp2`; resized delivery at 1200px wide, no content edits.
 - `public/archive/universal-sundial.jpg`: *Clocks: a universal sundial, with a compass. Engraving.* Wellcome Collection, work `cpyrw6ej`, reference 45214i. Public Domain Mark verified through the catalogue API. Original IIIF image `V0024399EL`; resized delivery at 1200px wide, no content edits.
 - Both plates retain compact linked WELLCOME credits with descriptive accessible labels and title details. Images are served locally.
+
+## Guide structure (24 September 2026)
+
+Each published text-type URL opens an overview. `?view=example` opens the current worked example, with reciprocal links and browser history support. The editable course body is divided at `## Worked example`: preceding content is the general overview, following content is the walkthrough. Keep that marker when editing these guides. Additional models can later become named entries in the Worked examples directory without changing the main overview URL.
+
+Infographic overview covers uses, conventions, audience appeals, infographic forms, a reading method and shared vocabulary links. The existing source viewer, close-ups, practice notebook and exports remain within the example view. Poetry uses the same default-overview structure.

@@ -9,10 +9,9 @@ import { assessmentRefinery } from "@/lib/refineries";
 import Practice from "@/components/practice";
 import PaperOneDossier from "@/components/paper-one-dossier";
 import TextTypeIndex from "@/components/text-type-index";
-import TextTypeExample from "@/components/text-type-example";
-import InfographicGuide from "@/components/infographic-guide";
+import TextTypeGuide from "@/components/text-type-guide";
 import CourseSectionTabs from "@/components/course-section-tabs";
-import { hasTextTypeExample, textTypeGuideIds } from "@/lib/text-type-guides";
+import { hasTextTypeExample } from "@/lib/text-type-guides";
 import {
   ArchiveCardArt,
   ArchiveHero,
@@ -27,7 +26,7 @@ import {
   type Section,
   type CourseItem,
 } from "@/lib/schema";
-type Props = { params: Promise<{ courseId: string; path?: string[] }> };
+type Props = { params: Promise<{ courseId: string; path?: string[] }>; searchParams: Promise<{ view?: string | string[] }> };
 
 const assessmentCodes: Record<string, string> = {
   "Paper 1": "P1",
@@ -156,7 +155,7 @@ export async function generateMetadata({ params }: Props) {
   }
   return { title: course.title, description: course.description };
 }
-export default async function CoursePage({ params }: Props) {
+export default async function CoursePage({ params, searchParams }: Props) {
   const { courseId, path = [] } = await params;
   if (!isCourseId(courseId) || path.length > 2) notFound();
   const currentCourseId = courseId;
@@ -247,7 +246,7 @@ export default async function CoursePage({ params }: Props) {
               )}
             </figure>
           )}
-          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && courseId === "language-literature" && item.id === textTypeGuideIds.infographic ? <InfographicGuide body={item.body} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <div className="text-type-guide"><Markdown>{item.body}</Markdown><TextTypeExample itemId={item.id}/></div> : <Markdown>{item.body}</Markdown>}
+          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <TextTypeGuide body={item.body} itemId={item.id} href={`${base}/text-types/${item.id}`} showExample={(await searchParams).view === "example"} /> : <Markdown>{item.body}</Markdown>}
           {item.section === "assessment" && courseId !== "english-10" && (
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>

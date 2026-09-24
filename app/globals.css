@@ -2764,3 +2764,15 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .reference-term > div { padding:0 20px 14px; max-width:85ch; }
 .reference-term summary:hover { text-decoration:underline; text-underline-offset:4px; }
 @media(max-width:700px) { .reference-jumps { grid-template-columns:1fr; } }
+
+.text-type-view-nav { display:flex; gap:4px; border-bottom:2px solid var(--ink); margin:24px 0 30px; }
+.text-type-view-nav a { padding:14px 24px; border:1px solid var(--line); text-decoration:underline; text-underline-offset:4px; background:var(--panel-warm); }
+.text-type-view-nav a[aria-current="page"] { background:var(--graphite); color:var(--citron); text-decoration:none; }
+.text-type-overview { max-width:1000px; }
+.text-type-view-heading { margin-bottom:28px; }
+.text-type-view-heading h2 { margin:8px 0 12px; }
+.text-type-view-heading a { text-decoration:underline; text-underline-offset:4px; }
+.text-type-example-directory { margin:32px 0; padding:28px; border:1px solid var(--line); border-top:4px solid var(--citron); background:var(--panel-warm); }
+.text-type-example-directory a { display:block; padding:18px 0; }
+.text-type-example-directory strong { display:block; text-decoration:underline; text-underline-offset:4px; margin-bottom:8px; }
+.text-type-example-directory span:not(.mono) { display:block; max-width:75ch; }
