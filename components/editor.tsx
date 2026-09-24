@@ -5,7 +5,7 @@ import { ArrowUpRight, Plus, Save, Upload, X } from "lucide-react";
 import Markdown from "./markdown";
 import {
   courseIds,
-  sectionNames,
+  courseSectionName,
   sections,
   type Course,
   type CourseItem,
@@ -282,9 +282,9 @@ export default function Editor({ login, previewCourses }: Props) {
           >
             Course overview
           </button>
-          {sections.map((section) => (
+          {sections.filter(section => section !== "text-types" || courseId !== "english-10").map((section) => (
             <div className="editor-group" key={section}>
-              <div className="mono">{sectionNames[section]}</div>
+              <div className="mono">{courseSectionName(courseId, section)}</div>
               {course?.items
                 .filter((i) => i.section === section)
                 .map((i) => (
@@ -494,9 +494,9 @@ export default function Editor({ login, previewCourses }: Props) {
                         })
                       }
                     >
-                      {sections.map((s) => (
+                      {sections.filter(section => section !== "text-types" || courseId !== "english-10").map((s) => (
                         <option key={s} value={s}>
-                          {sectionNames[s]}
+                          {courseSectionName(courseId, s)}
                         </option>
                       ))}
                     </select>

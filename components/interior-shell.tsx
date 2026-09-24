@@ -3,7 +3,7 @@ import ThemeToggle from "@/components/theme-toggle";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { BookOpen, Library, CalendarDays, Sparkles, FilePenLine, Home, Menu, X, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { BookOpen, Library, CalendarDays, Sparkles, FilePenLine, Home, Menu, X, PanelLeftClose, PanelLeftOpen, LayoutGrid } from "lucide-react";
 import type { CourseId } from "@/lib/schema";
 const defaults = [{id:"language-literature",short:"IB Lang & Lit",side:"Language & Literature"},{id:"literature",short:"IB Literature",side:"Literature"}];
 export default function InteriorShell({children,courseId,courseLabels=defaults}:{children:React.ReactNode;courseId?:CourseId;courseLabels?:typeof defaults}) {
@@ -15,6 +15,7 @@ export default function InteriorShell({children,courseId,courseLabels=defaults}:
   const local = courseId ? [
     ...(courseId === "english-10" ? [{href:base,label:"Overview",icon:Home},{href:`${base}/units`,label:"Units & texts",icon:BookOpen}] : []),
     {href:`${base}/assessment`,label:"Assessments",icon:FilePenLine},
+    ...(courseId !== "english-10" ? [{href:`${base}/text-types`,label:courseId === "literature" ? "Literary forms" : "Text types",icon:LayoutGrid}] : []),
   ] : [];
   const shared=[{href:"/resources",label:"Skills & Methods",icon:Library},{href:"/practice",label:"Practice",icon:Sparkles},{href:"/calendar",label:"My calendar",icon:CalendarDays}];
   function links(items:typeof shared) {return items.map(item=><Link key={item.href} href={item.href} onClick={()=>setMobileOpen(false)} title={item.label} aria-current={(path===item.href || (item.href!==base && path.startsWith(item.href+"/"))) ? "page":undefined}><item.icon size={18} aria-hidden="true"/><span>{item.label}</span></Link>);}

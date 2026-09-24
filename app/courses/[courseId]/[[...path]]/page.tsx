@@ -8,6 +8,10 @@ import RefineryLinks from "@/components/refinery-links";
 import { assessmentRefinery } from "@/lib/refineries";
 import Practice from "@/components/practice";
 import PaperOneDossier from "@/components/paper-one-dossier";
+import TextTypeIndex from "@/components/text-type-index";
+import TextTypeExample from "@/components/text-type-example";
+import CourseSectionTabs from "@/components/course-section-tabs";
+import { hasTextTypeExample } from "@/lib/text-type-guides";
 import {
   ArchiveCardArt,
   ArchiveHero,
@@ -16,6 +20,7 @@ import {
 import { publicCourse, courses } from "@/lib/content";
 import {
   isCourseId,
+  courseSectionName,
   sectionNames,
   sections,
   type Section,
@@ -138,20 +143,27 @@ function ImageCredit({ item }: { item: CourseItem }) {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const { courseId } = await params;
-  return {
-    title: isCourseId(courseId)
-      ? publicCourse(courseId).title
-      : "Course not found",
-  };
+  const { courseId, path = [] } = await params;
+  if (!isCourseId(courseId)) return { title: "Course not found" };
+  const course = publicCourse(courseId);
+  const section = path[0];
+  if (section && (sections as readonly string[]).includes(section)) {
+    const typedSection = section as Section;
+    const item = path[1] && course.items.find(candidate => candidate.section === section && candidate.id === path[1]);
+    if (item) return { title: `${item.title} · ${course.shortTitle}`, description: item.summary };
+    return { title: `${courseSectionName(courseId, typedSection)} · ${course.shortTitle}` };
+  }
+  return { title: course.title, description: course.description };
 }
 export default async function CoursePage({ params }: Props) {
   const { courseId, path = [] } = await params;
   if (!isCourseId(courseId) || path.length > 2) notFound();
+  const currentCourseId = courseId;
   if (!path.length && courseId !== "english-10") redirect(`/courses/${courseId}/assessment`);
   const course = publicCourse(courseId);
   const section = path[0] as Section | undefined;
   if (section && !(sections as readonly string[]).includes(section)) notFound();
+  if (section === "text-types" && courseId === "english-10") notFound();
   const item = path[1]
     ? course.items.find((i) => i.id === path[1] && i.section === section)
     : undefined;
@@ -179,7 +191,7 @@ export default async function CoursePage({ params }: Props) {
           )}
           <div className="card-copy">
             <span className="mono card-number">
-              {String(n + 1).padStart(2, "0")} / {sectionNames[i.section]}
+              {String(n + 1).padStart(2, "0")} / {courseSectionName(currentCourseId, i.section)}
             </span>
             <h2>{i.title}</h2>
             <p>{i.summary}</p>
@@ -206,12 +218,13 @@ export default async function CoursePage({ params }: Props) {
     >
       <div className="breadcrumb mono">
         <Link href={base}>{course.eyebrow}</Link> /{" "}
-        {section ? sectionNames[section] : "Overview"}
+        {section ? courseSectionName(courseId, section) : "Overview"}
       </div>
+      {courseId !== "english-10" && (section === "assessment" || section === "text-types") && <CourseSectionTabs courseId={courseId} active={section} />}
       {item ? (
         <>
           <Link className="back" href={`${base}/${section}`}>
-            <ArrowLeft size={16} /> {sectionNames[section!]}
+            <ArrowLeft size={16} /> {courseSectionName(courseId, section!)}
           </Link>
           <h1>{item.title}</h1>
           <p className="intro">{item.summary}</p>
@@ -233,7 +246,7 @@ export default async function CoursePage({ params }: Props) {
               )}
             </figure>
           )}
-          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : <Markdown>{item.body}</Markdown>}
+          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <div className="text-type-guide"><Markdown>{item.body}</Markdown><TextTypeExample itemId={item.id}/></div> : <Markdown>{item.body}</Markdown>}
           {item.section === "assessment" && courseId !== "english-10" && (
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>
@@ -241,7 +254,7 @@ export default async function CoursePage({ params }: Props) {
                 <h2>Skills & Methods</h2>
                 <p>Close reading, evidence, analytical verbs, comparison, and response-building methods shared across the IB courses.</p>
               </div>
-              <div><Link href="/resources">Explore skills & methods <ArrowUpRight size={17} /></Link><br /><Link href="/resources/critical-lenses">Critical Lenses <ArrowUpRight size={17} /></Link></div>
+              <div><Link href="/resources">Explore skills & methods <ArrowUpRight size={17} /></Link><br /><Link href="/resources/critical-lenses">Critical Lenses <ArrowUpRight size={17} /></Link><br /><Link href={`${base}/text-types`}>{courseSectionName(courseId, "text-types")} <ArrowUpRight size={17} /></Link></div>
             </aside>
           )}
           {item.links.length > 0 && (
@@ -286,9 +299,11 @@ export default async function CoursePage({ params }: Props) {
           items={course.items.filter((i) => i.section === "assessment")}
           href={href}
         />
+      ) : section === "text-types" ? (
+        <TextTypeIndex courseId={courseId as "language-literature" | "literature"} items={course.items.filter(i => i.section === "text-types")} />
       ) : section ? (
         <>
-          <h1>{sectionNames[section]}</h1>
+          <h1>{courseSectionName(courseId, section)}</h1>
           <p className="intro">
             {
               {
@@ -299,6 +314,7 @@ export default async function CoursePage({ params }: Props) {
                   "Useful references to return to throughout the course.",
                 practice:
                   "Try a skill, experiment with a choice, and sharpen your thinking.",
+                "text-types": "Explore the choices that shape different kinds of texts.",
               }[section]
             }
           </p>
@@ -347,7 +363,7 @@ export default async function CoursePage({ params }: Props) {
             >
               <div className="featured-copy">
                 <span className="mono">
-                  IN FOCUS / {sectionNames[featured.section]}
+                  IN FOCUS / {courseSectionName(courseId, featured.section)}
                 </span>
                 <h2>{featured.title}</h2>
                 <p>{featured.summary}</p>
@@ -411,7 +427,7 @@ export default async function CoursePage({ params }: Props) {
               >
                 <ArchiveCardArt
                   courseId={courseId}
-                  section={x.section as Section}
+                  section={x.section as Exclude<Section, "text-types">}
                 />
                 <Link className="archive-route-link" href={`${base}/${x.section}`}>
                   <div className="card-copy">

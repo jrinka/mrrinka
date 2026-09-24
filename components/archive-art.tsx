@@ -37,7 +37,8 @@ export function archiveKeyword(src: string) {
   return archiveKeywords[src] ?? "ARCHIVE";
 }
 
-const plates: Record<CourseId, Record<"hero" | Section, Plate>> = {
+type ArchiveSection = Exclude<Section, "text-types">;
+const plates: Record<CourseId, Record<"hero" | ArchiveSection, Plate>> = {
   "language-literature": {
     hero: {
       src: "/archive/babel-language-confounded.jpg",
@@ -212,7 +213,7 @@ export function ArchiveCardArt({
   section,
 }: {
   courseId: CourseId;
-  section: Section;
+  section: ArchiveSection;
 }) {
   const plate = plates[courseId][section];
   return (

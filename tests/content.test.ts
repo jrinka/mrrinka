@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { courseSchema, itemSchema } from "../lib/schema";
+import { courseSchema, courseSectionName, itemSchema } from "../lib/schema";
 import { courses, publicCourse } from "../lib/content";
+import { textTypeGuideIds } from "../lib/text-type-guides";
 test("all course seeds have valid references and working activities", () => {
   for (const course of courses) {
     assert.ok(courseSchema.safeParse(course).success);
@@ -82,4 +83,23 @@ test("shared references point directly to existing canonical pages", () => {
     assert.equal(target.sharedFrom, undefined, "Shared references must not form chains or cycles");
     assert.equal(target.section, item.section);
   }
+});
+
+test("IB text-type guides have clear course labels and routes back to Paper 1", () => {
+  const guides = [
+    { course: "language-literature" as const, id: textTypeGuideIds.infographic, label: "Text types" },
+    { course: "literature" as const, id: textTypeGuideIds.poetry, label: "Literary forms" },
+  ];
+  for (const { course, id, label } of guides) {
+    assert.equal(courseSectionName(course, "text-types"), label);
+    const pages = publicCourse(course).items;
+    const guide = pages.find(item => item.id === id);
+    const paperOne = pages.find(item => item.title === "Paper 1" && item.section === "assessment");
+    assert.equal(guide?.section, "text-types");
+    assert.ok(guide?.body.includes(`/courses/${course}/assessment/${paperOne?.id}`));
+    assert.ok(paperOne?.body.includes(`/courses/${course}/text-types/${id}`));
+  }
+  const english = structuredClone(courses.find(course => course.id === "english-10")!);
+  english.items.push({ ...english.items[0], id: crypto.randomUUID(), section: "text-types" });
+  assert.equal(courseSchema.safeParse(english).success, false);
 });

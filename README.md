@@ -1,6 +1,6 @@
 # Mr Rinka — English classroom
 
-Public course pages for IB English A: Language & Literature, IB English A: Literature, and English 10. Graphite and citron design with a GitHub-backed teacher editor.
+Public course pages for IB English A: Language & Literature and Literature, with shared English skills and practice. English 10 remains as legacy editor data and routes. Graphite and citron design with a GitHub-backed teacher editor.
 
 ## Run locally
 
@@ -16,6 +16,7 @@ Visit `http://127.0.0.1:3000`. For a stable local production preview, use `npm r
 ## Content and editing
 
 - Course content lives in `content/<course-id>.json` and is validated by `lib/schema.ts`.
+- Each IB course opens on Assessments. Its second course tab holds Text types (Language & Literature) or Literary forms (Literature); both use the `text-types` section in the teacher editor. Shared analytical methods stay under Skills & Methods. Published guides appear in the course index, while planned topics are plain text until a guide is ready. Link directly from an assessment to a relevant guide and back, rather than copying guidance into both.
 - `/admin` is the teacher editor. `/admin/preview` is a clearly labeled sandbox that cannot publish.
 - Admin access is restricted to the numeric GitHub user ID in `ADMIN_GITHUB_ID`.
 - Saves create GitHub commits on `CONTENT_BRANCH`. Connect the repository to Vercel so those commits deploy automatically.

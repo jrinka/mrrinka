@@ -7,12 +7,14 @@ export const courseIds = [
 export const sections = [
   "units",
   "assessment",
+  "text-types",
   "resources",
   "practice",
 ] as const;
 export const sectionNames = {
   units: "Units & texts",
   assessment: "Assessment",
+  "text-types": "Text types & forms",
   resources: "Skills & Methods",
   practice: "Practice",
 };
@@ -91,6 +93,8 @@ export const courseSchema = z
     items: z.array(itemSchema).max(150),
   })
   .superRefine((course, ctx) => {
+    if (course.id === "english-10" && course.items.some(item => item.section === "text-types"))
+      ctx.addIssue({ code: "custom", message: "Text-type guides belong to an IB course." });
     const ids = new Set(course.items.map((i) => i.id));
     if (ids.size !== course.items.length)
       ctx.addIssue({
@@ -115,6 +119,11 @@ export type Course = z.infer<typeof courseSchema>;
 export type CourseItem = z.infer<typeof itemSchema>;
 export type CourseId = Course["id"];
 export type Section = (typeof sections)[number];
+export function courseSectionName(courseId: CourseId, section: Section) {
+  if (section === "text-types")
+    return courseId === "literature" ? "Literary forms" : "Text types";
+  return sectionNames[section];
+}
 export function isCourseId(id: string): id is CourseId {
   return (courseIds as readonly string[]).includes(id);
 }
