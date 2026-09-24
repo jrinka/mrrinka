@@ -90,6 +90,7 @@ test("IB text-type guides have clear course labels and routes back to Paper 1", 
     { course: "language-literature" as const, id: textTypeGuideIds.infographic, label: "Text types" },
     { course: "literature" as const, id: textTypeGuideIds.poetry, label: "Literary forms" },
     { course: "language-literature" as const, id: textTypeGuideIds.advertisement, label: "Text types" },
+    { course: "language-literature" as const, id: textTypeGuideIds.charityAppeal, label: "Text types" },
   ];
   for (const { course, id, label } of guides) {
     assert.equal(courseSectionName(course, "text-types"), label);

@@ -1,0 +1,18 @@
+.source :global(.text-type-example-head) a { font-size:.75rem; text-decoration:underline; text-underline-offset:3px; }
+.figure { margin:0; padding:12px; }
+.figure img { display:block; width:100%; height:auto; }
+.figure button { display:block; width:100%; padding:0; border:1px solid var(--line); background:var(--paper); color:var(--ink); cursor:zoom-in; text-align:left; font:inherit; }
+.figure button span { display:block; padding:9px 12px; font-size:.78rem; text-decoration:underline; text-underline-offset:3px; }
+.figure figcaption { font-size:.7rem; line-height:1.55; color:var(--muted); margin-top:10px; }
+.figure a { text-decoration:underline; text-underline-offset:3px; }
+.sourceNote { border-top:1px solid var(--line); padding:18px; background:var(--panel-warm); }
+.sourceNote > span { font-size:.64rem; }
+.sourceNote h3 { font-size:1.05rem; line-height:1.4; margin:10px 0; }
+.sourceNote p { font-size:.9rem; line-height:1.65; margin:12px 0; }
+.sourceNote p:last-child { font-size:.73rem; margin-bottom:0; }
+.dialog { width:min(1050px,95vw); }
+@media print {
+ .figure button { border:0; }
+ .figure button span { display:none; }
+ .sourceNote { display:none; }
+}

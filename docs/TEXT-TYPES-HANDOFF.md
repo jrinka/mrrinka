@@ -8,18 +8,17 @@ Continue Mr Rinka's site in this repository. Read AGENTS.md and docs/TEXT-TYPE-S
 
 IB course navigation has Assessments and Text types (Literature calls this Literary forms). Each individual guide opens a GENERAL OVERVIEW covering uses, common features/techniques, audience and purpose, vocabulary and a reading method. A separately linked worked-example view demonstrates these principles in a particular source. Add more examples later without displacing the overview. Do not organise around a single model text.
 
-Current guides: Advertisement (Lang/Lit, cf482e4c-3555-4e12-afca-b63396aec3ea), Infographic (Lang/Lit, c1e54cf5-1489-440b-a98c-3e7107bacc62) and Poetry (Literature, 8889a1cf-bfb4-4930-bc54-b693504ae80a). Main URLs open Overview; ?view=example opens the model. components/text-type-guide.tsx splits editable body at ## Worked example. Example metadata explicitly identifies Infographic, Advertisement and Poetry; unknown IDs do not fall back to poetry.
+Current guides: Advertisement (Lang/Lit, cf482e4c-3555-4e12-afca-b63396aec3ea), Infographic (Lang/Lit, c1e54cf5-1489-440b-a98c-3e7107bacc62), Charitable appeal (Lang/Lit, b0a0e8bb-7dfb-4fd6-8da0-a19d3dc95e92), and Poetry (Literature, 8889a1cf-bfb4-4930-bc54-b693504ae80a). Main URLs open Overview; ?view=example opens the model. components/text-type-guide.tsx splits editable body at ## Worked example. Example metadata explicitly identifies Infographic, Advertisement, Charitable appeal and Poetry; unknown IDs do not fall back to poetry.
 
 Overview is currently continuous prose, NOT collapsible. Assistant proposed collapsible headings with first section open and expand/collapse-all; user then discussed serif styling but did not explicitly request the accordion implementation. Clarify or include it as a considered next improvement, do not claim it exists. The infographic worked-example sections ARE collapsible. An empty initial accordion caused by leading whitespace was fixed in 2eb8eaa.
 
 ## Next content priorities
 
-Advertisement is now built using FIJI Water; Becky stays in Paper 1. Remaining priorities:
+Advertisement uses FIJI Water; Charitable appeal uses WWF’s snow-leopard adoption page. Becky stays in Paper 1. Remaining priorities:
 
-1. Charity appeal.
-2. Blog post.
-3. Opinion/commentary, distinguishing opinion from explainers rather than treating a publisher (Guardian / The Conversation) as a genre.
-4. Speech.
+1. Blog post.
+2. Opinion/commentary, distinguishing opinion from explainers rather than treating a publisher (Guardian / The Conversation) as a genre.
+3. Speech.
 
 The planned shelf in lib/text-type-guides.ts follows the agreed order above. Literature currently plans prose fiction, drama and literary nonfiction. Work on one strong guide at a time.
 
@@ -58,3 +57,13 @@ Teaching emphasis: appeal labels are not a default tripartite thesis/paragraph p
 Laptop and larger tablets take priority; mobile parity is not a goal. The Advertisement overview remains continuous prose, now with a sticky contents list and audience/purpose before techniques. The FIJI worked example follows Orient → Analyse → Write: nine selectable sections with previous/next controls, section URLs, and browser-history support. Commentary and source sit side by side above 850px; the source stays visible while reading. Six source views can be compared independently of the section; an accessible enlarged viewer preserves the wide composition. Question and transcript are available beside the reading. Student notes remain mounted across section changes and still export TXT/MD. Print reveals all nine sections and the complete ad. Stable guide IDs and the editable ## Worked example boundary are preserved.
 
 Verified in an isolated production build: TypeScript, 57 existing tests, and Chrome flows at 1280×800, 1512×982, 1024×768 and a narrow fallback. Checks cover section links after reload, back/forward, retained notes and TXT/MD export, enlarged source/Escape/focus return, dark mode, printing all sections, and existing Infographic/Poetry examples. In-page section navigation uses native history to avoid duplicate hashes after reload.
+
+## Charitable appeal
+
+New Lang/Lit guide `b0a0e8bb-7dfb-4fd6-8da0-a19d3dc95e92`, title Charitable appeal. The general overview covers communicative purpose across forms, donor/beneficiary/intermediary roles, need, efficacy, credibility, practical requests, sustained relationships, representation, language/design and a reading method. It is broad enough for humanitarian, conservation and community appeals. Keep the overview independent of WWF. The shared continuous-prose overview component is now `components/text-type-overview.tsx`; Advertisement retains its existing layout and labels.
+
+The separate worked example uses WWF-UK’s snow-leopard adoption webpage as checked on 24 September 2026. Eight sections follow Orient → Analyse → Write, with source notes alongside, explicit links to the complete original, and a small credited opening-image/headline excerpt. The excerpt is not the whole page. Do not silently treat it as evidence of payment-panel or gift-pack layout. The walkthrough identifies the reviewed monthly options (£5/£8/£10), custom and one-off alternatives, adoption benefits and the collective scope of funds. Do not import the older teacher prospect’s £3 price, named tiger biography or a predetermined guilt arc into this source.
+
+Teaching stance: analyse how admiration and protective concern become a manageable contribution, then connect the personal framing with wider conservation work. Do not assume symbolic adoption is literal ownership or deception, or that donor benefits invalidate the cause. Original thesis, paragraph and notebook support a connected reading. Section navigation uses native browser history; notes stay mounted across steps; TXT/MD exports include source URL and review date. Preserve the editable `## Worked example` boundary.
+
+Verification: isolated production build and TypeScript passed; all 60 existing tests passed, including the new guide in the course-reference test. Browser checks covered guide discovery, overview contents, all eight reading sections, keyboard focus, source image/links, enlarged view/Escape, reload/back/forward, note retention and TXT/MD export, 1280px and 1512px laptops, 1024px tablet landscape, narrow fallback, dark mode and printing. Existing Advertisement, Infographic and Poetry flows also passed.

@@ -3,12 +3,13 @@ import type { CourseId } from "./schema";
 export const textTypeGuideIds = {
   infographic: "c1e54cf5-1489-440b-a98c-3e7107bacc62",
   advertisement: "cf482e4c-3555-4e12-afca-b63396aec3ea",
+  charityAppeal: "b0a0e8bb-7dfb-4fd6-8da0-a19d3dc95e92",
   poetry: "8889a1cf-bfb4-4930-bc54-b693504ae80a",
 } as const;
 
 type TextTypeExample = {
   courseId: CourseId;
-  kind: "infographic" | "advertisement" | "poetry";
+  kind: "infographic" | "advertisement" | "charity-appeal" | "poetry";
   title: string;
   description: string;
 };
@@ -24,6 +25,11 @@ const examples: Record<string, TextTypeExample> = {
     title: "FIJI Water — No Added Chemicals",
     description: "Read the whole spread, zoom into its details, and trace how visual contrast and product claims build a preference.",
   },
+  [textTypeGuideIds.charityAppeal]: {
+    courseId: "language-literature", kind: "charity-appeal",
+    title: "WWF — Adopt a snow leopard",
+    description: "Trace how an animal portrait, adoption language and a practical contribution connect personal concern with conservation work.",
+  },
   [textTypeGuideIds.poetry]: {
     courseId: "literature", kind: "poetry",
     title: "Up-Hill — Christina Rossetti",
@@ -32,7 +38,7 @@ const examples: Record<string, TextTypeExample> = {
 };
 
 export const plannedTextTypes: Record<"language-literature" | "literature", readonly string[]> = {
-  "language-literature": ["Charity appeal", "Blog post", "Opinion/commentary", "Speech"],
+  "language-literature": ["Blog post", "Opinion/commentary", "Speech"],
   literature: ["Prose fiction", "Drama", "Literary nonfiction"],
 };
 
