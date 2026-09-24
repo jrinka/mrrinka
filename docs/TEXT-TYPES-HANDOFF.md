@@ -8,19 +8,20 @@ Continue Mr Rinka's site in this repository. Read AGENTS.md and docs/TEXT-TYPE-S
 
 IB course navigation has Assessments and Text types (Literature calls this Literary forms). Each individual guide opens a GENERAL OVERVIEW covering uses, common features/techniques, audience and purpose, vocabulary and a reading method. A separately linked worked-example view demonstrates these principles in a particular source. Add more examples later without displacing the overview. Do not organise around a single model text.
 
-Current guides: Infographic (Lang/Lit, c1e54cf5-1489-440b-a98c-3e7107bacc62) and Poetry (Literature, 8889a1cf-bfb4-4930-bc54-b693504ae80a). Main URLs open Overview; ?view=example opens the model. components/text-type-guide.tsx splits editable body at ## Worked example. This current implementation knows two model types; extend its metadata/rendering deliberately for new guides rather than letting its poetry fallback label an advertisement.
+Current guides: Advertisement (Lang/Lit, cf482e4c-3555-4e12-afca-b63396aec3ea), Infographic (Lang/Lit, c1e54cf5-1489-440b-a98c-3e7107bacc62) and Poetry (Literature, 8889a1cf-bfb4-4930-bc54-b693504ae80a). Main URLs open Overview; ?view=example opens the model. components/text-type-guide.tsx splits editable body at ## Worked example. Example metadata explicitly identifies Infographic, Advertisement and Poetry; unknown IDs do not fall back to poetry.
 
 Overview is currently continuous prose, NOT collapsible. Assistant proposed collapsible headings with first section open and expand/collapse-all; user then discussed serif styling but did not explicitly request the accordion implementation. Clarify or include it as a considered next improvement, do not claim it exists. The infographic worked-example sections ARE collapsible. An empty initial accordion caused by leading whitespace was fixed in 2eb8eaa.
 
 ## Next content priorities
 
-1. Advertisement (before speech): reuse the existing CDC print-ad sources and Paper 1 walkthrough thoughtfully.
-2. Charity appeal.
-3. Blog post.
-4. Opinion/commentary, distinguishing opinion from explainers rather than treating a publisher (Guardian / The Conversation) as a genre.
-5. Speech.
+Advertisement is now built using FIJI Water; Becky stays in Paper 1. Remaining priorities:
 
-The planned shelf in lib/text-type-guides.ts still shows the older Blog post / Speech / Charity appeal order. Update it to the agreed priorities during the next build. Literature currently plans prose fiction, drama and literary nonfiction. Work on one strong guide at a time.
+1. Charity appeal.
+2. Blog post.
+3. Opinion/commentary, distinguishing opinion from explainers rather than treating a publisher (Guardian / The Conversation) as a genre.
+4. Speech.
+
+The planned shelf in lib/text-type-guides.ts follows the agreed order above. Literature currently plans prose fiction, drama and literary nonfiction. Work on one strong guide at a time.
 
 ## Sources and teaching principles
 
@@ -45,3 +46,9 @@ Calendar assessment snapshot is useful but not daily-critical; DX is authoritati
 ## Verification
 
 npm run build; npm run typecheck where appropriate. Tests: node --import tsx --test tests/*.test.ts avoids tsx CLI sandbox pipe errors (57 passed). agent-browser CLI unavailable in prior checks; Playwright via installed @playwright/test and /Applications/Google Chrome.app/Contents/MacOS/Google Chrome used for browser checks. Local server may require sandbox escalation. Never expose environment secrets. Existing canary/AI setup not involved in these static guides.
+
+## Advertisement continuation
+
+The user clarified that Becky belongs in the Paper 1 section and selected the supplied FIJI Water commercial advertisement for this guide. Do not duplicate Becky as its worked example. Preserve the landscape composition and the six guided close-ups; connect image, headline, copy, product and slogan to a single argument about preference. See docs/TEXT-TYPE-SOURCES.md for scan provenance and limits. The overview remains general and continuous, with a separate example view and student notebook. Kagi is the user’s preferred search/extraction tool where available.
+
+Teaching emphasis: appeal labels are not a default tripartite thesis/paragraph plan. Pathos must name a particular emotion and explain its construction; ethos can establish credibility as well as draw on existing reputation; logos means reasoning connecting evidence to a conclusion, not the mere presence of numbers. Keep the treatment brief and contextual.
