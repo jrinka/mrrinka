@@ -9,7 +9,7 @@ export default function TextTypeIndex({ courseId, items }: { courseId: "language
   const planned = plannedTextTypes[courseId].filter(title => !items.some(item => item.title.toLowerCase() === title.toLowerCase()));
   const language = courseId === "language-literature";
   return <>
-    <div className="reference-intro"><div className="text-type-index-head">
+    <div className="reference-intro text-type-intro"><div className="text-type-index-head">
       <span className="mono">IB ENGLISH A / COURSE REFERENCE</span>
       <h1>{label}</h1>
       <p className="intro">{language

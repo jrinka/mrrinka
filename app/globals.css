@@ -2803,3 +2803,12 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .infographic-guide .p1-section h2 button .p1-toggle {
   font-family: var(--font-sans);
 }
+
+/* Crop the engraved sheet into a companion panel, balanced with the introduction. */
+.text-type-intro { grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr); gap:24px; align-items:stretch; }
+.text-type-intro .reference-plate-texts { width:100%; height:100%; min-height:300px; }
+.reference-plate-texts img { padding:0; object-fit:cover; object-position:50% 48%; transform:scale(1.35); }
+@media (max-width:700px) {
+  .text-type-intro { grid-template-columns:minmax(0,1fr); }
+  .text-type-intro .reference-plate-texts { height:230px; min-height:0; }
+}

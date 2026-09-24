@@ -8,8 +8,8 @@ const plates = {
 export default function ReferencePlate({ kind }: { kind: keyof typeof plates }) {
   const plate = plates[kind];
   const credit = `${plate.title} Wellcome Collection. Public Domain Mark.`;
-  return <figure className="guide-plate reference-plate">
-    <Image src={plate.src} alt={plate.alt} fill sizes="(max-width: 700px) 180px, 250px" />
+  return <figure className={`guide-plate reference-plate reference-plate-${kind}`}>
+    <Image src={plate.src} alt={plate.alt} fill sizes={kind === "texts" ? "(max-width: 700px) 90vw, (max-width: 1200px) 35vw, 420px" : "(max-width: 700px) 180px, 250px"} />
     <span className="guide-plate-keyword mono">{plate.keyword}</span>
     <figcaption><a href={`https://wellcomecollection.org/works/${plate.id}`} title={credit} aria-label={credit}>WELLCOME</a></figcaption>
   </figure>;
