@@ -73,3 +73,10 @@ The user requested removal of the bottom-of-page “Continue exploring” cards.
 ## Student-facing language
 
 Keep explanations accessible to grades 11–12 without simplifying the ideas. Retain useful analytical terminology, explain it where needed, and avoid ornate phrasing or abstract nouns that hide a straightforward relationship. The September 24 language pass revised the course guidance, worked examples, critical lenses, reading methods and reference explanations. Keep source quotations intact. Ethos/pathos/logos entries now match the contextual teaching guidance above.
+
+
+## Drama
+
+Drama is now a Literature guide, ID `5131f911-d916-4135-8415-ce6ad59606ff`. Overview first, with a separate seven-section Bovell worked example. Read dialogue as action: connect speech with reply, distinguish script evidence from possible performance, and follow changes in the relationship. Preserve the accessible source transcript, explicit silence, editorial labels and original PDF link. The reader pairs selected exchanges with commentary, can keep the whole extract open, supports section URLs/history and exports student notes as TXT/MD. Source details and date limitations are recorded in TEXT-TYPE-SOURCES.md. Literature’s remaining planned forms are Prose fiction and Literary nonfiction.
+
+Drama verification: production build and TypeScript passed; 14 relevant content/resource/export checks passed. Chrome checks covered overview-first discovery, all seven sections, source-follow and whole-extract modes, keyboard focus, reload/back/forward, note retention and TXT/MD exports, original PDF availability, 1280px/1512px laptops, 1024px tablet, narrow fallback, dark mode and complete printed source/commentary. Poetry, Advertisement and Charitable appeal remained available through the shared renderer.
