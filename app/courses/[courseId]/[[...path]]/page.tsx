@@ -10,8 +10,9 @@ import Practice from "@/components/practice";
 import PaperOneDossier from "@/components/paper-one-dossier";
 import TextTypeIndex from "@/components/text-type-index";
 import TextTypeExample from "@/components/text-type-example";
+import InfographicGuide from "@/components/infographic-guide";
 import CourseSectionTabs from "@/components/course-section-tabs";
-import { hasTextTypeExample } from "@/lib/text-type-guides";
+import { hasTextTypeExample, textTypeGuideIds } from "@/lib/text-type-guides";
 import {
   ArchiveCardArt,
   ArchiveHero,
@@ -246,7 +247,7 @@ export default async function CoursePage({ params }: Props) {
               )}
             </figure>
           )}
-          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <div className="text-type-guide"><Markdown>{item.body}</Markdown><TextTypeExample itemId={item.id}/></div> : <Markdown>{item.body}</Markdown>}
+          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && courseId === "language-literature" && item.id === textTypeGuideIds.infographic ? <InfographicGuide body={item.body} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <div className="text-type-guide"><Markdown>{item.body}</Markdown><TextTypeExample itemId={item.id}/></div> : <Markdown>{item.body}</Markdown>}
           {item.section === "assessment" && courseId !== "english-10" && (
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>

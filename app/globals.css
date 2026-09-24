@@ -2715,3 +2715,32 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .text-type-example-poem > p:not(.mono) { margin: 0 0 18px; font-family: var(--font-literary); font-size: 1rem; line-height: 1.45; }
 .text-type-example-source { margin: 0; padding: 14px 18px 18px; font-size: .77rem; line-height: 1.7; }
 @media (max-width: 1050px) { .text-type-directory, .text-type-guide { grid-template-columns: 1fr; } .text-type-example { position: static; max-height: none; } }
+
+/* Infographic source reading: one clear text, inspectable at its original resolution. */
+.infographic-jump { display: flex; flex-wrap: wrap; gap: 10px 18px; padding: 16px 0; margin-bottom: 24px; border-block: 1px solid var(--line); font-size: .8rem; }
+.infographic-jump > .mono { width: 100%; font-size: .68rem; color: var(--muted); }
+.infographic-jump a, .infographic-source a { text-decoration: underline; text-underline-offset: 3px; }
+.infographic-guide { grid-template-columns: minmax(0, 1.15fr) minmax(330px, 1fr); }
+.infographic-guide .p1-guidance { background: var(--paper); }
+.infographic-source { scrollbar-width: thin; }
+.infographic-source figure { margin: 0; padding: 12px; }
+.infographic-view-controls { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 12px 0; }
+.infographic-view-controls button { font: inherit; font-size: .75rem; padding: 7px 10px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
+.infographic-view-controls button[aria-pressed="true"] { background: var(--citron); color: #25282b; border-color: #25282b; }
+.infographic-view-controls button:hover { border-color: var(--ink); }
+.infographic-source .infographic-crop { position: relative; width: 100%; overflow: hidden; background: #f8f6f4; border: 1px solid var(--line); }
+.infographic-source .infographic-crop img { position: absolute; max-width: none; height: auto; border: 0; transform: none; }
+.infographic-source .text-type-example-note { padding: 5px 16px 12px; }
+.infographic-source .text-type-example-source { border-top: 1px solid var(--line); padding: 12px 16px; }
+.infographic-source .text-type-example-source a { display: inline; }
+.infographic-transcript { border-top: 1px solid var(--line); padding: 12px 16px; font-size: .85rem; line-height: 1.6; }
+.infographic-transcript summary, .infographic-self-check summary { cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.infographic-transcript h3 { font-size: 1rem; margin-top: 16px; }
+.infographic-notes { border-top: 2px solid var(--line); margin-top: 24px; padding-top: 14px; font-size: .93rem; line-height: 1.65; }
+.infographic-notes .field { margin-block: 18px; }
+.infographic-notes textarea { width: 100%; resize: vertical; }
+.infographic-notes .tool-actions { align-items: end; }
+.infographic-self-check { margin-top: 20px; padding: 14px; background: var(--panel-citron); border: 1px solid var(--line); }
+.infographic-guide button:focus-visible, .infographic-guide a:focus-visible, .infographic-guide summary:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+@media (max-width: 1050px) { .infographic-guide { grid-template-columns: minmax(0, 1fr); } .infographic-source { max-width: 680px; width: 100%; } }
+@media print { .infographic-jump, .infographic-view-controls, .infographic-notes .tool-actions { display: none; } .infographic-guide { display: block; } .infographic-source { position: static; max-height: none; overflow: visible; } }
