@@ -279,18 +279,6 @@ export default async function CoursePage({ params, searchParams }: Props) {
           )}
           {item.practiceKind !== "none" && (
             <Practice key={item.id} kind={item.practiceKind} />
-          )}{" "}
-          {item.relatedIds.length > 0 && (
-            <section className="related">
-              <div className="section-heading">
-                <h2>Continue exploring</h2>
-              </div>
-              <div className="cards">
-                {course.items
-                  .filter((i) => item.relatedIds.includes(i.id))
-                  .map(card)}
-              </div>
-            </section>
           )}
         </>
       ) : section === "assessment" ? (

@@ -50,3 +50,10 @@ The Advertisement usability pass pairs each reading section with an appropriate 
 - Photo credit visible on the original: © Muhammad Osama / WWF-Pakistan. Credit and original source link accompany the excerpt, including the enlarged view. WWF retains rights; no public-domain or open-licence claim is made. Only this small excerpt and brief phrases are reproduced for critical analysis, not the full webpage or a full transcript.
 - The source was visually checked for the close portrait and headline, payment options (£5, £8, £10 monthly, custom amount, one-off alternative), donor benefits and conservation explanation. The page explains the symbolic/group nature of adoption and broader funding scope. Do not substitute current values later without updating both commentary and the recorded source version.
 - Source metadata, section prompts and notebook fields: `lib/charity-appeal-example.ts`. Reader: `components/charity-appeal-guide.tsx`. Course body and stable guide ID: `content/language-literature.json`, `b0a0e8bb-7dfb-4fd6-8da0-a19d3dc95e92`. All guiding questions, models, commentary and exercises are original teaching material.
+
+
+## Distinct Literary forms artwork
+
+- Literary forms now uses *Dr Williams’ Library: interior of the library. Engraving by J. and H.S. Storer, 1826.* Wellcome Collection, work `q26kavkt`, reference 24559i. Published April 1826. Public Domain Mark verified on the catalogue page: https://wellcomecollection.org/works/q26kavkt.
+- Local asset `public/archive/library-storer.jpg` is the unchanged 1200px-wide IIIF delivery from https://iiif.wellcomecollection.org/image/V0013161/full/1200,/0/default.jpg. CSS frames the engraved interior; the original asset retains its borders and lettering. The linked credit includes artist, title, year, collection and licence in accessible detail.
+- Language & Literature Text types retains the sign-alphabet engraving. Calendar retains its sundial.

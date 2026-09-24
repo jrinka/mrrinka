@@ -19,7 +19,7 @@ export default function TextTypeIndex({ courseId, items }: { courseId: "language
         ? "Categories can overlap: a charity appeal might be a speech, a blog post or an infographic. Start with the actual text in front of you."
         : "A work can cross forms and genres. Follow its particular choices before relying on a label."}</p>
     </div>
-    <ReferencePlate kind="texts" /></div>
+    <ReferencePlate kind={language ? "texts" : "literature"} /></div>
     <p><Link href="/resources/analysis-reference">Explore literary, rhetorical and image-analysis terms ↗</Link></p>
     <div className="text-type-directory">
       <section className="text-type-available" aria-labelledby="available-guides"><div className="section-heading"><h2 id="available-guides">Available guides</h2><span className="mono">{String(items.length).padStart(2,"0")} / OPEN</span></div>
