@@ -3,6 +3,7 @@ import Markdown from "@/components/markdown";
 import InfographicGuide from "@/components/infographic-guide";
 import TextTypeExample from "@/components/text-type-example";
 import AdvertisementGuide from "@/components/advertisement-guide";
+import AdvertisementOverview from "@/components/advertisement-overview";
 import { getTextTypeExample } from "@/lib/text-type-guides";
 
 export default function TextTypeGuide({ body, itemId, href, showExample }: { body: string; itemId: string; href: string; showExample: boolean }) {
@@ -20,9 +21,9 @@ export default function TextTypeGuide({ body, itemId, href, showExample }: { bod
     </nav>
     {showExample && worked ? <>
       <div className="text-type-view-heading"><span className="mono">WORKED EXAMPLE / 01</span><h2>{title}</h2><Link href={href}>← Return to the text-type overview</Link></div>
-      {kind === "infographic" ? <InfographicGuide body={worked} /> : kind === "advertisement" ? <AdvertisementGuide body={worked} /> : <div className="text-type-guide"><Markdown>{worked}</Markdown><TextTypeExample itemId={itemId}/></div>}
+      {kind === "infographic" ? <InfographicGuide body={worked} /> : kind === "advertisement" ? <AdvertisementGuide body={worked} href={href} /> : <div className="text-type-guide"><Markdown>{worked}</Markdown><TextTypeExample itemId={itemId}/></div>}
     </> : <>
-      <div className="text-type-overview"><Markdown>{overview}</Markdown></div>
+      {kind === "advertisement" ? <AdvertisementOverview body={overview} href={href} /> : <div className="text-type-overview"><Markdown>{overview}</Markdown></div>}
       {worked && <section className="text-type-example-directory"><span className="mono">APPLY THE OVERVIEW</span><h2>Worked examples</h2><Link href={`${href}?view=example`}><strong>{title} ↗</strong><span>{description}</span></Link></section>}
     </>}
   </>;

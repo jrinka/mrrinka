@@ -1,18 +1,72 @@
 "use client";
 
-import { useRef, useState, type MouseEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Markdown from "./markdown";
 import ExportFormatSelect from "./export-format";
 import { downloadRecord, type ExportFormat } from "@/lib/practice-record";
+import { splitGuideSections } from "@/lib/guide-sections";
 import { advertisementExample as example, advertisementViews as views, advertisementNoteFields as fields } from "@/lib/advertisement-example";
 
-export default function AdvertisementGuide({ body }: { body: string }) {
+const readingSections: Record<string, { label: string; phase: string; source: string }> = {
+  "start-with-the-whole-advertisement": { label: "Start with the whole ad", phase: "Orient", source: "whole" },
+  "audience-and-purpose": { label: "Audience & purpose", phase: "Orient", source: "whole" },
+  "1-the-image-creates-the-problem": { label: "Image", phase: "Analyse", source: "syringe" },
+  "2-the-headline-supplies-the-distinction": { label: "Headline", phase: "Analyse", source: "headline" },
+  "3-the-copy-gives-reassurance-a-rationale": { label: "Body copy", phase: "Analyse", source: "copy" },
+  "4-the-product-and-slogan-resolve-the-contrast": { label: "Product & slogan", phase: "Analyse", source: "product" },
+  "build-an-analytical-response": { label: "Build a response", phase: "Write", source: "whole" },
+  "avoid-and-revise": { label: "Avoid & revise", phase: "Write", source: "whole" },
+  "practice-and-transfer": { label: "Practise & transfer", phase: "Write", source: "copy" },
+};
+
+export default function AdvertisementGuide({ body, href }: { body: string; href: string }) {
+  const sections = useMemo(() => splitGuideSections(body), [body]);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [viewIndex, setViewIndex] = useState(0);
   const sourceRef = useRef<HTMLElement>(null);
-  const view = views[viewIndex];
-  const ratio = (example.width * view.width) / (example.height * view.height);
+  const workspaceRef = useRef<HTMLDivElement>(null);
+  const headingRefs = useRef<(HTMLHeadingElement | null)[]>([]);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const active = sections[activeIndex] ?? sections[0];
+
+  function selectSection(index: number, focus = true) {
+    const section = sections[index];
+    if (!section) return;
+    setActiveIndex(index);
+    setViewIndex(Math.max(0, views.findIndex(view => view.id === (readingSections[section.id]?.source ?? "whole"))));
+    if (focus) requestAnimationFrame(() => {
+      headingRefs.current[index]?.focus({ preventScroll: true });
+      workspaceRef.current?.scrollIntoView({ block: "start", behavior: "instant" });
+    });
+  }
+
+  useEffect(() => {
+    function readHash() {
+      const hash = window.location.hash.slice(1);
+      const sourceIndex = views.findIndex(view => `ad-view-${view.id}` === hash);
+      const sectionId = sourceIndex >= 0 ? views[sourceIndex].section : hash;
+      const index = sections.findIndex(section => section.id === sectionId);
+      if (index >= 0) {
+        setActiveIndex(index);
+        setViewIndex(sourceIndex >= 0 ? sourceIndex : Math.max(0, views.findIndex(view => view.id === (readingSections[sectionId]?.source ?? "whole"))));
+      } else if (!hash) {
+        setActiveIndex(0);
+        setViewIndex(0);
+      }
+    }
+    readHash();
+    window.addEventListener("hashchange", readHash);
+    window.addEventListener("popstate", readHash);
+    return () => { window.removeEventListener("hashchange", readHash); window.removeEventListener("popstate", readHash); };
+  }, [sections]);
+
+  function goToSection(index: number) {
+    if (!sections[index]) return;
+    selectSection(index);
+    const url = `${href}?view=example#${sections[index].id}`;
+    if (window.location.pathname + window.location.search + window.location.hash !== url) window.history.pushState(null, "", url);
+  }
 
   function followZoom(event: MouseEvent<HTMLDivElement>) {
     const anchor = event.target instanceof Element ? event.target.closest("a") : null;
@@ -22,44 +76,85 @@ export default function AdvertisementGuide({ body }: { body: string }) {
     if (index < 0) return;
     event.preventDefault();
     setViewIndex(index);
-    sourceRef.current?.focus({ preventScroll: true });
-    sourceRef.current?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
+    if (window.matchMedia("(max-width: 850px)").matches) {
+      sourceRef.current?.focus({ preventScroll: true });
+      sourceRef.current?.scrollIntoView({ behavior: "instant", block: "start" });
+    }
   }
 
+  if (!active) return <Markdown>{body}</Markdown>;
+  const labelFor = (index: number) => readingSections[sections[index]?.id]?.label ?? sections[index]?.title;
+
   return <div className="advertisement-guide" onClick={followZoom}>
-    <section className="advertisement-viewer" id="advertisement-source" ref={sourceRef} tabIndex={-1} aria-label="FIJI Water source and close-up views">
-      <div className="text-type-example-head"><span className="mono">EXAMINE THE SOURCE</span><span className="mono">FIJI WATER / PRINT AD</span></div>
-      <div className="advertisement-view-controls" role="group" aria-label="Choose a source view">
-        {views.map((item, index) => <button id={`ad-view-${item.id}`} key={item.id} type="button" aria-pressed={index === viewIndex} aria-controls="advertisement-crop advertisement-view-notes" onClick={() => setViewIndex(index)}>{item.label}</button>)}
+    <p className="advertisement-question"><span className="mono">PRACTICE GUIDING QUESTION</span>{example.question}</p>
+    <nav className="advertisement-reading-route" id="advertisement-reading-route" tabIndex={-1} aria-label="Worked example sections">
+      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase}</span><ol>
+        {sections.map((section, index) => (readingSections[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
+          <a href={`${href}?view=example#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            event.preventDefault();
+            goToSection(index);
+          }}><span className="mono">{String(index + 1).padStart(2, "0")}</span>{labelFor(index)}</a>
+        </li>)}
+      </ol></div>)}
+    </nav>
+    <div className="advertisement-reading-workspace" ref={workspaceRef}>
+      <section className="advertisement-viewer" id="advertisement-source" ref={sourceRef} tabIndex={-1} aria-label="FIJI Water source and close-up views">
+        <div className="text-type-example-head"><span className="mono">SOURCE / FIJI WATER</span><button type="button" onClick={() => dialogRef.current?.showModal()}>Enlarge source ↗</button></div>
+        <SourceControls viewIndex={viewIndex} onChange={setViewIndex} scope="inline" />
+        <SourceFigure viewIndex={viewIndex} />
+        <p className="advertisement-source-status" role="status">Showing: <strong>{views[viewIndex].label.replace(/^\d+ · /, "")}</strong>. Switch views to compare without leaving this section.</p>
+        <details className="advertisement-transcript"><summary>Practice guiding question</summary><p>{example.question}</p></details>
+        <details className="advertisement-transcript"><summary>Read the ad’s wording</summary>
+          <p className="hint">The advertiser’s wording, transcribed from this scan. Tiny packaging text is not fully legible.</p>
+          {example.transcript.map(part => <div key={part.title}><h3>{part.title}</h3><p>{part.text}</p></div>)}
+        </details>
+      </section>
+      <div className="advertisement-analysis">
+        <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { const route = document.getElementById("advertisement-reading-route"); route?.focus({ preventScroll: true }); route?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>
+        <nav className="advertisement-reader-pager advertisement-reader-pager-top" aria-label="Reading controls">
+          <button type="button" disabled={activeIndex === 0} onClick={() => goToSection(activeIndex - 1)}>← Previous</button>
+          <button type="button" disabled={activeIndex === sections.length - 1} onClick={() => goToSection(activeIndex + 1)}>Next: {labelFor(activeIndex + 1) ?? "Finished"} →</button>
+        </nav>
+        {sections.map((section, index) => <section className="advertisement-reading-section" key={section.id} hidden={activeIndex !== index} aria-labelledby={section.id}>
+          <h2 id={section.id} tabIndex={-1} ref={element => { headingRefs.current[index] = element; }}>{section.title.replace(/^\d+\.\s+/, "")}</h2>
+          <Markdown>{section.body}</Markdown>
+          {section.id === "practice-and-transfer" && <AdvertisementNotes />}
+        </section>)}
+        <nav className="advertisement-reader-pager" aria-label="Continue reading">
+          <button type="button" disabled={activeIndex === 0} onClick={() => goToSection(activeIndex - 1)}>← {labelFor(activeIndex - 1) ?? "Previous"}</button>
+          {activeIndex < sections.length - 1 ? <button type="button" onClick={() => goToSection(activeIndex + 1)}>Next: {labelFor(activeIndex + 1)} →</button> : <a href={`${href}?view=example#start-with-the-whole-advertisement`} onClick={event => {
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            event.preventDefault();
+            goToSection(0);
+          }}>Return to the whole reading ↗</a>}
+        </nav>
       </div>
-      <div className="advertisement-view-layout">
-        <figure>
-          <div className="advertisement-image-stage">
-            <div id="advertisement-crop" className="advertisement-crop" style={{ aspectRatio: ratio, width: `min(100%, ${500 * ratio}px)` }}>
-              <Image src={example.image} alt={view.alt} width={example.width} height={example.height} unoptimized loading="eager"
-                style={{ width: `${100 / view.width}%`, left: `${-view.x / view.width * 100}%`, top: `${-view.y / view.height * 100}%` }} />
-            </div>
-          </div>
-          <figcaption>{example.credit} <a href={example.image} target="_blank" rel="noopener noreferrer">Open complete source image ↗</a></figcaption>
-        </figure>
-        <div className="advertisement-view-notes" id="advertisement-view-notes">
-          <div aria-live="polite" aria-atomic="true"><span className="mono">{viewIndex === 0 ? "WHOLE COMPOSITION" : `DETAIL / 0${viewIndex}`}</span><h3>{view.title}</h3><p>{view.prompt}</p></div>
-          <Link className="advertisement-analysis-link" href={`?view=example#${view.section}`}>Read the analysis ↓</Link>
-          <div className="advertisement-step-controls">
-            <button type="button" disabled={viewIndex === 0} onClick={() => setViewIndex(index => index - 1)}>← Previous</button>
-            <button type="button" disabled={viewIndex === views.length - 1} onClick={() => setViewIndex(index => index + 1)}>Next detail →</button>
-          </div>
-          {viewIndex > 0 && <button className="advertisement-reset" type="button" onClick={() => setViewIndex(0)}>Return to whole ad</button>}
-          <p className="hint">Close-ups use the same scan. Return to the whole ad to check size, placement and contrast.</p>
-        </div>
-      </div>
-      <details className="advertisement-transcript"><summary>Read the ad’s wording</summary>
-        <p className="hint">Transcription of the displayed scan; line breaks are joined. These are the advertiser’s claims. Tiny packaging text is not fully legible.</p>
-        {example.transcript.map(part => <div key={part.title}><h3>{part.title}</h3><p>{part.text}</p></div>)}
-      </details>
-    </section>
-    <div className="advertisement-analysis"><Markdown>{body}</Markdown><AdvertisementNotes /></div>
+    </div>
+    <dialog className="advertisement-source-dialog" ref={dialogRef} aria-labelledby="advertisement-source-dialog-title" onClick={event => { if (event.target === dialogRef.current) dialogRef.current?.close(); }}>
+      <div className="advertisement-dialog-heading"><h2 id="advertisement-source-dialog-title">FIJI Water — source viewer</h2><button type="button" autoFocus onClick={() => dialogRef.current?.close()}>Close ×</button></div>
+      <SourceControls viewIndex={viewIndex} onChange={setViewIndex} scope="enlarged" />
+      <SourceFigure viewIndex={viewIndex} enlarged />
+    </dialog>
   </div>;
+}
+
+function SourceControls({ viewIndex, onChange, scope }: { viewIndex: number; onChange: (index: number) => void; scope: "inline" | "enlarged" }) {
+  return <div className="advertisement-view-controls" role="group" aria-label={scope === "inline" ? "Choose a source view" : "Choose an enlarged source view"}>
+    {views.map((item, index) => <button key={item.id} type="button" aria-pressed={index === viewIndex} onClick={() => onChange(index)}>{item.label.replace(/^\d+ · /, "")}</button>)}
+  </div>;
+}
+
+function SourceFigure({ viewIndex, enlarged = false }: { viewIndex: number; enlarged?: boolean }) {
+  const view = views[viewIndex];
+  const ratio = (example.width * view.width) / (example.height * view.height);
+  return <figure className="advertisement-source-figure">
+    <div className="advertisement-image-stage"><div className="advertisement-crop" style={{ aspectRatio: ratio, width: `min(100%, calc(var(--ad-crop-height) * ${ratio}))` }}>
+      <Image src={example.image} alt={view.alt} width={example.width} height={example.height} unoptimized loading={enlarged ? "lazy" : "eager"}
+        style={{ width: `${100 / view.width}%`, left: `${-view.x / view.width * 100}%`, top: `${-view.y / view.height * 100}%` }} />
+    </div></div>
+    <figcaption>{example.credit} <a href={example.image} target="_blank" rel="noopener noreferrer">Open complete source image ↗</a></figcaption>
+  </figure>;
 }
 
 function AdvertisementNotes() {
