@@ -2776,3 +2776,30 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .text-type-example-directory a { display:block; padding:18px 0; }
 .text-type-example-directory strong { display:block; text-decoration:underline; text-underline-offset:4px; margin-bottom:8px; }
 .text-type-example-directory span:not(.mono) { display:block; max-width:75ch; }
+
+/* Literary headings punctuate text-type guides without changing tool typography. */
+.text-type-overview .prose h2,
+.text-type-guide > .prose h2,
+.text-type-view-heading h2,
+.text-type-example-directory h2 {
+  font-family: var(--font-literary);
+  font-weight: 400;
+  font-size: 1.65rem;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+.text-type-example-directory > a > strong {
+  font-family: var(--font-literary);
+  font-weight: 400;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+.infographic-guide .p1-section h2 button {
+  font-family: var(--font-literary);
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.3;
+}
+.infographic-guide .p1-section h2 button .p1-toggle {
+  font-family: var(--font-sans);
+}

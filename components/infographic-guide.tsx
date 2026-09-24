@@ -8,7 +8,7 @@ import { downloadRecord, type ExportFormat } from "@/lib/practice-record";
 import { infographicExample as example, infographicViews, infographicNoteFields } from "@/lib/infographic-example";
 
 export default function InfographicGuide({ body }: { body: string }) {
-  const sections = body.split(/^## /m).filter(Boolean).map(part => {
+  const sections = body.split(/^## /m).map(part => part.trim()).filter(Boolean).map(part => {
     const [title, ...text] = part.split("\n");
     return { title, id: title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, ""), text: text.join("\n") };
   });
