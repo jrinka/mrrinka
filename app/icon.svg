@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mr Rinka">
+  <rect width="64" height="64" fill="#25282b"/>
+  <path fill="#f5f5f3" fill-rule="evenodd" d="M14 10h25l9 9v12l-8 8H24v10H14V10Zm10 10v10h13V20H24Z"/>
+  <path fill="#f5f5f3" d="M28 39h12l9 10H37z"/>
+  <path fill="#d8ed61" d="M14 54h35v4H14z"/>
+</svg>
