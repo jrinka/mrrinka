@@ -2355,7 +2355,7 @@ h3 {
 .entry-site { max-width: 1500px; margin: 0 auto; padding: clamp(22px, 3.5vw, 52px); }
 .entry-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 30px; padding-bottom: 22px; border-bottom: 1px solid var(--ink); }
 .entry-header h1 { margin: 0; font-family: var(--font-sans); font-size: clamp(2.1rem, 3.8vw, 3.3rem); font-weight: 500; letter-spacing: -.06em; line-height: 1.1; }
-.entry-header h1 > span { color: #7b871e; }
+.entry-header h1 > span { color: var(--citron); }
 .entry-header p { display: grid; gap: 5px; margin: 0; text-align: right; }
 .entry-header [lang="la"] { font-family: var(--font-accent); font-size: 1rem; letter-spacing: .1em; }
 .entry-header small { color: var(--muted); font-size: .73rem; }
@@ -2744,3 +2744,23 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .infographic-guide button:focus-visible, .infographic-guide a:focus-visible, .infographic-guide summary:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 @media (max-width: 1050px) { .infographic-guide { grid-template-columns: minmax(0, 1fr); } .infographic-source { max-width: 680px; width: 100%; } }
 @media print { .infographic-jump, .infographic-view-controls, .infographic-notes .tool-actions { display: none; } .infographic-guide { display: block; } .infographic-source { position: static; max-height: none; overflow: visible; } }
+
+/* Quiet archive plates keep the introduction and useful content together. */
+.reference-intro { display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:32px; align-items:start; margin-bottom:28px; }
+.reference-intro .global-page-head, .reference-intro .text-type-index-head { margin-bottom:0; }
+.reference-plate { width:250px; height:270px; }
+.reference-plate img { object-fit:contain; padding:12px 12px 38px; }
+.reference-plate a { text-decoration:underline; }
+@media (max-width:700px) { .reference-intro { grid-template-columns:minmax(0,1fr); gap:18px; } .reference-plate { width:180px; height:200px; } }
+
+.reference-jumps { display:grid; grid-template-columns:1fr 1fr; gap:24px; padding:24px; border:1px solid var(--line); background:var(--panel-warm); }
+.reference-jumps strong { display:block; margin-bottom:12px; }
+.reference-jumps a { display:block; margin:6px 0; text-decoration:underline; text-underline-offset:3px; }
+.reference-bank { margin-top:40px; }
+.reference-bank section { scroll-margin-top:24px; margin-top:28px; }
+.reference-term { border-bottom:1px solid var(--line); scroll-margin-top:24px; }
+.reference-term summary { cursor:pointer; padding:14px 8px; font-weight:600; }
+.reference-term[open] { background:var(--panel-warm); }
+.reference-term > div { padding:0 20px 14px; max-width:85ch; }
+.reference-term summary:hover { text-decoration:underline; text-underline-offset:4px; }
+@media(max-width:700px) { .reference-jumps { grid-template-columns:1fr; } }

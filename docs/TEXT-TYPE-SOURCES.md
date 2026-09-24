@@ -14,3 +14,9 @@
 - Further reading linked for students: Purdue OWL, “Visual Rhetoric: Analyzing Visual Documents.” https://owl.purdue.edu/owl/general_writing/visual_rhetoric/analyzing_visual_documents/index.html
 
 Keep the guide body editable in `content/language-literature.json`, using its existing stable item ID. The source metadata, close-up regions and notebook prompts live in `lib/infographic-example.ts`.
+
+## Reference landing-page plates (24 September 2026)
+
+- `public/archive/sign-alphabet.jpg`: *Hands showing the sign language alphabet. Line engraving.* Wellcome Collection, work `awq9wceu`, reference 17990i. Public Domain Mark verified through the catalogue API. Original IIIF image `b11758697_0001.jp2`; resized delivery at 1200px wide, no content edits.
+- `public/archive/universal-sundial.jpg`: *Clocks: a universal sundial, with a compass. Engraving.* Wellcome Collection, work `cpyrw6ej`, reference 45214i. Public Domain Mark verified through the catalogue API. Original IIIF image `V0024399EL`; resized delivery at 1200px wide, no content edits.
+- Both plates retain compact linked WELLCOME credits with descriptive accessible labels and title details. Images are served locally.

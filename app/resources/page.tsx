@@ -44,6 +44,7 @@ export default function ResourcesPage() {
       {href:"/resources/hle-inquiries",title:"HLE: how an inquiry develops",summary:"Worked examples with Lady Susan and Timon of Athens."},
     ]},
     {title:"Language & reference",items:[
+      {href:"/resources/analysis-reference",title:"Terms for analysis",summary:"Literary, rhetorical and visual terms: definitions, examples and possible analysis."},
       {href:"/resources/analytical-language",title:"Tone, transitions, verbs & sentence stems",summary:"Reference banks for precise language and connected ideas."},
       ...[...shared.values()].filter(({item})=>item.title!=="From observation to analysis"&&!/TPCASTT|SOAPSTone/i.test(item.title)).map(({item,courseId})=>({href:`/courses/${courseId}/resources/${item.id}`,title:item.title,summary:item.summary})),
     ]},
