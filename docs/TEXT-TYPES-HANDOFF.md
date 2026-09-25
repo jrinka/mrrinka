@@ -4,6 +4,17 @@
 
 Continue Mr Rinka's site in this repository. Read AGENTS.md and docs/TEXT-TYPE-SOURCES.md. Pull current main before editing course JSON; retain stable IDs and teacher edits. Current branch github-main pushes to origin main; GitHub integration deploys to Vercel. Live site https://mrrinka.com. Check build and actual browser flows before pushing; confirm Vercel status afterward.
 
+## Current agreed plan (25 September 2026)
+
+This plan supersedes the historical queues below. The user approved articles next, then useful additions drawn from the existing past-paper bank, with a language clarity pass at the end.
+
+1. COMPLETED: Articles overview and separate Lensa worked example (see completion note below). Original brief: build a general News and feature articles overview with a separate worked example. The reviewed Lensa AI article from The Conversation (November 2024 TZ2 Text 1) is the leading candidate. Distinguish reporting, explanation and opinion; a publisher is not a genre. Treat the article's technical and legal claims in their original publication context, not as current guidance.
+2. Follow with useful additions that introduce distinct reading challenges. Prioritise Webpages (Redwoods Treewalk, May 2025 TZ2 Text 1), Letters (Murthy or Steinbeck), and Podcasts/interviews (The Happiness Lab, May 2023 TZ1 Text 1). Review each supplied exam text before committing to its treatment.
+3. Expand existing guides where that is more useful than creating another category: a sequential comic alongside Cartoons, North and South alongside Moon Tiger for Prose fiction, and a contrasting poem alongside Up-Hill. Select from the user's catalogued paper bank as needed; these are candidates, not completed additions. Posters can sit within Advertisement and further conservation appeals within Charitable appeal.
+4. Finish with a language clarity pass across the new overviews, commentary, models, prompts and interface labels. Aim for accessible grade 11–12 explanations without simplifying the ideas. Remove ornate or needlessly abstract phrasing; preserve source quotations, useful terminology and analytical precision. Models should remain achievable under timed conditions.
+
+Maintain overview-first organisation, separate worked examples, laptop-first reading space and restrained navigation. Both current planned shelves are empty because the previous queue is complete; this section records the new agreed work. Record completion here as the work proceeds.
+
 ## Agreed organisation
 
 IB course navigation has Assessments and Text types (Literature calls this Literary forms). Each individual guide opens a GENERAL OVERVIEW covering uses, common features/techniques, audience and purpose, vocabulary and a reading method. A separately linked worked-example view demonstrates these principles in a particular source. Add more examples later without displacing the overview. Do not organise around a single model text.
@@ -144,3 +155,10 @@ The separate eight-step Helen Clark eulogy example uses the supplied November 20
 Both planned shelves are now empty: the agreed Language & Literature queue and four Literature forms are built. This means the planned set is complete, not that every possible IB text type is covered. Further additions should follow the user’s priorities.
 
 Speech verification: production build, TypeScript and 10 content/export checks passed. Chrome verified overview discovery and contents, all eight sections, source-follow/whole-speech persistence, both source pages, practice-question label, reload/back/forward and focus, previous/next, retained notes and TXT/MD exports, 1280px/1512px laptops, 1024px tablet, narrow fallback, dark mode and print revealing all five source groups and all commentary. Moon Tiger, Poetry and Blog passed regression checks.
+
+
+## Articles (25 September 2026)
+
+Articles is built at `b773dc6e-4794-4c80-a99f-8cdd183b20f4`. Seven overview sections cover news, features and explainers, angle, evidence, structure, language and a practical reading method. A separate eight-step Lensa example uses the supplied November 2024 TZ2 Text 1 adaptation of Murphy’s December 2022 article. Supplied guiding question retained. Four readable source groups, headline, original first-page layout and two cropped source-page links support the existing shared reader. Notes persist between sections and export TXT/MD; print reveals complete transcript and commentary. No shared reader behaviour changed.
+
+Validation: production build, TypeScript and 10 content/export tests passed. Chrome checked overview-first discovery, all eight steps, source-follow/whole-article views, original-layout expansion, source links, section URLs/reload/history/focus, previous/next, retained notes, TXT/MD exports, 1280px/1512px laptops, 1024px tablet, narrow fallback, dark mode and complete printed source/commentary. Existing Moon Tiger, Poetry and Blog examples passed regression checks. A local language clarity review is complete; the agreed final pass across all new additions remains pending. Next priority: Webpages, with Redwoods Treewalk as the reviewed candidate, then the useful additions in the current plan above.

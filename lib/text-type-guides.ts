@@ -1,6 +1,7 @@
 import type { CourseId } from "./schema";
 
 export const textTypeGuideIds = {
+  article: "b773dc6e-4794-4c80-a99f-8cdd183b20f4",
   speech: "501e5fac-47a8-4c41-a081-ac57220685c2",
   opinion: "9860d817-e8b4-4a15-b499-b0df6b780f28",
   blog: "a6b9e918-4b25-4ae8-9f6c-08bd45c89173",
@@ -16,12 +17,16 @@ export const textTypeGuideIds = {
 
 type TextTypeExample = {
   courseId: CourseId;
-  kind: "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
+  kind: "article" | "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
   title: string;
   description: string;
 };
 
 const examples: Record<string, TextTypeExample> = {
+  [textTypeGuideIds.article]: {
+    courseId: "language-literature", kind: "article", title: "Lensa AI and artists’ work — Brendan Paul Murphy",
+    description: "Explore how familiar images make a technical dispute approachable while preserving concern about its consequences.",
+  },
   [textTypeGuideIds.speech]: {
     courseId: "language-literature", kind: "speech", title: "Eulogy for Sir Edmund Hillary — Helen Clark",
     description: "Trace how extraordinary achievement, shared mourning and practical service become an invitation to continue a legacy of compassion.",
