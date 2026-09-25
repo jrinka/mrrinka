@@ -27,12 +27,11 @@ export default function PracticePage() {
     <GlobalShell>
       <div className="illustrated-guide-head"><div className="global-page-head"><span className="mono">READ / WRITE / REVISE</span><h1>Practice</h1><p>Choose a skill to work on. Start with a supplied passage or bring a text from class.</p></div><GuidePlate kind="practice" /></div>
       <Link className="practice-feature" href="/practice/passages">
-        <span className="practice-feature-index mono">AI FEEDBACK</span>
-        <span className="practice-feature-icon"><Sparkles size={22} /></span>
+        <span className="practice-feature-index mono">ANALYSIS</span>
         <span><strong>Passage Practice</strong><small>Literature Paper 1 skills: read a supplied extract, practice analysis, and request feedback—or download it to work offline.</small></span>
-        <ArrowUpRight size={20} />
+        <span className="practice-feature-actions"><span className="practice-feature-icon" role="img" aria-label="AI feedback available" title="AI feedback available"><Sparkles size={19} aria-hidden="true" /><span className="mono">AI</span></span><ArrowUpRight size={20} aria-hidden="true" /></span>
       </Link>
-      <Link className="practice-feature" href="/practice/what-changes"><span className="practice-feature-index mono">COMPARE &amp; INTERPRET</span><span><strong>What changes?</strong><small>Compare words, line breaks and visual choices. Explain the difference, reveal a possible reading, and try another version.</small></span><ArrowUpRight size={20} aria-hidden="true" /></Link>
+      <Link className="practice-feature" href="/practice/what-changes"><span className="practice-feature-index mono">COMPARE &amp; INTERPRET</span><span><strong>What changes?</strong><small>Compare words, line breaks and visual choices. Explain the difference, reveal a possible reading, and try another version.</small></span><span className="practice-feature-actions"><ArrowUpRight size={20} aria-hidden="true" /></span></Link>
       <section className="refinery-directory"><h2>Refineries</h2><p>AI guidance to help you develop your own work for each task. The tools’ limits are based on the IB academic integrity policy. Using them does not automatically make your work compliant: you still need to follow the policy and your teacher’s rules.</p><p><a href={ibAiPolicy}>Read the IB policy and AI guidance ↗</a></p><RefineryLinks /></section>
       <div className="global-directory-list">
         <section className="global-directory-group">
