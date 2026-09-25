@@ -1,6 +1,7 @@
 import type { CourseId } from "./schema";
 
 export const textTypeGuideIds = {
+  cartoon: "64dc8a9a-f80c-4e62-8a60-55a641a7b7f7",
   infographic: "c1e54cf5-1489-440b-a98c-3e7107bacc62",
   advertisement: "cf482e4c-3555-4e12-afca-b63396aec3ea",
   charityAppeal: "b0a0e8bb-7dfb-4fd6-8da0-a19d3dc95e92",
@@ -12,12 +13,16 @@ export const textTypeGuideIds = {
 
 type TextTypeExample = {
   courseId: CourseId;
-  kind: "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose";
+  kind: "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
   title: string;
   description: string;
 };
 
 const examples: Record<string, TextTypeExample> = {
+  [textTypeGuideIds.cartoon]: {
+    courseId: "language-literature", kind: "cartoon", title: "The History of Technology — Andy Singer",
+    description: "Compare two panels to see how a changed world and a repeated complaint challenge an assumption about progress.",
+  },
   [textTypeGuideIds.infographic]: {
     courseId: "language-literature", kind: "infographic",
     title: "Physical activity for early years",

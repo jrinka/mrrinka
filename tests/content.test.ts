@@ -87,6 +87,7 @@ test("shared references point directly to existing canonical pages", () => {
 
 test("IB text-type guides have clear course labels and routes back to Paper 1", () => {
   const guides = [
+    { course: "language-literature" as const, id: textTypeGuideIds.cartoon, label: "Text types" },
     { course: "language-literature" as const, id: textTypeGuideIds.infographic, label: "Text types" },
     { course: "literature" as const, id: textTypeGuideIds.poetry, label: "Literary forms" },
     { course: "literature" as const, id: textTypeGuideIds.drama, label: "Literary forms" },
