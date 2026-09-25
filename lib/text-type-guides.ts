@@ -1,6 +1,7 @@
 import type { CourseId } from "./schema";
 
 export const textTypeGuideIds = {
+  blog: "a6b9e918-4b25-4ae8-9f6c-08bd45c89173",
   cartoon: "64dc8a9a-f80c-4e62-8a60-55a641a7b7f7",
   infographic: "c1e54cf5-1489-440b-a98c-3e7107bacc62",
   advertisement: "cf482e4c-3555-4e12-afca-b63396aec3ea",
@@ -13,12 +14,16 @@ export const textTypeGuideIds = {
 
 type TextTypeExample = {
   courseId: CourseId;
-  kind: "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
+  kind: "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
   title: string;
   description: string;
 };
 
 const examples: Record<string, TextTypeExample> = {
+  [textTypeGuideIds.blog]: {
+    courseId: "language-literature", kind: "blog", title: "Follow your dreams — Oliver Emberton",
+    description: "Connect a conversational voice, bee illustrations and practical advice to see how the post makes focused effort seem necessary and achievable.",
+  },
   [textTypeGuideIds.cartoon]: {
     courseId: "language-literature", kind: "cartoon", title: "The History of Technology — Andy Singer",
     description: "Compare two panels to see how a changed world and a repeated complaint challenge an assumption about progress.",
@@ -60,7 +65,7 @@ const examples: Record<string, TextTypeExample> = {
 };
 
 export const plannedTextTypes: Record<"language-literature" | "literature", readonly string[]> = {
-  "language-literature": ["Blog post", "Opinion/commentary", "Speech"],
+  "language-literature": ["Opinion/commentary", "Speech"],
   literature: [],
 };
 
