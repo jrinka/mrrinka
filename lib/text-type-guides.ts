@@ -1,6 +1,7 @@
 import type { CourseId } from "./schema";
 
 export const textTypeGuideIds = {
+  speech: "501e5fac-47a8-4c41-a081-ac57220685c2",
   opinion: "9860d817-e8b4-4a15-b499-b0df6b780f28",
   blog: "a6b9e918-4b25-4ae8-9f6c-08bd45c89173",
   cartoon: "64dc8a9a-f80c-4e62-8a60-55a641a7b7f7",
@@ -15,12 +16,16 @@ export const textTypeGuideIds = {
 
 type TextTypeExample = {
   courseId: CourseId;
-  kind: "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
+  kind: "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
   title: string;
   description: string;
 };
 
 const examples: Record<string, TextTypeExample> = {
+  [textTypeGuideIds.speech]: {
+    courseId: "language-literature", kind: "speech", title: "Eulogy for Sir Edmund Hillary — Helen Clark",
+    description: "Trace how extraordinary achievement, shared mourning and practical service become an invitation to continue a legacy of compassion.",
+  },
   [textTypeGuideIds.opinion]: {
     courseId: "language-literature", kind: "opinion", title: "Should Netball Be Our National Sport? — Alasdair McClintock",
     description: "Follow teasing reversals, self-deprecation and shared affection as a sports column builds its case for recognition.",
@@ -70,7 +75,7 @@ const examples: Record<string, TextTypeExample> = {
 };
 
 export const plannedTextTypes: Record<"language-literature" | "literature", readonly string[]> = {
-  "language-literature": ["Speech"],
+  "language-literature": [],
   literature: [],
 };
 

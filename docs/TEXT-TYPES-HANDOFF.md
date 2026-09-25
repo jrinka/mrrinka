@@ -133,3 +133,14 @@ The shared `LiteraryReadingGuide` now also supports this non-literary text throu
 The remaining planned text type is Speech. Helen Clark’s eulogy for Hillary (November 2020 Text C) is the recommended next source, but this build does not implement it.
 
 Opinion verification: production build, TypeScript and 10 content/export checks passed. Chrome verified overview discovery and contents, eight reading sections, source-follow/whole-column persistence, original layout image, section URLs/history/focus, previous/next, retained notes and TXT/MD exports, 1280px/1512px laptop and 1024px tablet layouts, narrow fallback, dark mode and print showing all source passages and commentary. Poetry, Moon Tiger and Blog passed regression checks.
+
+
+## Speech (25 September 2026)
+
+Speech is built at `501e5fac-47a8-4c41-a081-ac57220685c2`. Its general overview covers overlapping speech purposes, speaker/occasion/audience, structure, language shaped for listening, credibility/emotion/reasoning and a reading method. It distinguishes transcript evidence from possible performance.
+
+The separate eight-step Helen Clark eulogy example uses the supplied November 2020 Text C adaptation. An original practice guiding question is clearly labelled because the source came from the older comparative examination. Five readable passage groups follow the commentary or remain complete through “Whole speech”; two source-region image links preserve the supplied layout and footnotes. Notes persist between sections and export TXT/MD with question credit. Print reveals all passages and commentary. Existing shared-reader behaviour is retained.
+
+Both planned shelves are now empty: the agreed Language & Literature queue and four Literature forms are built. This means the planned set is complete, not that every possible IB text type is covered. Further additions should follow the user’s priorities.
+
+Speech verification: production build, TypeScript and 10 content/export checks passed. Chrome verified overview discovery and contents, all eight sections, source-follow/whole-speech persistence, both source pages, practice-question label, reload/back/forward and focus, previous/next, retained notes and TXT/MD exports, 1280px/1512px laptops, 1024px tablet, narrow fallback, dark mode and print revealing all five source groups and all commentary. Moon Tiger, Poetry and Blog passed regression checks.
