@@ -122,3 +122,14 @@ Blog post is built at `a6b9e918-4b25-4ae8-9f6c-08bd45c89173`. The general overvi
 The planned shelf now contains Opinion/commentary and Speech. Candidate sources already reviewed: McClintock’s netball column (November 2023 TZ2) and Helen Clark’s eulogy for Hillary (November 2020 Text C). Neither is built or independently authorised by this Blog post build.
 
 Blog verification: production build, TypeScript and 10 content/export checks passed. Chrome verified overview discovery and contents, all eight sections, five source views, enlargement/Escape/focus, transcript and source notes, reload/back/forward, previous/next, retained notes and TXT/MD exports, 1280px/1512px laptops, 1024px tablet, narrow fallback, dark mode and print showing both source pages and all commentary. Existing Cycling, WWF and Cartoons examples passed regression checks. The graph close-up was tightened after visual review for readable equation and axes in the side panel.
+
+
+## Opinion/commentary (25 September 2026)
+
+Opinion/commentary is built at `9860d817-e8b4-4a15-b499-b0df6b780f28`, with a general overview distinguishing opinion, reporting and explanation and covering forms, audience, reasoning, tone, credibility and structure. Its separate eight-step McClintock netball example uses the supplied November 2023 TZ2 exam version of the May 2019 column. It traces mock attack, affection, self-deprecation, a change from ranking to shared feeling, and the final invitation. A short model paragraph demonstrates the relationship between voice and argument.
+
+The shared `LiteraryReadingGuide` now also supports this non-literary text through the existing typed configuration. Optional image and whole-view label fields add an expandable original-layout image and “Whole column” button for this example only. Readable passages follow the analysis or remain complete by choice. Notes remain mounted across sections and export TXT/MD; print reveals the whole transcript and commentary. Existing poetry/prose configuration and behaviour are preserved.
+
+The remaining planned text type is Speech. Helen Clark’s eulogy for Hillary (November 2020 Text C) is the recommended next source, but this build does not implement it.
+
+Opinion verification: production build, TypeScript and 10 content/export checks passed. Chrome verified overview discovery and contents, eight reading sections, source-follow/whole-column persistence, original layout image, section URLs/history/focus, previous/next, retained notes and TXT/MD exports, 1280px/1512px laptop and 1024px tablet layouts, narrow fallback, dark mode and print showing all source passages and commentary. Poetry, Moon Tiger and Blog passed regression checks.

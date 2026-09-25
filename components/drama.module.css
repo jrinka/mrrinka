@@ -18,3 +18,10 @@
 .poemLine, .poemAnswer { display:block; position:relative; padding-left:24px; }
 .poemAnswer { padding-left:44px; }
 .lineNumber { position:absolute; left:0; font-family:monospace; font-size:.65rem; color:var(--muted); user-select:none; }
+
+.sourceLayout { padding:16px; border-bottom:1px solid var(--line); }
+.sourceLayout summary { cursor:pointer; text-decoration:underline; text-underline-offset:3px; font-size:.82rem; }
+.sourceLayout figure { margin:16px 0 0; }
+.sourceLayout img { width:100%; height:auto; display:block; }
+.sourceLayout figcaption { font-size:.72rem; line-height:1.5; margin-top:10px; }
+@media print { .sourceLayout { display:none; } }

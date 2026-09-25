@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import Markdown from "./markdown";
 import ExportFormatSelect from "./export-format";
@@ -65,8 +66,9 @@ export default function LiteraryReadingGuide({ body, href, example }: { body: st
         <p className={styles.context}>{example.context}</p>
         <div className={styles.controls} role="group" aria-label={example.poem ? "Poem view" : "Extract view"}>
           <button type="button" aria-pressed={!wholeSource} onClick={() => { setWholeSource(false); sourceRef.current?.scrollTo({ top: 0 }); }}>Follow the reading</button>
-          <button type="button" aria-pressed={wholeSource} onClick={() => { setWholeSource(true); sourceRef.current?.scrollTo({ top: 0 }); }}>{example.poem ? "Whole poem" : "Whole extract"}</button>
+          <button type="button" aria-pressed={wholeSource} onClick={() => { setWholeSource(true); sourceRef.current?.scrollTo({ top: 0 }); }}>{example.wholeLabel ?? (example.poem ? "Whole poem" : "Whole extract")}</button>
         </div>
+        {example.image && <details className={styles.sourceLayout}><summary>See original page layout</summary><figure><Image src={example.image.url} width={example.image.width} height={example.image.height} alt={example.image.alt} unoptimized /><figcaption>{example.credit}</figcaption></figure></details>}
         <div className={styles.transcript}>
           {example.passages.map((passage, index) => <section className={styles.passage} key={passage.title} hidden={!wholeSource && note?.passage != null && note.passage !== index}>
             <h3>{passage.title}</h3>
