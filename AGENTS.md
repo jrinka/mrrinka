@@ -25,3 +25,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Public course navigation is IB Language & Literature and IB Literature. Skills & Methods provides general English resources, including for English 10. Keep English 10 editor data and legacy routes; do not create a third actively maintained course space.
 
 - Use US spelling in original teaching material and interface labels (analyze, practice, organize, etc.). Preserve source quotations, transcripts, original titles and proper names. Include a US spelling audit in the planned final language clarity pass.
+
+- Prioritize clear grade 11–12 explanations: avoid ornate phrasing, invented verbs and convoluted syntax. Keep useful terminology and analytical precision. Present models as supported possible readings; context and evidence determine meaning, rather than fixed symbolic rules. Do not imply all alternatives are equally well supported.

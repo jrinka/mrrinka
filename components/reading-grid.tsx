@@ -17,6 +17,6 @@ export default function ReadingGrid({method}:{method:ReadingMethod}) {
   <div className="reading-grid-head mono"><span>READING MOVE</span><span>WORKED EXAMPLE / {guide.work}</span><span>YOUR NOTES</span></div>
   {guide.steps.map((step,i)=><section className="reading-grid-row" key={step.title}><div><span className="method-letter" aria-hidden="true">{step.letter}</span><h2>{step.title}</h2><p>{step.prompt}</p></div><div className="reading-model"><span className="mono">WORKED EXAMPLE</span><p>{step.example}</p></div><label className="field">Your notes: {step.title}<textarea rows={4} maxLength={2500} value={notes[i]} onChange={e=>setNotes(current=>current.map((n,index)=>index===i?e.target.value:n))}/></label></section>)}
   <div className="tool-actions"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button className="button secondary" type="button" onClick={()=>downloadRecord(`${guide.title} reading notes\nText: ${text || guide.work}\n\n${guide.steps.map((s,i)=>`${s.title}\n${notes[i]||"(Not yet recorded)"}`).join("\n\n")}`,`${method}-notes.txt`,exportFormat)}>Save my notes</button></div>
-  <aside className="lens-intro"><h2>Turn the grid into an argument</h2><p>{guide.bridge}</p><a href="/resources/observation-to-analysis">Practise moving from observation to analysis →</a></aside>
+  <aside className="lens-intro"><h2>Turn the grid into an argument</h2><p>{guide.bridge}</p><a href="/resources/observation-to-analysis">Practice moving from observation to analysis →</a></aside>
  </section>;
 }

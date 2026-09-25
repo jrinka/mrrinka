@@ -1,7 +1,7 @@
 export const toneGroups=[
  {title:"Anger and objection",words:"accusatory · belligerent · bitter · disappointed · disgusted · furious · incredulous · indignant · inflammatory · insulting · irritated · outraged · petulant · querulous · savage · sullen · threatening · wrathful"},
  {title:"Happiness and enthusiasm",words:"amiable · amused · cheery · contented · ecstatic · elated · enthusiastic · exuberant · hopeful · jovial · joyful · jubilant · lighthearted · optimistic · sanguine"},
- {title:"Humour, irony and mockery",words:"belittling · caustic · comical · cynical · facetious · flippant · ironic · irreverent · mock-heroic · mocking · ribald · ridiculing · sarcastic · scornful · taunting"},
+ {title:"Humor, irony and mockery",words:"belittling · caustic · comical · cynical · facetious · flippant · ironic · irreverent · mock-heroic · mocking · ribald · ridiculing · sarcastic · scornful · taunting"},
  {title:"Superiority and judgment",words:"boastful · condescending · contemptuous · critical · disdainful · haughty · insolent · judgmental · mordant · patronizing · pompous · pretentious · supercilious"},
  {title:"Sadness and unease",words:"apprehensive · concerned · despairing · elegiac · foreboding · gloomy · hopeless · melancholy · morose · mournful · pessimistic · regretful · sober · solemn · somber · tragic"},
  {title:"Calm and reflection",words:"calm · hopeful · meditative · nostalgic · optimistic · peaceful · relaxed · reminiscent · sentimental · serene · soothing · staid"},

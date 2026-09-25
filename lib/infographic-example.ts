@@ -7,7 +7,7 @@ export const infographicExample = {
   context: "https://www.gov.uk/government/publications/physical-activity-guidelines-early-years-under-5s",
   license: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
   question: "How do words and visual choices make the advice feel both authoritative and achievable?",
-  alt: "2019 UK government infographic about activity from birth to five. Benefits appear as six labelled icons above the slogan Every movement counts. A large orange clock carries the 180-minute target for ages one to five; teal tiles show everyday activities. An orange Under-1s panel specifies 30 minutes across the day beside a tummy-time icon. Three closing instructions appear above the Chief Medical Officers’ source line.",
+  alt: "2019 UK government infographic about activity from birth to five. Benefits appear as six labeled icons above the slogan Every movement counts. A large orange clock carries the 180-minute target for ages one to five; teal tiles show everyday activities. An orange Under-1s panel specifies 30 minutes across the day beside a tummy-time icon. Three closing instructions appear above the Chief Medical Officers’ source line.",
 };
 
 // Regions are percentages of the unaltered 1819 × 2573 source image.

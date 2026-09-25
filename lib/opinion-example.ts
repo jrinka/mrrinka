@@ -5,7 +5,7 @@ export const opinionExample: LiteraryReading = {
   "author": "Alasdair McClintock",
   "question": "How is tone used to shape the meaning of this text?",
   "questionCredit": "SUPPLIED PAPER",
-  "context": "The Beast, 1 May 2019. Supplied exam adaptation: November 2023, TZ2, Text 2. Reading-group headings and paragraph numbers below are editorial aids. Wording is preserved; typography and footnote placement are normalised.",
+  "context": "The Beast, 1 May 2019. Supplied exam adaptation: November 2023, TZ2, Text 2. Reading-group headings and paragraph numbers below are editorial aids. Wording is preserved; typography and footnote placement are normalized.",
   "sources": [
     {
       "label": "Source image",
@@ -89,7 +89,7 @@ export const opinionExample: LiteraryReading = {
       "passage": null
     },
     "practice-and-transfer": {
-      "label": "Practise & transfer",
+      "label": "Practice & transfer",
       "phase": "Write",
       "passage": 0
     }

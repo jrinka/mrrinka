@@ -17,7 +17,7 @@ const readingSections: Record<string, { label: string; phase: string; source: st
   "4-the-product-and-slogan-resolve-the-contrast": { label: "Product & slogan", phase: "Analyse", source: "product" },
   "build-an-analytical-response": { label: "Build a response", phase: "Write", source: "whole" },
   "avoid-and-revise": { label: "Avoid & revise", phase: "Write", source: "whole" },
-  "practice-and-transfer": { label: "Practise & transfer", phase: "Write", source: "copy" },
+  "practice-and-transfer": { label: "Practice & transfer", phase: "Write", source: "copy" },
 };
 
 export default function AdvertisementGuide({ body, href }: { body: string; href: string }) {
@@ -88,7 +88,7 @@ export default function AdvertisementGuide({ body, href }: { body: string; href:
   return <div className="advertisement-guide" onClick={followZoom}>
     <p className="advertisement-question"><span className="mono">PRACTICE GUIDING QUESTION</span>{example.question}</p>
     <nav className="advertisement-reading-route" id="advertisement-reading-route" tabIndex={-1} aria-label="Worked example sections">
-      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase}</span><ol>
+      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (readingSections[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
           <a href={`${href}?view=example#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;

@@ -16,7 +16,7 @@ export const speechExample: LiteraryReading = {
       "url": "/examples/clark-hillary-page-2.png"
     }
   ],
-  "credit": "Helen Clark’s tribute to Sir Edmund Hillary at his state funeral. The supplied source states: adapted from the tribute published in the New Zealand Herald (22 January 2008). Catalogued as November 2020, Text C, from the older comparative Paper 1. This standalone question and all analysis are original teaching material. Rights remain with their holders.",
+  "credit": "Helen Clark’s tribute to Sir Edmund Hillary at his state funeral. The supplied source states: adapted from the tribute published in the New Zealand Herald (22 January 2008). Cataloged as November 2020, Text C, from the older comparative Paper 1. This standalone question and all analysis are original teaching material. Rights remain with their holders.",
   "footnotes": "Sir Edmund Hillary: New Zealand mountaineer, explorer and philanthropist (1919–2008). Knighted: honour bestowed by the monarch of the United Kingdom. Sherpa: glossed in the supplied paper as a local Himalayan guide. Kiwi: colloquial term for a New Zealander.",
   "passages": [
     {
@@ -110,7 +110,7 @@ export const speechExample: LiteraryReading = {
       "passage": 4
     },
     "practice-and-transfer": {
-      "label": "Practise & transfer",
+      "label": "Practice & transfer",
       "phase": "Write",
       "passage": 1
     }

@@ -44,7 +44,7 @@ export const cartoonReadingSections: Record<string, {label:string;phase:string;l
     "note": "Select details that work together to question a particular assumption about progress. Avoid separate inventories of language and image."
   },
   "practice-and-transfer": {
-    "label": "Practise & transfer",
+    "label": "Practice & transfer",
     "phase": "Write",
     "location": "The title, settings and repeated complaint",
     "note": "Connect a detail from each environment to the title. Check your claim against the first figure’s explicit unhappiness."

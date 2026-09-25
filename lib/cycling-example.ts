@@ -84,7 +84,7 @@ export const cyclingExample = {
       "view": 3
     },
     "practice-and-transfer": {
-      "label": "Practise & transfer",
+      "label": "Practice & transfer",
       "phase": "Write",
       "view": 4
     }

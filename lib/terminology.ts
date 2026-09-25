@@ -4,7 +4,7 @@ export const categories = [
  {id:'voice',title:'Voice & perspective',hint:'Tone, register, speakers and viewpoints'},
  {id:'structure',title:'Structure & pattern',hint:'Arrangement, contrast, repetition and narrative movement'},
  {id:'sound',title:'Sound & poetic form',hint:'Rhythm, sound patterns, pauses and line breaks'},
- {id:'images',title:'Images & composition',hint:'Framing, gaze, colour, layout and visual relationships'},
+ {id:'images',title:'Images & composition',hint:"Framing, gaze, color, layout and visual relationships"},
  {id:'persuasion',title:'Persuasion & context',hint:'Appeals, audiences, representation and cultural assumptions'},
 ] as const;
 export type Category = typeof categories[number]['id'];

@@ -11,7 +11,7 @@ export default async function Introductions({searchParams}:{searchParams:Promise
  return <GlobalShell>
   <Link className="back" href="/resources">← Skills &amp; Methods</Link>
   <div className="global-page-head"><span className="mono">PAPER 1 / SHARED METHOD</span><h1>Introductions &amp; thesis statements</h1><p>Establish the text, develop a reading, and give your response a direction.</p></div>
-  <div className="lens-intro prose"><p>Your introduction should explain which text you are analysing, what matters about it, and what your response will argue. This is a flexible method, not a compulsory sentence formula.</p><a href="#worked-examples">Jump to the worked examples ↓</a></div>
+  <div className="lens-intro prose"><p>Your introduction should explain which text you are analyzing, what matters about it, and what your response will argue. This is a flexible method, not a compulsory sentence formula.</p><a href="#worked-examples">Jump to the worked examples ↓</a></div>
   <section aria-label="Step-by-step introduction guide">{sections.slice(0,6).map((section,index)=><details className="lens-section" key={section.title} open={index===0}><summary><span>{section.title}</span></summary><div className="lens-body"><Markdown>{section.body}</Markdown></div></details>)}</section>
   <IntroductionExamples key={example} initialExample={example}/>
   {sections.slice(6).map(section=><section className="lens-intro" key={section.title}><h2>{section.title}</h2><Markdown>{section.body}</Markdown></section>)}

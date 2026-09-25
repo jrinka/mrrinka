@@ -1,3 +1,11 @@
+const legacySectionIds: Record<string, string> = {
+  "humor-irony-and-the-argument": "humour-irony-and-the-argument",
+  "make-divided-attention-recognizable": "make-divided-attention-recognisable",
+  "keep-the-hero-recognizably-human": "keep-the-hero-recognisably-human",
+  "sound-rhythm-and-meter": "sound-rhythm-and-metre",
+  "practice": "practise"
+};
+
 export type GuideSection = { id: string; title: string; body: string };
 
 export function splitGuideSections(body: string): GuideSection[] {
@@ -9,9 +17,10 @@ export function splitGuideSections(body: string): GuideSection[] {
   matches.forEach((match, index) => {
     const title = match[1].trim();
     const base = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-    let id = base;
+    const stableBase = legacySectionIds[base] ?? base;
+    let id = stableBase;
     let suffix = 2;
-    while (sections.some(section => section.id === id)) id = `${base}-${suffix++}`;
+    while (sections.some(section => section.id === id)) id = `${stableBase}-${suffix++}`;
     sections.push({ id, title, body: body.slice(match.index! + match[0].length, matches[index + 1]?.index ?? body.length).trim() });
   });
   return sections;

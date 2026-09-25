@@ -4,6 +4,18 @@
 
 Continue Mr Rinka's site in this repository. Read AGENTS.md and docs/TEXT-TYPE-SOURCES.md. Pull current main before editing course JSON; retain stable IDs and teacher edits. Current branch github-main pushes to origin main; GitHub integration deploys to Vercel. Live site https://mrrinka.com. Check build and actual browser flows before pushing; confirm Vercel status afterward.
 
+## Latest priority and language pass (25 September 2026)
+
+The user moved the language and usability pass ahead of further contrasting examples. That pass is now complete locally, with publication checks to follow. Original teaching prose and interface labels use US spelling; source quotations, transcripts, original titles and proper names remain intact. Simplified abstract or ornate explanations in course guidance and models; revised reference entries where a possible effect sounded automatic. Color, gaze, framing and other choices must be interpreted in context. Common associations remain useful, but are not fixed answers. A compact note on each worked-example view identifies it as one supported reading, allowing alternatives that explain the evidence and address complications.
+
+Preserved stable course IDs and existing section hashes after US spelling changes, including source-view mappings. Source-link labels stay together at laptop/tablet widths. No additional exit cards or navigation were added. Validation: production build, TypeScript and 70 tests passed; 110 source fields compared unchanged. Browser checks covered all 15 overviews and worked-example views and 109 reading sections, plus source-follow/whole-source views, enlargement, history/focus, retained notes, TXT/MD exports, laptop/tablet/narrow layouts, dark mode and complete print on representative text/image readers. Additional WWF and Cycling views remained available.
+
+Next content options remain a sequential comic, North and South alongside Moon Tiger, and a contrasting poem, selected from the supplied bank. Do not treat older pending-language-pass notes below as the current queue.
+
+### Paper 2 practice idea — queued, not built
+
+The user reports that the same past-paper folder also contains a catalogue of all past Paper 2 questions. Review that bank before implementation. Proposed introductory activity: show a random supplied question, let students choose two works they have read, and ask them to craft a comparative thesis responding to that question. Keep possible responses open to alternatives supported by the works. This turn records the idea; it does not implement the activity or verify the bank's completeness.
+
 ## Current agreed plan (25 September 2026)
 
 This plan supersedes the historical queues below. The user approved articles next, then useful additions drawn from the existing past-paper bank, with a language clarity pass at the end.

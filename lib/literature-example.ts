@@ -22,7 +22,7 @@ export const literatureNotes:Record<string,{title:string;body:string}[]> = {
  ],
  avoid:[
   {title:"Device spotting",body:"Thin: “Rossetti uses questions to engage the reader.” Stronger: “The recurring questions keep the questioner’s uncertainty present even as each answer offers assurance.” The revision identifies what this pattern contributes to this poem."},
-  {title:"Claims without enough evidence",body:"Overclaim: “Rossetti is frightened of death, and God promises her heaven.” Better: “The unnamed dialogue can suggest a journey towards death and promised rest, particularly through the night, the inn and ‘those who have gone before.’” Distinguish a plausible allegory from a claim about the poet’s own situation."},
+  {title:"Claims without enough evidence",body:"Overclaim: “Rossetti is frightened of death, and God promises her heaven.” Better: “The unnamed dialogue can suggest a journey toward death and promised rest, particularly through the night, the inn and ‘those who have gone before.’” Distinguish a plausible allegory from a claim about the poet’s own situation."},
   {title:"Flattening the ending",body:"Overclaim: “The happy ending removes all fear.” Revision: “The final answer extends the promise of welcome to everyone who comes, while ‘travel-sore and weak’ reminds us how exhausting the journey has been.” The qualification strengthens the interpretation instead of weakening it."},
  ],
  criteria:[

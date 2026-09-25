@@ -7,7 +7,7 @@ const examples = [
     question: "How does the poem’s movement develop the speaker’s relationship with the woods?",
     source: "https://poets.org/poem/stopping-woods-snowy-evening", sourceLabel: "Read the poem · Academy of American Poets",
     sentences: [
-      "In Robert Frost’s ‘Stopping by Woods on a Snowy Evening’, a traveller pauses to watch snow falling in a secluded wood.",
+      "In Robert Frost’s ‘Stopping by Woods on a Snowy Evening’, a traveler pauses to watch snow falling in a secluded wood.",
       "The pause draws attention to the appeal of stillness before the speaker recalls obligations beyond the scene.",
       "By shifting from the sights and sounds of the woods to a repeated reminder of the journey ahead, Frost shows the speaker weighing the desire to stay against the need to continue.",
     ],

@@ -186,7 +186,7 @@ export default function PassagePractice({provider}:{provider:{name:string;disclo
       <div className="passage-writing-column">
       <section className="passage-panel passage-response">
         <header className="passage-panel-head"><div><span className="mono">ANALYSIS BAY / 01</span><h2>Your reading</h2></div><span className="mono">{responseWordCount} WORDS</span></header>
-        <label htmlFor="passage-response">Analyse how the writing creates meaning or effect.</label>
+        <label htmlFor="passage-response">Analyze how the writing creates meaning or effect.</label>
         <div
           className="passage-writing-field"
           style={{ "--writing-progress": `${writingProgress * 100}%` } as CSSProperties}

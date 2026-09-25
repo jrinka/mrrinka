@@ -16,7 +16,7 @@ export const charityReadingSections: Record<string, { label: string; phase: stri
   "give-the-relationship-a-presence": { label: "Gifts & ongoing contact", phase: "Analyse", location: "Adoption benefits", note: "The page shows a soft toy, an adoption pack, updates and a certificate among the benefits. Inspect how their images make participation tangible, including when the adoption is given as a gift." },
   "connect-the-gift-with-conservation": { label: "What support funds", phase: "Analyse", location: "Conservation explanation and funding scope", note: "Read the account of practical work and the explanation that funds also support wider conservation. Keep those qualifications connected to the personal language of the offer." },
   "build-an-analytical-response": { label: "Build a response", phase: "Write", location: "Bring the page together", note: "Connect the animal portrait, the reader’s proposed role, the donation options and the explanation of the work. Check the scope of the promise before forming a thesis." },
-  "practice-and-transfer": { label: "Practise & transfer", phase: "Write", location: "Compare benefits with charitable purpose", note: "Choose one detail from the adoption benefits and one from the account of conservation work. Explain the relationship rather than treating each as an isolated technique." },
+  "practice-and-transfer": { label: "Practice & transfer", phase: "Write", location: "Compare benefits with charitable purpose", note: "Choose one detail from the adoption benefits and one from the account of conservation work. Explain the relationship rather than treating each as an isolated technique." },
 };
 
 export const charityNoteFields = [

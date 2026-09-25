@@ -59,7 +59,7 @@ export default function CyclingGuide({ body, href }: { body: string; href: strin
   return <div className="advertisement-guide">
     <p className="advertisement-question"><span className="mono">GUIDING QUESTION / SUPPLIED PAPER</span>{example.question}</p>
     <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
-      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase}</span><ol>
+      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
           <a href={`${href}?view=example&example=cycling#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -75,7 +75,7 @@ export default function CyclingGuide({ body, href }: { body: string; href: strin
         <div className={styles.screenSource}><SourceFigure viewIndex={viewIndex} /></div>
         <div className={styles.printSource}><SourceFigure viewIndex={0} /><SourceFigure viewIndex={1} /></div>
         <p className="advertisement-source-status" role="status">Showing: <strong>{example.views[viewIndex].label}</strong>. Change views to compare without leaving this section.</p>
-        <details className="advertisement-transcript"><summary>Read the infographic’s wording</summary><p className="hint">Source wording with editorial headings. Typography and line breaks are normalised; the source images preserve emphasis and layout.</p><Markdown>{example.transcript}</Markdown></details>
+        <details className="advertisement-transcript"><summary>Read the infographic’s wording</summary><p className="hint">Source wording with editorial headings. Typography and line breaks are normalized; the source images preserve emphasis and layout.</p><Markdown>{example.transcript}</Markdown></details>
         <details className="advertisement-transcript"><summary>Image descriptions and source notes</summary><p>{example.views[0].alt}</p><p>{example.views[1].alt}</p><p>The design uses green for the proposed shift and highlighted benefits. Maps, a globe, contrasting bars and policy icons move from everyday travel to global projections and institutional action. Dashed segments and arrows distinguish cycling’s highlighted contribution from the comprehensive scenarios.</p><p>{example.credit}</p></details>
       </aside>
       <div className="advertisement-analysis">

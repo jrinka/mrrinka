@@ -79,7 +79,7 @@ function InfographicSource() {
     <div className="text-type-example-note" aria-live="polite" aria-atomic="true"><h2>{view.term}</h2><p>{view.note}</p></div>
     <p className="text-type-example-source">
       <a href={example.context} target="_blank" rel="noopener noreferrer" title="Department of Health and Social Care · UK Chief Medical Officers’ Physical Activity Guidelines">Department of Health and Social Care ↗</a><br />
-      © Crown copyright 2019 · <a href={example.license} target="_blank" rel="noopener noreferrer">Open Government Licence v3.0 ↗</a><br />
+      © Crown copyright 2019 · <a href={example.license} target="_blank" rel="noopener noreferrer">Open Government License v3.0 ↗</a><br />
       <a href={example.source} target="_blank" rel="noopener noreferrer">2019 original preserved by Cumbria Council ↗</a>. Historical text for analysis; GOV.UK now provides revised guidance.
     </p>
     <details className="infographic-transcript"><summary>Read the infographic as text</summary><div>

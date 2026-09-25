@@ -16,11 +16,11 @@ export const poetryExample: LiteraryReading = {
   "rest-widens-from-me-to-all": { label: "From me to all", phase: "Analyse", passage: 3 },
   "what-the-repeated-form-contributes": { label: "Form & repetition", phase: "Analyse", passage: null },
   "build-an-analytical-response": { label: "Build a response", phase: "Write", passage: null },
-  "practice-and-transfer": { label: "Practise & transfer", phase: "Write", passage: 3 },
+  "practice-and-transfer": { label: "Practice & transfer", phase: "Write", passage: 3 },
  },
  fields: [
   { key: "contrast", label: "The relationship you will explain", hint: "How does the final stanza hold exhaustion and the promise of rest together?" },
-  { key: "evidence", label: "Connected evidence", hint: "Connect the traveller’s vulnerability with the widening from me to all." },
+  { key: "evidence", label: "Connected evidence", hint: "Connect the traveler’s vulnerability with the widening from me to all." },
   { key: "analysis", label: "Your analytical paragraph", hint: "Explain how the exchange develops reassurance without claiming that the questions or difficulty disappear." },
  ],
  checks: ["Have I distinguished the voices from the poet?", "Have I explained the relationship between a question and its reply?", "Have I connected form with particular words and ideas?", "Does my claim account for both the promised rest and continuing exhaustion?"],

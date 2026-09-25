@@ -29,7 +29,7 @@ export const dramaPassages: { title: string; lines: Speech[] }[] = [
     { speaker: "BOB", text: "No… I want to know." },
   ] },
   { title: "Settling and honesty", lines: [
-    { speaker: "FRAN", text: "You fall out of love. You just do. And you think about, maybe, something else. Another life. But it passes. If you wait long enough, one day you realise that the man you did love is still there, still sitting across the table from you, still sleeping on the other side of the bed. And you settle for that." },
+    { speaker: "FRAN", text: "You fall out of love. You just do. And you think about, maybe, something else. Another life. But it passes. If you wait long enough, one day you realize that the man you did love is still there, still sitting across the table from you, still sleeping on the other side of the bed. And you settle for that." },
     { speaker: "BOB", text: "You settled for me." },
     { speaker: "FRAN", text: "I’m being honest, Bob." },
   ] },
@@ -42,7 +42,7 @@ export const dramaReadingSections: Record<string, { label: string; phase: string
   "the-children-and-the-missing-me": { label: "The missing ‘me’", phase: "Analyse", passage: 1 },
   "settling-and-being-honest": { label: "Settling & honesty", phase: "Analyse", passage: 2 },
   "build-an-analytical-response": { label: "Build a response", phase: "Write", passage: 2 },
-  "practice-and-transfer": { label: "Practise & transfer", phase: "Write", passage: 1 },
+  "practice-and-transfer": { label: "Practice & transfer", phase: "Write", passage: 1 },
 };
 
 export const dramaNoteFields = [

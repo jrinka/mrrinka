@@ -104,7 +104,7 @@ export const letterExample: LiteraryReading = {
       "passage": 2
     },
     "practice-and-transfer": {
-      "label": "Practise & transfer",
+      "label": "Practice & transfer",
       "phase": "Write",
       "passage": 3
     }

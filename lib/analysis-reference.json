@@ -27,18 +27,18 @@
             "term": "Tone",
             "definition": "The writer’s attitude toward the subject or audience, conveyed through diction and style.",
             "example": "A review calling a blockbuster “competent, inoffensive, and instantly forgettable.”",
-            "analysis": "Guides how the reader is meant to feel, often steering judgement without stating it outright."
+            "analysis": "Helps establish an attitude toward the subject or audience. Explain which words support that attitude and whether it changes."
           },
           {
             "term": "Mood / Atmosphere",
             "definition": "The emotional quality a text creates for the reader.",
             "example": "Long shadows, a ticking clock, an empty corridor.",
-            "analysis": "Primes the reader emotionally so later events land as ominous, comic, or poignant."
+            "analysis": "Can make a scene feel uneasy, comic, peaceful or otherwise distinctive. Connect the atmosphere to specific details; readers may respond differently."
           },
           {
             "term": "Connotation",
             "definition": "The associations and emotional overtones a word carries beyond its literal meaning.",
-            "example": "“Home” often suggests belonging; “house” may emphasise the building. Context can make either word comforting or unsettling.",
+            "example": "“Home” often suggests belonging; “house” may emphasize the building. Context can make either word comforting or unsettling.",
             "analysis": "Lets a writer suggest an attitude through a word’s associations, even when the statement appears neutral."
           },
           {
@@ -51,7 +51,7 @@
             "term": "Colloquialism / Vernacular",
             "definition": "Informal, conversational language, including slang and regional usage.",
             "example": "“gonna,” “y’all,” “it’s no biggie.”",
-            "analysis": "Creates intimacy and authenticity, characterises a speaker, or signals solidarity with a particular audience."
+            "analysis": "Can suggest familiarity, shared identity or a speaker’s background. In another context, it may sound affected or inappropriate. Explain why the wording fits this situation."
           },
           {
             "term": "Euphemism",
@@ -104,19 +104,19 @@
             "term": "Symbolism",
             "definition": "Using an object, image, or action to represent a larger idea.",
             "example": "A recurring caged bird representing confinement.",
-            "analysis": "Lets abstract themes be carried by concrete images, rewarding close reading and unifying a text."
+            "analysis": "Look for details that support a meaning beyond the literal object. A familiar association is a starting point, not a fixed answer; context can change it."
           },
           {
             "term": "Motif",
             "definition": "A recurring image, idea, or structure that develops a theme.",
             "example": "Repeated references to hands throughout a novel.",
-            "analysis": "Builds thematic coherence through repetition and signals what a text wants the reader to track."
+            "analysis": "Repetition draws attention to a detail or idea. Track what changes each time it appears and how the pattern contributes to the text."
           },
           {
             "term": "Allusion",
             "definition": "A reference to another text, person, event, or work.",
             "example": "Calling an ambition “his Icarus moment.”",
-            "analysis": "Borrows the weight and associations of the referenced source, enriching meaning for readers who recognise it."
+            "analysis": "Borrows the weight and associations of the referenced source, enriching meaning for readers who recognize it."
           },
           {
             "term": "Pathetic fallacy",
@@ -163,7 +163,7 @@
             "term": "Caesura",
             "definition": "A deliberate pause within a line of verse.",
             "example": "“To be, or not to be — that is the question.”",
-            "analysis": "A pause can emphasise a word or mark hesitation, reflection or a turn in thought. Explain what its placement does in this line."
+            "analysis": "A pause can emphasize a word or mark hesitation, reflection or a turn in thought. Explain what its placement does in this line."
           }
         ]
       },
@@ -204,25 +204,25 @@
             "term": "Tricolon (rule of three)",
             "definition": "A series of three parallel words, phrases, or clauses.",
             "example": "“government of the people, by the people, for the people.”",
-            "analysis": "Exploits the satisfying rhythm of threes to make a claim feel complete and quotable."
+            "analysis": "Three linked elements can build rhythm, emphasis or a sense of completion. Explain what the particular sequence adds, rather than assuming three items are always persuasive."
           },
           {
             "term": "Antithesis",
             "definition": "Placing contrasting ideas in parallel structure.",
             "example": "“Ask not what your country can do for you—ask what you can do for your country.”",
-            "analysis": "Sharpens a contrast and makes a point land through balanced opposition."
+            "analysis": "A balanced contrast can make a difference clear and memorable. Identify what is opposed and why that distinction matters."
           },
           {
             "term": "Rhetorical question",
             "definition": "A question posed for effect rather than for an answer.",
             "example": "“How long must we wait for change?”",
-            "analysis": "Guides the audience towards an answer the wording already suggests, while appearing to invite them to decide."
+            "analysis": "Guides the audience toward an answer the wording already suggests, while appearing to invite them to decide."
           },
           {
             "term": "Hyperbole",
             "definition": "Deliberate exaggeration for emphasis or effect.",
             "example": "“I’ve told you a million times.”",
-            "analysis": "Amplifies feeling or stakes—for emphasis, humour, or to expose intensity of attitude."
+            "analysis": "Amplifies feeling or stakes—for emphasis, humor, or to expose intensity of attitude."
           }
         ]
       },
@@ -239,11 +239,11 @@
             "term": "Irony",
             "definition": "A gap between what is said or expected and what is meant or occurs (verbal, dramatic, situational).",
             "example": "A fire station burning down (situational).",
-            "analysis": "Creates layered meaning, inviting the reader to perceive a discrepancy the surface conceals; central to satire."
+            "analysis": "Examine the gap between what is said or expected and what the text reveals. Explain what the gap asks readers to question."
           },
           {
             "term": "Satire",
-            "definition": "The use of irony, exaggeration, or ridicule to criticise.",
+            "definition": "The use of irony, exaggeration, or ridicule to criticize.",
             "example": "A mock ad selling “Outrage™, now in convenient daily doses.”",
             "analysis": "Exposes folly or vice while entertaining, prompting the audience to judge the target."
           },
@@ -303,7 +303,7 @@
             "term": "Context",
             "definition": "The circumstances surrounding a text’s production and reception (historical, cultural, biographical, situational).",
             "example": "Reading a wartime poster in light of 1940s rationing.",
-            "analysis": "Determines how meaning is constructed and received; the same text signifies differently across contexts—a core Lang & Lit concern."
+            "analysis": "The time, place, audience and circumstances can change how a text is understood. Use relevant evidence rather than treating background information as a substitute for reading."
           },
           {
             "term": "Intertextuality",
@@ -314,8 +314,8 @@
           {
             "term": "Bias",
             "definition": "A text’s slant or partiality toward a particular view, often through selection and framing.",
-            "example": "A report quoting only one side and labelling the other “so-called experts.”",
-            "analysis": "Shapes perception while presenting itself as neutral; a key target of critical reading."
+            "example": "A report quoting only one side and labeling the other “so-called experts.”",
+            "analysis": "Examine how selection, emphasis and assumptions favor a particular view. Bias can be explicit or can appear in an account presented as neutral."
           }
         ]
       },
@@ -324,15 +324,15 @@
         "entries": [
           {
             "term": "Salience",
-            "definition": "The visual prominence of an element in an image or layout (size, placement, colour, focus).",
-            "example": "A product lit and centred while the model is blurred behind it.",
-            "analysis": "Directs the viewer’s eye and signals what matters most, guiding interpretation of a visual text."
+            "definition": "The visual prominence of an element in an image or layout (size, placement, color, focus).",
+            "example": "A product lit and centered while the model is blurred behind it.",
+            "analysis": "Identify what stands out through size, contrast, placement or another choice. Explain why that detail matters; prominence does not guarantee a fixed order of attention."
           },
           {
             "term": "Gaze",
             "definition": "The direction and object of looking within an image, including whether a subject looks at the viewer.",
             "example": "A model staring directly out of an advertisement.",
-            "analysis": "Direct gaze addresses the viewer and may invite intimacy, challenge or pressure; averted gaze can position us as observers. Expression and context shape the relationship."
+            "analysis": "Direct gaze can invite contact, challenge or pressure; looking away can draw attention elsewhere or make the viewer an observer. Expression, setting and distance help determine the relationship."
           },
           {
             "term": "Anchorage",
@@ -360,31 +360,31 @@
             "term": "Framing",
             "definition": "What is included/excluded by the image's edges; also elements within the image that enclose the subject.",
             "example": null,
-            "analysis": "Ask why the creator chose these boundaries: what is cropped out, and why?"
+            "analysis": "Examine what the image includes and leaves outside its boundaries. Explain how the visible selection shapes the subject without inventing what lies beyond the frame."
           },
           {
             "term": "Rule of thirds",
             "definition": "Placing key elements along imaginary lines that divide the frame into thirds.",
             "example": null,
-            "analysis": "Consider how off-centre placement relates the subject to surrounding space; it may create balance, movement or tension."
+            "analysis": "Consider how off-center placement relates the subject to surrounding space; it may create balance, movement or tension."
           },
           {
             "term": "Leading lines",
             "definition": "Lines (roads, fences, gazes) that direct attention toward a focal point.",
             "example": null,
-            "analysis": "Trace where the lines take the eye and what the viewer is made to notice first."
+            "analysis": "Follow where the lines lead and what they connect or emphasize. They suggest a route for attention; viewers need not follow it in one fixed order."
           },
           {
             "term": "Negative space",
             "definition": "Empty or unoccupied area around the subject.",
             "example": null,
-            "analysis": "Discuss isolation, emphasis, simplicity, or a sense of absence or loss."
+            "analysis": "Consider what the empty space does beside the subject: it may emphasize, isolate, simplify or suggest absence. Choose the reading supported by this composition."
           },
           {
             "term": "Focal point",
             "definition": "The element that draws the eye first.",
             "example": null,
-            "analysis": "Identify what is prioritised and how (size, color, sharpness, placement)."
+            "analysis": "Identify what is prioritized and how (size, color, sharpness, placement)."
           },
           {
             "term": "Balance / symmetry",
@@ -425,7 +425,7 @@
             "term": "Establishing / long shot",
             "definition": "Subject seen from a distance, showing surroundings.",
             "example": null,
-            "analysis": "Emphasises environment and context over the individual."
+            "analysis": "Emphasizes environment and context over the individual."
           },
           {
             "term": "Medium shot",
@@ -443,7 +443,7 @@
             "term": "Extreme close-up",
             "definition": "A very tight detail (eyes, hands, texture).",
             "example": null,
-            "analysis": "Signals heightened significance or emotional pressure."
+            "analysis": "A tight view can emphasize a detail or make it feel intimate, intrusive or unfamiliar. Explain what the chosen detail contributes."
           },
           {
             "term": "Eye-level angle",
@@ -473,7 +473,7 @@
             "term": "Canted / Dutch angle",
             "definition": "Tilted, off-level framing.",
             "example": null,
-            "analysis": "Suggests instability, disorientation, or psychological unease."
+            "analysis": "A tilted frame often suggests instability or disorientation, but may also be playful or show movement. Connect the angle to the scene."
           },
           {
             "term": "Point of view (POV)",
@@ -490,31 +490,31 @@
             "term": "Palette",
             "definition": "The range of colors used.",
             "example": null,
-            "analysis": "Describe the palette (limited, bold, muted) and its effect on mood."
+            "analysis": "Describe the range of colors and connect it to the subject, wording and purpose. Green might suggest nature beside a forest or money beside banknotes; color alone does not establish either meaning."
           },
           {
             "term": "Hue / saturation",
             "definition": "Hue = the color itself; saturation = its intensity.",
             "example": null,
-            "analysis": "High saturation can suggest intensity; muted colour may suggest restraint, bleakness or nostalgia. Connect the palette to the subject and purpose."
+            "analysis": "High saturation can suggest intensity; muted color may suggest restraint, bleakness or nostalgia. Connect the palette to the subject and purpose."
           },
           {
             "term": "Warm vs. cool tones",
             "definition": "Warm = reds, oranges, yellows; cool = blues, greens.",
             "example": null,
-            "analysis": "Warm colours often suggest comfort or intensity; cool colours calm or distance. Cultural associations and surrounding details can alter these readings."
+            "analysis": "Warm colors often suggest comfort or intensity; cool colors calm or distance. Cultural associations and surrounding details can alter these readings."
           },
           {
             "term": "Contrast",
             "definition": "Degree of difference between light/dark or colors.",
             "example": null,
-            "analysis": "Strong contrast can emphasise edges or differences; low contrast can soften or obscure them. Explain what is clarified or concealed here."
+            "analysis": "Strong contrast can emphasize edges or differences; low contrast can soften or obscure them. Explain what is clarified or concealed here."
           },
           {
             "term": "High-key lighting",
             "definition": "Bright, even, low-shadow lighting.",
             "example": null,
-            "analysis": "Suggests openness, optimism, or artificial perfection (advertising)."
+            "analysis": "Bright, even lighting can suggest openness, cheerfulness or an idealized setting. The subject and context may make that brightness feel artificial or unsettling instead."
           },
           {
             "term": "Low-key lighting",
@@ -526,13 +526,13 @@
             "term": "Chiaroscuro",
             "definition": "Strong contrasts of light and shadow that give shapes a sense of depth, a technique also used in painting.",
             "example": null,
-            "analysis": "Lends drama and sculptural depth; often signals seriousness."
+            "analysis": "Strong light-dark contrasts can give forms depth or emphasize dramatic differences. Explain what is revealed and what remains in shadow."
           },
           {
             "term": "Silhouette / backlighting",
             "definition": "Subject dark against a lit background.",
             "example": null,
-            "analysis": "Anonymises or universalises a figure; adds drama or mystery."
+            "analysis": "A silhouette can hide identity or emphasize a recognizable shape. Consider whether that concealment suggests mystery, anonymity or something else in context."
           },
           {
             "term": "Monochrome",
@@ -542,7 +542,7 @@
           },
           {
             "term": "Tone and mood",
-            "definition": "Tone is the attitude conveyed; mood is the atmosphere evoked. Lighting and colour can contribute to either.",
+            "definition": "Tone is the attitude conveyed; mood is the atmosphere evoked. Lighting and color can contribute to either.",
             "example": null,
             "analysis": "Link color and lighting choices to the feeling created for the viewer."
           }
@@ -573,7 +573,7 @@
             "term": "Texture",
             "definition": "The implied surface quality (rough, smooth, soft).",
             "example": null,
-            "analysis": "Texture makes an image feel tactile, real, or gritty."
+            "analysis": "Surface detail can suggest touch, age or material qualities. Explain what that impression adds; roughness does not automatically make an image more truthful."
           },
           {
             "term": "Scale / proportion",
@@ -602,13 +602,13 @@
             "term": "Layout",
             "definition": "How text and image are arranged together on the page or screen.",
             "example": null,
-            "analysis": "Analyse what sits where. Position signals importance and shapes reading order."
+            "analysis": "Analyze what sits where. Position signals importance and shapes reading order."
           },
           {
             "term": "Salience",
             "definition": "What stands out most in a text–image composition.",
             "example": null,
-            "analysis": "Identify the most salient element and the techniques that make it so."
+            "analysis": "Identify what stands out through size, contrast, placement or another choice. Explain why that detail matters; prominence does not guarantee a fixed order of attention."
           },
           {
             "term": "Reading path",
@@ -620,13 +620,13 @@
             "term": "Caption",
             "definition": "Text that accompanies and comments on an image.",
             "example": null,
-            "analysis": "Ask how the caption fixes, narrows, or changes the image's meaning."
+            "analysis": "Ask how the caption narrows, extends or changes the image’s possible meanings. It can guide interpretation without removing every alternative."
           },
           {
             "term": "Logo / slogan",
             "definition": "Brand mark and catchphrase.",
             "example": null,
-            "analysis": "Analyse how they condense identity and values, triggering recognition or trust."
+            "analysis": "Explain how the design or wording presents an identity or value. Recognition may encourage trust, skepticism or another response depending on the audience and context."
           }
         ]
       },
@@ -649,13 +649,13 @@
             "term": "Signifier / signified",
             "definition": "The form (signifier) and the concept it triggers (signified).",
             "example": null,
-            "analysis": "Break an element into what you see and what it stands for."
+            "analysis": "Distinguish the visible or audible sign from the idea it suggests. Explain how context supports that association rather than assigning one permanent meaning."
           },
           {
             "term": "Icon / index / symbol (Peirce)",
             "definition": "An icon resembles what it represents; an index has a direct connection to it, as smoke does to fire; a symbol depends on a learned convention, as a flag does.",
             "example": null,
-            "analysis": "Classify key signs to explain HOW they communicate."
+            "analysis": "Ask whether a sign communicates through resemblance, a direct connection or a learned convention. Use the distinction only when it helps explain the meaning."
           },
           {
             "term": "Visual metaphor",
@@ -667,13 +667,13 @@
             "term": "Symbolism",
             "definition": "An element that stands for an abstract idea.",
             "example": null,
-            "analysis": "Identify conventional symbols (dove, flag, chains) and culture-specific ones."
+            "analysis": "Look for details that support a meaning beyond the literal object. A familiar association is a starting point, not a fixed answer; context can change it."
           },
           {
             "term": "Intertextuality",
             "definition": "Reference to or borrowing from other texts or images.",
             "example": null,
-            "analysis": "Name the reference (parody, homage, allusion) and what it adds for viewers who recognise it."
+            "analysis": "Name the reference (parody, homage, allusion) and what it adds for viewers who recognize it."
           },
           {
             "term": "Modality",
@@ -685,7 +685,7 @@
             "term": "Gaze",
             "definition": "Where figures look: at the viewer (direct / demand) or away (offer).",
             "example": null,
-            "analysis": "A direct gaze addresses and involves us; an averted gaze lets us observe unseen."
+            "analysis": "Direct gaze can invite contact, challenge or pressure; looking away can draw attention elsewhere or make the viewer an observer. Expression, setting and distance help determine the relationship."
           },
           {
             "term": "Body language / gesture / pose",
@@ -732,7 +732,7 @@
             "term": "Representation",
             "definition": "How people, groups, or ideas are depicted.",
             "example": null,
-            "analysis": "Ask who is shown, how, and whose viewpoint is centred or excluded."
+            "analysis": "Ask who is shown, how, and whose viewpoint is centered or excluded."
           },
           {
             "term": "Stereotype / archetype",

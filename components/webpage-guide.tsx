@@ -10,7 +10,7 @@ import { webpageExample as example } from "@/lib/webpage-example";
 import styles from "./elephant-appeal.module.css";
 const reading: Record<string, {label:string;phase:string;view:number}> = example.sections;
 const fields = [
- {key:"audience",label:"The page’s invitation",hint:"How does the page move from an imagined experience towards a practical decision?"},
+ {key:"audience",label:"The page’s invitation",hint:"How does the page move from an imagined experience toward a practical decision?"},
  {key:"evidence",label:"Connected words and images",hint:"Connect a precise phrase with a photograph, layout choice or invitation to act."},
  {key:"analysis",label:"Your analytical paragraph",hint:"Develop one claim about how words and images promote the experience."},
 ] as const;
@@ -59,7 +59,7 @@ export default function WebpageGuide({ body, href }: { body: string; href: strin
   return <div className="advertisement-guide">
     <p className="advertisement-question"><span className="mono">GUIDING QUESTION / SUPPLIED PAPER</span>{example.question}</p>
     <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
-      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase}</span><ol>
+      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
           <a href={`${href}?view=example#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -75,7 +75,7 @@ export default function WebpageGuide({ body, href }: { body: string; href: strin
         <div className={styles.screenSource}><SourceFigure viewIndex={viewIndex} /></div>
         <div className={styles.printSource}><SourceFigure viewIndex={0} /><SourceFigure viewIndex={1} /></div>
         <p className="advertisement-source-status" role="status">Showing: <strong>{example.views[viewIndex].label}</strong>. Change views to compare without leaving this section.</p>
-        <details className="advertisement-transcript"><summary>Read the webpage’s wording</summary><p className="hint">Source wording from the supplied exam version. Navigation and button labels are included; typography and line breaks are normalised. Images preserve layout and emphasis. Prices are historical, not current booking information.</p><Markdown>{example.transcript}</Markdown></details>
+        <details className="advertisement-transcript"><summary>Read the webpage’s wording</summary><p className="hint">Source wording from the supplied exam version. Navigation and button labels are included; typography and line breaks are normalized. Images preserve layout and emphasis. Prices are historical, not current booking information.</p><Markdown>{example.transcript}</Markdown></details>
         <details className="advertisement-transcript"><summary>Image descriptions and source notes</summary><p>{example.views[0].alt}</p><p>{example.views[1].alt}</p><p>The source pairs daytime forest scenes with a night-time lighting display. Headings and buttons stand out against dark backgrounds; an award badge and a separate price panel support the invitation to visit. The photographs show people participating in the experience.</p><p>{example.credit}</p><p><a href={example.url} target="_blank" rel="noopener noreferrer">Visit the current Redwoods Treewalk website ↗</a></p></details>
       </aside>
       <div className="advertisement-analysis">

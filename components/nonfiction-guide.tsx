@@ -48,7 +48,7 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
   return <div className="advertisement-guide">
     <p className="advertisement-question"><span className="mono">GUIDING QUESTION / SUPPLIED PAPER</span>{example.question}</p>
     <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
-      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase}</span><ol>
+      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
           <a href={`${href}?view=example#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -72,7 +72,7 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
           </section>)}
         </div>
         <p className={styles.context}><strong>Source footnotes:</strong> winily: she has had wine to drink; surfeit: excess.</p>
-        <p className={styles.credit}>{example.credit} Reading groups and paragraph numbers are editorial aids. Typography is normalised; the original exam page preserves the layout and footnote markers.</p>
+        <p className={styles.credit}>{example.credit} Reading groups and paragraph numbers are editorial aids. Typography is normalized; the original exam page preserves the layout and footnote markers.</p>
       </aside>
       <div className="advertisement-analysis">
         <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { routeRef.current?.focus({ preventScroll: true }); routeRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>

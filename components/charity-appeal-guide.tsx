@@ -46,7 +46,7 @@ export default function CharityAppealGuide({ body, href }: { body: string; href:
   return <div className="advertisement-guide">
     <p className="advertisement-question"><span className="mono">PRACTICE GUIDING QUESTION</span>{example.question}</p>
     <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
-      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase}</span><ol>
+      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
           <a href={`${href}?view=example&example=wwf#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -67,7 +67,7 @@ export default function CharityAppealGuide({ body, href }: { body: string; href:
           <p className="hint">These are teaching notes, not WWF’s wording. The walkthrough refers to the page checked on {example.checked}; the live page may change.</p>
         </div>
         <details className="advertisement-transcript"><summary>Practice guiding question</summary><p>{example.question}</p></details>
-        <details className="advertisement-transcript"><summary>About the source excerpt</summary><p>The image preserves the opening photograph and headline at their original proportions. It omits the surrounding navigation, payment panel and body copy. Open the complete source to analyse those parts in context.</p></details>
+        <details className="advertisement-transcript"><summary>About the source excerpt</summary><p>The image preserves the opening photograph and headline at their original proportions. It omits the surrounding navigation, payment panel and body copy. Open the complete source to analyze those parts in context.</p></details>
       </aside>
       <div className="advertisement-analysis">
         <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { routeRef.current?.focus({ preventScroll: true }); routeRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>

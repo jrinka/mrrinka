@@ -15,7 +15,7 @@ export const proseExample: LiteraryReading = {
       "url": "/examples/moon-tiger-page-3.png"
     }
   ],
-  "credit": "Penelope Lively, Moon Tiger. Extract and question from the supplied teaching paper, printed pages 2–3; the exam session is not identified in this copy. Rights remain with their respective holders. Reading-group headings are editorial. Typography is normalised; the original pages preserve layout and footnote markers.",
+  "credit": "Penelope Lively, Moon Tiger. Extract and question from the supplied teaching paper, printed pages 2–3; the exam session is not identified in this copy. Rights remain with their respective holders. Reading-group headings are editorial. Typography is normalized; the original pages preserve layout and footnote markers.",
   "footnotes": "ammonite: a type of fossil (the hardened remains of a prehistoric animal or plant); Asteroceras: a type of fossil.",
   "passages": [
     {
@@ -94,7 +94,7 @@ export const proseExample: LiteraryReading = {
       "passage": 2
     },
     "practice-and-transfer": {
-      "label": "Practise & transfer",
+      "label": "Practice & transfer",
       "phase": "Write",
       "passage": null
     }
@@ -118,9 +118,9 @@ export const proseExample: LiteraryReading = {
   ],
   "checks": [
     "Have I distinguished narrator from focal character?",
-    "Have I connected perspectives rather than summarised them separately?",
+    "Have I connected perspectives rather than summarized them separately?",
     "Have I separated spoken claims from narrated actions?",
-    "Does my judgement account for a complicating detail?"
+    "Does my judgment account for a complicating detail?"
   ],
   "filename": "moon-tiger-notes"
 };

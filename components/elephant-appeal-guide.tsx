@@ -59,7 +59,7 @@ export default function ElephantAppealGuide({ body, href }: { body: string; href
   return <div className="advertisement-guide">
     <p className="advertisement-question"><span className="mono">GUIDING QUESTION / SUPPLIED PAPER</span>{example.question}</p>
     <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
-      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase}</span><ol>
+      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
           <a href={`${href}?view=example#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -75,7 +75,7 @@ export default function ElephantAppealGuide({ body, href }: { body: string; href
         <div className={styles.screenSource}><SourceFigure viewIndex={viewIndex} /></div>
         <div className={styles.printSource}><SourceFigure viewIndex={0} /><SourceFigure viewIndex={1} /></div>
         <p className="advertisement-source-status" role="status">Showing: <strong>{example.views[viewIndex].label}</strong>. Change views to compare without leaving this section.</p>
-        <details className="advertisement-transcript"><summary>Read the appeal’s wording</summary><p className="hint">Source wording with editorial headings. Typography and line breaks are normalised; the source images preserve emphasis, layout and badges.</p><Markdown>{example.transcript}</Markdown></details>
+        <details className="advertisement-transcript"><summary>Read the appeal’s wording</summary><p className="hint">Source wording with editorial headings. Typography and line breaks are normalized; the source images preserve emphasis, layout and badges.</p><Markdown>{example.transcript}</Markdown></details>
         <details className="advertisement-transcript"><summary>Image descriptions and source notes</summary><p>{example.views[0].alt}</p><p>{example.views[1].alt}</p><p>The opening photograph shows Tange in a green, wooded setting. A feeding close-up and named portraits of Billie, Minnie and Debbie show residents in the Sanctuary. Beside the CEO’s signature are Global Federation of Animal Sanctuaries accreditation and Association of Zoos and Aquariums badges. Nine truck icons represent nine truckloads; the other food illustrations identify categories rather than a one-to-one scale.</p><p>{example.credit}</p></details>
       </aside>
       <div className="advertisement-analysis">

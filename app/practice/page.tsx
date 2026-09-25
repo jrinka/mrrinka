@@ -29,7 +29,7 @@ export default function PracticePage() {
       <Link className="practice-feature" href="/practice/passages">
         <span className="practice-feature-index mono">AI FEEDBACK</span>
         <span className="practice-feature-icon"><Sparkles size={22} /></span>
-        <span><strong>Passage Practice</strong><small>Literature Paper 1 skills: read a supplied extract, practise analysis, and request feedback—or download it to work offline.</small></span>
+        <span><strong>Passage Practice</strong><small>Literature Paper 1 skills: read a supplied extract, practice analysis, and request feedback—or download it to work offline.</small></span>
         <ArrowUpRight size={20} />
       </Link>
       <Link className="practice-feature" href="/practice/what-changes"><span className="practice-feature-index mono">COMPARE &amp; INTERPRET</span><span><strong>What changes?</strong><small>Compare words, line breaks and visual choices. Explain the difference, reveal a possible reading, and try another version.</small></span><ArrowUpRight size={20} aria-hidden="true" /></Link>

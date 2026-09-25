@@ -38,7 +38,7 @@ export default function ResourcesPage() {
       ...[...shared.values()].filter(({item})=>/TPCASTT|SOAPSTone/i.test(item.title)).map(({item,courseId})=>({href:`/courses/${courseId}/resources/${item.id}`,title:item.title,summary:item.summary})),
     ]},
     {title:"Building a response",items:[
-      {href:"/resources/unpacking-questions",title:"Unpacking Paper 1 & Paper 2 questions",summary:"Worked breakdowns and original comparison prompts to practise with."},
+      {href:"/resources/unpacking-questions",title:"Unpacking Paper 1 & Paper 2 questions",summary:"Worked breakdowns and original comparison prompts to practice with."},
       {href:"/resources/observation-to-analysis",title:"From observation to analysis",summary:"Evidence, meaning and an interactive sentence workshop."},
       {href:"/resources/paper-1-introductions",title:"Paper 1: Introductions & thesis statements",summary:"Step-by-step guidance with literary and non-literary worked examples."},
       {href:"/resources/hle-inquiries",title:"HLE: how an inquiry develops",summary:"Worked examples with Lady Susan and Timon of Athens."},

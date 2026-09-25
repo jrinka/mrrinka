@@ -48,7 +48,7 @@ export default function DramaGuide({ body, href }: { body: string; href: string 
   return <div className="advertisement-guide">
     <p className="advertisement-question"><span className="mono">GUIDING QUESTION / SUPPLIED PAPER</span>{example.question}</p>
     <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
-      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase}</span><ol>
+      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
           <a href={`${href}?view=example#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -71,7 +71,7 @@ export default function DramaGuide({ body, href }: { body: string; href: string 
             {passage.lines.map((line, i) => line.speaker ? <p className={styles.speech} key={i}><strong>{line.speaker}</strong>{line.text}</p> : <p className={styles.direction} key={i}><em>{line.text}</em></p>)}
           </section>)}
         </div>
-        <p className={styles.credit}>{example.credit} Reading-group headings and the repeated BOB label after the silence are editorial aids. Typography is normalised; the original pages preserve the supplied layout.</p>
+        <p className={styles.credit}>{example.credit} Reading-group headings and the repeated BOB label after the silence are editorial aids. Typography is normalized; the original pages preserve the supplied layout.</p>
       </aside>
       <div className="advertisement-analysis">
         <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { routeRef.current?.focus({ preventScroll: true }); routeRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>
@@ -102,6 +102,6 @@ function DramaNotes() {
     {fields.map(field => <label className="field" key={field.key} htmlFor={`drama-${field.key}`}>{field.label}<span className="hint" id={`drama-${field.key}-hint`}>{field.hint}</span><textarea id={`drama-${field.key}`} aria-describedby={`drama-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}
     <p className="hint">Your notes stay here while this page is open. Export before leaving. This exercise does not send writing to AI.</p>
     <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`Drama analysis notes\n\nSource: ${example.title}\nhttps://mrrinka.com${example.pdf}\n\nQuestion from the supplied paper: ${example.question}\n\n${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, "drama-analysis-notes.txt", format)}>Export my notes</button></div>
-    <details className="infographic-self-check"><summary>Review your paragraph</summary><ul><li>Have I analysed a speech in relation to its reply?</li><li>Have I explained how specific words develop emotional tension?</li><li>Have I distinguished a written direction from a possible performance choice?</li><li>Does my reading account for the unresolved ending?</li></ul></details>
+    <details className="infographic-self-check"><summary>Review your paragraph</summary><ul><li>Have I analyzed a speech in relation to its reply?</li><li>Have I explained how specific words develop emotional tension?</li><li>Have I distinguished a written direction from a possible performance choice?</li><li>Does my reading account for the unresolved ending?</li></ul></details>
   </section>;
 }

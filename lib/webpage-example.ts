@@ -92,7 +92,7 @@ export const webpageExample = {
       "view": 4
     },
     "practice-and-transfer": {
-      "label": "Practise & transfer",
+      "label": "Practice & transfer",
       "phase": "Write",
       "view": 5
     }

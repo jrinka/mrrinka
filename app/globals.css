@@ -2914,3 +2914,6 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
   .advertisement-crop img { width:100% !important; left:0 !important; top:0 !important; }
   .advertisement-reading-section[hidden] { display:block; }
 }
+
+/* Keep source-link labels together at laptop and tablet widths. */
+.text-type-example-head a { display: inline-block; }

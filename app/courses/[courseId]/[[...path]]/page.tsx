@@ -93,7 +93,7 @@ function AssessmentIndex({
                   <h2>{assessment.title}</h2>
                   <p>{assessment.summary}</p>
                   <div className="assessment-stages mono">
-                    <span>ORIENT</span><span>BUILD</span><span>EXAMINE</span><span>PRACTISE</span>
+                    <span>ORIENT</span><span>BUILD</span><span>EXAMINE</span><span>PRACTICE</span>
                   </div>
                 </div>
                 <ArrowUpRight size={20} aria-hidden="true" />

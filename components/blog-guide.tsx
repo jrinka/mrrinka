@@ -59,7 +59,7 @@ export default function BlogGuide({ body, href }: { body: string; href: string }
   return <div className="advertisement-guide">
     <p className="advertisement-question"><span className="mono">GUIDING QUESTION / SUPPLIED PAPER</span>{example.question}</p>
     <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
-      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase}</span><ol>
+      {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
           <a href={`${href}?view=example#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -75,8 +75,8 @@ export default function BlogGuide({ body, href }: { body: string; href: string }
         <div className={styles.screenSource}><SourceFigure viewIndex={viewIndex} /></div>
         <div className={styles.printSource}><SourceFigure viewIndex={0} /><SourceFigure viewIndex={1} /></div>
         <p className="advertisement-source-status" role="status">Showing: <strong>{example.views[viewIndex].label}</strong>. Change views to compare without leaving this section.</p>
-        <details className="advertisement-transcript"><summary>Read the blog’s wording</summary><p className="hint">Source wording from the supplied exam version. Illustration labels are placed after the related paragraphs; typography and emphasis are normalised. Images preserve the original layout. Supplied explanations are summarised separately.</p><Markdown>{example.transcript}</Markdown></details>
-        <details className="advertisement-transcript"><summary>Image descriptions and source notes</summary><p>{example.views[0].alt}</p><p>{example.views[1].alt}</p><p>Colourful cartoon bees give the argument a repeated visual comparison. In the third illustration, mathematical notation and a descending curve present an apparent relationship between divided effort and achievement. The second page uses bold numbered imperatives. Its final point allows compatible goals to support each other.</p><p>{example.credit}</p><p><a href={example.url} target="_blank" rel="noopener noreferrer">Read the current post on the author’s website ↗</a></p></details>
+        <details className="advertisement-transcript"><summary>Read the blog’s wording</summary><p className="hint">Source wording from the supplied exam version. Illustration labels are placed after the related paragraphs; typography and emphasis are normalized. Images preserve the original layout. Supplied explanations are summarized separately.</p><Markdown>{example.transcript}</Markdown></details>
+        <details className="advertisement-transcript"><summary>Image descriptions and source notes</summary><p>{example.views[0].alt}</p><p>{example.views[1].alt}</p><p>Colorful cartoon bees give the argument a repeated visual comparison. In the third illustration, mathematical notation and a descending curve present an apparent relationship between divided effort and achievement. The second page uses bold numbered imperatives. Its final point allows compatible goals to support each other.</p><p>{example.credit}</p><p><a href={example.url} target="_blank" rel="noopener noreferrer">Read the current post on the author’s website ↗</a></p></details>
       </aside>
       <div className="advertisement-analysis">
         <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { routeRef.current?.focus({ preventScroll: true }); routeRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>

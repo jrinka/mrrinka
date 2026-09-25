@@ -26,10 +26,10 @@ export const nonfictionReadingSections: Record<string,{label:string;phase:string
  "the-private-story-of-a-victim":{label:"The private ‘victim’",phase:"Analyse",passage:1},
  "politeness-and-the-sacrificial-fantasy":{label:"Politeness & fantasy",phase:"Analyse",passage:2},
  "build-an-analytical-response":{label:"Build a response",phase:"Write",passage:2},
- "practice-and-transfer":{label:"Practise & transfer",phase:"Write",passage:null},
+ "practice-and-transfer":{label:"Practice & transfer",phase:"Write",passage:null},
 };
 export const nonfictionNoteFields = [
  {key:"contrast",label:"The contrast and what it reveals",hint:"How do the two figures experience the same encounter differently?"},
- {key:"evidence",label:"Connected evidence",hint:"Choose precise details that connect the waitress’s behaviour with the diner’s response."},
+ {key:"evidence",label:"Connected evidence",hint:"Choose precise details that connect the waitress’s behavior with the diner’s response."},
  {key:"analysis",label:"Your analytical paragraph",hint:"Explain the contrast and its effect, including a detail that complicates your reading."},
 ] as const;
