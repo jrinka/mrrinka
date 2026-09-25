@@ -1,6 +1,7 @@
 import type { CourseId } from "./schema";
 
 export const textTypeGuideIds = {
+  webpage: "81d752ad-9f14-43a5-a7b5-34e14a7a7803",
   article: "b773dc6e-4794-4c80-a99f-8cdd183b20f4",
   speech: "501e5fac-47a8-4c41-a081-ac57220685c2",
   opinion: "9860d817-e8b4-4a15-b499-b0df6b780f28",
@@ -17,12 +18,16 @@ export const textTypeGuideIds = {
 
 type TextTypeExample = {
   courseId: CourseId;
-  kind: "article" | "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
+  kind: "webpage" | "article" | "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
   title: string;
   description: string;
 };
 
 const examples: Record<string, TextTypeExample> = {
+  [textTypeGuideIds.webpage]: {
+    courseId: "language-literature", kind: "webpage", title: "Redwoods Treewalk — Rotorua",
+    description: "Connect photographs, language of wonder, practical details and visible choices to see how a webpage promotes an experience.",
+  },
   [textTypeGuideIds.article]: {
     courseId: "language-literature", kind: "article", title: "Lensa AI and artists’ work — Brendan Paul Murphy",
     description: "Explore how familiar images make a technical dispute approachable while preserving concern about its consequences.",
