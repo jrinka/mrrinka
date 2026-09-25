@@ -10,7 +10,7 @@ export default function ReferencePlate({ kind }: { kind: keyof typeof plates }) 
   const plate = plates[kind];
   const credit = `${plate.title} Wellcome Collection. Public Domain Mark.`;
   return <figure className={`guide-plate reference-plate reference-plate-${kind}`}>
-    <Image src={plate.src} alt={plate.alt} fill sizes={kind !== "calendar" ? "(max-width: 700px) 90vw, (max-width: 1200px) 35vw, 420px" : "(max-width: 700px) 180px, 250px"} />
+    <Image src={plate.src} alt={plate.alt} fill sizes={kind !== "calendar" ? "(max-width: 700px) 90vw, (max-width: 1200px) 35vw, 420px" : "(max-width: 700px) 100vw, (max-width: 1200px) 40vw, 600px"} />
     <span className="guide-plate-keyword mono">{plate.keyword}</span>
     <figcaption><a href={`https://wellcomecollection.org/works/${plate.id}`} title={credit} aria-label={credit}>WELLCOME</a></figcaption>
   </figure>;
