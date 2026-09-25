@@ -4,6 +4,10 @@
 
 Continue Mr Rinka's site in this repository. Read AGENTS.md and docs/TEXT-TYPE-SOURCES.md. Pull current main before editing course JSON; retain stable IDs and teacher edits. Current branch github-main pushes to origin main; GitHub integration deploys to Vercel. Live site https://mrrinka.com. Check build and actual browser flows before pushing; confirm Vercel status afterward.
 
+## Export formats (25 September 2026)
+
+Student feedback prompted PDF and Word (.docx) options everywhere an export-format choice exists, including the standalone downloadable TPCASTT and SOAPSTone grids. Plain text and Markdown remain available. All generation runs locally in the browser; no export sends student writing to a server. Original export content and attribution are retained. See docs/EXPORTS.md for implementation, offline build instructions and verification. Older TXT/MD-only descriptions below are historical.
+
 ## Latest priority and language pass (25 September 2026)
 
 The user moved the language and usability pass ahead of further contrasting examples. That pass is now complete locally, with publication checks to follow. Original teaching prose and interface labels use US spelling; source quotations, transcripts, original titles and proper names remain intact. Simplified abstract or ornate explanations in course guidance and models; revised reference entries where a possible effect sounded automatic. Color, gaze, framing and other choices must be interpreted in context. Common associations remain useful, but are not fixed answers. A compact note on each worked-example view identifies it as one supported reading, allowing alternatives that explain the evidence and address complications.

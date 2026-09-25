@@ -1,5 +1,5 @@
 "use client";
-import type {ExportFormat} from "@/lib/practice-record";
+import {exportFormats, type ExportFormat} from "@/lib/practice-record";
 export default function ExportFormatSelect({value,onChange}:{value:ExportFormat;onChange:(value:ExportFormat)=>void}){
- return <label className="export-format">Export format<select value={value} onChange={e=>onChange(e.target.value as ExportFormat)}><option value="txt">Plain text (.txt) — recommended</option><option value="md">Markdown (.md) — for Markdown apps</option></select></label>;
+ return <label className="export-format">Export format<select value={value} onChange={e=>onChange(e.target.value as ExportFormat)}>{exportFormats.map(format=><option key={format.value} value={format.value}>{format.label}</option>)}</select></label>;
 }

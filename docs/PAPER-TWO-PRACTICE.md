@@ -14,7 +14,7 @@ The activity lives under Practice in both existing Paper 2 course pages; Literat
 
 State is kept per question for the current page visit. New questions inherit the current pair of work titles but start fresh evidence/thesis fields. Returning to a previously drawn question restores its own pair and draft. Collapsing the assessment section does not unmount the activity. Refresh or navigation away ends the visit; the UI instructs students to export first. No login, local-storage persistence, AI service, or server submission was added.
 
-TXT/MD exports include all nonempty question records, source labels, both works, evidence, initial thesis and revision. Original question and metadata remain attached to each record. The independent Unpack the question exercise and the comparison refinery keep their original classroom prompts; they are not relabeled as past exam questions.
+PDF, DOCX, TXT and Markdown exports include all nonempty question records, source labels, both works, evidence, initial thesis and revision. Original question and metadata remain attached to each record. The independent Unpack the question exercise and the comparison refinery keep their original classroom prompts; they are not relabeled as past exam questions.
 
 ## Teaching
 
