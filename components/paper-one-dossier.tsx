@@ -6,6 +6,8 @@ import {LiteratureCompanion,LiteraturePractice} from "./literature-paper-one";
 import RefineryLinks from "./refinery-links";
 import type { RefineryKind } from "@/lib/refineries";
 import Markdown from "./markdown";
+import dynamic from "next/dynamic";
+const PaperTwoPractice = dynamic(() => import("./paper-two-practice"));
 
 const steps = [
   { title: "Orient", text: "This is a CDC public-health advertisement addressing people who smoke. The direct address invites the reader to imagine sharing Becky’s situation. The purpose is to encourage quitting, with a free telephone service offered as the next action.", evidence: "Start with the campaign badge, the second-person headline, and the contact details. These establish speaker, audience, and purpose without inventing a publication context." },
@@ -16,7 +18,7 @@ const steps = [
 ];
 const source = "https://www.cdc.gov/tobacco/campaign/tips/resources/ads/pdf-print-ads/beckys-tip-print-ad-7x10.pdf";
 
-export default function PaperOneDossier({ body, workedExample = true, literatureExample = false, refinery }: { body: string; workedExample?: boolean; literatureExample?:boolean; refinery?:RefineryKind }) {
+export default function PaperOneDossier({ body, workedExample = true, literatureExample = false, refinery, paperTwo = false }: { body: string; workedExample?: boolean; literatureExample?:boolean; refinery?:RefineryKind; paperTwo?:boolean }) {
   const sections = body.split(/^## /m).filter(Boolean).map((part) => {
     const [title, ...text] = part.split("\n");
     return { title, id: title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, ""), text: text.join("\n") };
@@ -53,7 +55,8 @@ export default function PaperOneDossier({ body, workedExample = true, literature
               {(workedExample || literatureExample) && <a className="p1-companion-jump" href="#worked-example" onClick={() => setActive(section.id)}>See this in the {literatureExample ? "poem" : "advertisement"} ↓</a>}
               <Markdown>{section.text}</Markdown>
               {section.id === "practice" && literatureExample && <LiteraturePractice/>}
-              {section.id === "practice" && refinery && !literatureExample && <RefineryLinks kind={refinery} />}
+              {section.id === "practice" && paperTwo && <PaperTwoPractice/>}
+              {section.id === "practice" && refinery && !literatureExample && !paperTwo && <RefineryLinks kind={refinery} />}
             </div>
           </section>
         ))}

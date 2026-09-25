@@ -12,9 +12,15 @@ Preserved stable course IDs and existing section hashes after US spelling change
 
 Next content options remain a sequential comic, North and South alongside Moon Tiger, and a contrasting poem, selected from the supplied bank. Do not treat older pending-language-pass notes below as the current queue.
 
-### Paper 2 practice idea — queued, not built
+### Paper 2 question-to-thesis practice (25 September 2026)
 
-The user reports that the same past-paper folder also contains a catalogue of all past Paper 2 questions. Review that bank before implementation. Proposed introductory activity: show a random supplied question, let students choose two works they have read, and ask them to craft a comparative thesis responding to that question. Keep possible responses open to alternatives supported by the works. This turn records the idea; it does not implement the activity or verify the bank's completeness.
+Built into the Practice accordion in both Paper 2 course guides, using the shared assessment body and a dynamically loaded practice component. Language & Literature ID `328b3ae8-3fe6-48f0-a217-2aceb6b390fc`; Literature ID `aa5f3d25-5253-4cce-b665-95f658637753`; `#practice` opens the activity. The Method section links directly to it. Existing original prompts in the separate Unpack the question resource and comparison workshop remain distinctly labeled.
+
+Students draw a supplied exam question, choose two works, note relevant evidence and authorial choices side by side, write a comparative thesis, and optionally revise after a self-check. A question reminder sits beside the thesis task. There is no generated thesis, fixed response formula or automatic marking. The chosen pair carries into a new question; every question retains its own notes. A compact selector returns to previously drawn questions. TXT/MD exports include all planning, question wording, source attribution, initial thesis and revision. Writing stays in page memory: export before leaving or refreshing. Collapsing the Practice accordion preserves drafts.
+
+The supplied catalogue contains 510 rows (May 2010–May 2025). Four donated November 2023 entries duplicate the TZ2 paper; the published bank has 506 distinct questions with all 510 source references retained. Default: 44 recent questions (2023–2025). Earlier questions are divided into general (126), drama (84), poetry (84), prose fiction (84), and prose non-fiction (84), with original genre limits retained. Earlier Literature genre groups were recovered from the companion text files, not inferred from question numbers: the pre-2013 numbering differs. The workbook's promised Section column is absent. Only whitespace was standardized; duplicate detection also normalizes quotation-mark style, preferring the combined-course record. Source details: docs/PAPER-TWO-PRACTICE.md.
+
+Validation: production build, TypeScript and 73 tests passed; all 510 source rows matched question text and attribution. Browser checks cover both course entry points, Method link and direct #practice reload, drawing and bank selection, per-question draft retention, carried work titles, thesis revision, collapse/reopen, TXT/MD exports, 1280/1512/1024px layouts and narrow fallback, dark mode, refresh behavior and Paper 1 regression. Sampling exhausts a bank before repeating and retains draw history when switching banks. No student writing is sent to a server.
 
 ## Current agreed plan (25 September 2026)
 

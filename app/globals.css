@@ -2917,3 +2917,31 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 
 /* Keep source-link labels together at laptop and tablet widths. */
 .text-type-example-head a { display: inline-block; }
+
+/* Paper 2: keep the two works side by side on school laptops. */
+.paper-two-practice { margin:24px 0 4px; padding:24px; border:1px solid var(--line); background:var(--paper); }
+.paper-two-practice h3 { font-size:1.65rem; margin:10px 0; }
+.paper-two-practice h4 { font-size:1.1rem; margin:0 0 12px; }
+.paper-two-practice p { max-width:75ch; }
+.p2-question-controls { display:flex; align-items:end; gap:16px; margin-top:22px; }
+.p2-question-controls .field { flex:1; margin:0; }
+.paper-two-practice select,.paper-two-practice input,.paper-two-practice textarea { width:100%; min-width:0; box-sizing:border-box; font:inherit; color:var(--ink); background:var(--white); border:1px solid var(--line); padding:12px; }
+.paper-two-practice textarea { resize:vertical; line-height:1.55; }
+.p2-question-controls button { flex-shrink:0; min-height:46px; }
+.p2-return { margin-top:20px; }
+.p2-question { border-left:4px solid var(--ink); padding:18px 22px; margin:24px 0; background:var(--white); scroll-margin-top:24px; }
+.p2-question .mono { font-size:.72rem; line-height:1.65; }
+.p2-question blockquote { font-size:1.23rem; line-height:1.6; margin:12px 0 0; padding:0; border:0; }
+.p2-draft > section { border-top:1px solid var(--line); padding-top:22px; margin-top:24px; }
+.p2-work-pair { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px; }
+.p2-work-pair fieldset { min-width:0; margin:0; padding:14px; border:1px solid var(--line); }
+.p2-work-pair legend { font-weight:700; padding:0 6px; }
+.p2-question-reminder { margin:12px 0 20px; }
+.p2-self-check { padding:15px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:18px 0; }
+.paper-two-practice summary { cursor:pointer; font-weight:600; }
+.p2-export { display:flex; gap:16px; align-items:end; margin-top:24px; }
+.p2-export .export-format { flex:1; min-width:0; margin:0; }
+.p2-export button { min-height:46px; }
+.p2-bank-note { font-size:.85rem; border-top:1px solid var(--line); padding-top:16px; margin-top:20px; }
+@media(max-width:700px) { .paper-two-practice { padding:16px; } .p2-question-controls,.p2-export { flex-direction:column; align-items:stretch; } .p2-work-pair { grid-template-columns:1fr; } }
+@media print { .p2-question-controls,.p2-return,.p2-export,.p2-bank-note { display:none; } .paper-two-practice { border:0; padding:0; } .p2-work-pair { grid-template-columns:1fr 1fr; } }
