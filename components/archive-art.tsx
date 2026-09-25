@@ -165,7 +165,7 @@ function Credit({ plate }: { plate: Plate }) {
       <span className="credit-license">{license}</span>
       <span aria-hidden="true"> / </span>
       <a
-        href={plate.source}
+        href={met ? plate.source : "https://wellcomecollection.org/"}
         rel="noopener noreferrer"
         title={detail}
         aria-label={detail}

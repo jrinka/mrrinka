@@ -45,7 +45,7 @@ export default function Home() {
           <div>
             <Image src="/archive/printing-workshop-stradanus.jpg" alt="An engraving of compositors setting type, proofing copy, and operating a printing press" fill sizes="(max-width: 900px) 100vw, 40vw" priority />
             <span className="landing-plate-label">PLATE / 00 — IMPRESS</span>
-            <figcaption><a href="https://wellcomecollection.org/works/czcn5src" rel="noopener noreferrer" title="The printing workshop. Public Domain Mark. Source: Wellcome Collection.">WELLCOME</a></figcaption>
+            <figcaption><a href="https://wellcomecollection.org/" rel="noopener noreferrer" title="The printing workshop. Public Domain Mark. Source: Wellcome Collection.">WELLCOME</a></figcaption>
           </div>
         </figure>
       </main>
