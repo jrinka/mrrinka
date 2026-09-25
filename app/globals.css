@@ -2629,6 +2629,8 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .export-format { display:flex; flex-direction:column; gap:6px; font-size:.8rem; color:var(--muted); margin:12px 0; }
 .export-format select { padding:10px 12px; border:1px solid var(--line); color:var(--ink); background:var(--white); font:inherit; max-width:100%; }
 .tool-actions .export-format { margin:0; }
+.reading-workshop .tool-actions { align-items:flex-end; }
+.reading-workshop .export-format select { min-height:44px; }
 
 /* Literature Paper 1: keep the text within reach while the reading develops. */
 .lit-poem { background:var(--panel-warm); padding:14px; border:1px solid var(--line); }
