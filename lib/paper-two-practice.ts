@@ -40,6 +40,6 @@ export function formatPaperTwoNotes(drafts: Record<string, PaperTwoDraft>) {
   return Object.entries(drafts).filter(([,draft]) => hasDraft(draft)).map(([id, draft]) => {
     const question = paperTwoQuestions.find(q => q.id === id);
     if (!question) return "";
-    return `PAPER 2 — QUESTION TO THESIS\n\n${questionSource(question)}\n${question.pool === "recent" ? "2023–2025 question" : "Earlier syllabus question — use its stated limits"}\n\n${question.text}\n\n${draftFields.map(([key, label]) => `${label}\n${draft[key]?.trim() || "—"}`).join("\n\n")}`;
+    return `PAPER 2 — QUESTION TO THESIS\n\n${questionSource(question)}\n${question.pool === "recent" ? "2023–2025 question" : "Earlier syllabus question — follow its stated requirements"}\n\n${question.text}\n\n${draftFields.map(([key, label]) => `${label}\n${draft[key]?.trim() || "—"}`).join("\n\n")}`;
   }).filter(Boolean).join("\n\n====================\n\n");
 }
