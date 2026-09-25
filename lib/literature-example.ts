@@ -12,7 +12,7 @@ export const literatureSteps = [
  {title:"Orient",lines:"1–4",observation:"A questioning voice asks about an uphill journey; an answering voice responds with assurance. Neither voice is named.",interpretation:"The question asks about a relationship: how reassurance responds to uncertainty. An account of a difficult journey alone would not answer it.",test:"Call them the questioner and the respondent. Do not assume that the questioner is Rossetti or identify the respondent as God without developing textual support."},
  {title:"Survey",lines:"1–16",observation:"Each of the four stanzas alternates questions and answers. The concerns move from the length of the journey, to finding shelter, to being received, to comfort for everyone who seeks it.",interpretation:"Reassurance is repeatedly offered, yet further questions follow. The repeated replies sustain confidence even as doubts continue.",test:"The final question expands from “me” to “all who seek.” Test how the answer’s “all who come” develops that widening concern."},
  {title:"Select",lines:"5–8",observation:"The questioner fears that darkness may “hide” the resting place. The answer “You cannot miss that inn” directly denies that possibility.",interpretation:"The contrast between the uncertain “May not” and the firm “cannot” gives the respondent’s voice an assurance the questioner lacks. The inn gives the hope of rest a concrete form: a place to shelter.",test:"Explain what the negative does here: “cannot” rules out missing the destination. Calling it “negative diction” would obscure its reassuring function."},
- {title:"Construct",lines:"1–16",observation:"A possible thesis: Through alternating anxious questions with assured replies, Rossetti presents reassurance as a continuing response to doubt; the widening promise of welcome offers rest without denying the journey’s difficulty.",interpretation:"Plan by ideas: first, difficulty acknowledged alongside companionship; next, fears of exclusion answered with increasingly inclusive welcome. Each paragraph should bring dialogue, wording and movement together.",test:"Return to “all the way,” “my friend,” “cannot miss,” and “all who come.” These details support the argument; the device names alone do not."},
+ {title:"Construct",lines:"1–16",observation:"A possible thesis: Rossetti alternates anxious questions with confident replies to show how reassurance responds to doubt. The replies promise rest and welcome, but they do not deny that the journey is difficult.",interpretation:"Plan by ideas: first, difficulty acknowledged alongside companionship; next, fears of exclusion answered with increasingly inclusive welcome. Each paragraph should bring dialogue, wording and movement together.",test:"Return to “all the way,” “my friend,” “cannot miss,” and “all who come.” These details support the argument; the device names alone do not."},
  {title:"Verify",lines:"1–2, 13–16",observation:"“Yes, to the very end” confirms the difficulty rather than removing it. “Travel-sore and weak” also keeps exhaustion present near the close.",interpretation:"Revise “the speaker’s fears disappear” to “the replies offer assurance while the questions continue to express doubt.” That qualification makes room for the whole poem.",test:"A reading of the journey as life and the inn as rest after death is plausible, particularly beside “those who have gone before.” Present it as an interpretation supported by the pattern, not a fixed code for every image."},
 ];
 export const literatureNotes:Record<string,{title:string;body:string}[]> = {
@@ -44,8 +44,20 @@ export const literatureNotes:Record<string,{title:string;body:string}[]> = {
  ],
 };
 export const literatureModel = [
- {label:"Claim",text:"Rossetti’s promise of shelter answers the questioner’s fear of being turned away as well as the need to rest.",note:"An interpretive claim connects the dialogue to the guiding question; it does not announce a device list."},
- {label:"Evidence and analysis",text:"The question ‘May not the darkness hide it from my face?’ imagines rest as something that could remain out of reach. In reply, ‘You cannot miss that inn’ answers that uncertainty with a firm assurance: the feared failure to find shelter is ruled out.",note:"Short quotations are explained through their relationship. The analysis accounts for the force of ‘May not’ and ‘cannot.’"},
- {label:"Development and evaluation",text:"The next stanza extends this reassurance from finding a place to being admitted, promising that ‘They will not keep you standing at that door.’ By answering each specific obstacle, the respondent makes welcome seem dependable even though the questioner continues to ask for it.",note:"A second detail develops the same idea across stanzas. The final clause evaluates why the recurring exchange matters without claiming that doubt vanishes."},
+  {
+    "label": "Claim",
+    "text": "Rossetti uses the promise of shelter to answer the traveler’s fear of being turned away.",
+    "note": "The claim connects the promise of shelter to the traveler’s uncertainty."
+  },
+  {
+    "label": "Evidence and analysis",
+    "text": "The question “May not the darkness hide it from my face?” suggests that the traveler might fail to find a place to rest. The reply, “You cannot miss that inn,” rules out that possibility.",
+    "note": "The explanation shows how the reply answers the particular fear in the question."
+  },
+  {
+    "label": "Development and evaluation",
+    "text": "In the next stanza, the concern shifts from finding shelter to being allowed inside. The answer “They will not keep you standing at that door” promises admission as well as a destination. Each reply addresses a particular fear, making the welcome seem dependable. Yet the questions continue, so reassurance does not simply remove all doubt.",
+    "note": "The second detail develops the same idea across stanzas. The last sentence accounts for the continuing questions."
+  }
 ];
 export function literatureSourceText(){return `${literatureExample.title} — ${literatureExample.author}\n${literatureExample.source}\nPublic-domain poem. Line numbers in the site are editorial aids.\n\n${literatureExample.stanzas.map(stanza=>stanza.map((line,index)=>(index%2 ? "    " : "")+line).join("\n")).join("\n\n")}`;}

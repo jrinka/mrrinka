@@ -8,8 +8,8 @@ const examples = [
     source: "https://poets.org/poem/stopping-woods-snowy-evening", sourceLabel: "Read the poem · Academy of American Poets",
     sentences: [
       "In Robert Frost’s ‘Stopping by Woods on a Snowy Evening’, a traveler pauses to watch snow falling in a secluded wood.",
-      "The pause draws attention to the appeal of stillness before the speaker recalls obligations beyond the scene.",
-      "By shifting from the sights and sounds of the woods to a repeated reminder of the journey ahead, Frost shows the speaker weighing the desire to stay against the need to continue.",
+      "The quiet scene makes staying seem attractive, but the speaker remembers that there are obligations to return to.",
+      "Frost moves from the quiet woods to a repeated reminder of the journey ahead. This shift shows the speaker caught between wanting to stay and needing to continue.",
     ],
     notes: [
       "Identifies poet, title and the immediate situation, without treating Frost and the speaker as the same person.",
@@ -24,8 +24,8 @@ const examples = [
     source: "https://www.cdc.gov/tobacco/campaign/tips/resources/ads/pdf-print-ads/beckys-tip-print-ad-7x10.pdf", sourceLabel: "Open the advertisement · CDC",
     sentences: [
       "The CDC’s anti-smoking advertisement presents Becky alongside the oxygen equipment on which she depends.",
-      "Addressing people who smoke, it turns the familiar idea of being attached to cigarettes into a visible physical constraint.",
-      "Through the interaction of the headline and photographs, the advertisement presents smoking as a threat to independence, while its invitation to seek help frames quitting as a way to act on that warning.",
+      "For people who smoke, the oxygen tubing makes the idea of being attached to cigarettes visible: Becky now depends on equipment to breathe.",
+      "The headline and photographs present smoking as a threat to independence. The offer of help then gives readers a way to act on this warning by trying to quit.",
     ],
     notes: [
       "Identifies creator, text type and immediate situation, using information visible in the advertisement.",
@@ -61,7 +61,7 @@ export default function IntroductionExamples({initialExample}:{initialExample:st
       <p><strong>Practice guiding question:</strong> {example.question}</p>
       <a href={example.source}>{example.sourceLabel} ↗</a>
       <blockquote>{example.sentences.join(" ")}</blockquote>
-      <h3>What each sentence does</h3>
+      <h3>How the introduction develops</h3>
       <ol className="intro-sentence-notes">{example.sentences.map((sentence,i)=><li key={sentence}><p><strong>{sentence}</strong></p><p>{example.notes[i]}</p></li>)}</ol>
       <aside className="lens-intro"><strong>Check the interpretation against the text</strong><p>{example.evidence}</p></aside>
       <p>The body must support these claims with precise details. An introduction establishes a direction; it does not prove the argument on its own.</p>

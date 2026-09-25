@@ -1,0 +1,38 @@
+export const magicSentenceExamples = [
+  {
+    id: "frankenstein", label: "Fiction · Frankenstein", author: "Mary Shelley", title: "Frankenstein, chapter 10",
+    context: "The creature addresses Victor Frankenstein, asking him to recognize a creator’s responsibility. Read the surrounding exchange before drawing conclusions about the whole novel.",
+    excerpt: "I ought to be thy Adam, but I am rather the fallen angel, whom thou drivest from joy for no misdeed.",
+    source: "https://www.gutenberg.org/files/84/84-h/84-h.htm#chap10", sourceLabel: "Read the public-domain text at Project Gutenberg",
+    checks: ["Does your verb describe Shelley’s writing, rather than the creature’s actions?", "Have you explained the difference between the relationship he expects and the one he describes?", "What would be lost if Adam and fallen angel were replaced by neutral words?"],
+    reading: "Shelley contrasts “Adam” with “fallen angel” to show the creature accusing his creator of rejecting him. “Ought” suggests that he expects care from Victor, as Adam received from God. “Rather” then replaces that expectation with exclusion. The phrase “no misdeed” strengthens his claim that this treatment is unfair. This is the creature’s account of their relationship, not an independent judgment of everything he does.",
+    explanation: "The reading starts with a contrast, explains the words that build it, and limits the claim to the creature’s perspective. These steps can take several sentences.",
+  },
+  {
+    id: "up-hill", label: "Poetry · Up-Hill", author: "Christina Rossetti", title: "Up-Hill, lines 7–8",
+    context: "A traveler asks about an uphill journey, and another voice replies. Here, the traveler worries about finding shelter at night.",
+    excerpt: "May not the darkness hide it from my face?\nYou cannot miss that inn.",
+    source: "/courses/literature/text-types/8889a1cf-bfb4-4930-bc54-b693504ae80a?view=example", sourceLabel: "Read the poem in the Poetry worked example",
+    checks: ["Have you distinguished the poet from the two voices?", "How does ‘cannot’ answer the possibility raised by ‘May not’?", "Do the later questions support a claim that all doubt has disappeared?"],
+    reading: "Rossetti answers the traveler’s uncertain question with a firm promise to make shelter seem dependable. “May not” raises the possibility that darkness will hide the inn. The reply “cannot miss” rules out that fear. Reassurance comes from answering the particular worry, although the traveler continues to ask questions later in the poem.",
+    explanation: "The reading explains the relationship between a question and its answer. It then uses the wider poem to avoid claiming that reassurance removes every doubt.",
+  },
+  {
+    id: "moon-tiger", label: "Fiction · Moon Tiger", author: "Penelope Lively", title: "Moon Tiger, Gordon’s perspective",
+    context: "Claudia and Gordon are competing for fossils on a cliff. After Gordon blocks her path, Claudia falls. This sentence presents his response.",
+    excerpt: "And suddenly there are awful tearing noises and thumps and she is gone, sliding and hurtling down, and in horror and satisfaction he stares.",
+    source: "/courses/literature/text-types/197e1470-54d4-470b-a22a-414e4d4d00b9?view=example", sourceLabel: "Read the supplied extract in the Prose fiction worked example",
+    checks: ["Does your verb describe how Lively presents Gordon’s response?", "Have you accounted for both ‘horror’ and ‘satisfaction’?", "What can his reaction suggest, and what can it not prove about his earlier intention?"],
+    reading: "Lively pairs “horror and satisfaction” to show Gordon’s divided response to Claudia’s fall. “Horror” suggests alarm at what has happened, while “satisfaction” suggests that his rivalry with her continues. Placing the feelings together prevents a simple reading of him as either sorry or pleased. The reaction does not, by itself, prove that he intended to injure her.",
+    explanation: "The reading gives each word attention before explaining their combination. It distinguishes evidence about a reaction from proof of an intention.",
+  },
+  {
+    id: "hillary", label: "Speech · Tribute to Hillary", author: "Helen Clark", title: "Tribute to Sir Edmund Hillary",
+    context: "At Hillary’s state funeral, Clark looks back on his achievements and service. Near the end, she asks what listeners can carry forward from his example.",
+    excerpt: "As individuals, we may not be able to match Sir Ed’s abilities or strength, but we can all strive to match his humanity and compassion for others.",
+    source: "/courses/language-literature/text-types/501e5fac-47a8-4c41-a081-ac57220685c2?view=example", sourceLabel: "Read the supplied extract in the Speech worked example",
+    checks: ["What changes between the first and second uses of ‘match’?", "How does ‘all’ widen the invitation, and how does ‘strive’ qualify it?", "Have you explained the invitation without assuming that every listener acts on it?"],
+    reading: "Clark repeats “match” to turn admiration for Hillary into an example listeners can follow. They may not equal his strength, but “all” can try to show his compassion. “Strive” makes clear that this still requires effort. The contrast gives the audience a way to honor him through care for others, rather than through extraordinary physical achievements.",
+    explanation: "The reading tracks a repeated word across a contrast. It connects that contrast to the speech’s purpose without claiming to know every listener’s response.",
+  },
+] as const;
