@@ -2521,6 +2521,7 @@ h3 {
 .sentence-lab > blockquote, .lens-body blockquote { padding:20px; margin:20px 0; border-left:3px solid var(--citron); background:var(--white); font:1.25rem/1.55 var(--font-literary); }
 .sentence-fields { display:grid; grid-template-columns:1fr 1fr; gap:0 22px; }
 .sentence-fields .field { min-width:0; }
+.sentence-builder-fields textarea { margin-top:auto; }
 .sentence-preview { padding:24px; background:var(--panel-citron); overflow-wrap:anywhere; }
 .sentence-preview p { white-space:pre-wrap; }
 .inquiry-explainer { margin:18px 0 28px; border:1px solid var(--line); padding:16px 20px; }
