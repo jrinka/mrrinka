@@ -4,6 +4,7 @@ export const textTypeGuideIds = {
   infographic: "c1e54cf5-1489-440b-a98c-3e7107bacc62",
   advertisement: "cf482e4c-3555-4e12-afca-b63396aec3ea",
   charityAppeal: "b0a0e8bb-7dfb-4fd6-8da0-a19d3dc95e92",
+  prose: "197e1470-54d4-470b-a22a-414e4d4d00b9",
   nonfiction: "63208637-86ff-4f34-b522-dad42e9ab1ac",
   drama: "5131f911-d916-4135-8415-ce6ad59606ff",
   poetry: "8889a1cf-bfb4-4930-bc54-b693504ae80a",
@@ -11,7 +12,7 @@ export const textTypeGuideIds = {
 
 type TextTypeExample = {
   courseId: CourseId;
-  kind: "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction";
+  kind: "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose";
   title: string;
   description: string;
 };
@@ -32,6 +33,10 @@ const examples: Record<string, TextTypeExample> = {
     title: "WWF — Adopt a snow leopard",
     description: "Trace how an animal portrait, adoption language and a practical contribution connect personal concern with conservation work.",
   },
+  [textTypeGuideIds.prose]: {
+    courseId: "literature", kind: "prose", title: "Moon Tiger — Penelope Lively",
+    description: "Follow a childhood accident through three perspectives and examine how each changes our understanding of rivalry and blame.",
+  },
   [textTypeGuideIds.nonfiction]: {
     courseId: "literature", kind: "nonfiction",
     title: "The Gastronomical Me — M. F. K. Fisher",
@@ -51,7 +56,7 @@ const examples: Record<string, TextTypeExample> = {
 
 export const plannedTextTypes: Record<"language-literature" | "literature", readonly string[]> = {
   "language-literature": ["Blog post", "Opinion/commentary", "Speech"],
-  literature: ["Prose fiction"],
+  literature: [],
 };
 
 export function getTextTypeExample(itemId: string): TextTypeExample | undefined {

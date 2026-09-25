@@ -1,7 +1,9 @@
+import LiteraryReadingGuide from "@/components/literary-reading-guide";
+import { poetryExample } from "@/lib/poetry-example";
+import { proseExample } from "@/lib/prose-example";
 import Link from "next/link";
 import Markdown from "@/components/markdown";
 import InfographicGuide from "@/components/infographic-guide";
-import TextTypeExample from "@/components/text-type-example";
 import AdvertisementGuide from "@/components/advertisement-guide";
 import TextTypeOverview from "@/components/text-type-overview";
 import NonfictionGuide from "@/components/nonfiction-guide";
@@ -24,9 +26,9 @@ export default function TextTypeGuide({ body, itemId, href, showExample }: { bod
     </nav>
     {showExample && worked ? <>
       <div className="text-type-view-heading"><span className="mono">WORKED EXAMPLE / 01</span><h2>{title}</h2><Link href={href}>← Return to the text-type overview</Link></div>
-      {kind === "infographic" ? <InfographicGuide body={worked} /> : kind === "advertisement" ? <AdvertisementGuide body={worked} href={href} /> : kind === "charity-appeal" ? <CharityAppealGuide body={worked} href={href} /> : kind === "drama" ? <DramaGuide body={worked} href={href} /> : kind === "nonfiction" ? <NonfictionGuide body={worked} href={href} /> : <div className="text-type-guide"><Markdown>{worked}</Markdown><TextTypeExample itemId={itemId}/></div>}
+      {kind === "prose" || kind === "poetry" ? <LiteraryReadingGuide key={itemId} body={worked} href={href} example={kind === "poetry" ? poetryExample : proseExample} /> : kind === "infographic" ? <InfographicGuide body={worked} /> : kind === "advertisement" ? <AdvertisementGuide body={worked} href={href} /> : kind === "charity-appeal" ? <CharityAppealGuide body={worked} href={href} /> : kind === "drama" ? <DramaGuide body={worked} href={href} /> : kind === "nonfiction" ? <NonfictionGuide body={worked} href={href} /> : <Markdown>{worked}</Markdown>}
     </> : <>
-      {kind === "advertisement" || kind === "charity-appeal" || kind === "drama" || kind === "nonfiction" ? <TextTypeOverview body={overview} href={href} guideTitle={kind === "advertisement" ? "Advertisement" : kind === "drama" ? "Drama" : kind === "nonfiction" ? "Prose non-fiction" : "Charitable appeal"} exampleLabel={kind === "advertisement" ? "FIJI Water worked example" : kind === "drama" ? "Bovell worked example" : kind === "nonfiction" ? "Fisher worked example" : "WWF worked example"} /> : <div className="text-type-overview"><Markdown>{overview}</Markdown></div>}
+      {kind === "poetry" || kind === "prose" || kind === "advertisement" || kind === "charity-appeal" || kind === "drama" || kind === "nonfiction" ? <TextTypeOverview body={overview} href={href} guideTitle={kind === "poetry" ? "Poetry" : kind === "prose" ? "Prose fiction" : kind === "advertisement" ? "Advertisement" : kind === "drama" ? "Drama" : kind === "nonfiction" ? "Prose non-fiction" : "Charitable appeal"} exampleLabel={kind === "poetry" ? "Up-Hill worked example" : kind === "prose" ? "Moon Tiger worked example" : kind === "advertisement" ? "FIJI Water worked example" : kind === "drama" ? "Bovell worked example" : kind === "nonfiction" ? "Fisher worked example" : "WWF worked example"} /> : <div className="text-type-overview"><Markdown>{overview}</Markdown></div>}
       {worked && <section className="text-type-example-directory"><span className="mono">APPLY THE OVERVIEW</span><h2>Worked examples</h2><Link href={`${href}?view=example`}><strong>{title} ↗</strong><span>{description}</span></Link></section>}
     </>}
   </>;
