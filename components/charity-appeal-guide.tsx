@@ -34,7 +34,7 @@ export default function CharityAppealGuide({ body, href }: { body: string; href:
   function goTo(index: number) {
     if (!sections[index]) return;
     setActiveIndex(index);
-    const url = `${href}?view=example#${sections[index].id}`;
+    const url = `${href}?view=example&example=wwf#${sections[index].id}`;
     if (window.location.pathname + window.location.search + window.location.hash !== url) window.history.pushState(null, "", url);
     requestAnimationFrame(() => {
       headings.current[index]?.focus({ preventScroll: true });
@@ -48,7 +48,7 @@ export default function CharityAppealGuide({ body, href }: { body: string; href:
     <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
       {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
-          <a href={`${href}?view=example#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
+          <a href={`${href}?view=example&example=wwf#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
             event.preventDefault(); goTo(index);
           }}><span className="mono">{String(index + 1).padStart(2, "0")}</span>{labelFor(index)}</a>
@@ -99,7 +99,7 @@ function CharityNotes() {
   return <section className="infographic-notes" aria-label="Charitable appeal analysis notebook">
     <h3>Try a connected reading</h3>
     {fields.map(field => <label className="field" key={field.key} htmlFor={`charity-${field.key}`}>{field.label}<span className="hint" id={`charity-${field.key}-hint`}>{field.hint}</span><textarea id={`charity-${field.key}`} aria-describedby={`charity-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}
-    <p className="hint">Your notes stay here while this page is open. Export before leaving. This exercise does not send writing to AI.</p>
+    <p className="hint">Your notes stay while you move between sections. Export before switching examples, leaving or refreshing. This exercise does not send writing to AI.</p>
     <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`Charitable appeal analysis notes\n\nSource: ${example.title}\n${example.url}\nSource checked: ${example.checked}\n\nPractice question: ${example.question}\n\n${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, "charitable-appeal-notes.txt", format)}>Export my notes</button></div>
     <details className="infographic-self-check"><summary>Review your paragraph</summary><ul><li>Have I identified the contribution and supported my audience inference?</li><li>Have I connected specific choices to one meaning?</li><li>Have I explained a named emotion or a chain of reasoning, where relevant?</li><li>Have I checked the scope of the promise against the complete source?</li><li>Have I distinguished an intended response from a proven result?</li></ul></details>
   </section>;

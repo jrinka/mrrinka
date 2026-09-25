@@ -26,7 +26,7 @@ import {
   type Section,
   type CourseItem,
 } from "@/lib/schema";
-type Props = { params: Promise<{ courseId: string; path?: string[] }>; searchParams: Promise<{ view?: string | string[] }> };
+type Props = { params: Promise<{ courseId: string; path?: string[] }>; searchParams: Promise<{ view?: string | string[]; example?: string | string[] }> };
 
 const assessmentCodes: Record<string, string> = {
   "Paper 1": "P1",
@@ -246,7 +246,7 @@ export default async function CoursePage({ params, searchParams }: Props) {
               )}
             </figure>
           )}
-          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <TextTypeGuide body={item.body} itemId={item.id} href={`${base}/text-types/${item.id}`} showExample={(await searchParams).view === "example"} /> : <Markdown>{item.body}</Markdown>}
+          {item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <TextTypeGuide body={item.body} itemId={item.id} href={`${base}/text-types/${item.id}`} showExample={(await searchParams).view === "example"} exampleChoice={(await searchParams).example === "wwf" ? "wwf" : undefined} /> : <Markdown>{item.body}</Markdown>}
           {item.section === "assessment" && courseId !== "english-10" && (
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>

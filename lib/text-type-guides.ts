@@ -35,8 +35,8 @@ const examples: Record<string, TextTypeExample> = {
   },
   [textTypeGuideIds.charityAppeal]: {
     courseId: "language-literature", kind: "charity-appeal",
-    title: "WWF — Adopt a snow leopard",
-    description: "Trace how an animal portrait, adoption language and a practical contribution connect personal concern with conservation work.",
+    title: "The Elephant Sanctuary — 2018 Spring Appeal",
+    description: "Connect named elephants, evidence of individual care and an annual grocery list with the invitation to join the team.",
   },
   [textTypeGuideIds.prose]: {
     courseId: "literature", kind: "prose", title: "Moon Tiger — Penelope Lively",
