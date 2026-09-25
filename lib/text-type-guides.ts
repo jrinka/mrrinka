@@ -1,6 +1,7 @@
 import type { CourseId } from "./schema";
 
 export const textTypeGuideIds = {
+  letter: "027cb949-724f-4872-bef8-4f2599684139",
   webpage: "81d752ad-9f14-43a5-a7b5-34e14a7a7803",
   article: "b773dc6e-4794-4c80-a99f-8cdd183b20f4",
   speech: "501e5fac-47a8-4c41-a081-ac57220685c2",
@@ -18,12 +19,16 @@ export const textTypeGuideIds = {
 
 type TextTypeExample = {
   courseId: CourseId;
-  kind: "webpage" | "article" | "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
+  kind: "letter" | "webpage" | "article" | "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
   title: string;
   description: string;
 };
 
 const examples: Record<string, TextTypeExample> = {
+  [textTypeGuideIds.letter]: {
+    courseId: "language-literature", kind: "letter", title: "Letter to Thom — John Steinbeck",
+    description: "Follow how a father combines reassurance, ethical distinctions and practical advice while respecting his son’s feelings.",
+  },
   [textTypeGuideIds.webpage]: {
     courseId: "language-literature", kind: "webpage", title: "Redwoods Treewalk — Rotorua",
     description: "Connect photographs, language of wonder, practical details and visible choices to see how a webpage promotes an experience.",

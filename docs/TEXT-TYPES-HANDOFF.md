@@ -171,3 +171,12 @@ Webpages is built at `81d752ad-9f14-43a5-a7b5-34e14a7a7803`. A seven-section gen
 Production build, TypeScript and 10 content/export tests passed. Browser checks covered overview discovery/contents, eight sections, seven source views, enlargement/Escape/focus return, transcript/source notes, reload/back/forward, previous/next, retained notes and both export formats, 1280px/1512px laptops, 1024px tablet, narrow fallback, dark mode and complete print output. Existing Cycling, WWF and Cartoons examples passed regression checks. The React review preserved hooks before conditional returns, effect cleanup, mounted notebook state, labelled controls and semantic source/section navigation.
 
 Current queue: Articles and Webpages complete. Letters next (review Murthy and Steinbeck candidates), then Podcasts/interviews, then useful contrasting examples in existing categories as agreed. A local clarity review of Webpages is complete; the final language pass across all additions remains pending.
+
+
+## Letters (25 September 2026)
+
+Letters is built at `027cb949-724f-4872-bef8-4f2599684139`. Seven overview sections cover personal/formal/public letters, relationship, the absent reply, conventions, voice and reading method. The separate eight-step Steinbeck example uses the supplied November 2013 text of his 1958 letter to Thom. The standalone question is labelled original because the source came from a comparative paper. Five source groups follow the reading or remain complete through Whole letter; two faithful source crops, persistent notebook, TXT/MD exports and full printed transcript/commentary use the existing shared reader without changing its behaviour.
+
+Build, TypeScript and 10 content/export checks passed. Chrome verified discovery, overview contents, eight sections, source-follow/whole-letter controls, source links, practice-question label, reload/back/forward/focus, previous/next, retained notes, TXT/MD exports, 1280px/1512px laptop and 1024px tablet layouts, narrow fallback, dark mode and complete print. Moon Tiger, Poetry and Blog passed regression checks. Source footnote correction is explained in TEXT-TYPE-SOURCES.md. Local clarity review complete; final language pass across the additions remains pending.
+
+Next: Podcasts/interviews, with The Happiness Lab (May 2023 TZ1 Text 1) as the reviewed candidate. Articles, Webpages and Letters are complete.
