@@ -2,13 +2,14 @@
 
 import {useCallback,useEffect,useRef,useState} from 'react';
 import DrawingPad from './drawing-pad';
+import {drawFromBank} from './decks';
 import {ToggleGroup,ToggleGroupItem} from '@/recess/components/ui/toggle-group';
 import {KeyRound,Umbrella,Apple,Clock,Scissors,Coffee,Fish,Crown,BookOpen,Lamp,Utensils,Leaf,Bell,Backpack,Carrot,Briefcase,Bike,Camera,Cloud,TrafficCone,Paintbrush,Rocket,Snail,Trophy,Banana,Glasses,Flower2,Mail,HardHat,Guitar,Ruler,Calculator} from 'lucide-react';
 import {masterpieces,squiggles,blobPrompts,inventionSubjects,inventionPurposes,memoryObjects,drawingPhases,memoryPhases,clockState,type Phase} from './mini-game-data';
 
 const objectIcons = {key:KeyRound,umbrella:Umbrella,apple:Apple,clock:Clock,scissors:Scissors,cup:Coffee,fish:Fish,crown:Crown,book:BookOpen,lamp:Lamp,spoon:Utensils,leaf:Leaf,bell:Bell,backpack:Backpack,carrot:Carrot,briefcase:Briefcase,bike:Bike,camera:Camera,cloud:Cloud,cone:TrafficCone,brush:Paintbrush,rocket:Rocket,snail:Snail,trophy:Trophy,banana:Banana,glasses:Glasses,flower:Flower2,mail:Mail,hat:HardHat,guitar:Guitar,ruler:Ruler,calculator:Calculator};
 
-function shuffled<T,>(items:T[]):T[]{const result=[...items];for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]];}return result;}
+const inventions: [string,string][] = inventionSubjects.flatMap(subject => inventionPurposes.map(purpose => [subject,purpose] as [string,string]));
 
 function useRoundClock(phases:Phase[]) {
   const [elapsed,setElapsed]=useState(0);
@@ -42,35 +43,31 @@ function SourceNote({kind}:{kind:number}) {
 }
 
 export default function MiniGame({kind,onBack}:{kind:number;onBack:()=>void}) {
-  const [index,setIndex]=useState(0);
+  const [index,setIndex]=useState(()=>kind<2?drawFromBank('drawing-prompt-'+kind,(kind===0?masterpieces:blobPrompts).map((_,i)=>i))[0]:0);
   const [onScreen,setOnScreen]=useState(false);
-  const [shapeIndex,setShapeIndex]=useState(0);
+  const [shapeIndex,setShapeIndex]=useState(()=>kind===1?drawFromBank('blob-shapes',squiggles.map((_,i)=>i))[0]:0);
   const [round,setRound]=useState(1);
-  const [objects,setObjects]=useState(()=>memoryObjects.slice(0,8));
+  const [objects,setObjects]=useState(()=>kind===3?drawFromBank('memory-objects',memoryObjects,8):[]);
   const [revealed,setRevealed]=useState(false);
   const [erasing,setErasing]=useState(false);
   const [invention,setInvention]=useState<[string,string]|null>(null);
   const [reelWords,setReelWords]=useState<[string,string]>(['?','?']);
   const [spinning,setSpinning]=useState(false);
-  const lastInvention=useRef<[string,string]|null>(null);
-  const deck=useRef<number[]>([]);
   const phases=kind===3?memoryPhases:drawingPhases;
   const clock=useRoundClock(phases);
   const startClock=clock.start;
   useEffect(()=>{
     if(!spinning)return;
     const pick=(words:string[])=>words[Math.floor(Math.random()*words.length)];
-    const subject=pick(inventionSubjects);
-    const purposes=inventionPurposes.filter(word=>subject!==lastInvention.current?.[0]||word!==lastInvention.current?.[1]);
-    const target:[string,string]=[subject,pick(purposes)];
+    const target=drawFromBank('inventions',inventions)[0];
     // Reduced motion reveals the same random result without animated cycling.
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      lastInvention.current=target;setReelWords(target);setInvention(target);setSpinning(false);startClock();return;
+      setReelWords(target);setInvention(target);setSpinning(false);startClock();return;
     }
     const started=Date.now();
     const tick=()=>{
       const elapsed=Date.now()-started;
-      if(elapsed>=1800){clearInterval(interval);lastInvention.current=target;setReelWords(target);setInvention(target);setSpinning(false);startClock();return;}
+      if(elapsed>=1800){clearInterval(interval);setReelWords(target);setInvention(target);setSpinning(false);startClock();return;}
       setReelWords([elapsed>=1000?target[0]:pick(inventionSubjects),pick(inventionPurposes)]);
     };
     const interval=setInterval(tick,120);
@@ -84,10 +81,10 @@ export default function MiniGame({kind,onBack}:{kind:number;onBack:()=>void}) {
   const start=()=>{if(kind===2&&!invention)setSpinning(true);else clock.start();};
   const next=()=>{
     const length=kind===0?masterpieces.length:kind===1?blobPrompts.length:1;
-    if(kind<2){if(!deck.current.length)deck.current=shuffled(Array.from({length},(_,i)=>i).filter(i=>i!==index));setIndex(deck.current.pop()??0);}
-    if(kind===1)setShapeIndex(current=>(current+1+Math.floor(Math.random()*(squiggles.length-1)))%squiggles.length);
+    if(kind<2)setIndex(drawFromBank('drawing-prompt-'+kind,Array.from({length},(_,i)=>i),1,[index])[0]);
+    if(kind===1)setShapeIndex(drawFromBank('blob-shapes',squiggles.map((_,i)=>i),1,[shapeIndex])[0]);
     if(kind===2){setInvention(null);setReelWords(['?','?']);}
-    if(kind===3){const previous=new Set(objects.map(o=>o.icon));setObjects(shuffled(memoryObjects.filter(o=>!previous.has(o.icon))).slice(0,8));}
+    if(kind===3)setObjects(drawFromBank('memory-objects',memoryObjects,8,objects));
     setRound(n=>n+1);reset();
   };
   const status=spinning?'Consulting the invention department.':kind===2&&!invention?'Press Start to discover your invention.':erasing?(onScreen?'Clear your drawing when you are ready.':'Erase your desk.'):clock.done?(kind===3&&!revealed?'Time. Keep your answers ready.':'Markers down. Compare with a neighbor.'):!begun?(kind===1?(onScreen?'The starter line is ready.':'Copy the starter line before starting.'):'Ready when you are.'):!clock.running?'Paused.':phases[clock.phase].label;

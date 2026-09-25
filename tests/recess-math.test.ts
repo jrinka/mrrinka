@@ -15,7 +15,7 @@ test('arithmetic rejects executable input, unsupported operations and malformed 
   for(const input of ['alert(1)','globalThis','2**3','Math.pow(2,3)','1/0','02+3','2(3+4)','2+','(1+2','1+2)','2.5+3','-2+3','4!','1=1','1'.repeat(81)])assert.throws(()=>parseArithmetic(input),input);
 });
 test('all generated equations are true and fit their requested grids',()=>{
-  for(const length of [6,8] as const){const bank=equationBank(length);assert.ok(bank.length>100);assert.equal(new Set(bank).size,bank.length);for(const equation of bank)assert.equal(validateEquation(equation,length),equation);}
+  for(const length of [6,8] as const){const bank=equationBank(length);assert.ok(bank.length>100);assert.equal(new Set(bank).size,bank.length);assert.equal(new Set(bank.map(e=>{const [left,right]=e.split('=');return parseArithmetic(left).signature+'='+right;})).size,bank.length);for(const equation of bank)assert.equal(validateEquation(equation,length),equation);}
 });
 test('equation guesses must be true, correctly formed and the correct length',()=>{
   assert.equal(validateEquation('8 × 7 = 56',6),'8*7=56');

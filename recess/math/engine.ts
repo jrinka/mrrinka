@@ -82,7 +82,14 @@ export function equationBank(length: 6 | 8): string[] {
     const equation = `${a}+${b}*${c}=${a + b * c}`;
     if (equation.length === length) bank.add(equation);
   }
-  return [...bank];
+  // Operand swaps count as the same puzzle, just as they do when checking guesses.
+  const signatures = new Set<string>();
+  return [...bank].filter(equation => {
+    const [left,right] = equation.split('=');
+    const key = parseArithmetic(left).signature + '=' + right;
+    if (signatures.has(key)) return false;
+    signatures.add(key); return true;
+  });
 }
 export function checkTwentyFour(text: string, numbers: number[]): string {
   const parsed = parseArithmetic(text);

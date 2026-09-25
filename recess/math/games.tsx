@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { feedback, drawFromDeck } from '../logic';
+import { feedback } from '../logic';
+import {drawFromBank} from '../decks';
 import { twentyFourBanks, oddsPuzzles, matchPuzzles } from './data';
 import { equationBank, validateEquation, sameEquation, pretty, normalize, parseArithmetic, checkTwentyFour, solveTwentyFour, masksFor, moveMatch, matchTrue, matchText, matchSolutions, segmentNames } from './engine';
 import './math.css';
@@ -36,10 +37,10 @@ function Source({ kind }: { kind:'equation'|'24'|'match'|'odds' }) {
     <p>The timer is optional. Students can answer aloud, on a whiteboard, or here. Save activity downloads the visible puzzle and work; unrevealed hints and answers stay out.</p>
   </details>;
 }
-function useRound(size:number) {
-  const [index,setIndex]=useState(0),[round,setRound]=useState(1);
-  const deck=useRef<number[]>([]);
-  const next=()=>{setIndex(drawFromDeck(Array.from({length:size},(_,i)=>i),deck.current,1,[index])[0]);setRound(r=>r+1);};
+function useRound(key:string, size:number) {
+  const choices=Array.from({length:size},(_,i)=>i);
+  const [index,setIndex]=useState(()=>drawFromBank(key,choices)[0]),[round,setRound]=useState(1);
+  const next=()=>{setIndex(drawFromBank(key,choices,1,[index])[0]);setRound(r=>r+1);};
   return {index,round,next};
 }
 export default function MathGame({kind}:{kind:number}) {
@@ -49,19 +50,15 @@ export default function MathGame({kind}:{kind:number}) {
 function EquationGame() {
   const [length,setLength]=useState<6|8>(6),[round,setRound]=useState(1);
   const bank=useMemo(()=>equationBank(length),[length]);
-  const [answer,setAnswer]=useState('8+7=15');
+  const [answer,setAnswer]=useState(()=>drawFromBank('equation-6',bank)[0]);
   const [guess,setGuess]=useState(''),[guesses,setGuesses]=useState<string[]>([]);
   const [message,setMessage]=useState(''),[hint,setHint]=useState(false),[revealed,setRevealed]=useState(false);
   const [won,setWon]=useState(false);
-  const deck=useRef<string[]>([]);
   const done=won||revealed||guesses.length===6;
   function newRound(size:6|8=length) {
     const pool=size===length?bank:equationBank(size);
-    if(size!==length)deck.current=[];
-    setLength(size);setAnswer(drawFromDeck(pool,deck.current,1,[answer])[0]);setGuess('');setGuesses([]);setMessage('');setHint(false);setRevealed(false);setWon(false);setRound(r=>r+1);
+    setLength(size);setAnswer(drawFromBank('equation-'+size,pool,1,[answer])[0]);setGuess('');setGuesses([]);setMessage('');setHint(false);setRevealed(false);setWon(false);setRound(r=>r+1);
   }
-  // A new visit starts with a fresh equation; no answer is fetched from a server.
-  useEffect(()=>{setAnswer(bank[Math.floor(Math.random()*bank.length)]);},[]);
   function submit() {
     if(done)return;
     try {
@@ -111,7 +108,7 @@ function TwentyFour() {
     <TwentyFourRounds key={difficulty} difficulty={difficulty}/><Source kind="24"/></>;
 }
 function TwentyFourRounds({difficulty}:{difficulty:'warmup'|'stretch'}) {
-  const bank=twentyFourBanks[difficulty];const {index,round,next}=useRound(bank.length);
+  const bank=twentyFourBanks[difficulty];const {index,round,next}=useRound('twenty-four-'+difficulty,bank.length);
   return <TwentyFourPuzzle key={round} numbers={bank[index]} round={round} next={next}/>;
 }
 function TwentyFourPuzzle({numbers,round,next}:{numbers:number[];round:number;next:()=>void}) {
@@ -128,7 +125,7 @@ function TwentyFourPuzzle({numbers,round,next}:{numbers:number[];round:number;ne
     <BreakTimer/></section>;
 }
 function MatchGame() {
-  const {index,round,next}=useRound(matchPuzzles.length);
+  const {index,round,next}=useRound('matches',matchPuzzles.length);
   return <><p className="rule">Move exactly one match to make a true equation. Click an occupied segment, then an empty outlined slot. Only the digits change; the operation and = stay fixed.</p><MatchRound key={round} index={index} round={round} next={next}/><Source kind="match"/></>;
 }
 function MatchRound({index,round,next}:{index:number;round:number;next:()=>void}) {
@@ -161,7 +158,7 @@ function MatchRound({index,round,next}:{index:number;round:number;next:()=>void}
   </section>;
 }
 function OddsGame() {
-  const {index,round,next}=useRound(oddsPuzzles.length);
+  const {index,round,next}=useRound('odds',oddsPuzzles.length);
   return <><p className="rule">Predict first. Then count the possibilities. No speed bonus for confident guessing.</p><OddsRound key={round} index={index} round={round} next={next}/><Source kind="odds"/></>;
 }
 function OddsRound({index,round,next}:{index:number;round:number;next:()=>void}) {

@@ -1,0 +1,17 @@
+.hangman-board{max-width:1050px;margin:0 auto}
+.hangman-layout{display:grid;grid-template-columns:220px minmax(0,1fr);align-items:center;gap:32px}
+.hangman-drawing{width:100%;max-height:230px;color:#25282b}
+.hangman-puzzle{min-width:0;text-align:center}
+.hangman-word{display:flex;justify-content:center;gap:clamp(3px,.7vw,10px);margin:24px 0;font:700 clamp(20px,3vw,40px)/1.5 var(--font-geist-mono),monospace}
+.hangman-word span{min-width:0;flex:0 1 44px;border-bottom:3px solid #25282b}
+.hangman-word .hangman-revealed{color:#9b302b}
+.hangman-status{font-size:22px;font-weight:800;margin:16px 0}
+.hangman-misses{font-size:16px;line-height:1.6}
+.hangman-keyboard{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:8px;max-width:850px;margin:28px auto 0}
+.hangman-keyboard button{position:relative;min-width:0;min-height:52px;padding:8px 4px 15px;border:2px solid #25282b;border-radius:2px;background:#fff;font:700 20px var(--font-geist-mono),monospace;color:#25282b}
+.hangman-keyboard button:hover:not(:disabled){background:#e7ff43}
+.hangman-keyboard button:disabled{opacity:1;cursor:default}
+.hangman-keyboard button span{position:absolute;bottom:0;left:0;right:0;font-size:12px}
+.hangman-keyboard .hangman-hit{background:#e7ff43}
+.hangman-keyboard .hangman-miss{background:#e4e4df;color:#64645d}
+@media(max-width:700px){.hangman-layout{grid-template-columns:1fr;gap:8px}.hangman-drawing{max-height:145px}.hangman-word{font-size:clamp(16px,4.3vw,28px);gap:4px;margin:16px 0}.hangman-keyboard{grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:20px}.hangman-keyboard button{min-height:46px;font-size:18px}.hangman-status{font-size:20px}}
