@@ -23,3 +23,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Desktop and school laptops are the primary experience (one-to-one school). Preserve useful side-by-side models, grids, and working space; mobile is a usable fallback, not a reason to remove desktop functionality.
 - Public course navigation is IB Language & Literature and IB Literature. Skills & Methods provides general English resources, including for English 10. Keep English 10 editor data and legacy routes; do not create a third actively maintained course space.
+
+- Use US spelling in original teaching material and interface labels (analyze, practice, organize, etc.). Preserve source quotations, transcripts, original titles and proper names. Include a US spelling audit in the planned final language clarity pass.

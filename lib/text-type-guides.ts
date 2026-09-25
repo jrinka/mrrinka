@@ -1,6 +1,7 @@
 import type { CourseId } from "./schema";
 
 export const textTypeGuideIds = {
+  podcast: "746d8c8a-0c8a-4ba0-9f37-0e38ffdcf686",
   letter: "027cb949-724f-4872-bef8-4f2599684139",
   webpage: "81d752ad-9f14-43a5-a7b5-34e14a7a7803",
   article: "b773dc6e-4794-4c80-a99f-8cdd183b20f4",
@@ -19,12 +20,16 @@ export const textTypeGuideIds = {
 
 type TextTypeExample = {
   courseId: CourseId;
-  kind: "letter" | "webpage" | "article" | "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
+  kind: "podcast" | "letter" | "webpage" | "article" | "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
   title: string;
   description: string;
 };
 
 const examples: Record<string, TextTypeExample> = {
+  [textTypeGuideIds.podcast]: {
+    courseId: "language-literature", kind: "podcast", title: "The Happiness Lab — The War For Kindness",
+    description: "Follow how two speakers make empathy understandable, practical and voluntary through framing, comparisons and a classroom example.",
+  },
   [textTypeGuideIds.letter]: {
     courseId: "language-literature", kind: "letter", title: "Letter to Thom — John Steinbeck",
     description: "Follow how a father combines reassurance, ethical distinctions and practical advice while respecting his son’s feelings.",
