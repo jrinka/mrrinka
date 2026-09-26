@@ -4,8 +4,8 @@ export const podcastExample: LiteraryReading = {
   "title": "The Happiness Lab — The War For Kindness",
   "author": "Laurie Santos and Jamil Zaki",
   "question": "How and to what effect is empathy presented in the text?",
-  "questionCredit": "GUIDING QUESTION · SUPPLIED EXAM TEXT",
-  "context": "Supplied May 2023 TZ1 Text 1. Timestamps and speaker labels follow the exam transcript. Reading-group headings are editorial; the final group continues Zaki’s 23:45 contribution. Episode framing is transcribed before the first turn.",
+  "questionCredit": "Supplied guiding question",
+  "context": "Timestamps and speaker labels follow the supplied transcript. Reading-group headings are editorial; the final group continues Zaki’s 23:45 contribution. Episode framing is transcribed before the first turn.",
   "wholeLabel": "Whole transcript",
   "image": {
     "url": "/examples/happiness-lab-1.png",

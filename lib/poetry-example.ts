@@ -2,8 +2,8 @@ import { literatureExample } from "./literature-example";
 import type { LiteraryReading } from "./literary-reading";
 
 export const poetryExample: LiteraryReading = {
- title: "Up-Hill — Christina Rossetti", author: "CHRISTINA ROSSETTI", poem: true,
- question: literatureExample.question, questionCredit: "TEACHING QUESTION",
+ title: "Up-Hill — Christina Rossetti", author: "CHRISTINA ROSSETTI", poem: true, poemAlternatingIndent: true,
+ question: literatureExample.question, questionCredit: "Practice guiding question",
  context: "An unnamed questioner asks about an uphill journey; another voice responds. Read the sentences through their line breaks.",
  sources: [{ label: "Original poem", url: literatureExample.source }],
  credit: "Christina Rossetti, Up-Hill. Public-domain poem, checked against the Academy of American Poets source. Line numbers and stanza labels are editorial aids. On narrower panels, a numbered line may wrap. The question and analysis are original teaching material.",

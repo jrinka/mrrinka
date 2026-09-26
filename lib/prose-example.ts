@@ -3,7 +3,7 @@ export const proseExample: LiteraryReading = {
   "title": "Moon Tiger — Penelope Lively",
   "author": "PENELOPE LIVELY",
   "question": "How does the use of varying narrative perspectives shape meaning in the passage?",
-  "questionCredit": "SUPPLIED PAPER",
+  "questionCredit": "Supplied guiding question",
   "context": "Claudia and Gordon hunt for fossils on a cliff. The extract moves through the children’s and their mother’s perspectives.",
   "sources": [
     {

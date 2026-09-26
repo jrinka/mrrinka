@@ -4,8 +4,8 @@ export const articleExample: LiteraryReading = {
   "title": "Lensa AI and artists’ work",
   "author": "Brendan Paul Murphy",
   "question": "How and to what effect is figurative language used in shaping the meaning of this text?",
-  "questionCredit": "GUIDING QUESTION · SUPPLIED EXAM TEXT",
-  "context": "The Conversation, December 2022; abridged version supplied in November 2024 TZ2, Text 1. The opening reading-group label is editorial; the three question headings are from the source. The article’s technical and legal claims are read in their original context.",
+  "questionCredit": "Supplied guiding question",
+  "context": "The Conversation, December 2022; supplied here in an abridged version. The opening reading-group label is editorial; the three question headings are from the source. The article’s technical and legal claims are read in their original context.",
   "wholeLabel": "Whole article",
   "image": {
     "url": "/examples/lensa-page-1.png",

@@ -4,8 +4,8 @@ export const letterExample: LiteraryReading = {
   "title": "Letter to Thom",
   "author": "John Steinbeck",
   "question": "How does Steinbeck combine reassurance and advice in addressing his son?",
-  "questionCredit": "PRACTICE QUESTION · ORIGINAL TEACHING MATERIAL",
-  "context": "New York, 10 November 1958. Supplied November 2013 examination text, from Steinbeck: A Life in Letters. Reading-group headings are editorial aids; the letter’s wording and paragraphs follow the supplied version.",
+  "questionCredit": "Practice guiding question",
+  "context": "New York, 10 November 1958. From Steinbeck: A Life in Letters. Reading-group headings are editorial aids; the letter’s wording and paragraphs follow the supplied version.",
   "wholeLabel": "Whole letter",
   "sources": [
     {

@@ -57,7 +57,7 @@ export default function WebpageGuide({ body, href }: { body: string; href: strin
 
   if (!active) return <Markdown>{body}</Markdown>;
   return <div className="advertisement-guide">
-    <p className="advertisement-question"><span className="mono">GUIDING QUESTION / SUPPLIED PAPER</span>{example.question}</p>
+    <p className="advertisement-question"><span className="mono">Supplied guiding question</span>{example.question}</p>
     <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
       {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>

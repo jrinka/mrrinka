@@ -4,7 +4,7 @@ export const speechExample: LiteraryReading = {
   "title": "Eulogy for Sir Edmund Hillary",
   "author": "Helen Clark",
   "question": "How does Clark shape the audience’s response to Hillary’s life and legacy?",
-  "questionCredit": "PRACTICE QUESTION · ORIGINAL TEACHING MATERIAL",
+  "questionCredit": "Practice guiding question",
   "context": "Helen Clark, Prime Minister of New Zealand, speaking at Hillary’s state funeral. Supplied adaptation, attributed to the New Zealand Herald, 22 January 2008. Reading-group headings are editorial aids; wording and paragraph boundaries follow the supplied version.",
   "sources": [
     {

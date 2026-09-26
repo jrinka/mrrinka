@@ -174,3 +174,18 @@ The Advertisement usability pass pairs each reading section with an appropriate 
 - `public/examples/happiness-lab-1.png` and `happiness-lab-2.png` are faithful source-region crops from 1600px-high renders. They include the banner, transcript and explanatory footnotes while omitting surrounding exam framing and question. No reconstruction or retouching. Rights remain with their holders; no open-license claim.
 - Kagi found and extracted the official episode page: https://www.pushkin.fm/podcasts/the-happiness-lab-with-dr-laurie-santos/the-war-for-kindness. This confirms the title and speakers and provides an optional listening route. The original description mentions another contributor omitted from the exam banner; the supplied version remains authoritative for this analysis. Audio delivery was not analyzed, and additional episode content was not imported.
 - Supplied guiding question retained. All overview, commentary, thesis, model and exercises are original teaching material. The analysis follows speaker contributions, accessible comparisons, empirical claims and the final qualification against compulsory engagement. Timestamp gaps are not interpreted as pauses; association is not treated as proof of cure or universal benefit.
+
+
+## Additional poetry example: The Paperweight — Gjertrud Schnackenberg
+
+- Teacher-supplied November 2021 Literature Paper 1, Text 1, reviewed as a complete page. The paper identifies the anthology The Zoo of the New. No original publication date or public-domain status is asserted.
+- `public/examples/paperweight-source.png` is an unchanged 1600px-high rendering of the supplied page, including all five four-line stanzas, footnote and guiding question. `lib/paperweight-example.ts` preserves its twenty lines, punctuation and stanza divisions. Consecutive line numbers and stanza labels are editorial aids; the poem has no alternating indentation.
+- The supplied guiding question is retained verbatim. The original walkthrough also explores time, intimacy, form and the limits of interpretation. Its examples distinguish statements from questions and supported inferences from invented feelings or biography. No marking notes or marking-note extracts are included in the repository.
+- The existing Poetry overview and Up-Hill example remain in place. The second example uses `?view=example&example=paperweight`; section links preserve that selection. A first-reading task invites students to write before revealing authored guidance and a complication. Their initial writing remains available in the final notebook and its exports while the page stays open.
+
+
+### Caught — Susan Adams
+
+Third poetry example, available with `?view=example&example=caught`. Transcript and source layout follow the teacher-supplied May 2025 TZ1 Literature Paper 1, Text 1: 22 lines, in stanzas of 5, 5, 3, 5 and 4 lines. The paper cites Susan Adams, Caught (2014), on [PoemHunter](https://www.poemhunter.com/poem/caught-38/); the online page differs in punctuation and spacing. The supplied version controls the walkthrough.
+
+Original guidance follows changing images and agency, distinguishing physical events from imagined transformations and keeping attraction alongside constraint. Includes a first reading before model reveal, a complication, an analytical paragraph and exportable student notes. No marking notes are reproduced.
