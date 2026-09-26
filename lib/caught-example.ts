@@ -20,7 +20,7 @@ export const caughtExample: LiteraryReading = {
       "url": "https://www.poemhunter.com/poem/caught-38/"
     }
   ],
-  "credit": "Susan Adams, Caught. Source: teacher-supplied May 2025 TZ1 Literature Paper 1, Text 1; the paper cites PoemHunter (2014). Wording, punctuation and stanza divisions follow the supplied page; the linked online version differs in punctuation and spacing. Stanza labels and consecutive line numbers are editorial aids. Rights remain with their holders. Commentary, models and practice are original teaching material.",
+  "credit": "Susan Adams, Caught. The supplied version cites PoemHunter (2014). Wording, punctuation and stanza divisions follow the supplied page; the linked online version differs in punctuation and spacing. Stanza labels and consecutive line numbers are editorial aids. Rights remain with their holders. Commentary, models and practice are original teaching material.",
   "passages": [
     {
       "title": "Stanza 1 · lines 1–5",

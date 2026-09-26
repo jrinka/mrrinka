@@ -21,7 +21,7 @@ export const letterExample: LiteraryReading = {
       "url": "https://www.sjsu.edu/steinbeck/resources/biography/steinbeck-american-writer.php"
     }
   ],
-  "credit": "John Steinbeck, letter to Thom, 10 November 1958, from Steinbeck: A Life in Letters, edited by Elaine Steinbeck and Robert Wallsten. Supplied in the November 2013 comparative Paper 1. Rights remain with their holders; the printed attribution is retained in source page 2. The standalone practice question, commentary and models are original teaching material.",
+  "credit": "John Steinbeck, letter to Thom, 10 November 1958, from Steinbeck: A Life in Letters, edited by Elaine Steinbeck and Robert Wallsten. Rights remain with their holders; the printed attribution is retained in source page 2. The standalone practice question, commentary and models are original teaching material.",
   "footnotes": "Fa: short for father. Elaine was Steinbeck’s wife and Thom’s stepmother. Correction to the supplied exam note: Elaine was his third wife; Thom was a son of his second wife, Gwyn. The linked Center for Steinbeck Studies biography confirms this. The original source image preserves the printed note unchanged.",
   "passages": [
     {

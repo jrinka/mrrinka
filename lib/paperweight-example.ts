@@ -20,7 +20,7 @@ export const paperweightExample: LiteraryReading = {
       "url": "/examples/paperweight-source.png"
     }
   ],
-  "credit": "Gjertrud Schnackenberg, The Paperweight. Source: teacher-supplied November 2021 Literature Paper 1, Text 1; anthology identified in the paper as The Zoo of the New. Wording, punctuation, line breaks and stanza divisions follow the supplied page. Stanza headings and consecutive line numbers are editorial; long lines may wrap on narrow screens. Rights remain with their holders. Commentary, practice and models are original teaching material, not an official marked response.",
+  "credit": "Gjertrud Schnackenberg, The Paperweight. The supplied version identifies the anthology as The Zoo of the New. Wording, punctuation, line breaks and stanza divisions follow the supplied page. Stanza headings and consecutive line numbers are editorial; long lines may wrap on narrow screens. Rights remain with their holders. Commentary, practice and models are original teaching material, not an official marked response.",
   "footnotes": "Supplied note: Paperweight: a heavy, ornamental object used to hold loose papers down.",
   "passages": [
     {

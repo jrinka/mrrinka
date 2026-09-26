@@ -3,7 +3,7 @@ export const cartoonExample = {
   "url": "/examples/singer-history-of-technology.png",
   "image": "/examples/singer-history-of-technology.png",
   "imageAlt": "Two-panel cartoon. At left, an unhappy prehistoric figure sits among trees, flowers and fish, saying ME NOT HAPPY. At right, a similarly unhappy suited man sits on a heap of manufactured objects below an industrial skyline and aircraft, saying STILL NOT HAPPY!",
-  "imageCredit": "© Andy Singer. The History of Technology, from No Exit. Cartoon from the supplied examination page; original publication date and exam session are not identified on that page.",
+  "imageCredit": "© Andy Singer. The History of Technology, from No Exit. Cartoon from the supplied examination page; original publication date is not identified on that page.",
   "question": "Discuss how text and image work together to communicate the message of the cartoon."
 };
 export const cartoonReadingSections: Record<string, {label:string;phase:string;location:string;note:string}> = {

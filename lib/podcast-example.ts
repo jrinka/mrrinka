@@ -27,7 +27,7 @@ export const podcastExample: LiteraryReading = {
       "url": "https://www.pushkin.fm/podcasts/the-happiness-lab-with-dr-laurie-santos/the-war-for-kindness"
     }
   ],
-  "credit": "The Happiness Lab with Dr. Laurie Santos, Pushkin Industries, The War For Kindness, with Jamil Zaki. Supplied May 2023 TZ1 Text 1. Transcript wording, repetitions, speaker labels and timestamps follow the supplied version; typography and footnote placement are normalized. The original episode contains additional material. Rights remain with their holders. All commentary, models and practice are original teaching material.",
+  "credit": "The Happiness Lab with Dr. Laurie Santos, Pushkin Industries, The War For Kindness, with Jamil Zaki. Transcript wording, repetitions, speaker labels and timestamps follow the supplied version; typography and footnote placement are normalized. The original episode contains additional material. Rights remain with their holders. All commentary, models and practice are original teaching material.",
   "footnotes": "Pushkin: Pushkin Industries is a podcast and audiobook production company. Pollyanna: a term derived from a children’s book of the same name, meaning an excessively or blindly optimistic person. Program artwork wording: THE HAPPINESS LAB; PUSHKIN.",
   "passages": [
     {

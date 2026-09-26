@@ -16,7 +16,7 @@ export const opinionExample: LiteraryReading = {
       "url": "https://thebeast.com.au/sport/netball-national-sport/"
     }
   ],
-  "credit": "Alasdair McClintock, “Should Netball Be Our National Sport?”, The Beast (1 May 2019), as reproduced in the supplied examination adaptation, November 2023, TZ2, Text 2. Visible photograph caption: “Great for the joints, by Liz Ellis.” Rights remain with their holders. The original page link is provided as cited in the supplied paper; the transcript follows the supplied version.",
+  "credit": "Alasdair McClintock, “Should Netball Be Our National Sport?”, The Beast (1 May 2019), as reproduced in the supplied examination adaptation. Visible photograph caption: “Great for the joints, by Liz Ellis.” Rights remain with their holders. The original page link is provided as cited in the supplied paper; the transcript follows the supplied version.",
   "footnotes": "Aerial Ping-Pong: Australian rules football. Cop a spray: get angrily yelled at. UFC: Ultimate Fighting Championship, an American mixed martial arts promotion company. Like hens’ teeth: exceptionally rare or scarce.",
   "passages": [
     {
