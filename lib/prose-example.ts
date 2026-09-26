@@ -15,7 +15,7 @@ export const proseExample: LiteraryReading = {
       "url": "/examples/moon-tiger-page-3.png"
     }
   ],
-  "credit": "Penelope Lively, Moon Tiger. Extract and question from the supplied teaching paper, printed pages 2–3. Rights remain with their respective holders. Reading-group headings are editorial. Typography is normalized; the original pages preserve layout and footnote markers.",
+  "credit": "Penelope Lively, Moon Tiger. Supplied extract, printed pages 2–3. Rights remain with their respective holders. Reading-group headings are editorial. Typography is normalized; the original pages preserve layout and footnote markers.",
   "footnotes": "ammonite: a type of fossil (the hardened remains of a prehistoric animal or plant); Asteroceras: a type of fossil.",
   "passages": [
     {

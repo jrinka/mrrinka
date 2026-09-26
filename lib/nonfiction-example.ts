@@ -3,7 +3,7 @@ export const nonfictionExample = {
  source: "/examples/gastronomical-me-exam-page.png",
  question: "How and to what effect are the diner and the waitress contrasted here?",
  context: "In this memoir extract, M. F. K. Fisher recounts her experience in a French restaurant.",
- credit: "M. F. K. Fisher, The Gastronomical Me (1943), Daunt Books, pp. 183–184. Source adapted by the examination paper. Rights remain with their respective holders.",
+ credit: "M. F. K. Fisher, The Gastronomical Me (1943), Daunt Books, pp. 183–184. Supplied adapted extract. Rights remain with their respective holders.",
 };
 export const nonfictionPassages = [
  {title:"The intended ending and the next dish · paragraphs 1–3", paragraphs:[

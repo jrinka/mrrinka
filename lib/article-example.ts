@@ -27,8 +27,8 @@ export const articleExample: LiteraryReading = {
       "url": "https://theconversation.com/no-the-lensa-ai-app-technically-isnt-stealing-artists-work-but-it-will-majorly-shake-up-the-art-world-196480"
     }
   ],
-  "credit": "Brendan Paul Murphy, The Conversation (December 2022), supplied in an abridged exam version. Image credit in the supplied caption: Stable Diffusion. Wording and paragraph boundaries follow the supplied text; typography and footnote placement are normalized. Rights remain with their holders. Commentary and models are original teaching material.",
-  "footnotes": "Supplied caption: “The rise of AI image generators spells a somewhat uncertain future for artists. Copyright law might need to catch up.” Image: Stable Diffusion. The supplied footnote identifies Midjourney, OpenAI and the CompVis group as developers central to image generation through machine learning. This note reports the exam’s explanatory context, not current technical guidance.",
+  "credit": "Brendan Paul Murphy, The Conversation (December 2022), supplied in an abridged version. Image credit in the supplied caption: Stable Diffusion. Wording and paragraph boundaries follow the supplied text; typography and footnote placement are normalized. Rights remain with their holders. Commentary and models are original teaching material.",
+  "footnotes": "Supplied caption: “The rise of AI image generators spells a somewhat uncertain future for artists. Copyright law might need to catch up.” Image: Stable Diffusion. The supplied footnote identifies Midjourney, OpenAI and the CompVis group as developers central to image generation through machine learning. This note reports the supplied source’s explanatory context, not current technical guidance.",
   "passages": [
     {
       "title": "Opening: appeal and disagreement",
