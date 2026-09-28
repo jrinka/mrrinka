@@ -2959,3 +2959,17 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .p2-bank-note { font-size:.85rem; border-top:1px solid var(--line); padding-top:16px; margin-top:20px; }
 @media(max-width:700px) { .paper-two-practice { padding:16px; } .p2-question-controls,.p2-export { flex-direction:column; align-items:stretch; } .p2-work-pair { grid-template-columns:1fr; } }
 @media print { .p2-question-controls,.p2-return,.p2-export,.p2-bank-note { display:none; } .paper-two-practice { border:0; padding:0; } .p2-work-pair { grid-template-columns:1fr 1fr; } }
+
+/* The sequential comic reader keeps a chosen source view while navigating. */
+.comic-follow { display:flex; align-items:center; gap:8px; padding:0 18px 12px; font-size:.8rem; }
+.comic-follow input { width:16px; height:16px; accent-color:var(--ink); }
+@media print { .comic-follow { display:none; } }
+.comic-guide .advertisement-view-controls { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+@media print {
+  .interior-site:has(.comic-guide) { display:block; min-height:0; background:white; color:black; }
+  .interior-site:has(.comic-guide) :is(.interior-sidebar,.interior-mobile,.footer,.course-tabs,.back,.text-type-view-nav,.text-type-view-heading > a) { display:none !important; }
+  .interior-site:has(.comic-guide) .interior-main { max-width:none; padding:10mm; }
+  .comic-guide .advertisement-viewer { break-before:page; border:0; background:white; }
+  .comic-guide .advertisement-transcript { display:none; }
+  .comic-guide .advertisement-reading-section h2 { break-after:avoid; }
+}

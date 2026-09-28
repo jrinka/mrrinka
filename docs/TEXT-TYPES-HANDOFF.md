@@ -213,3 +213,13 @@ New teaching text uses US spelling. The shared reader’s visible Analyze phase 
 Build, TypeScript and 10 content/export tests passed. Chrome verified overview discovery/contents, all eight sections, source-follow/whole-transcript controls, original-layout expansion, source links, supplied-question label, history/focus, previous/next, retained notes, TXT/MD exports, 1280px/1512px laptops, 1024px tablet, narrow fallback, dark mode and complete print. Moon Tiger, Poetry and Blog passed regression checks. React review preserved hook order, cleanup, mounted notes and semantic controls.
 
 Articles, Webpages, Letters and Podcasts/interviews are complete. Next phase: useful contrasting examples within existing guides (sequential comic, North and South prose extract, contrasting poem), followed by the final clarity and US spelling audit.
+
+## Sequential comic (28 September 2026)
+
+Added Dave Roman’s *I Was Reading That!* alongside Singer at the existing Cartoons ID, now titled Cartoons and comics. General overview additions explain sequence, gutters/closure, reading time versus story time, word-image relationships and a practical method. Existing overview wording (including teacher additions) and Singer commentary are preserved.
+
+Roman opens at `?view=example&example=comic` with eight sections. The reader offers a complete strip and three row close-ups, native-dialog enlargement, a panel transcript and image descriptions. Follow analysis selects relevant rows; choosing a view turns following off and preserves that view across section changes. History links retain the example choice, notebooks stay mounted during section navigation, and all four shared export formats are available. Print includes the whole strip and all commentary. Source details: TEXT-TYPE-SOURCES.md.
+
+The user specifically authorized this addition following the coverage audit; it does not authorize implementing the rest of that shortlist. The newer Obsidian roadmap remains the planning reference. Ed Grace’s science comic remains a possible future contrast, not a completed example.
+
+Verification: production build and TypeScript passed; 17 content, resource, section and export tests passed. Chrome checks covered overview discovery, all eight sections, persistent whole-strip/manual views, automatic following, dialog/Escape/focus return, history/reload, retained notes, all four actual downloads, 1440/1280px laptops, 1024px tablet, narrow fallback, actual dark theme and complete printed source/commentary. Singer, Caught, WWF and Cycling remained functional. Original course items and previous cartoon prose were compared unchanged. A final language review kept interpretation conditional where the image permits alternatives.
