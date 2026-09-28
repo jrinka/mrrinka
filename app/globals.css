@@ -2966,9 +2966,9 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 @media print { .comic-follow { display:none; } }
 .comic-guide .advertisement-view-controls { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
 @media print {
-  .interior-site:has(.comic-guide) { display:block; min-height:0; background:white; color:black; }
-  .interior-site:has(.comic-guide) :is(.interior-sidebar,.interior-mobile,.footer,.course-tabs,.back,.text-type-view-nav,.text-type-view-heading > a) { display:none !important; }
-  .interior-site:has(.comic-guide) .interior-main { max-width:none; padding:10mm; }
+  .interior-site:has(.comic-guide, .advertorial-reading) { display:block; min-height:0; background:white; color:black; }
+  .interior-site:has(.comic-guide, .advertorial-reading) :is(.interior-sidebar,.interior-mobile,.footer,.course-tabs,.back,.text-type-view-nav,.text-type-view-heading > a) { display:none !important; }
+  .interior-site:has(.comic-guide, .advertorial-reading) .interior-main { max-width:none; padding:10mm; }
   .comic-guide .advertisement-viewer { break-before:page; border:0; background:white; }
   .comic-guide .advertisement-transcript { display:none; }
   .comic-guide .advertisement-reading-section h2 { break-after:avoid; }

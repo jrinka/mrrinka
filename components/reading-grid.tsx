@@ -10,13 +10,18 @@ export default function ReadingGrid({method}:{method:ReadingMethod}) {
  const guide=readingMethods[method];
  const [notes,setNotes]=useState<string[]>(guide.steps.map(()=>""));
  const [text,setText]=useState("");
+ const record = { title: `${guide.title} reading grid`, text: text || guide.work, rows: guide.steps.map((step, i) => ({ title: step.title, prompt: step.prompt, notes: notes[i] })) };
+ function saveNotes() {
+  const content = `${record.title}\nText / author: ${record.text}\n\n${record.rows.map(row => `${row.title}\n${row.prompt}\n\n${row.notes || "(Not yet written)"}`).join("\n\n")}`;
+  return downloadRecord(content, `${method}-notes.txt`, exportFormat, record);
+ }
  return <section className="reading-workshop">
-  <div className="tool-actions"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><a className="button secondary" href={`/downloads/${method}-grid.html`} download><Download size={16}/> Download blank grid (.html)</a><button className="button secondary" type="button" onClick={()=>downloadRecord(`${guide.title} reading notes\nText: ${text || guide.work}\n\n${guide.steps.map((s,i)=>`${s.title}\n${notes[i]||"(Not yet recorded)"}`).join("\n\n")}`,`${method}-notes.txt`,exportFormat)}>Save my notes</button></div>
-  <p className="hint">The download opens in a browser for printing or offline use. Notes typed here stay on this page only; save them before leaving. No AI is used.</p>
+  <div className="tool-actions"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><a className="button secondary" href={`/downloads/${method}-grid.html`} download><Download size={16}/> Download blank grid (.html)</a><button className="button secondary" type="button" onClick={saveNotes}>Save my notes</button></div>
+  <p className="hint">PDF and Word exports keep your notes in a two-column grid. The blank HTML download opens in a browser for printing or offline use. Notes typed here stay on this page only; save them before leaving. No AI is used.</p>
   <label className="field">Your text and author (if trying a different text)<input value={text} onChange={e=>setText(e.target.value)} maxLength={300}/></label>
   <div className="reading-grid-head mono"><span>READING MOVE</span><span>WORKED EXAMPLE / {guide.work}</span><span>YOUR NOTES</span></div>
   {guide.steps.map((step,i)=><section className="reading-grid-row" key={step.title}><div><span className="method-letter" aria-hidden="true">{step.letter}</span><h2>{step.title}</h2><p>{step.prompt}</p></div><div className="reading-model"><span className="mono">WORKED EXAMPLE</span><p>{step.example}</p></div><label className="field">Your notes: {step.title}<textarea rows={4} maxLength={2500} value={notes[i]} onChange={e=>setNotes(current=>current.map((n,index)=>index===i?e.target.value:n))}/></label></section>)}
-  <div className="tool-actions"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button className="button secondary" type="button" onClick={()=>downloadRecord(`${guide.title} reading notes\nText: ${text || guide.work}\n\n${guide.steps.map((s,i)=>`${s.title}\n${notes[i]||"(Not yet recorded)"}`).join("\n\n")}`,`${method}-notes.txt`,exportFormat)}>Save my notes</button></div>
+  <div className="tool-actions"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button className="button secondary" type="button" onClick={saveNotes}>Save my notes</button></div>
   <aside className="lens-intro"><h2>Turn the grid into an argument</h2><p>{guide.bridge}</p><a href="/resources/observation-to-analysis">Practice moving from observation to analysis →</a></aside>
  </section>;
 }

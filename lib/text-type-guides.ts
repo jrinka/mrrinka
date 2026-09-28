@@ -1,6 +1,7 @@
 import type { CourseId } from "./schema";
 
 export const textTypeGuideIds = {
+  advertorial: "ccb7ce91-2ed6-4114-9626-e51733d172c0",
   podcast: "746d8c8a-0c8a-4ba0-9f37-0e38ffdcf686",
   letter: "027cb949-724f-4872-bef8-4f2599684139",
   webpage: "81d752ad-9f14-43a5-a7b5-34e14a7a7803",
@@ -20,12 +21,16 @@ export const textTypeGuideIds = {
 
 type TextTypeExample = {
   courseId: CourseId;
-  kind: "podcast" | "letter" | "webpage" | "article" | "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
+  kind: "advertorial" | "podcast" | "letter" | "webpage" | "article" | "speech" | "opinion" | "blog" | "infographic" | "advertisement" | "charity-appeal" | "poetry" | "drama" | "nonfiction" | "prose" | "cartoon";
   title: string;
   description: string;
 };
 
 const examples: Record<string, TextTypeExample> = {
+  [textTypeGuideIds.advertorial]: {
+    courseId: "language-literature", kind: "advertorial", title: "Stapelstein — Katie Cloyd for Romper",
+    description: "Trace how a parent’s story shifts between family experience, product claims and a recommendation in openly sponsored writing.",
+  },
   [textTypeGuideIds.podcast]: {
     courseId: "language-literature", kind: "podcast", title: "The Happiness Lab — The War For Kindness",
     description: "Follow how two speakers make empathy understandable, practical and voluntary through framing, comparisons and a classroom example.",
