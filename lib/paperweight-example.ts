@@ -7,7 +7,7 @@ export const paperweightExample: LiteraryReading = {
   "wholeLabel": "Whole poem",
   "question": "How, and to what effect, are perspectives considered in this poem?",
   "questionCredit": "Supplied guiding question",
-  "context": "Read through line and stanza breaks; the stanza labels and consecutive line numbers below are editorial aids.",
+  "context": "Read through line and stanza breaks; line numbers in the walkthrough are editorial aids.",
   "image": {
     "url": "/examples/paperweight-source.png",
     "width": 1132,
@@ -20,7 +20,7 @@ export const paperweightExample: LiteraryReading = {
       "url": "/examples/paperweight-source.png"
     }
   ],
-  "credit": "Gjertrud Schnackenberg, The Paperweight. The supplied version identifies the anthology as The Zoo of the New. Wording, punctuation, line breaks and stanza divisions follow the supplied page. Stanza headings and consecutive line numbers are editorial; long lines may wrap on narrow screens. Rights remain with their holders. Commentary, practice and models are original teaching material, not an official marked response.",
+  "credit": "Gjertrud Schnackenberg, The Paperweight. The supplied version identifies the anthology as The Zoo of the New. Wording, punctuation, line breaks and stanza divisions follow the supplied page. Line numbers in the walkthrough are editorial; long lines may wrap on narrow screens. Rights remain with their holders. Commentary, practice and models are original teaching material, not an official marked response.",
   "footnotes": "Supplied note: Paperweight: a heavy, ornamental object used to hold loose papers down.",
   "passages": [
     {

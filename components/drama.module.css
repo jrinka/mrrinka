@@ -5,7 +5,8 @@
 .controls button { font:inherit; font-size:.8rem; border:1px solid var(--line); background:var(--paper); color:var(--ink); padding:8px 12px; cursor:pointer; }
 .controls button[aria-pressed="true"] { background:var(--ink); color:var(--paper); }
 .transcript { padding:4px 20px 20px; }
-.passage { border-bottom:1px solid var(--line); padding-bottom:12px; }
+.passage { display:contents; }
+.passage[hidden] { display:none; }
 .passage:last-child { border-bottom:0; }
 .passage h3 { font-size:.8rem; color:var(--muted); margin:18px 0; font-weight:500; }
 .speech { font-size:.95rem; line-height:1.7; margin:16px 0; }
@@ -25,3 +26,27 @@
 .sourceLayout img { width:100%; height:auto; display:block; }
 .sourceLayout figcaption { font-size:.72rem; line-height:1.5; margin-top:10px; }
 @media print { .sourceLayout { display:none; } }
+
+.readingMode { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 20px; }
+.readingMode button { font:inherit; padding:10px 16px; border:1px solid var(--line); background:var(--paper); color:var(--ink); cursor:pointer; }
+.readingMode button[aria-pressed="true"] { background:var(--ink); color:var(--paper); }
+.reader [hidden] { display:none; }
+.reader[data-text-only="true"] :global(.advertisement-reading-workspace) { display:block; }
+.reader[data-text-only="true"] .source { position:static; max-height:none; overflow:visible; width:100%; max-width:850px; margin-inline:auto; }
+@media print {
+  .readingMode { display:none; }
+  .reader .passage[hidden] { display:contents; }
+  .reader[data-text-only="true"] :global(.advertisement-analysis),
+  .reader[data-text-only="true"] :global(.advertisement-reading-route) { display:none !important; }
+}
+
+.passage .sourceHeading { font-size:1rem; color:var(--ink); font-weight:700; }
+.reader[data-text-only="true"] .lineNumber { display:none; }
+.reader[data-text-only="true"] .poemLine { padding-left:0; }
+.reader[data-text-only="true"] .poemAnswer { padding-left:20px; }
+@media print {
+  .reader[data-text-only="false"] :global(.advertisement-reading-section[hidden]) { display:block; }
+}
+@media print {
+  .reader[data-text-only="true"] .source { break-after:auto !important; }
+}

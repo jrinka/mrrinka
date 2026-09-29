@@ -15,6 +15,7 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
   const routeRef = useRef<HTMLElement>(null);
   const headings = useRef<(HTMLHeadingElement | null)[]>([]);
   const [wholeSource, setWholeSource] = useState(false);
+  const [textOnly, setTextOnly] = useState(true);
   const sourceRef = useRef<HTMLElement>(null);
   const active = sections[activeIndex] ?? sections[0];
   const note = active ? reading[active.id] : undefined;
@@ -24,6 +25,7 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
     function readHash() {
       const index = sections.findIndex(section => section.id === window.location.hash.slice(1));
       setActiveIndex(Math.max(0, index));
+      setTextOnly(index < 0);
     }
     readHash();
     window.addEventListener("popstate", readHash);
@@ -34,6 +36,7 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
   function goTo(index: number) {
     if (!sections[index]) return;
     setActiveIndex(index);
+    setTextOnly(false);
     const url = `${href}?view=example#${sections[index].id}`;
     if (window.location.pathname + window.location.search + window.location.hash !== url) window.history.pushState(null, "", url);
     requestAnimationFrame(() => {
@@ -45,9 +48,17 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
   useEffect(() => { sourceRef.current?.scrollTo({ top: 0 }); }, [activeIndex]);
 
   if (!active) return <Markdown>{body}</Markdown>;
-  return <div className="advertisement-guide">
+  return <div className={`advertisement-guide ${styles.reader}`} data-text-only={textOnly}>
+    <div className={styles.readingMode} role="group" aria-label="Reading mode">
+      <button type="button" aria-pressed={textOnly} onClick={() => {
+        setTextOnly(true);
+        window.history.pushState(null, "", `${href}?view=example`);
+        sourceRef.current?.scrollTo({ top: 0 });
+      }}>Read the text</button>
+      <button type="button" aria-pressed={!textOnly} onClick={() => goTo(activeIndex)}>Work through the example</button>
+    </div>
     <p className="advertisement-question"><span className="mono">Supplied guiding question</span>{example.question}</p>
-    <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
+    <nav hidden={textOnly} className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
       {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
           <a href={`${href}?view=example#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
@@ -61,20 +72,19 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
       <aside className={`advertisement-viewer ${styles.source}`} ref={sourceRef} tabIndex={0} aria-label="Memoir extract: The Gastronomical Me">
         <div className="text-type-example-head"><span className="mono">SOURCE / M. F. K. FISHER</span><a href={example.source} target="_blank" rel="noopener noreferrer">Original exam page ↗</a></div>
         <p className={styles.context}>{example.context}</p>
-        <div className={styles.controls} role="group" aria-label="Extract view">
+        <div hidden={textOnly} className={styles.controls} role="group" aria-label="Extract view">
           <button type="button" aria-pressed={!wholeSource} onClick={() => { setWholeSource(false); sourceRef.current?.scrollTo({ top: 0 }); }}>Follow the reading</button>
           <button type="button" aria-pressed={wholeSource} onClick={() => { setWholeSource(true); sourceRef.current?.scrollTo({ top: 0 }); }}>Whole extract</button>
         </div>
         <div className={styles.transcript}>
-          {nonfictionPassages.map((passage, index) => <section className={styles.passage} key={passage.title} hidden={!wholeSource && note?.passage != null && note.passage !== index}>
-            <h3>{passage.title}</h3>
+          {nonfictionPassages.map((passage, index) => <section className={styles.passage} key={passage.title} hidden={!textOnly && !wholeSource && note?.passage != null && note.passage !== index}>
             {passage.paragraphs.map((paragraph, i) => <p className={styles.speech} key={i}>{paragraph}</p>)}
           </section>)}
         </div>
         <p className={styles.context}><strong>Source footnotes:</strong> winily: she has had wine to drink; surfeit: excess.</p>
         <p className={styles.credit}>{example.credit} Reading groups and paragraph numbers are editorial aids. Typography is normalized; the original exam page preserves the layout and footnote markers.</p>
       </aside>
-      <div className="advertisement-analysis">
+      <div hidden={textOnly} className="advertisement-analysis">
         <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { routeRef.current?.focus({ preventScroll: true }); routeRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>
         <nav className="advertisement-reader-pager advertisement-reader-pager-top" aria-label="Reading controls">
           <button type="button" disabled={activeIndex === 0} onClick={() => goTo(activeIndex - 1)}>← Previous</button>

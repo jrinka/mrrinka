@@ -4,7 +4,7 @@ export type LiteraryReading = {
  sources: { label: string; url: string }[]; credit: string; footnotes?: string; poem?: boolean;
  poemAlternatingIndent?: boolean;
  firstReading?: { prompt: string; model: string; complication: string };
- passages: { title: string; paragraphs: string[] }[];
+ passages: { title: string; sourceHeading?: boolean; paragraphs: string[] }[];
  sections: Record<string, { label: string; phase: string; passage: number | null }>;
  fields: readonly { key: "contrast" | "evidence" | "analysis"; label: string; hint: string }[];
  checks: string[]; filename: string;

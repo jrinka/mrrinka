@@ -5,7 +5,7 @@ export const articleExample: LiteraryReading = {
   "author": "Brendan Paul Murphy",
   "question": "How and to what effect is figurative language used in shaping the meaning of this text?",
   "questionCredit": "Supplied guiding question",
-  "context": "The Conversation, December 2022; supplied here in an abridged version. The opening reading-group label is editorial; the three question headings are from the source. The article’s technical and legal claims are read in their original context.",
+  "context": "The Conversation, December 2022; supplied here in an abridged version. The three question headings are from the source. The article’s technical and legal claims are read in their original context.",
   "wholeLabel": "Whole article",
   "image": {
     "url": "/examples/lensa-page-1.png",
@@ -43,6 +43,7 @@ export const articleExample: LiteraryReading = {
     },
     {
       "title": "If it’s not direct theft, what is it?",
+      "sourceHeading": true,
       "paragraphs": [
         "Text-to-media AI is inherently very complicated, but it is possible for us non-computer-scientists to understand conceptually.",
         "To really grasp the positives and negatives of Lensa, it’s worth taking a couple of steps back to understand how artists’ individual styles can find their way into, and out of, the black boxes that power systems like Lensa.",
@@ -51,6 +52,7 @@ export const articleExample: LiteraryReading = {
     },
     {
       "title": "What makes Lensa stand out?",
+      "sourceHeading": true,
       "paragraphs": [
         "Lensa takes user-supplied photos and injects them into Stable Diffusion’s existing knowledge base, teaching the system how to “capture” the user’s features so it can then stylise them. While this can be done in the regular Stable Diffusion, it’s far from a streamlined process.",
         "Although you can’t push the images on Lensa in any particular desired direction, the trade-off is a wide variety of options that are almost always impressive. These images borrow ideas from other artists’ work, but do not contain any actual snippets of their work.",
@@ -59,6 +61,7 @@ export const articleExample: LiteraryReading = {
     },
     {
       "title": "What about the artists?",
+      "sourceHeading": true,
       "paragraphs": [
         "Nonetheless, the fact that art styles and techniques are now transferable in this way is immensely disruptive and extremely upsetting for artists. As technologies like Lensa become more mainstream and artists feel increasingly ripped-off, there may be pressure for legislation to adapt to it.",
         "For artists who work on small-scale jobs, such as creating digital illustrations for influencers or other web enterprises, the future looks challenging.",

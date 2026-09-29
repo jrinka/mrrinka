@@ -7,7 +7,7 @@ export const caughtExample: LiteraryReading = {
   "wholeLabel": "Whole poem",
   "question": "How and to what effect is figurative language used in this text?",
   "questionCredit": "Supplied guiding question",
-  "context": "Read the changing comparisons through the whole poem. Stanza labels and consecutive line numbers are editorial aids.",
+  "context": "Read the changing comparisons through the whole poem. Line numbers in the walkthrough are editorial aids.",
   "image": {
     "url": "/examples/caught-source.png",
     "width": 1132,
@@ -20,7 +20,7 @@ export const caughtExample: LiteraryReading = {
       "url": "https://www.poemhunter.com/poem/caught-38/"
     }
   ],
-  "credit": "Susan Adams, Caught. The supplied version cites PoemHunter (2014). Wording, punctuation and stanza divisions follow the supplied page; the linked online version differs in punctuation and spacing. Stanza labels and consecutive line numbers are editorial aids. Rights remain with their holders. Commentary, models and practice are original teaching material.",
+  "credit": "Susan Adams, Caught. The supplied version cites PoemHunter (2014). Wording, punctuation and stanza divisions follow the supplied page; the linked online version differs in punctuation and spacing. Line numbers in the walkthrough are editorial aids. Rights remain with their holders. Commentary, models and practice are original teaching material.",
   "passages": [
     {
       "title": "Stanza 1 · lines 1–5",

@@ -5,7 +5,7 @@ export const opinionExample: LiteraryReading = {
   "author": "Alasdair McClintock",
   "question": "How is tone used to shape the meaning of this text?",
   "questionCredit": "Supplied guiding question",
-  "context": "The Beast, 1 May 2019. Reading-group headings and paragraph numbers below are editorial aids. Wording is preserved; typography and footnote placement are normalized.",
+  "context": "The Beast, 1 May 2019. Wording is preserved; typography and footnote placement are normalized.",
   "sources": [
     {
       "label": "Source image",

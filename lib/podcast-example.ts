@@ -5,7 +5,7 @@ export const podcastExample: LiteraryReading = {
   "author": "Laurie Santos and Jamil Zaki",
   "question": "How and to what effect is empathy presented in the text?",
   "questionCredit": "Supplied guiding question",
-  "context": "Timestamps and speaker labels follow the supplied transcript. Reading-group headings are editorial; the final group continues Zaki’s 23:45 contribution. Episode framing is transcribed before the first turn.",
+  "context": "Timestamps and speaker labels follow the supplied transcript. Episode framing is transcribed before the first turn.",
   "wholeLabel": "Whole transcript",
   "image": {
     "url": "/examples/happiness-lab-1.png",

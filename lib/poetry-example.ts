@@ -6,7 +6,7 @@ export const poetryExample: LiteraryReading = {
  question: literatureExample.question, questionCredit: "Practice guiding question",
  context: "An unnamed questioner asks about an uphill journey; another voice responds. Read the sentences through their line breaks.",
  sources: [{ label: "Original poem", url: literatureExample.source }],
- credit: "Christina Rossetti, Up-Hill. Public-domain poem, checked against the Academy of American Poets source. Line numbers and stanza labels are editorial aids. On narrower panels, a numbered line may wrap. The question and analysis are original teaching material.",
+ credit: "Christina Rossetti, Up-Hill. Public-domain poem, checked against the Academy of American Poets source. Line numbers in the walkthrough are editorial aids. On narrower panels, a numbered line may wrap. The question and analysis are original teaching material.",
  passages: literatureExample.stanzas.map((paragraphs, index) => ({ title: `Stanza ${index + 1} · lines ${index * 4 + 1}–${index * 4 + 4}`, paragraphs })),
  sections: {
   "read-the-dialogue-as-a-whole": { label: "Read the whole dialogue", phase: "Orient", passage: null },

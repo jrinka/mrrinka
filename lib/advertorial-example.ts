@@ -5,7 +5,7 @@ export const advertorialExample: LiteraryReading = {
   "author": "Katie Cloyd / Romper",
   "question": "How and to what effect is narrative voice used in the text?",
   "questionCredit": "Supplied guiding question",
-  "context": "Katie Cloyd, Romper (2023), sponsored by Stapelstein. This is the supplied adapted version. Reading-group headings are editorial; product claims are analyzed as claims, not verified specifications.",
+  "context": "Katie Cloyd, Romper (2023), sponsored by Stapelstein. This is the supplied adapted version. Product claims are analyzed as claims, not verified specifications.",
   "wholeLabel": "Whole advertorial",
   "image": {
     "url": "/examples/stapelstein-page-1.png",

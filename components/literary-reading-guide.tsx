@@ -21,6 +21,7 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
   const routeRef = useRef<HTMLElement>(null);
   const headings = useRef<(HTMLHeadingElement | null)[]>([]);
   const [wholeSource, setWholeSource] = useState(false);
+  const [textOnly, setTextOnly] = useState(true);
   const sourceRef = useRef<HTMLElement>(null);
   const active = sections[activeIndex] ?? sections[0];
   const note = active ? reading[active.id] : undefined;
@@ -30,6 +31,7 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
     function readHash() {
       const index = sections.findIndex(section => section.id === window.location.hash.slice(1));
       setActiveIndex(Math.max(0, index));
+      setTextOnly(index < 0);
     }
     readHash();
     window.addEventListener("popstate", readHash);
@@ -40,6 +42,7 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
   function goTo(index: number) {
     if (!sections[index]) return;
     setActiveIndex(index);
+    setTextOnly(false);
     const url = `${readingHref}#${sections[index].id}`;
     if (window.location.pathname + window.location.search + window.location.hash !== url) window.history.pushState(null, "", url);
     requestAnimationFrame(() => {
@@ -51,9 +54,17 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
   useEffect(() => { sourceRef.current?.scrollTo({ top: 0 }); }, [activeIndex]);
 
   if (!active) return <Markdown>{body}</Markdown>;
-  return <div className="advertisement-guide">
+  return <div className={`advertisement-guide ${styles.reader}`} data-text-only={textOnly}>
+    <div className={styles.readingMode} role="group" aria-label="Reading mode">
+      <button type="button" aria-pressed={textOnly} onClick={() => {
+        setTextOnly(true);
+        window.history.pushState(null, "", readingHref);
+        sourceRef.current?.scrollTo({ top: 0 });
+      }}>Read the text</button>
+      <button type="button" aria-pressed={!textOnly} onClick={() => goTo(activeIndex)}>Work through the example</button>
+    </div>
     <p className="advertisement-question"><span className="mono">{example.questionCredit}</span>{example.question}</p>
-    <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
+    <nav hidden={textOnly} className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
       {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
           <a href={`${readingHref}#${section.id}`} aria-current={activeIndex === index ? "step" : undefined} onClick={event => {
@@ -67,21 +78,21 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
       <aside className={`advertisement-viewer ${styles.source}`} ref={sourceRef} tabIndex={0} aria-label={`Source: ${example.title}`}>
         <div className="text-type-example-head"><span className="mono">SOURCE / {example.author}</span><span>{example.sources.map(source => <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer" style={{ marginLeft: 12 }}>{source.label} ↗</a>)}</span></div>
         <p className={styles.context}>{example.context}</p>
-        <div className={styles.controls} role="group" aria-label={example.poem ? "Poem view" : "Extract view"}>
+        <div hidden={textOnly} className={styles.controls} role="group" aria-label={example.poem ? "Poem view" : "Extract view"}>
           <button type="button" aria-pressed={!wholeSource} onClick={() => { setWholeSource(false); sourceRef.current?.scrollTo({ top: 0 }); }}>Follow the reading</button>
           <button type="button" aria-pressed={wholeSource} onClick={() => { setWholeSource(true); sourceRef.current?.scrollTo({ top: 0 }); }}>{example.wholeLabel ?? (example.poem ? "Whole poem" : "Whole extract")}</button>
         </div>
         {example.image && <details className={styles.sourceLayout}><summary>See original page layout</summary><figure><Image src={example.image.url} width={example.image.width} height={example.image.height} alt={example.image.alt} unoptimized /><figcaption>{example.credit}</figcaption></figure></details>}
         <div className={styles.transcript}>
-          {example.passages.map((passage, index) => <section className={styles.passage} key={passage.title} hidden={!wholeSource && note?.passage != null && note.passage !== index}>
-            <h3>{passage.title}</h3>
+          {example.passages.map((passage, index) => <section className={styles.passage} key={passage.title} hidden={!textOnly && !wholeSource && note?.passage != null && note.passage !== index}>
+            {passage.sourceHeading && <h3 className={styles.sourceHeading}>{passage.title}</h3>}
             {example.poem ? <p className={styles.poemStanza}>{passage.paragraphs.map((line, i) => <span className={example.poemAlternatingIndent && i % 2 ? styles.poemAnswer : styles.poemLine} key={i}><span className={styles.lineNumber} aria-hidden="true">{example.passages.slice(0, index).reduce((count, previous) => count + previous.paragraphs.length, 0) + i + 1}</span>{line}</span>)}</p> : passage.paragraphs.map((paragraph, i) => <ReactMarkdown key={i} components={{ p: ({ children }) => <p className={styles.speech}>{children}</p> }}>{paragraph}</ReactMarkdown>)}
           </section>)}
         </div>
         {example.footnotes && <p className={styles.context}><strong>Source footnotes:</strong> {example.footnotes}</p>}
         <p className={styles.credit}>{example.credit}</p>
       </aside>
-      <div className="advertisement-analysis">
+      <div hidden={textOnly} className="advertisement-analysis">
         <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { routeRef.current?.focus({ preventScroll: true }); routeRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>
         <nav className="advertisement-reader-pager advertisement-reader-pager-top" aria-label="Reading controls">
           <button type="button" disabled={activeIndex === 0} onClick={() => goTo(activeIndex - 1)}>← Previous</button>
