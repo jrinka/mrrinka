@@ -2973,3 +2973,32 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
   .comic-guide .advertisement-transcript { display:none; }
   .comic-guide .advertisement-reading-section h2 { break-after:avoid; }
 }
+
+/* Worked-example navigation stays secondary to the source and student's writing. */
+.worked-example-navigation { display:flex; align-items:flex-start; gap:16px; margin:18px 0 24px; }
+.worked-example-navigation[hidden], .source-next-step[hidden] { display:none; }
+.worked-example-sections { flex:1; min-width:0; border-block:1px solid var(--line); }
+.worked-example-sections summary { padding:14px 8px; cursor:pointer; font-size:.9rem; }
+.worked-example-sections summary .mono { float:right; font-size:.7rem; color:var(--muted); }
+.worked-example-sections .advertisement-reading-route { margin:0; padding:12px 0; border-bottom:0; }
+.notebook-shortcut { font:inherit; font-size:.85rem; padding:12px 14px; border:1px solid var(--line); background:var(--paper); color:var(--ink); cursor:pointer; white-space:nowrap; }
+.advertisement-reader-progress { flex-wrap:wrap; gap:10px; }
+.advertisement-reader-progress > .mono { margin-right:auto; }
+.source-reading-column { display:contents; }
+[data-text-only="true"] .source-reading-column { display:block; max-width:850px; margin-inline:auto; }
+.source-next-step { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:20px; }
+.source-information { border-top:1px solid var(--line); background:var(--panel-warm); font-size:.85rem; }
+.source-information summary { cursor:pointer; padding:14px 20px; }
+.source-information p:first-of-type { margin-top:0; }
+.infographic-notes { scroll-margin-top:24px; padding:20px; background:var(--panel-warm); border:1px solid var(--line); border-top:3px solid var(--citron); }
+.notebook-label { display:block; font-size:.7rem; color:var(--muted); margin-bottom:10px; }
+@media print {
+  .worked-example-navigation, .source-next-step, .notebook-shortcut { display:none !important; }
+  .source-information { display:none; }
+  .source-information-print { display:block; }
+
+  .infographic-notes { background:white; }
+}
+
+
+@media screen { .source-information-print { display:none; } }

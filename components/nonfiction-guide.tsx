@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Markdown from "./markdown";
+import SourceInformation from "./source-information";
+import WorkedExampleNavigation, { NotesShortcut, openSectionMap } from "./worked-example-navigation";
 import ExportFormatSelect from "./export-format";
 import { downloadRecord, type ExportFormat } from "@/lib/practice-record";
 import { splitGuideSections } from "@/lib/guide-sections";
@@ -56,8 +58,10 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
         sourceRef.current?.scrollTo({ top: 0 });
       }}>Read the text</button>
       <button type="button" aria-pressed={!textOnly} onClick={() => goTo(activeIndex)}>Work through the example</button>
+      <NotesShortcut onSelect={() => { setWholeSource(true); goTo(sections.findIndex(section => section.id === "practice-and-transfer")); }} />
     </div>
     <p className="advertisement-question"><span className="mono">Supplied guiding question</span>{example.question}</p>
+    <WorkedExampleNavigation showNotes={false} hidden={textOnly} current={activeIndex + 1} total={sections.length} onNotes={() => { setWholeSource(true); goTo(sections.findIndex(section => section.id === "practice-and-transfer")); }}>
     <nav hidden={textOnly} className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
       {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
@@ -68,7 +72,9 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
         </li>)}
       </ol></div>)}
     </nav>
+    </WorkedExampleNavigation>
     <div className="advertisement-reading-workspace" ref={workspaceRef}>
+      <div className="source-reading-column">
       <aside className={`advertisement-viewer ${styles.source}`} ref={sourceRef} tabIndex={0} aria-label="Memoir extract: The Gastronomical Me">
         <div className="text-type-example-head"><span className="mono">SOURCE / M. F. K. FISHER</span><a href={example.source} target="_blank" rel="noopener noreferrer">Original exam page ↗</a></div>
         <p className={styles.context}>{example.context}</p>
@@ -82,10 +88,14 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
           </section>)}
         </div>
         <p className={styles.context}><strong>Source footnotes:</strong> winily: she has had wine to drink; surfeit: excess.</p>
+        <SourceInformation>
         <p className={styles.credit}>{example.credit} Reading groups and paragraph numbers are editorial aids. Typography is normalized; the original exam page preserves the layout and footnote markers.</p>
+        </SourceInformation>
       </aside>
+      <div className="source-next-step" hidden={!textOnly}><button type="button" className="button" onClick={() => goTo(0)}>Continue to the walkthrough →</button><NotesShortcut onSelect={() => { setWholeSource(true); goTo(sections.findIndex(section => section.id === "practice-and-transfer")); }} /></div>
+      </div>
       <div hidden={textOnly} className="advertisement-analysis">
-        <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { routeRef.current?.focus({ preventScroll: true }); routeRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>
+        <div className="advertisement-reader-progress"><span className="mono">GUIDED ANALYSIS · {activeIndex + 1} / {sections.length}</span><NotesShortcut onSelect={() => { setWholeSource(true); goTo(sections.findIndex(section => section.id === "practice-and-transfer")); }} /><button type="button" onClick={() => { openSectionMap(routeRef.current); }}>All sections ↑</button></div>
         <nav className="advertisement-reader-pager advertisement-reader-pager-top" aria-label="Reading controls">
           <button type="button" disabled={activeIndex === 0} onClick={() => goTo(activeIndex - 1)}>← Previous</button>
           <button type="button" disabled={activeIndex === sections.length - 1} onClick={() => goTo(activeIndex + 1)}>Next: {labelFor(activeIndex + 1) ?? "Finished"} →</button>
@@ -109,7 +119,7 @@ function NonfictionNotes() {
   const [values, setValues] = useState({ contrast: "", evidence: "", analysis: "" });
   const [format, setFormat] = useState<ExportFormat>("txt");
   return <section className="infographic-notes" aria-label="Prose non-fiction analysis notebook">
-    <h3>Try a connected reading</h3>
+    <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
     {fields.map(field => <label className="field" key={field.key} htmlFor={`nonfiction-${field.key}`}>{field.label}<span className="hint" id={`nonfiction-${field.key}-hint`}>{field.hint}</span><textarea id={`nonfiction-${field.key}`} aria-describedby={`nonfiction-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}
     <p className="hint">Your notes stay here while this page is open. Export before leaving. This exercise does not send writing to AI.</p>
     <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`Prose non-fiction analysis notes\n\nSource: ${example.title}\nhttps://mrrinka.com${example.source}\n\nQuestion from the supplied paper: ${example.question}\n\n${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, "prose-nonfiction-notes.txt", format)}>Export my notes</button></div>

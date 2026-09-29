@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import Image from "next/image";
 import Markdown from "./markdown";
+import WorkedExampleNavigation, { NotesShortcut, openSectionMap } from "./worked-example-navigation";
 import ExportFormatSelect from "./export-format";
 import { downloadRecord, type ExportFormat } from "@/lib/practice-record";
 import { splitGuideSections } from "@/lib/guide-sections";
@@ -87,6 +88,7 @@ export default function AdvertisementGuide({ body, href }: { body: string; href:
 
   return <div className="advertisement-guide" onClick={followZoom}>
     <p className="advertisement-question"><span className="mono">PRACTICE GUIDING QUESTION</span>{example.question}</p>
+    <WorkedExampleNavigation current={activeIndex + 1} total={sections.length} onNotes={() => goToSection(sections.findIndex(section => section.id === "practice-and-transfer"))}>
     <nav className="advertisement-reading-route" id="advertisement-reading-route" tabIndex={-1} aria-label="Worked example sections">
       {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (readingSections[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
@@ -98,6 +100,7 @@ export default function AdvertisementGuide({ body, href }: { body: string; href:
         </li>)}
       </ol></div>)}
     </nav>
+    </WorkedExampleNavigation>
     <div className="advertisement-reading-workspace" ref={workspaceRef}>
       <section className="advertisement-viewer" id="advertisement-source" ref={sourceRef} tabIndex={-1} aria-label="FIJI Water source and close-up views">
         <div className="text-type-example-head"><span className="mono">SOURCE / FIJI WATER</span><button type="button" onClick={() => dialogRef.current?.showModal()}>Enlarge source ↗</button></div>
@@ -111,7 +114,7 @@ export default function AdvertisementGuide({ body, href }: { body: string; href:
         </details>
       </section>
       <div className="advertisement-analysis">
-        <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { const route = document.getElementById("advertisement-reading-route"); route?.focus({ preventScroll: true }); route?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>
+        <div className="advertisement-reader-progress"><span className="mono">GUIDED ANALYSIS · {activeIndex + 1} / {sections.length}</span><NotesShortcut onSelect={() => goToSection(sections.findIndex(section => section.id === "practice-and-transfer"))} /><button type="button" onClick={() => { openSectionMap(document.getElementById("advertisement-reading-route")); }}>All sections ↑</button></div>
         <nav className="advertisement-reader-pager advertisement-reader-pager-top" aria-label="Reading controls">
           <button type="button" disabled={activeIndex === 0} onClick={() => goToSection(activeIndex - 1)}>← Previous</button>
           <button type="button" disabled={activeIndex === sections.length - 1} onClick={() => goToSection(activeIndex + 1)}>Next: {labelFor(activeIndex + 1) ?? "Finished"} →</button>
@@ -161,7 +164,7 @@ function AdvertisementNotes() {
   const [values, setValues] = useState({ audience: "", evidence: "", analysis: "" });
   const [format, setFormat] = useState<ExportFormat>("txt");
   return <section className="infographic-notes" aria-label="Advertisement analysis notebook">
-    <h3>Try a connected reading</h3>
+    <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
     <p>Work with the body copy or closing slogan. Connect what it says with how the product is presented.</p>
     {fields.map(field => <label className="field" key={field.key} htmlFor={`advertisement-${field.key}`}>{field.label}<span className="hint" id={`advertisement-${field.key}-hint`}>{field.hint}</span>
       <textarea id={`advertisement-${field.key}`} aria-describedby={`advertisement-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} />

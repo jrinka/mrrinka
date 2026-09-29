@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import Markdown from "./markdown";
+import SourceInformation from "./source-information";
+import WorkedExampleNavigation, { NotesShortcut, openSectionMap } from "./worked-example-navigation";
 import ExportFormatSelect from "./export-format";
 import { downloadRecord, type ExportFormat } from "@/lib/practice-record";
 import { splitGuideSections } from "@/lib/guide-sections";
@@ -62,8 +64,10 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
         sourceRef.current?.scrollTo({ top: 0 });
       }}>Read the text</button>
       <button type="button" aria-pressed={!textOnly} onClick={() => goTo(activeIndex)}>Work through the example</button>
+      <NotesShortcut onSelect={() => { setWholeSource(true); goTo(sections.findIndex(section => section.id === "practice-and-transfer")); }} />
     </div>
     <p className="advertisement-question"><span className="mono">{example.questionCredit}</span>{example.question}</p>
+    <WorkedExampleNavigation showNotes={false} hidden={textOnly} current={activeIndex + 1} total={sections.length} onNotes={() => { setWholeSource(true); goTo(sections.findIndex(section => section.id === "practice-and-transfer")); }}>
     <nav hidden={textOnly} className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
       {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
@@ -74,7 +78,9 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
         </li>)}
       </ol></div>)}
     </nav>
+    </WorkedExampleNavigation>
     <div className="advertisement-reading-workspace" ref={workspaceRef}>
+      <div className="source-reading-column">
       <aside className={`advertisement-viewer ${styles.source}`} ref={sourceRef} tabIndex={0} aria-label={`Source: ${example.title}`}>
         <div className="text-type-example-head"><span className="mono">SOURCE / {example.author}</span><span>{example.sources.map(source => <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer" style={{ marginLeft: 12 }}>{source.label} ↗</a>)}</span></div>
         <p className={styles.context}>{example.context}</p>
@@ -89,11 +95,15 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
             {example.poem ? <p className={styles.poemStanza}>{passage.paragraphs.map((line, i) => <span className={example.poemAlternatingIndent && i % 2 ? styles.poemAnswer : styles.poemLine} key={i}><span className={styles.lineNumber} aria-hidden="true">{example.passages.slice(0, index).reduce((count, previous) => count + previous.paragraphs.length, 0) + i + 1}</span>{line}</span>)}</p> : passage.paragraphs.map((paragraph, i) => <ReactMarkdown key={i} components={{ p: ({ children }) => <p className={styles.speech}>{children}</p> }}>{paragraph}</ReactMarkdown>)}
           </section>)}
         </div>
+        <SourceInformation>
         {example.footnotes && <p className={styles.context}><strong>Source footnotes:</strong> {example.footnotes}</p>}
         <p className={styles.credit}>{example.credit}</p>
+        </SourceInformation>
       </aside>
+      <div className="source-next-step" hidden={!textOnly}><button type="button" className="button" onClick={() => goTo(0)}>Continue to the walkthrough →</button><NotesShortcut onSelect={() => { setWholeSource(true); goTo(sections.findIndex(section => section.id === "practice-and-transfer")); }} /></div>
+      </div>
       <div hidden={textOnly} className="advertisement-analysis">
-        <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { routeRef.current?.focus({ preventScroll: true }); routeRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>
+        <div className="advertisement-reader-progress"><span className="mono">GUIDED ANALYSIS · {activeIndex + 1} / {sections.length}</span><NotesShortcut onSelect={() => { setWholeSource(true); goTo(sections.findIndex(section => section.id === "practice-and-transfer")); }} /><button type="button" onClick={() => { openSectionMap(routeRef.current); }}>All sections ↑</button></div>
         <nav className="advertisement-reader-pager advertisement-reader-pager-top" aria-label="Reading controls">
           <button type="button" disabled={activeIndex === 0} onClick={() => goTo(activeIndex - 1)}>← Previous</button>
           <button type="button" disabled={activeIndex === sections.length - 1} onClick={() => goTo(activeIndex + 1)}>Next: {labelFor(activeIndex + 1) ?? "Finished"} →</button>
@@ -129,7 +139,7 @@ function LiteraryNotes({ example, firstReading }: { example: LiteraryReading; fi
   const [values, setValues] = useState({ contrast: "", evidence: "", analysis: "" });
   const [format, setFormat] = useState<ExportFormat>("txt");
   return <section className="infographic-notes" aria-label={`${example.title} analysis notebook`}>
-    <h3>Try a connected reading</h3>
+    <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
     {example.firstReading && <div><h4>Your first reading</h4><p style={{ whiteSpace: "pre-wrap" }}>{firstReading || "You have not written a first reading yet. You can return to the opening section at any time."}</p></div>}
     {fields.map(field => <label className="field" key={field.key} htmlFor={`literary-${field.key}`}>{field.label}<span className="hint" id={`literary-${field.key}-hint`}>{field.hint}</span><textarea id={`literary-${field.key}`} aria-describedby={`literary-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}
     <p className="hint">Your notes stay here while this page is open. Export before leaving. This exercise does not send writing to AI.</p>

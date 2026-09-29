@@ -76,7 +76,7 @@ function InfographicSource() {
       </a>
       <figcaption><a href={example.image} target="_blank" rel="noopener noreferrer">Open full-size image ↗</a> · <a href={example.pdf} download>Download original PDF ↓</a></figcaption>
     </figure>
-    <div className="text-type-example-note" aria-live="polite" aria-atomic="true"><h2>{view.term}</h2><p>{view.note}</p></div>
+    <div className="text-type-example-note" aria-live="polite" aria-atomic="true"><span className="mono notebook-label">GUIDE NOTE</span><h2>{view.term}</h2><p>{view.note}</p></div>
     <p className="text-type-example-source">
       <a href={example.context} target="_blank" rel="noopener noreferrer" title="Department of Health and Social Care · UK Chief Medical Officers’ Physical Activity Guidelines">Department of Health and Social Care ↗</a><br />
       © Crown copyright 2019 · <a href={example.license} target="_blank" rel="noopener noreferrer">Open Government License v3.0 ↗</a><br />

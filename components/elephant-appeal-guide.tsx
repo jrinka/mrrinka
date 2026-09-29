@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Markdown from "./markdown";
+import WorkedExampleNavigation, { NotesShortcut, openSectionMap } from "./worked-example-navigation";
 import ExportFormatSelect from "./export-format";
 import { downloadRecord, type ExportFormat } from "@/lib/practice-record";
 import { splitGuideSections } from "@/lib/guide-sections";
@@ -58,6 +59,7 @@ export default function ElephantAppealGuide({ body, href }: { body: string; href
   if (!active) return <Markdown>{body}</Markdown>;
   return <div className="advertisement-guide">
     <p className="advertisement-question"><span className="mono">Supplied guiding question</span>{example.question}</p>
+    <WorkedExampleNavigation current={activeIndex + 1} total={sections.length} onNotes={() => goTo(sections.findIndex(section => section.id === "practice-and-transfer"))}>
     <nav className="advertisement-reading-route" ref={routeRef} tabIndex={-1} aria-label="Worked example sections">
       {["Orient", "Analyse", "Write"].map(phase => <div key={phase}><span className="mono">{phase === "Analyse" ? "Analyze" : phase}</span><ol>
         {sections.map((section, index) => (reading[section.id]?.phase ?? "Analyse") === phase && <li key={section.id}>
@@ -68,6 +70,7 @@ export default function ElephantAppealGuide({ body, href }: { body: string; href
         </li>)}
       </ol></div>)}
     </nav>
+    </WorkedExampleNavigation>
     <div className="advertisement-reading-workspace" ref={workspaceRef}>
       <aside className={`advertisement-viewer ${styles.source}`} ref={sourceRef} tabIndex={0} aria-label="Elephant Sanctuary source views">
         <div className="text-type-example-head"><span className="mono">SOURCE / ELEPHANT SANCTUARY</span><button type="button" onClick={() => dialogRef.current?.showModal()}>Enlarge source ↗</button></div>
@@ -79,7 +82,7 @@ export default function ElephantAppealGuide({ body, href }: { body: string; href
         <details className="advertisement-transcript"><summary>Image descriptions and source notes</summary><p>{example.views[0].alt}</p><p>{example.views[1].alt}</p><p>The opening photograph shows Tange in a green, wooded setting. A feeding close-up and named portraits of Billie, Minnie and Debbie show residents in the Sanctuary. Beside the CEO’s signature are Global Federation of Animal Sanctuaries accreditation and Association of Zoos and Aquariums badges. Nine truck icons represent nine truckloads; the other food illustrations identify categories rather than a one-to-one scale.</p><p>{example.credit}</p></details>
       </aside>
       <div className="advertisement-analysis">
-        <div className="advertisement-reader-progress"><span className="mono">SECTION {activeIndex + 1} / {sections.length}</span><button type="button" onClick={() => { routeRef.current?.focus({ preventScroll: true }); routeRef.current?.scrollIntoView({ block: "start", behavior: "instant" }); }}>All sections ↑</button></div>
+        <div className="advertisement-reader-progress"><span className="mono">GUIDED ANALYSIS · {activeIndex + 1} / {sections.length}</span><NotesShortcut onSelect={() => goTo(sections.findIndex(section => section.id === "practice-and-transfer"))} /><button type="button" onClick={() => { openSectionMap(routeRef.current); }}>All sections ↑</button></div>
         <nav className="advertisement-reader-pager advertisement-reader-pager-top" aria-label="Reading controls">
           <button type="button" disabled={activeIndex === 0} onClick={() => goTo(activeIndex - 1)}>← Previous</button>
           <button type="button" disabled={activeIndex === sections.length - 1} onClick={() => goTo(activeIndex + 1)}>Next: {labelFor(activeIndex + 1) ?? "Finished"} →</button>
@@ -106,7 +109,7 @@ function ElephantNotes() {
   const [values, setValues] = useState({ audience: "", evidence: "", analysis: "" });
   const [format, setFormat] = useState<ExportFormat>("txt");
   return <section className="infographic-notes" aria-label="Elephant Sanctuary analysis notebook">
-    <h3>Try a connected reading</h3>
+    <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
     {fields.map(field => <label className="field" key={field.key} htmlFor={`elephant-${field.key}`}>{field.label}<span className="hint" id={`elephant-${field.key}-hint`}>{field.hint}</span><textarea id={`elephant-${field.key}`} aria-describedby={`elephant-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}
     <p className="hint">Your notes stay while you move between sections. Export before switching examples, leaving or refreshing. This exercise does not send writing to AI.</p>
     <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`Elephant Sanctuary analysis notes\n\nSource: ${example.title}\nhttps://mrrinka.com${example.views[0].image}\nhttps://mrrinka.com${example.views[1].image}\n\nQuestion from the supplied paper: ${example.question}\n\n${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, "elephant-appeal-notes.txt", format)}>Export my notes</button></div>
