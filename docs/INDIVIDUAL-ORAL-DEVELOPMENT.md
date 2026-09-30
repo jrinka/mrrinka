@@ -53,3 +53,9 @@ Three orders are available in the map and timer: extract/whole then extract/whol
 The final language pass simplified abstract wording, clarified extract versus wider analysis, checked US spelling, preserved criterion explanations and added links to both course guides. Agreed edition and translation guidance uses A Doll’s House as an example. Student-facing IO content and printables were checked for the prohibited preparation term.
 
 Terminology: use work as a whole, and body of work for the non-literary selection, throughout the teaching content and tools.
+
+## Signposting
+
+A dedicated section follows structure and timing. It defines signposting, gives original spoken examples for each main transition, models a transition into analysis using the existing invented story, and links the existing shared analytical-language resource. The reviewed IO checklist informed the organization emphasis; third-party wording was not copied.
+
+Reviewed the publicly linked IB English Guys Signposting and Transitions handout and added direct handout/video links. Its one-minute introduction/conclusion and two-minute analytical sections differ from this site’s agreed timing model; the student-facing resource note makes that distinction explicit. Original examples remain on the site; the handout is not reproduced.
