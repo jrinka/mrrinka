@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run build:recess && npm run build:exports && next dev --hostname 127.0.0.1",
-    "build": "npm run build:recess && npm run build:exports && next build",
+    "dev": "npm run build:recess && npm run build:exports && npm run build:io && next dev --hostname 127.0.0.1",
+    "build": "npm run build:recess && npm run build:exports && npm run build:io && next build",
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
     "build:recess": "node scripts/build-recess.mjs",
-    "build:exports": "node scripts/build-exports.mjs"
+    "build:exports": "node scripts/build-exports.mjs",
+    "build:io": "node scripts/build-io-resources.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1133.0",
