@@ -59,3 +59,7 @@ Terminology: use work as a whole, and body of work for the non-literary selectio
 A dedicated section follows structure and timing. It defines signposting, gives original spoken examples for each main transition, models a transition into analysis using the existing invented story, and links the existing shared analytical-language resource. The reviewed IO checklist informed the organization emphasis; third-party wording was not copied.
 
 Reviewed the publicly linked IB English Guys Signposting and Transitions handout and added direct handout/video links. Its one-minute introduction/conclusion and two-minute analytical sections differ from this site’s agreed timing model; the student-facing resource note makes that distinction explicit. Original examples remain on the site; the handout is not reproduced.
+
+## Natural finish near ten minutes
+
+Added a short attributed quotation from IB Examiner Instructions 2026, Criterion C, printed page 16. The guide recommends aiming for 10:00, treating approximately 9:30–10:30 as breathing room rather than a fixed penalty boundary, and protecting Q&A time. The timing map calls 10:00 a target; the practice timer still stops there and explicitly refers students to the natural-finish guidance.
