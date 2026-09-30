@@ -18,7 +18,7 @@ export function ioSelections(course: IOCourse) {
   return course === "literature" ? ["Work originally in English", "Work in translation"] : ["Literary work", "Non-literary body of work"];
 }
 export function ioWholeLabel(course: IOCourse, index: number) {
-  return course === "language-literature" && index === 1 ? "body of work as a whole" : "work as a whole";
+  return course === "language-literature" && index === 1 ? "body of work" : "work as a whole";
 }
 export function ioStages(course: IOCourse, order: IOOrder): IOStage[] {
   const rows = [{ title: "Introduction", duration: 30, purpose: "Name the issue and selections; establish your analytical focus." }];

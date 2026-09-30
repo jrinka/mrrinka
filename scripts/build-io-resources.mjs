@@ -9,7 +9,7 @@ const labels = {
   'language-literature': ['Literary work', 'Non-literary body of work'],
   literature: ['Work originally in English', 'Work in translation'],
 };
-const wholeLabel = (course, index) => course === 'language-literature' && index === 1 ? 'Body of work as a whole' : 'Work as a whole';
+const wholeLabel = (course, index) => course === 'language-literature' && index === 1 ? 'Body of work' : 'Work as a whole';
 const courses = { 'language-literature': 'Language & Literature', literature: 'Literature' };
 function frame(title, body, course) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} · ${courses[course]} · MR RINKA</title><style>${css}</style></head><body><div class="toolbar"><button type="button" onclick="window.print()">Print / Save as PDF</button><span>Use A4, 100% scale, and turn off browser headers and footers.</span></div><main>${body}</main></body></html>`;

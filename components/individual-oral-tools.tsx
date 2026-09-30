@@ -13,7 +13,7 @@ export function IOTimingMap({ course }: { course: IOCourse }) {
         {ioOrders.map(item => <option key={item.id} value={item.id}>{item.title}</option>)}
       </select>
     </label>
-    <p>For the non-literary selection, “work as a whole” refers to the body of work as a whole. The mixed option starts with the extract for selection 1 and the work as a whole for selection 2. The two parts of each selection stay together. You may also reverse the order of the two selections.</p>
+    <p>For the non-literary selection, “work as a whole” refers to the body of work. The mixed option starts with the extract for selection 1 and the work as a whole for selection 2. The two parts of each selection stay together. You may also reverse the order of the two selections.</p>
     <ol className={styles.timeline}>{ioStages(course, order).map(stage => <li key={stage.title}>
       <span className={styles.time}>{ioClock(stage.start)}–{ioClock(stage.end)}<small>{ioClock(stage.duration)}</small></span>
       <div><strong>{stage.title}</strong><p>{stage.purpose}</p></div>
@@ -62,7 +62,7 @@ export function IOPracticeTimer({ course }: { course: IOCourse }) {
         {ioOrders.map(item => <option key={item.id} value={item.id}>{item.title}</option>)}
       </select></label>}
     </div>
-    <p className={styles.note}>For the non-literary selection, “work as a whole” refers to the body of work as a whole. Reset the timer before changing the practice order.</p>
+    <p className={styles.note}>For the non-literary selection, “work as a whole” refers to the body of work. Reset the timer before changing the practice order.</p>
     <p className={styles.timerStatus} role="status">{status}</p>
     <div className={styles.clock} role="timer" aria-label={`${ioClock(Math.ceil(total - elapsed))} remaining`}>{ioClock(Math.ceil(total - elapsed))}<span>remaining</span></div>
     <p>{ioClock(elapsed)} elapsed{stage ? ` · This section ends at ${ioClock(stage.end)}` : ""}</p>

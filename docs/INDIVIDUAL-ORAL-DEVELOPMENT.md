@@ -52,4 +52,4 @@ Three orders are available in the map and timer: extract/whole then extract/whol
 
 The final language pass simplified abstract wording, clarified extract versus wider analysis, checked US spelling, preserved criterion explanations and added links to both course guides. Agreed edition and translation guidance uses A Doll’s House as an example. Student-facing IO content and printables were checked for the prohibited preparation term.
 
-Terminology: use work as a whole, and body of work as a whole for the non-literary selection, throughout the teaching content and tools.
+Terminology: use work as a whole, and body of work for the non-literary selection, throughout the teaching content and tools.
