@@ -26,7 +26,8 @@ test("Literature IO inherits editable canonical teaching and all tool sections",
   const lit = publicCourse("literature").items.find(item => item.title === "Individual Oral")!;
   assert.equal(lit.body, ll.body);
   const ids = splitGuideSections(ll.body).map(section => section.id);
-  for (const id of ["structure-and-timing", "practice-speaking", "planning-and-reflection-sheets", "learn-from-a-short-example", "find-and-test-a-global-issue"]) assert.ok(ids.includes(id));
+  for (const id of ["structure-and-timing", "analysis-planning-sheets", "personal-preparation-tools", "learn-from-a-short-example", "find-and-test-a-global-issue"]) assert.ok(ids.includes(id));
   assert.doesNotMatch(ll.body, /\bscripts?\b/i);
-  assert.match(ll.body, /cannot watch or listen to a rehearsal/);
+  assert.match(ll.body, /watch or listen to a rehearsal/);
+  assert.doesNotMatch(ll.body, /## Practice speaking|## Reflect on your rehearsal|Mini-IO/i);
 });

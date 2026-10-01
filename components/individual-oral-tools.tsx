@@ -68,7 +68,6 @@ export function IOPracticeTimer({ course }: { course: IOCourse }) {
     <p>{ioClock(elapsed)} elapsed{stage ? ` · This section ends at ${ioClock(stage.end)}` : ""}</p>
     <progress className={styles.progress} aria-label="Practice progress" value={elapsed} max={total} />
     <div className={styles.controls}><button className="button" onClick={toggle} disabled={complete}>{running ? "Pause" : elapsed > 0 ? "Resume" : "Start"}</button><button className="button secondary" onClick={reset}>Reset</button></div>
-    {mode === "mini" && <p className={styles.note}>Half-IO practice with one selection. Follow your teacher's task sheet for the internal timings.</p>}
     <p className={styles.note}>The timer stops at the practice target; see Structure and timing for guidance on finishing naturally. No audio is recorded or uploaded. The timer pauses only when you press Pause; leaving or reloading this page resets it.</p>
   </div>;
 }

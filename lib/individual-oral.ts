@@ -5,13 +5,12 @@ export const ioOrders: { id: IOOrder; title: string }[] = [
   { id: "whole-first", title: "Work as a whole first for both selections" },
   { id: "extract-whole-whole-extract", title: "Extract first / work as a whole first" },
 ];
-export type IOMode = "full" | "section" | "short" | "mini" | "questions";
+export type IOMode = "full" | "section" | "short" | "questions";
 export type IOStage = { title: string; duration: number; start: number; end: number; purpose: string };
 export const ioModes: { id: IOMode; title: string; seconds: number }[] = [
   { id: "full", title: "Full oral · 10:00", seconds: 600 },
   { id: "section", title: "One analytical section · 2:15", seconds: 135 },
   { id: "short", title: "One explanation · 1:00", seconds: 60 },
-  { id: "mini", title: "Mini-IO practice · 5:00", seconds: 300 },
   { id: "questions", title: "Teacher questions · 5:00", seconds: 300 },
 ];
 export function ioSelections(course: IOCourse) {
@@ -41,5 +40,5 @@ export function ioStageAt(stages: IOStage[], elapsed: number) {
 }
 export const ioLegacyAnchors: Record<string, string> = {
   "what-is-the-io": "briefing", "prepare-your-analysis": "method", "avoid-common-problems": "avoid",
-  "practice-speaking": "practice", "planning-and-reflection-sheets": "field-tools", "learn-from-a-short-example": "models",
+  "practice-speaking": "practice", "analysis-planning-sheets": "field-tools", "learn-from-a-short-example": "models",
 };

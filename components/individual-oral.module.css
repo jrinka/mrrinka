@@ -55,3 +55,16 @@
 .notesInput { display: block; width: 100%; min-height: 220px; resize: vertical; border: 1px solid var(--line); border-radius: 0; padding: 14px; background: var(--paper); color: var(--ink); font: inherit; line-height: 1.7; }
 .notesInput::placeholder { color: var(--muted); opacity: 1; }
 .notesInput:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+
+.section { padding: 0; }
+.sectionSummary { padding: 22px 32px 22px 0; cursor: pointer; position: relative; list-style: none; }
+.sectionSummary::-webkit-details-marker { display: none; }
+.sectionSummary::after { content: "+"; position: absolute; right: 0; top: 32px; font-size: 24px; }
+details[open] > .sectionSummary::after { content: "−"; }
+.sectionSummary > span { font-size: 10px; color: var(--muted); }
+.sectionSummary h2 { font-size: clamp(22px, 2.6vw, 30px); line-height: 1.25; margin: 8px 0 0; }
+.sectionBody { padding-bottom: 28px; }
+.sectionControls { margin: 24px 0; }
+.sectionControls p { font-size: 14px; }
+@media (min-width: 901px) { .contents { max-height: calc(100vh - 48px); overflow-y: auto; } }
+@media print { .sectionControls, .sectionSummary::after { display: none; } }

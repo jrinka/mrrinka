@@ -63,3 +63,7 @@ Reviewed the publicly linked IB English Guys Signposting and Transitions handout
 ## Natural finish near ten minutes
 
 Added a short attributed quotation from IB Examiner Instructions 2026, Criterion C, printed page 16. The guide recommends aiming for 10:00, treating approximately 9:30–10:30 as breathing room rather than a fixed penalty boundary, and protecting Q&A time. The timing map calls 10:00 a target; the practice timer still stops there and explicitly refers students to the natural-finish guidance.
+
+## 1 October guide revision
+
+Sections now collapse independently with the overview open initially, expand/collapse controls, automatic opening for direct and contents links, legacy section redirects, and full-content printing with restored screen state. The optional personal timer and browser-saved notes remain; mini-IO mode, classroom speaking routines and practice/reflection worksheet links are removed from the guide. Existing saved notes and previously linked downloadable files are preserved. Drama guidance is limited to a continuous 40-line extract, intact text, line numbering and an agreed edition/translation. Teacher recommendations use first person. The global issue is stated early and its exact wording is reinforced at meaningful transitions and in analysis without mechanical repetition.
