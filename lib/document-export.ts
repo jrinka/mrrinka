@@ -1,3 +1,4 @@
+import type { IOPlanningExport } from "./io-planning";
 import type { ReadingGridExport } from "./reading-grid-export";
 import type { Content, TDocumentDefinitions, TableCell as PdfTableCell } from "pdfmake/interfaces";
 
@@ -10,7 +11,8 @@ export function documentTitle(filename: string) {
   return title.charAt(0).toUpperCase() + title.slice(1);
 }
 
-export async function createPdf(content: string, filename: string, grid?: ReadingGridExport): Promise<Blob> {
+export async function createPdf(content: string, filename: string, grid?: ReadingGridExport | IOPlanningExport): Promise<Blob> {
+  if (grid && "kind" in grid) return (await import("./io-planning-export")).createIOPdf(grid);
   const [{ default: pdfMake }, { default: fonts }] = await Promise.all([
     import("pdfmake/build/pdfmake"), import("pdfmake/build/vfs_fonts"),
   ]);
@@ -30,7 +32,8 @@ export async function createPdf(content: string, filename: string, grid?: Readin
   return pdfMake.createPdf(definition).getBlob();
 }
 
-export async function createDocx(content: string, filename: string, grid?: ReadingGridExport): Promise<Blob> {
+export async function createDocx(content: string, filename: string, grid?: ReadingGridExport | IOPlanningExport): Promise<Blob> {
+  if (grid && "kind" in grid) return (await import("./io-planning-export")).createIODocx(grid);
   const { Document, Packer, Paragraph, TextRun, HeadingLevel, Footer, PageNumber, AlignmentType, Table, TableRow, TableCell, WidthType, HeightRule, BorderStyle, TableLayoutType } = await import("docx");
   const title = grid?.title ?? documentTitle(filename);
   const gridTable = grid ? new Table({

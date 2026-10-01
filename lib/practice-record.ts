@@ -1,3 +1,4 @@
+import type { IOPlanningExport } from "./io-planning";
 import type { ReadingGridExport } from "./reading-grid-export";
 export type PracticeRecord = {
   createdAt: string; model: string; policyVersion: string;
@@ -21,7 +22,7 @@ export function prepareRecordDownload(content:string,filename:string,format:"txt
   const base=filename.replace(/\.(txt|md|pdf|docx)$/i,"");
   return {content:format==="md" ? `# ${base.replace(/-/g," ")}\n\n${content}` : content,filename:`${base}.${format}`,mime:format==="md"?"text/markdown;charset=utf-8":"text/plain;charset=utf-8"};
 }
-export async function createRecordBlob(content: string, filename: string, format: ExportFormat, grid?: ReadingGridExport) {
+export async function createRecordBlob(content: string, filename: string, format: ExportFormat, grid?: ReadingGridExport | IOPlanningExport) {
   const base = filename.replace(/\.(txt|md|pdf|docx)$/i, "");
   if (format === "pdf" || format === "docx") {
     const { createPdf, createDocx } = await import("./document-export");
@@ -49,7 +50,7 @@ function exportStatus(message: string, error = false) {
   status.firstElementChild!.textContent = message;
   if (!error && !exporting) statusTimer = setTimeout(() => { status!.hidden = true; status!.style.display = "none"; }, 6000);
 }
-export async function downloadRecord(content: string, filename: string, format:ExportFormat="txt", grid?: ReadingGridExport): Promise<boolean> {
+export async function downloadRecord(content: string, filename: string, format:ExportFormat="txt", grid?: ReadingGridExport | IOPlanningExport): Promise<boolean> {
   if (exporting) return false;
   exporting = true;
   exportStatus(`Preparing ${format.toUpperCase()}…`);

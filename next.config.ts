@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 const config: NextConfig = {
+  async redirects() {
+    return ['literature', 'language-literature'].map(course => ({ source: `/io-resources/${course}-planning.html`, destination: `/practice/io-planning/${course}`, permanent: false }));
+  },
   async rewrites() {
     return [{ source: "/recess", destination: "/recess.html" }];
   },
