@@ -10,6 +10,10 @@ The original layout font imports are replaced by equivalent Fontsource packages 
 
 Generated output is ignored by Git; edit the source here. Do not copy deployment credentials, `.openai` configuration, caches, or dependencies from the original project.
 
+The landing page lists word games, drawing/observation games, then number games. Its main headline uses the teaching site's Sorts Mill Goudy serif, bundled locally with its font license. Game numbers and controls remain stable.
+
+Wordle uses `wordle-deck.ts` to keep the default bank in the same index order on opening, new rounds, and teacher-bank selection. Reordering the default word list in teacher setup therefore preserves its saved rotation; custom banks retain a separate deck.
+
 ## The Numbers Department
 
 Four further games live in `math/`: Equation Pending (generated six/eight-character equations), Twenty-Four, Somehow (validated banks and exact arithmetic), One Small Adjustment (seven-segment match moves), and What Are the Odds? (original questions with enumerated outcome grids). Arithmetic uses a bounded parser and exact fractions, never `eval`. Tests validate every shipped puzzle and the equation generator. Timers are optional and do not lock out play. Hints and explanations appear only after a player requests them. Any true one-match equation and any valid make-24 expression are accepted. Equation swaps use a narrower, documented commutative-operation rule.

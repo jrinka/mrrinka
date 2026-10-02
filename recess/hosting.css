@@ -4,3 +4,12 @@
   --font-zine-title: 'Archivo Black';
 }
 .home-link { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
+
+/* Match the teaching site's literary headline without changing game controls. */
+.intro h1 {
+  font-family: 'Sorts Mill Goudy', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1.08;
+}
+.drawing-games-heading { margin-top: 36px; }

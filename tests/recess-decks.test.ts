@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {drawFromBank} from '../recess/decks';
+import {drawWordleWord} from '../recess/wordle-deck';
 import {words,anagrams,ladders,definitions,debates} from '../recess/challenges';
 import {masterpieces,blobPrompts} from '../recess/mini-game-data';
 import {twentyFourBanks,matchPuzzles} from '../recess/math/data';
@@ -22,6 +23,18 @@ test('saved rotation is read again on the next draw, including last-round avoida
   storage.set(key,JSON.stringify({...record,remaining:[2],last:[0]}));
   assert.deepEqual(drawFromBank('saved',bank),['C']);
   const next=drawFromBank('saved',bank)[0];assert.notEqual(next,'C');
+});
+test('Wordle opening, new words and reordered teacher banks share one saved rotation',()=>{
+  const first = drawWordleWord();
+  const key = 'brain-break-deck-v1:wordle';
+  const before = JSON.parse(storage.get(key)!);
+  const next = drawWordleWord([...words].reverse(), [first]);
+  const after = JSON.parse(storage.get(key)!);
+  assert.equal(after.signature, before.signature);
+  assert.equal(after.remaining.length, before.remaining.length - 1);
+  assert.notEqual(next, first);
+  drawWordleWord();
+  assert.equal(JSON.parse(storage.get(key)!).remaining.length, before.remaining.length - 2);
 });
 test('batch rounds contain unique items and exhaust the bank before repeating',()=>{
   const bank=Array.from({length:32},(_,i)=>i);
