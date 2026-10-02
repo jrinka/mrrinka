@@ -21,7 +21,7 @@ test('short response coaching preserves safety gates and visual uncertainty',asy
  const result=await safeFeedback({kind:'analysis',course:'language-literature',evidence:attempt.evidence,draft:attempt.draft,previousDraft:'Earlier synthetic response.',reflection:'I clarified the connection.',closeAnalysis:true},async(system)=>{prompts.push(system);return outputs.shift()!;});
  assert.equal(result.refused,false);assert.equal(prompts.length,3);
  for(const prompt of prompts)assert.match(prompt,/never scores, marks, grades/);
- for(const term of ['SAME response','Never invite an essay','Do not reward length','NOT image access','under 150 words'])assert.ok(prompts[1].includes(term));
+ for(const term of ['SAME response','Never invite an essay','Do not reward length','NOT image access','under 150 words','Grammatical form has no fixed rhetorical effect','Do not manufacture a flaw','at most two brief quotations'])assert.ok(prompts[1].includes(term));
 });
 
 const coachingInput={kind:'analysis' as const,course:'language-literature' as const,evidence:attempt.evidence,draft:attempt.draft,previousDraft:'',reflection:'',closeAnalysis:true as const};
@@ -39,13 +39,13 @@ test('common scores are withheld even if the input gate mistakenly allows a grad
  for(const score of ['Your score is 6/7.','I would award 18 out of 20.','This earns band 5.','Your grade is A.','This is in the top band.']){
  const outputs=['{"allowed":true}',JSON.stringify({strength:score,concern:'Check your evidence.',nextMove:'What supports your claim?'})];
  const result=await safeFeedback(coachingInput,async()=>{assert.ok(outputs.length,'Scoring should stop before another model request');return outputs.shift()!;});
- assert.equal(result.refused,true);assert.equal('feedback' in result,false);
+ assert.equal(result.refused,true);assert.equal('feedback' in result,false);assert.equal('refusalKind' in result && result.refusalKind,'feedback-check');
  }
 });
 test('semantic review withholds verbal grade predictions that evade numeric checks',async()=>{
  const outputs=['{"allowed":true}',JSON.stringify({strength:'An examiner would award full marks.',concern:'Check your evidence.',nextMove:'What supports the claim?'}),'{"allowed":false}'];
  const result=await safeFeedback(coachingInput,async(system)=>{if(outputs.length===1)assert.match(system,/predicts IB results, numerically or verbally/);return outputs.shift()!;});
- assert.equal(result.refused,true);assert.equal('feedback' in result,false);
+ assert.equal(result.refused,true);assert.equal('feedback' in result,false);assert.equal('refusalKind' in result && result.refusalKind,'feedback-check');
 });
 test('ordinary critique and revision remain allowed, including mention of a mark in the source',async()=>{
  const outputs=['{"allowed":true}',JSON.stringify({strength:'Your revision grounds the claim in a detail.',concern:'The connection to the audience needs support.',nextMove:'How does the mark you describe support your claim?'}),'{"allowed":true}'];
