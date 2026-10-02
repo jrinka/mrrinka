@@ -39,3 +39,17 @@ test('adapter collects only numeric token counters and normalized finish reason'
  assert.deepEqual((logs[0] as CloseDiagnostic).usage,{inputTokens:20,outputTokens:10,totalTokens:30,reasoningTokens:5});assert.equal((logs[0] as CloseDiagnostic).finishReason,'other');
  }finally{globalThis.fetch=originalFetch;if(old===undefined)delete process.env.FIREWORKS_API_KEY;else process.env.FIREWORKS_API_KEY=old;}
 });
+test('only Close Analysis checking requests opt into low reasoning; coaching and ordinary feedback retain defaults',async()=>{
+ const originalFetch=globalThis.fetch;const old=process.env.FIREWORKS_API_KEY;process.env.FIREWORKS_API_KEY='fake-test-key';
+ try{
+ const bodies:Record<string,unknown>[]=[];const outputs=['{"allowed":true}',JSON.stringify(feedback),'{"allowed":true}','ordinary feedback'];
+ globalThis.fetch=async(_url,init)=>{bodies.push(JSON.parse(String(init?.body)));return Response.json({choices:[{message:{content:outputs.shift()},finish_reason:'stop'}]});};
+ const logs:CloseDiagnostic[]=[];const trace=createCloseAnalysisTrace('low-test',x=>logs.push(x));
+ assert.equal((await safeFeedback(input,trace.ask)).refused,false);
+ await askModel('ordinary system',{draft:'ordinary attempt'});
+ assert.deepEqual(bodies.map(x=>x.reasoning_effort),['low',undefined,'low',undefined]);
+ assert.deepEqual(bodies.map(x=>x.max_tokens),[4096,6000,4096,4096]);
+ assert.ok(bodies.every(x=>x.model==='accounts/fireworks/models/kimi-k3'&&!('thinking' in x)));
+ assert.deepEqual(logs.map(x=>x.reasoningEffort),['low','default','low']);
+ }finally{globalThis.fetch=originalFetch;if(old===undefined)delete process.env.FIREWORKS_API_KEY;else process.env.FIREWORKS_API_KEY=old;}
+});
