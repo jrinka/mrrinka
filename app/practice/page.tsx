@@ -10,14 +10,14 @@ import { ibCourses, publicCourse } from "@/lib/content";
 export const metadata: Metadata = { title: "Practice" };
 
 export default function PracticePage() {
-  // Combine identical activities, while preserving independently edited versions.
+  // Group matching directory cards; each course keeps its own activity guidance.
   const activities = new Map<string, {
     item: ReturnType<typeof publicCourse>["items"][number];
     versions: { href: string; course: string }[];
   }>();
   for (const course of ibCourses) {
     for (const item of publicCourse(course.id).items.filter(item => item.section === "practice")) {
-      const key = JSON.stringify([item.title, item.summary, item.body, item.practiceKind, item.links]);
+      const key = JSON.stringify([item.title, item.summary, item.practiceKind]);
       const activity = activities.get(key) ?? { item, versions: [] };
       activity.versions.push({ href: `/courses/${course.id}/practice/${item.id}`, course: course.shortTitle });
       activities.set(key, activity);

@@ -225,7 +225,7 @@ export default async function CoursePage({ params, searchParams }: Props) {
       {item ? (
         <>
           <Link className="back" href={`${base}/${section}`}>
-            <ArrowLeft size={16} /> {courseSectionName(courseId, section!)}
+            <ArrowLeft size={16} /> {section === "practice" ? `${course.shortTitle} practice` : courseSectionName(courseId, section!)}
           </Link>
           <h1>{item.title}</h1>
           <p className="intro">{item.summary}</p>

@@ -32,7 +32,7 @@ export default function IOPlanning({ course }: { course: IOCourse }) {
     setExporting(false);
   }
   return <div className={styles.planner}>
-    <div className={styles.export}><ExportFormatSelect value={format} onChange={setFormat} /><button className="button" disabled={!ready || exporting} onClick={download}>{exporting ? 'Preparing download…' : 'Download planning worksheet'}</button><p>Word stays editable. PDF is for reading and printing. Download a blank worksheet or include the notes you type below.</p></div>
+    <div className={styles.export}><ExportFormatSelect storage="local" value={format} onChange={setFormat} /><button className="button" disabled={!ready || exporting} onClick={download}>{exporting ? 'Preparing download…' : 'Download planning worksheet'}</button><p>Word stays editable. PDF is for reading and printing. Download a blank worksheet or include the notes you type below.</p></div>
     <p role="status" className={styles.hint}>{!ready ? 'Loading your notes…' : saved ? 'Saved in this browser on this device. Download a copy to keep; these notes are not uploaded or sent to your teacher.' : 'This browser could not save your notes. Download a copy before leaving.'}</p>
     <label className={styles.field}>My provisional global issue<textarea rows={2} disabled={!ready} value={plan.issue} onChange={e => save({ ...plan, issue: e.target.value })} /></label>
     {plan.selections.map((s, i) => <section className={styles.selection} key={i} aria-label={`Selection ${i + 1}`}>

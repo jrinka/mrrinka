@@ -3002,3 +3002,13 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 
 
 @media screen { .source-information-print { display:none; } }
+
+/* Storage information stays with the export selector without crowding buttons. */
+.export-controls { display:grid; gap:6px; max-width:24rem; min-width:0; }
+.export-controls .export-format { margin:0; }
+.export-storage-status { display:block; font-size:.85rem; line-height:1.5; }
+.p2-export .export-controls { flex:1; }
+.interior-course > label { color:#b7bdb9; font-size:.63rem; letter-spacing:.08em; }
+.interior-course small { color:#b7bdb9; font-size:.72rem; line-height:1.5; }
+.interior-browse-open { border:1px solid #686e69; background:#34383a; color:var(--on-graphite); padding:10px; font:inherit; font-size:.83rem; cursor:pointer; }
+.interior-browse-open:disabled { opacity:.5; cursor:default; }

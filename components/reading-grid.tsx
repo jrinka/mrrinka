@@ -38,7 +38,7 @@ export default function ReadingGrid({method}:{method:ReadingMethod}) {
  return <section className="reading-workshop">
   <div className={styles.export}>
    <label className="export-format">Download contents<select aria-label="Download contents" value={contents} onChange={e=>setContents(e.target.value as 'blank'|'notes')}><option value="blank">Blank worksheet</option><option value="notes">My completed notes</option></select></label>
-   <ExportFormatSelect value={exportFormat} onChange={setExportFormat}/>
+   <ExportFormatSelect storage="local" value={exportFormat} onChange={setExportFormat}/>
    <button className="button" type="button" disabled={!ready||exporting} onClick={saveNotes}>{exporting?'Preparing download…':'Download worksheet'}</button>
    <p>Word stays editable. PDF keeps the two-column worksheet layout for reading and printing. Completed notes include your writing and the prompts; worked examples stay on this page.</p>
   </div>

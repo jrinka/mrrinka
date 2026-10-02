@@ -6,8 +6,8 @@ import { categories, type Category, type Term } from '@/lib/terminology';
 import { flashcardTerms, shuffleCards, type TermCourse } from '@/lib/term-flashcards';
 import styles from './term-flashcards.module.css';
 
-export default function TermFlashcards() {
-  const [course, setCourse] = useState<TermCourse>('language-literature');
+export default function TermFlashcards({initialCourse = "language-literature"}:{initialCourse?:TermCourse}) {
+  const [course, setCourse] = useState<TermCourse>(initialCourse);
   const [category, setCategory] = useState<Category | 'all'>('all');
   const [reverse, setReverse] = useState(false);
   const [deck, setDeck] = useState<Term[] | null>(null);
@@ -30,7 +30,7 @@ export default function TermFlashcards() {
   }
   return <section className={styles.practice} aria-label="Term flashcards">
     <div className={styles.settings}>
-      <label>Course<select aria-label="Course" value={course} onChange={e => { setCourse(e.target.value as TermCourse); reset(); }}><option value="language-literature">Language &amp; Literature</option><option value="literature">Literature</option></select></label>
+      <label>Practice course<select aria-label="Practice course" value={course} onChange={e => { setCourse(e.target.value as TermCourse); reset(); }}><option value="language-literature">Language &amp; Literature</option><option value="literature">Literature</option></select></label>
       <label>Focus<select aria-label="Focus" value={category} onChange={e => { setCategory(e.target.value as Category | 'all'); reset(); }}><option value="all">All terms</option>{categories.map(c => <option key={c.id} value={c.id}>{c.title}</option>)}</select></label>
       <label>Show first<select aria-label="Show first" value={reverse ? 'definition' : 'term'} onChange={e => { setReverse(e.target.value === 'definition'); reset(); }}><option value="term">Term → explain it</option><option value="definition">Definition → name it</option></select></label>
     </div>
