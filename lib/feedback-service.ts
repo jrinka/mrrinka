@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { closeFeedbackFailureCode } from "./close-analysis";
 import { refineryKinds } from "./refineries";
 import { refineryReference } from "./assessment-reference";
 
@@ -31,7 +32,11 @@ export const coachingSchema = z.object({
 }).strict();
 export type Coaching = z.infer<typeof coachingSchema>;
 
-export async function askModel(system: string, material: unknown, maxTokens = 4096, timeoutMs = 30000, provider = feedbackProvider()): Promise<string> {
+export type ModelObservation = { elapsedMs:number; outcome:"completed"|"failed"; httpStatus?:number; finishReason?:"stop"|"length"|"other"; usage?:{inputTokens?:number;outputTokens?:number;totalTokens?:number;reasoningTokens?:number}; failureCode?:ReturnType<typeof closeFeedbackFailureCode> };
+export async function askModel(system: string, material: unknown, maxTokens = 4096, timeoutMs = 30000, provider = feedbackProvider(), observe?:(value:ModelObservation)=>void): Promise<string> {
+  const started=performance.now();
+  const observation:ModelObservation={elapsedMs:0,outcome:"failed"};
+  try {
   const fireworks = provider.model === fireworksModel;
   const apiKey = fireworks ? process.env.FIREWORKS_API_KEY?.trim() : process.env.MINIMAX_APIKEY;
   if (!apiKey) throw new Error("Feedback service is not configured.");
@@ -40,13 +45,24 @@ export async function askModel(system: string, material: unknown, maxTokens = 40
     body: JSON.stringify({ model:provider.model, messages: [{role:"system",content:system},{role:"user",content:JSON.stringify(material)}], max_tokens:maxTokens }),
     signal: AbortSignal.timeout(timeoutMs),
   });
+  observation.httpStatus=response.status;
   if (!response.ok) throw new Error(`Provider HTTP status ${response.status}`);
   const data = await response.json();
+  const finish=data.choices?.[0]?.finish_reason;
+  if(finish!==undefined) observation.finishReason=finish==="stop"||finish==="length"?finish:"other";
+  const usage=data.usage;
+  if(usage && typeof usage==="object") {
+    const numeric=(value:unknown)=>typeof value==="number" && Number.isFinite(value) && value>=0 ? value : undefined;
+    observation.usage={inputTokens:numeric(usage.prompt_tokens),outputTokens:numeric(usage.completion_tokens),totalTokens:numeric(usage.total_tokens),reasoningTokens:numeric(usage.completion_tokens_details?.reasoning_tokens)};
+  }
   if (data.base_resp?.status_code) throw new Error(`Provider API status ${Number(data.base_resp.status_code)}`);
   const content = fireworks ? data.choices?.[0]?.message?.content : data.choices?.[0]?.messages?.[0]?.content ?? data.choices?.[0]?.message?.content;
   if (data.choices?.[0]?.finish_reason === "length") throw new Error("Provider response truncated");
   if (typeof content !== "string" || !content.trim()) throw new Error(`Provider empty content; finish reason ${String(data.choices?.[0]?.finish_reason).slice(0,30)}`);
+  observation.outcome="completed";
   return content.trim();
+  } catch(error) {observation.failureCode=closeFeedbackFailureCode(error);throw error;}
+  finally {observation.elapsedMs=Math.round(performance.now()-started);try{observe?.(observation);}catch{/* Telemetry must not change feedback behavior. */}}
 }
 // Close Analysis deliberately has no MiniMax fallback. Reuse the existing Fireworks transport/key.
 export const askCloseAnalysisModel: typeof askModel = (system, material, maxTokens = 4096, timeoutMs = maxTokens === 6000 ? 50000 : 30000) =>

@@ -29,10 +29,12 @@ export default function CloseAnalysis({sources,provider,live}:{sources:CloseSour
  const input={sourceId:selected,area:work.area,feature:work.feature,evidence:work.evidence,draft:work.draft,reflection:work.reflection,previousDraft:previous?.draft??""};
  if(!closeRequest.safeParse(input).success){setError("Choose one feature, add precise evidence, and keep your own response to one short paragraph (180 words maximum).");return;}
  setBusy(true);
- try{const response=await fetch("/api/practice/close-analysis",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(input)});const data=await response.json();if(!response.ok)throw new Error(data.error);
+ const controller=new AbortController();
+ const deadline=setTimeout(()=>controller.abort(),130000);
+ try{const response=await fetch("/api/practice/close-analysis",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(input),signal:controller.signal});const data=await response.json();if(!response.ok)throw new Error(data.error);
  const feedback=data.refused?data.message:`What holds up\n${data.feedback.strength}\n\nWhat needs testing\n${data.feedback.concern}\n\nYour next move\n${data.feedback.nextMove}`;
  update({records:[...work.records,{tool:"Close Analysis",course:"language-literature",evidence,draft:work.draft,reflection:work.reflection,feedback,refused:data.refused,model:data.model,modelDisclosure:provider.disclosure,policyVersion:data.policyVersion,createdAt:data.createdAt}]});
- }catch(err){setError(err instanceof Error?err.message:"Feedback is unavailable. Your writing is still here.");}finally{setBusy(false);}}
+ }catch(err){setError(controller.signal.aborted?"Feedback took too long. Your writing is still here. You can download it or try again when you’re ready.":err instanceof Error?err.message:"Feedback is unavailable. Your writing is still here.");}finally{clearTimeout(deadline);setBusy(false);}}
  return <div className="close-analysis">
  <nav className="close-source-list" aria-label="Choose a source">{sources.map((s,i)=><button type="button" disabled={busy} key={s.id} aria-pressed={s.id===selected} onClick={()=>{setSelected(s.id);setPage(0);setZoom(100);setError("");}}><span className="mono">0{i+1} / {s.id==="tourism"?"ADVERTISEMENT":s.id==="parenting"?"ADVERTORIAL":"MANIFESTO"}</span><strong>{s.title}</strong></button>)}</nav>
  <p className="close-save-status" role="status">{!ready?"Opening your workspace…":saved?"Saved in this tab’s session. Switching sources keeps your work; download before closing the tab.":"Browser saving is unavailable. Download your work before leaving."}</p>
