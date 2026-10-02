@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { afterEach, test } from "node:test";
-import { askModel, feedbackProvider } from "../lib/feedback-service";
+import { askModel, feedbackProvider, askCloseAnalysisModel, closeAnalysisProvider } from "../lib/feedback-service";
 
 const previousFireworks = process.env.FIREWORKS_API_KEY;
 const previousMiniMax = process.env.MINIMAX_APIKEY;
@@ -49,4 +49,19 @@ test("truncated Fireworks responses fail closed", async () => {
   process.env.FIREWORKS_API_KEY = "test-fireworks-key";
   globalThis.fetch = async () => Response.json({ choices: [{ message: { content: "partial" }, finish_reason: "length" }] });
   await assert.rejects(() => askModel("coach", { draft:"test" }), /truncated/);
+});
+
+test("Close Analysis uses Kimi K3 only and never falls back to MiniMax",async()=>{
+ delete process.env.FIREWORKS_API_KEY;
+ process.env.MINIMAX_APIKEY="test-minimax-key";
+ globalThis.fetch=async()=>{assert.fail("Missing Fireworks key must not make any request");};
+ assert.equal(closeAnalysisProvider().name,"Kimi K3");
+ await assert.rejects(()=>askCloseAnalysisModel("coach",{draft:"synthetic"}),/not configured/);
+ process.env.FIREWORKS_API_KEY="test-fireworks-key";
+ globalThis.fetch=async(url,init)=>{
+ assert.equal(url,"https://api.fireworks.ai/inference/v1/chat/completions");
+ assert.equal(JSON.parse(String(init?.body)).model,"accounts/fireworks/models/kimi-k3");
+ return Response.json({choices:[{message:{content:"Synthetic diagnostic feedback"},finish_reason:"stop"}]});
+ };
+ assert.equal(await askCloseAnalysisModel("coach",{draft:"synthetic"}),"Synthetic diagnostic feedback");
 });

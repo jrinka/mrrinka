@@ -12,3 +12,7 @@ test-results/
 public/recess-assets/
 public/recess.html
 recess/.generated.css
+
+# Local review sources: never publish or commit
+local-sources/
+local-review/

@@ -31,6 +31,7 @@ export default function PracticePage() {
         <span><strong>Passage Practice</strong><small>Literature Paper 1 skills: read a supplied extract, practice analysis, and request feedback—or download it to work offline.</small></span>
         <span className="practice-feature-actions"><span className="practice-feature-icon" role="img" aria-label="AI feedback available" title="AI feedback available"><Sparkles size={19} aria-hidden="true" /><span className="mono">AI</span></span><ArrowUpRight size={20} aria-hidden="true" /></span>
       </Link>
+      <Link className="practice-feature" href="/practice/close-analysis"><span className="practice-feature-index mono">CLOSE ANALYSIS</span><span><strong>Close Analysis</strong><small>Language &amp; Literature · One feature, one paragraph. Start with an advertisement, advertorial, or manifesto; explain a choice and revise your response.</small></span><span className="practice-feature-actions"><span className="mono">AI FEEDBACK</span><ArrowUpRight size={20} aria-hidden="true" /></span></Link>
       <Link className="practice-feature" href="/practice/what-changes"><span className="practice-feature-index mono">COMPARE &amp; INTERPRET</span><span><strong>What changes?</strong><small>Compare words, line breaks and visual choices. Explain the difference, reveal a possible reading, and try another version.</small></span><span className="practice-feature-actions"><ArrowUpRight size={20} aria-hidden="true" /></span></Link>
       <Link className="practice-feature" href="/practice/flashcards"><span className="practice-feature-index mono">RECALL &amp; APPLY</span><span><strong>Term flashcards</strong><small>Choose Literature or Language &amp; Literature, check your understanding, and revisit unfamiliar terms. Includes visual choices for graphic novels.</small></span><span className="practice-feature-actions"><ArrowUpRight size={20} aria-hidden="true" /></span></Link>
       <section className="refinery-directory"><h2>Refineries</h2><p>AI guidance to help you develop your own work for each task. The tools’ limits are based on the IB academic integrity policy. Using them does not automatically make your work compliant: you still need to follow the policy and your teacher’s rules.</p><p><a href={ibAiPolicy}>Read the IB policy and AI guidance ↗</a></p><RefineryLinks /></section>
@@ -39,7 +40,7 @@ export default function PracticePage() {
           <div className="global-directory-course"><h2>Bring your own text</h2></div>
           <div className="practice-skill-list">{[...activities.values()].map(({ item, versions }) => (
             <article className="practice-skill" key={item.id}>
-              <Link className="practice-skill-title" href={versions[0].href}><strong>{item.title}</strong><ArrowUpRight size={18} aria-hidden="true" /></Link>
+              <Link className="practice-skill-title" href={versions[0].href}><strong>{item.practiceKind === "close-reading" ? "Analyze your own text" : item.title}</strong><ArrowUpRight size={18} aria-hidden="true" /></Link>
               <p>{item.summary}</p>
               <span className="practice-skill-mode mono">GUIDED WORKSPACE · SELF-REVIEW</span>
               <nav className="practice-course-links" aria-label={`${item.title}: course versions`}>
