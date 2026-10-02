@@ -44,12 +44,12 @@ export async function createDocx(content: string, filename: string, grid?: Readi
         width: { size: index ? 6432 : 3314, type: WidthType.DXA }, shading: { fill: "D8ED61" }, margins: { top: 140, bottom: 140, left: 140, right: 140 },
         children: [new Paragraph({ children: [new TextRun({ text: label, bold: true, size: 19 })] })],
       })) }),
-      ...grid.rows.map(row => new TableRow({ height: { value: 900, rule: HeightRule.ATLEAST }, children: [
+      ...grid.rows.map(row => new TableRow({ cantSplit: grid.blank, height: { value: 900, rule: HeightRule.ATLEAST }, children: [
         new TableCell({ width: { size: 3314, type: WidthType.DXA }, shading: { fill: "EEE9DC" }, margins: { top: 140, bottom: 140, left: 140, right: 140 }, children: [
           new Paragraph({ children: [new TextRun({ text: row.title, bold: true })], spacing: { after: 100 } }),
           new Paragraph({ children: [new TextRun({ text: row.prompt, size: 19 })] }),
         ] }),
-        new TableCell({ width: { size: 6432, type: WidthType.DXA }, margins: { top: 140, bottom: 140, left: 140, right: 140 }, children: documentLines(row.notes || "(Not yet written)").map(line => new Paragraph({ children: [new TextRun(line)], spacing: { after: 40 }, widowControl: true })) }),
+        new TableCell({ width: { size: 6432, type: WidthType.DXA }, margins: { top: 140, bottom: 140, left: 140, right: 140 }, children: documentLines(row.notes || (grid.blank ? " " : "(Not yet written)")).map(line => new Paragraph({ children: [new TextRun(line)], spacing: { after: 40 }, widowControl: true })) }),
       ] })),
     ],
   }) : undefined;
@@ -65,7 +65,7 @@ export async function createDocx(content: string, filename: string, grid?: Readi
       children: [
         new Paragraph({ text: title, heading: HeadingLevel.TITLE }),
         ...(grid && gridTable ? [
-          new Paragraph({ children: [new TextRun({ text: "Text / author: ", bold: true }), new TextRun(grid.text || "Not specified")], spacing: { after: 160 } }),
+          new Paragraph({ children: [new TextRun({ text: "Text / author: ", bold: true }), new TextRun(grid.text || (grid.blank ? "________________________" : "Not specified"))], spacing: { after: 160 } }),
           gridTable,
         ] : documentLines(content).map(line => new Paragraph({ children: [new TextRun(line)], spacing: { after: line ? 40 : 100 }, wordWrap: true, widowControl: true }))),
       ],
@@ -78,15 +78,16 @@ function gridPdfContent(grid: ReadingGridExport): Content[] {
   return [
     { text: "MR RINKA / READING NOTES", fontSize: 9, characterSpacing: 1, color: "#555D55", margin: [0, 0, 0, 10] },
     { text: grid.title, fontSize: 22, bold: true, margin: [0, 0, 0, 12] },
-    { text: [{ text: "Text / author: ", bold: true }, grid.text || "Not specified"], margin: [0, 0, 0, 10] },
+    { text: [{ text: "Text / author: ", bold: true }, grid.text || (grid.blank ? "________________________" : "Not specified")], margin: [0, 0, 0, 10] },
     {
+      fontSize: grid.blank ? 10 : 11, lineHeight: grid.blank ? 1.1 : 1.35,
       table: {
-        headerRows: 1, widths: [145, "*"],
+        headerRows: 1, dontBreakRows: grid.blank, widths: [145, "*"], heights: grid.blank ? (row: number) => row ? 50 : 20 : undefined,
         body: [
           ["READING MOVE", "YOUR NOTES"].map(text => ({ text, bold: true, fontSize: 10, fillColor: "#D8ED61" })),
           ...grid.rows.map((row): PdfTableCell[] => [
             { stack: [{ text: row.title, bold: true, margin: [0, 0, 0, 8] }, { text: row.prompt, fontSize: 9 }], fillColor: "#EEE9DC" },
-            { text: row.notes || "(Not yet written)", preserveLeadingSpaces: true },
+            { text: row.notes || (grid.blank ? " " : "(Not yet written)"), preserveLeadingSpaces: true },
           ]),
         ],
       },
