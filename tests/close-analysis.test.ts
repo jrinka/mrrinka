@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { closeRequest } from '../lib/close-analysis';
+import { closeFeedbackFailureCode, closeRequest } from '../lib/close-analysis';
 import { safeFeedback } from '../lib/feedback-service';
 import { closeAnalysisLiveEnabled } from '../lib/close-analysis-sources';
 const attempt={sourceId:'tourism',area:'The advertisement',feature:'Headline question',evidence:'A short synthetic detail for testing only.',draft:'My own synthetic explanation connects the chosen detail to the stated audience.'};
@@ -51,4 +51,10 @@ test('ordinary critique and revision remain allowed, including mention of a mark
  const outputs=['{"allowed":true}',JSON.stringify({strength:'Your revision grounds the claim in a detail.',concern:'The connection to the audience needs support.',nextMove:'How does the mark you describe support your claim?'}),'{"allowed":true}'];
  const result=await safeFeedback({...coachingInput,draft:'I describe the mark in the source image and explain its effect.',previousDraft:'My earlier analysis described the image.',reflection:'I added a precise detail.'},async(system)=>{assert.match(system,/Allow ordinary diagnostic critique and revision questions/);return outputs.shift()!;});
  assert.equal(result.refused,false);
+});
+
+test('failure diagnostics distinguish timeouts and format errors without leaking raw messages',()=>{
+ assert.equal(closeFeedbackFailureCode(new DOMException('private provider context','TimeoutError')),'timeout');
+ assert.equal(closeFeedbackFailureCode(new SyntaxError('private model text')),'response-format');
+ assert.equal(closeFeedbackFailureCode(new Error('private endpoint details')),'provider-unavailable');
 });

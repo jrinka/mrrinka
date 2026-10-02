@@ -7,3 +7,10 @@ export const closeRequest = z.object({
  draft:z.string().trim().min(20).max(1800).refine(value=>wordCount(value)<=180,"Keep this to one short paragraph (180 words maximum)."),
  previousDraft:z.string().max(1800).default(""), reflection:z.string().max(500).default(""),
 }).strict();
+
+// Stable, non-sensitive diagnostics: never return provider messages or submitted text.
+export function closeFeedbackFailureCode(error:unknown) {
+ if (error instanceof Error && (error.name === "TimeoutError" || error.name === "AbortError")) return "timeout";
+ if (error instanceof SyntaxError || (error instanceof Error && error.name === "ZodError")) return "response-format";
+ return "provider-unavailable";
+}
