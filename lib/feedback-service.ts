@@ -33,7 +33,7 @@ export const coachingSchema = z.object({
 export type Coaching = z.infer<typeof coachingSchema>;
 
 export type ModelObservation = { elapsedMs:number; outcome:"completed"|"failed"; httpStatus?:number; finishReason?:"stop"|"length"|"other"; usage?:{inputTokens?:number;outputTokens?:number;totalTokens?:number;reasoningTokens?:number}; failureCode?:ReturnType<typeof closeFeedbackFailureCode> };
-export async function askModel(system: string, material: unknown, maxTokens = 4096, timeoutMs = 30000, provider = feedbackProvider(), observe?:(value:ModelObservation)=>void, options?:{reasoningEffort:"low"}): Promise<string> {
+export async function askModel(system: string, material: unknown, maxTokens = 4096, timeoutMs = 30000, provider = feedbackProvider(), observe?:(value:ModelObservation)=>void): Promise<string> {
   const started=performance.now();
   const observation:ModelObservation={elapsedMs:0,outcome:"failed"};
   try {
@@ -42,7 +42,7 @@ export async function askModel(system: string, material: unknown, maxTokens = 40
   if (!apiKey) throw new Error("Feedback service is not configured.");
   const response = await fetch(fireworks ? "https://api.fireworks.ai/inference/v1/chat/completions" : "https://api.minimax.chat/v1/text/chatcompletion_v2", {
     method: "POST", headers: {"Content-Type":"application/json", Authorization:`Bearer ${apiKey}`},
-    body: JSON.stringify({ model:provider.model, messages: [{role:"system",content:system},{role:"user",content:JSON.stringify(material)}], max_tokens:maxTokens, ...(fireworks && options ? {reasoning_effort:options.reasoningEffort} : {}) }),
+    body: JSON.stringify({ model:provider.model, messages: [{role:"system",content:system},{role:"user",content:JSON.stringify(material)}], max_tokens:maxTokens }),
     signal: AbortSignal.timeout(timeoutMs),
   });
   observation.httpStatus=response.status;
