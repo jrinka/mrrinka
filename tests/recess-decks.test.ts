@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {drawFromBank} from '../recess/decks';
 import {drawWordleWord} from '../recess/wordle-deck';
+import {drawScatterCategories,scatterLetters} from '../recess/scatter';
 import {words,anagrams,ladders,definitions,debates} from '../recess/challenges';
 import {masterpieces,blobPrompts} from '../recess/mini-game-data';
 import {twentyFourBanks,matchPuzzles} from '../recess/math/data';
@@ -56,4 +57,32 @@ test('expanded banks have unique entries and usable words',()=>{
   assert.ok(words.length>=600);assert.ok(words.every(word=>/^[A-Z]{5}$/.test(word)));
   assert.ok(anagrams.length>=80);assert.ok(anagrams.every(word=>/^[A-Z]{6,24}$/.test(word)));
   for(const bank of [words,anagrams,ladders,definitions,debates,masterpieces,blobPrompts,twentyFourBanks.warmup,twentyFourBanks.stretch,matchPuzzles])assert.equal(new Set(bank.map(item=>JSON.stringify(item))).size,bank.length);
+});
+
+test('Scattergories rounds favor broad categories, rotate without repeats, and exclude X Q Z',()=>{
+  assert.equal(scatterLetters.join(''), 'ABCDEFGHIJKLMNOPRSTUVWY');
+  const seen = new Set<string>();
+  for(let round=0;round<8;round++) {
+    const categories = drawScatterCategories();
+    assert.equal(categories.length,12);
+    assert.equal(new Set(categories).size,12);
+    assert.equal(categories.filter(category=>category.startsWith('Something')).length,8);
+    for(const category of categories) {
+      assert.ok(!seen.has(category),`Repeated category: ${category}`);
+      seen.add(category);
+    }
+  }
+});
+
+test('all word ladders use distinct words and exactly one letter changes per step',()=>{
+  for(const ladder of ladders) {
+    assert.ok(ladder.length>=3);
+    assert.equal(new Set(ladder).size,ladder.length);
+    for(let step=0;step<ladder.length;step++) {
+      const word=ladder[step];
+      assert.match(word,/^[A-Z]{3,5}$/);
+      assert.equal(word.length,ladder[0].length);
+      if(step>0) assert.equal([...word].filter((letter,index)=>letter!==ladder[step-1][index]).length,1,ladder.join(' → '));
+    }
+  }
 });

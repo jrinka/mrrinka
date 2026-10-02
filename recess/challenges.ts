@@ -31,7 +31,9 @@ export const ladders=[
   ],
   [
     "BOOK",
-    "BOON",
+    "BOOT",
+    "SOOT",
+    "SOON",
     "MOON"
   ],
   [
@@ -320,8 +322,8 @@ export const ladders=[
   ],
   [
     "HILL",
-    "HELL",
-    "HEEL",
+    "FILL",
+    "FELL",
     "FEEL",
     "FEED"
   ],
@@ -368,11 +370,11 @@ export const ladders=[
     "SHEEP"
   ],
   [
-    "SMILE",
-    "STILE",
-    "STYLE",
-    "STALE",
-    "SCALE"
+    "SCORE",
+    "SHORE",
+    "SHARE",
+    "SHARK",
+    "SPARK"
   ],
   [
     "TRAIN",
