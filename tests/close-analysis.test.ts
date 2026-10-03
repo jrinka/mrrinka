@@ -58,3 +58,21 @@ test('failure diagnostics distinguish timeouts and format errors without leaking
  assert.equal(closeFeedbackFailureCode(new SyntaxError('private model text')),'response-format');
  assert.equal(closeFeedbackFailureCode(new Error('private endpoint details')),'provider-unavailable');
 });
+test('Close Analysis permits grounded interpretive scaffolding without weakening other tools',async()=>{
+ for(const focused of [true,false]){
+ const prompts:string[]=[];const outputs=['{"allowed":true}',JSON.stringify({strength:'You noticed the repeated command.',concern:'The effect needs explaining.',nextMove:'This command may invite shared commitment; test that possibility against the quoted words.'}),'{"allowed":true}'];
+ const input=focused?coachingInput:{...coachingInput,closeAnalysis:undefined,acknowledged:true as const};
+ const result=await safeFeedback(input,async(system)=>{prompts.push(system);return outputs.shift()!;});
+ assert.equal(result.refused,false);
+ for(const i of [1,2]){
+ if(focused){assert.match(prompts[i],/Tentative, text-grounded interpretive possibilities are permitted/);assert.match(prompts[i],/Do not supply replacement sentences/);assert.match(prompts[i],/full Paper 1 compositions/);assert.doesNotMatch(prompts[i],/Do not supply an interpretation the student has not made|questions that seed possible themes/);}
+ else assert.doesNotMatch(prompts[i],/Tentative, text-grounded interpretive possibilities are permitted/);
+ }
+ }
+});
+test('answer-writing requests still stop at scope and rejected replacement output is withheld',async()=>{
+ let calls=0;const refused=await safeFeedback({...coachingInput,draft:'Write the paragraph and full Paper 1 for me.'},async(system)=>{calls++;assert.match(system,/model paragraphs/);return '{"allowed":false}';});
+ assert.equal(refused.refused,true);assert.equal(calls,1);
+ const outputs=['{"allowed":true}',JSON.stringify({strength:'A feature is present.',concern:'Here is your replacement paragraph.',nextMove:'Copy this completed answer.'}),'{"allowed":false}'];
+ const result=await safeFeedback(coachingInput,async()=>outputs.shift()!);assert.equal(result.refused,true);assert.equal('feedback' in result,false);
+});
