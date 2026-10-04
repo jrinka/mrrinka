@@ -47,10 +47,26 @@ test("shared export menu offers Word, PDF, and Markdown and every caller selects
  assert.match(html,/<option value="docx" selected="">Word/);
  assert.doesNotMatch(html,/<option value="txt"/);
  const callers=readdirSync('components').filter(name=>name.endsWith('.tsx')&&name!=='export-format.tsx').map(name=>({name,source:readFileSync(`components/${name}`,'utf8')})).filter(file=>file.source.includes('<ExportFormatSelect'));
- assert.equal(callers.length,23);
+ assert.equal(callers.length,24);
  for(const {name,source} of callers){
   const defaults=[...source.matchAll(/useState<ExportFormat>\(\s*["']([^"']+)["']\s*\)/g)];
   assert.ok(defaults.length,`${name}: export state must have an explicit initial format`);
   for(const [,format] of defaults)assert.equal(format,'docx',`${name}: default format`);
  }
+});
+
+
+test("Brain Break offers shared document formats and preserves literal activity content", async () => {
+ const {createActivityBlob,activityRecord}=await import('../recess/exports');
+ const content='Synthetic activity\n2 × 3 = 6\n**literal** ```notes```';
+ const markdown=await createActivityBlob(content,'Test activity','md');
+ assert.equal(await markdown.blob.text(),activityRecord(content,'Test activity','md'));
+ const word=await createActivityBlob(content,'Test activity','docx');
+ assert.equal(word.filename,'brain-break-test-activity.docx');
+ assert.equal(Buffer.from(await word.blob.arrayBuffer()).subarray(0,2).toString(),'PK');
+ const pdf=await createActivityBlob(content,'Test activity','pdf');
+ assert.equal(Buffer.from(await pdf.blob.arrayBuffer()).subarray(0,5).toString(),'%PDF-');
+ const source=readFileSync('recess/activity-export.tsx','utf8');
+ assert.match(source,/useState<ExportFormat>\('docx'\)/);
+ assert.match(source,/exportFormats.map/);
 });

@@ -3040,3 +3040,12 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 @media(max-width:800px) { .close-columns {grid-template-columns:1fr;} .close-source-list {grid-template-columns:1fr;} .close-image-scroll {max-height:65vh;} }
 @media(min-width:801px) { .close-source {position:sticky; top:20px;} .close-image-scroll {max-height:60vh;} }
 .close-writing .passage-feedback .hint {color:inherit; opacity:.85;}
+
+/* Shared practice discovery; assessment-specific callers opt in. */
+.interactive-practice-label { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; line-height: 1.5; letter-spacing: .02em; }
+.practice-shortcuts { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 24px; padding: 16px 20px; border: 1px solid var(--line); border-left: 4px solid var(--citron); background: var(--panel-citron); margin-bottom: 24px; font-size: 14px; }
+.paper-two-practice { background: var(--panel-citron); }
+.paper-two-practice header > .interactive-practice-label { display: flex; margin-bottom: 12px; }
+#paper-two-practice-title { scroll-margin-top: 24px; }
+.p2-guidance .p1-section h2 button > .interactive-practice-label { margin-left: auto; flex-wrap: wrap; }
+@media (max-width: 540px) { .practice-shortcuts { align-items: flex-start; flex-direction: column; } .p2-guidance .p1-section h2 button { flex-wrap: wrap; } }

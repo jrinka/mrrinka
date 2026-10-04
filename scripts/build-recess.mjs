@@ -23,6 +23,7 @@ const result = await build({
   bundle: true,
   minify: true,
   format: 'esm',
+  splitting: true,
   platform: 'browser',
   target: ['es2022'],
   jsx: 'automatic',
@@ -36,12 +37,15 @@ const result = await build({
 });
 const files = Object.keys(result.metafile.outputs);
 const assetUrl = name => '/recess-assets/' + path.basename(name);
-const script = files.find(name => name.endsWith('.js'));
+const script = files.find(name => name.endsWith('.js') && result.metafile.outputs[name].entryPoint === 'recess/main.tsx');
 const styles = files.find(name => name.endsWith('.css'));
 if (!script || !styles) throw new Error('Recess build is missing its script or stylesheet.');
 await copyFile(path.join(source, 'favicon.svg'), path.join(output, 'favicon.svg'));
 for (const font of ['@fontsource-variable/dm-sans', '@fontsource/space-mono', '@fontsource/archivo-black', '@fontsource/sorts-mill-goudy']) {
   await copyFile(path.join(root, 'node_modules', font, 'LICENSE'), path.join(output, font.split('/')[1] + '-LICENSE.txt'));
+}
+for (const license of ['docx-LICENSE.txt','pdfmake-LICENSE.txt','Roboto-OFL.txt']) {
+  await copyFile(path.join(root, 'public/downloads/licenses', license), path.join(output, license));
 }
 await writeFile(path.join(root, 'public/recess.html'), `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">

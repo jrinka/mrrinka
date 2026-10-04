@@ -1,5 +1,6 @@
 "use client";
 
+import InteractivePracticeLabel from "./interactive-practice-label";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import {LiteratureCompanion,LiteraturePractice} from "./literature-paper-one";
@@ -25,6 +26,7 @@ export default function PaperOneDossier({ body, workedExample = true, literature
   });
   const [open, setOpen] = useState<string[]>(["briefing"]);
   const [step, setStep] = useState(0);
+  const [practiceFocus, setPracticeFocus] = useState(0);
   const [active, setActive] = useState("briefing");
   useEffect(() => {
     function revealHash() {
@@ -45,17 +47,18 @@ export default function PaperOneDossier({ body, workedExample = true, literature
     };
   }, []);
   return (
-    <div className={`p1-workbench ${workedExample || literatureExample ? "" : "p1-guidance-only"}`}>
+    <div className={`p1-workbench ${paperTwo ? "p2-guidance" : ""} ${workedExample || literatureExample ? "" : "p1-guidance-only"}`}>
       <div className="p1-guidance">
+        {paperTwo && <nav className="practice-shortcuts" aria-label="Paper 2 practice shortcut"><InteractivePracticeLabel /><a href="#practice" onClick={event => { event.preventDefault(); window.history.pushState(null, "", "#practice"); setOpen(previous => previous.includes("practice") ? previous : [...previous, "practice"]); setActive("practice"); setPracticeFocus(previous => previous + 1); }}>Start a comparative argument</a></nav>}
         <div className="p1-panel-heading"><span className="mono">ASSESSMENT GUIDE</span><button type="button" onClick={() => setOpen(open.length === sections.length ? [] : sections.map(s => s.id))}>{open.length === sections.length ? "Collapse all" : "Expand all"}</button></div>
         {sections.map((section, index) => (
           <section className="p1-section" id={section.id} key={section.id}>
-            <h2><button type="button" aria-expanded={open.includes(section.id)} aria-controls={`${section.id}-body`} onClick={() => { setActive(section.id); setOpen(previous => previous.includes(section.id) ? previous.filter(id => id !== section.id) : [...previous, section.id]); }}><span className="mono">{String(index + 1).padStart(2, "0")}</span>{section.title}<span className="p1-toggle" aria-hidden="true">{open.includes(section.id) ? "−" : "+"}</span></button></h2>
+            <h2><button type="button" aria-expanded={open.includes(section.id)} aria-controls={`${section.id}-body`} onClick={() => { setActive(section.id); setOpen(previous => previous.includes(section.id) ? previous.filter(id => id !== section.id) : [...previous, section.id]); }}><span className="mono">{String(index + 1).padStart(2, "0")}</span>{section.title}{paperTwo && section.id === "practice" && <InteractivePracticeLabel />}<span className="p1-toggle" aria-hidden="true">{open.includes(section.id) ? "−" : "+"}</span></button></h2>
             <div id={`${section.id}-body`} hidden={!open.includes(section.id)} className="p1-section-body">
               {(workedExample || literatureExample) && <a className="p1-companion-jump" href="#worked-example" onClick={() => setActive(section.id)}>See this in the {literatureExample ? "poem" : "advertisement"} ↓</a>}
               <Markdown>{section.text}</Markdown>
               {section.id === "practice" && literatureExample && <LiteraturePractice/>}
-              {section.id === "practice" && paperTwo && <PaperTwoPractice/>}
+              {section.id === "practice" && paperTwo && <PaperTwoPractice focusRequest={practiceFocus}/>}
               {section.id === "practice" && refinery && !literatureExample && !paperTwo && <RefineryLinks kind={refinery} />}
             </div>
           </section>

@@ -1,12 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { closeRequest, wordCount, type CloseSource } from "@/lib/close-analysis";
-import { downloadRecord, formatPracticeRecord, type PracticeRecord } from "@/lib/practice-record";
+import { downloadRecord, formatPracticeRecord, type PracticeRecord, type ExportFormat } from "@/lib/practice-record";
+
+import ExportFormatSelect from "./export-format";
 
 type Work={area:string;feature:string;evidence:string;draft:string;reflection:string;records:PracticeRecord[]};
 const empty=():Work=>({area:"",feature:"",evidence:"",draft:"",reflection:"",records:[]});
 const storageKey="close-analysis-local-v1";
 export default function CloseAnalysis({sources,provider,live}:{sources:CloseSource[];provider:{name:string;disclosure:string};live:boolean}){
+ const [format,setFormat]=useState<ExportFormat>("docx");
  const [selected,setSelected]=useState(sources[0].id);
  const [works,setWorks]=useState<Record<string,Work>>({});
  const [ready,setReady]=useState(false),[saved,setSaved]=useState(false);
@@ -63,6 +66,6 @@ export default function CloseAnalysis({sources,provider,live}:{sources:CloseSour
  <p className="hint">When enabled, feedback sends your entries and source text to {provider.disclosure}. Do not include personal information. Nothing is submitted to a teacher.</p>
  {error&&<p role="alert" className="error">{error}</p>}
  <div aria-live="polite" aria-busy={busy}>{latest&&<section className="passage-feedback"><span className="mono">03 / {latest.refused?"FEEDBACK NOT PROVIDED":"FEEDBACK → REVISE THE SAME RESPONSE"}</span><p style={{whiteSpace:"pre-line"}}>{latest.feedback}</p><p className="hint">Feedback applies to the saved attempt below{latest.draft!==work.draft||latest.evidence!==evidence?", not your current edits":""}.</p><details><summary>View the submitted attempt</summary><p style={{whiteSpace:"pre-line"}}>{latest.evidence}</p><p>{latest.draft}</p></details></section>}</div>
- <div className="refinery-save"><button type="button" className="button secondary" disabled={busy||!ready} onClick={()=>downloadRecord(`Close Analysis — practice record\n${source.credit}\n${source.url}\nTask: ${source.prompt}\n\n${formatPracticeRecord(work.records)}\n\nCurrent working response (may not have feedback)\n${evidence}\n\n${work.draft}\n\nRevision note: ${work.reflection}`,`close-analysis-${selected}.txt`,"txt")}>Download this source’s record</button><p className="hint">Includes your current notes and all feedback attempts for this source. Source scans and the full transcript are not included.</p></div>
+ <div className="refinery-save"><ExportFormatSelect value={format} onChange={setFormat}/><button type="button" className="button secondary" disabled={busy||!ready} onClick={()=>downloadRecord(`Close Analysis — practice record\n${source.credit}\n${source.url}\nTask: ${source.prompt}\n\n${formatPracticeRecord(work.records)}\n\nCurrent working response (may not have feedback)\n${evidence}\n\n${work.draft}\n\nRevision note: ${work.reflection}`,`close-analysis-${selected}.txt`,format)}>Download this source’s record</button><p className="hint">Includes your current notes and all feedback attempts for this source. Source scans and the full transcript are not included.</p></div>
  </section></div></div>;
 }

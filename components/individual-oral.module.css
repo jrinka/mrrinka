@@ -68,3 +68,13 @@ details[open] > .sectionSummary::after { content: "−"; }
 .sectionControls p { font-size: 14px; }
 @media (min-width: 901px) { .contents { max-height: calc(100vh - 48px); overflow-y: auto; } }
 @media print { .sectionControls, .sectionSummary::after { display: none; } }
+
+.guide > :global(.practice-shortcuts) { grid-column: 1 / -1; }
+.section { margin-top: 12px; border: 1px solid var(--line); }
+.warm .sectionSummary { background: var(--panel-warm); }
+.cool .sectionSummary { background: var(--panel-cool); }
+.sectionSummary { padding: 20px 48px 20px 20px; }
+.sectionSummary::after { right: 20px; }
+.sectionSummary :global(.interactive-practice-label) { margin-top: 10px; color: var(--ink); }
+.sectionBody { padding: 24px 20px; background: var(--paper); }
+.tool { background: var(--panel-citron); }

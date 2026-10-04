@@ -1,5 +1,6 @@
 "use client";
 
+import InteractivePracticeLabel from "./interactive-practice-label";
 import { useEffect, useRef, useState } from "react";
 import { ioClock, ioModes, ioOrders, ioStageAt, ioStages, type IOCourse, type IOMode, type IOOrder } from "@/lib/individual-oral";
 import styles from "./individual-oral.module.css";
@@ -7,6 +8,7 @@ import styles from "./individual-oral.module.css";
 export function IOTimingMap({ course }: { course: IOCourse }) {
   const [order, setOrder] = useState<IOOrder>("extract-first");
   return <div className={styles.tool}>
+    <InteractivePracticeLabel />
     <h3>Follow the 10-minute route</h3>
     <label className={styles.selectLabel}>Order within each selection
       <select value={order} onChange={event => setOrder(event.target.value as IOOrder)}>
@@ -53,6 +55,7 @@ export function IOPracticeTimer({ course }: { course: IOCourse }) {
     } else { startedAt.current = Date.now(); setRunning(true); }
   }
   return <div className={styles.tool} aria-label="IO practice timer">
+    <InteractivePracticeLabel />
     <h3>Practice timer</h3>
     <div className={styles.controls}>
       <label className={styles.selectLabel}>Practice mode<select value={mode} onChange={event => { reset(); setMode(event.target.value as IOMode); }}>
@@ -95,6 +98,7 @@ export function IORehearsalNotes({ course }: { course: IOCourse }) {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   return <div className={styles.tool} aria-label="Rehearsal notes">
+    <InteractivePracticeLabel />
     <h3>My rehearsal notes</h3>
     <label className={styles.notesLabel} htmlFor="io-rehearsal-notes">What did you notice, and what will you try next?</label>
     <p id="io-notes-help">Record a section or timestamp, the problem you noticed, and one change to test. Add a date when you return so you can track what improves.</p>

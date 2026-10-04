@@ -1,3 +1,5 @@
+import { createRecordBlob, type ExportFormat } from "../lib/practice-record";
+
 export function fileName(title:string) {
   return 'brain-break-'+title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80);
 }
@@ -64,4 +66,9 @@ export function activityRecord(content:string,title:string,format:'txt'|'md') {
   const longest=Math.max(0,...(content.match(/`+/g)||[]).map(run=>run.length));
   const fence='`'.repeat(Math.max(3,longest+1));
   return `# ${title}\n\n${fence}text\n${content}\n${fence}\n`;
+}
+
+export async function createActivityBlob(content:string,title:string,format:ExportFormat) {
+  if(format === "md") return {blob:new Blob([activityRecord(content,title,"md")],{type:"text/markdown;charset=utf-8"}),filename:fileName(title)+".md"};
+  return createRecordBlob(content,fileName(title),format);
 }
