@@ -53,7 +53,7 @@ export default function Practice({
             hint: "How might someone interpret the detail differently?",
           },
         ];
-  const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
+  const [exportFormat,setExportFormat]=useState<ExportFormat>("docx");
   const [values, setValues] = useState<Record<string, string>>({});
   const [review, setReview] = useState(false);
   const [copied, setCopied] = useState(false);

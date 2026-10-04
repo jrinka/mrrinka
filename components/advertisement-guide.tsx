@@ -162,7 +162,7 @@ function SourceFigure({ viewIndex, enlarged = false }: { viewIndex: number; enla
 
 function AdvertisementNotes() {
   const [values, setValues] = useState({ audience: "", evidence: "", analysis: "" });
-  const [format, setFormat] = useState<ExportFormat>("txt");
+  const [format, setFormat] = useState<ExportFormat>("docx");
   return <section className="infographic-notes" aria-label="Advertisement analysis notebook">
     <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
     <p>Work with the body copy or closing slogan. Connect what it says with how the product is presented.</p>

@@ -8,7 +8,7 @@ import {downloadRecord,type ExportFormat} from '@/lib/practice-record';
 import styles from './what-changes.module.css';
 type Response={observation:string;revision:string;revealed:boolean};
 export default function WhatChanges(){
- const [index,setIndex]=useState(0);const [responses,setResponses]=useState<Record<string,Response>>({});const [format,setFormat]=useState<ExportFormat>('txt');
+ const [index,setIndex]=useState(0);const [responses,setResponses]=useState<Record<string,Response>>({});const [format,setFormat]=useState<ExportFormat>('docx');
  const exercise=changeExercises[index];const answer=responses[exercise.id]??{observation:'',revision:'',revealed:false};
  function update(patch:Partial<Response>){setResponses(previous=>({...previous,[exercise.id]:{...(previous[exercise.id]??{observation:'',revision:'',revealed:false}),...patch}}));}
  function exportWork(){const text=changeExercises.filter(e=>responses[e.id]).map(e=>{const r=responses[e.id];return `${e.title}\n\nContext: ${e.context}\nVersion A: ${e.a}${e.kind==='hierarchy'?' [FREE ENTRY is the largest, bold line.]':''}\nVersion B: ${e.b}${e.kind==='hierarchy'?' [Community reading night is the largest, bold line.]':''}\n\nQuestion: ${e.prompt}\nMy first reading:\n${r.observation}\n\n${r.revealed?`Authored guidance (not student writing):\n${e.feedback}\n${e.complication}\n\n`:''}Transfer question: ${e.transfer}\nMy further thinking:\n${r.revision}`;}).join('\n\n---\n\n');downloadRecord(`What changes?\nOriginal classroom practice examples. No AI feedback.\n${location.origin}/practice/what-changes\n\n${text}\n\nImage exercise: Wellcome Collection, Hands showing the sign language alphabet. Public Domain Mark. https://wellcomecollection.org/works/awq9wceu`,'what-changes-notes',format);}

@@ -8,7 +8,7 @@ import {literatureExample as poem,literatureSteps,literatureNotes,literatureMode
 
 export function LiteratureCompanion({section,title}:{section:string;title:string}) {
  const [step,setStep]=useState(0);
- const [format,setFormat]=useState<ExportFormat>("txt");
+ const [format,setFormat]=useState<ExportFormat>("docx");
  const panel=useRef<HTMLElement>(null);
  useEffect(()=>{panel.current?.scrollTo({top:0});},[section]);
  return <aside ref={panel} id="worked-example" className="p1-example literature-companion" aria-label="Worked example: Up-Hill by Christina Rossetti">
@@ -27,7 +27,7 @@ export function LiteratureCompanion({section,title}:{section:string;title:string
 }
 
 export function LiteraturePractice(){
- const [draft,setDraft]=useState("");const [revision,setRevision]=useState("");const [format,setFormat]=useState<ExportFormat>("txt");
+ const [draft,setDraft]=useState("");const [revision,setRevision]=useState("");const [format,setFormat]=useState<ExportFormat>("docx");
  return <section className="lit-practice"><span className="mono">TRY IT / NO AI</span><h3>From “me” to “all”</h3><p>Write two or three sentences on the final question and answer. Explain how the wording develops the relationship between uncertainty and reassurance.</p><blockquote>Will there be beds for me and all who seek?<br/>Yea, beds for all who come.</blockquote>
  <label className="field">My first reading<textarea rows={5} maxLength={3500} value={draft} onChange={e=>setDraft(e.target.value)}/></label>
  <details className="p1-model"><summary>Self-check before revising</summary><ul><li>Have you explained the movement from an individual concern to a wider one?</li><li>What does the answer repeat, and what wording changes?</li><li>What earlier detail supports or qualifies your claim?</li><li>Are you describing the assurance the reply offers, or assuming an emotion every reader must feel?</li></ul></details>

@@ -109,7 +109,7 @@ export default function ComicGuide({ body, exampleHref }: { body: string; exampl
 
 function ComicNotes() {
   const [values, setValues] = useState({ audience: "", evidence: "", analysis: "" });
-  const [format, setFormat] = useState<ExportFormat>("txt");
+  const [format, setFormat] = useState<ExportFormat>("docx");
   return <section className="infographic-notes" aria-label="Sequential comic analysis notebook">
     <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
     {fields.map(field => <label className="field" key={field.key} htmlFor={`comic-${field.key}`}>{field.label}<span className="hint" id={`comic-${field.key}-hint`}>{field.hint}</span><textarea id={`comic-${field.key}`} aria-describedby={`comic-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}

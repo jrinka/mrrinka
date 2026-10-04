@@ -12,7 +12,7 @@ import SiteFeedback from "./site-feedback";
 
 type Result = {refused:boolean; message?:string; feedback?:{strength:string; concern:string; nextMove:string}; model:string; policyVersion:string; createdAt:string};
 export default function Refinery({kind,initialCourse="",transferId="",provider}: {kind:RefineryKind;initialCourse?:string;transferId?:string;provider:{name:string;disclosure:string}}) {
- const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
+ const [exportFormat,setExportFormat]=useState<ExportFormat>("docx");
   const config = refineries[kind];
   const [prompt,setPrompt] = useState("");
   const [course,setCourse] = useState(initialCourse);

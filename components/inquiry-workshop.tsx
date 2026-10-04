@@ -11,7 +11,7 @@ import SiteFeedback from "./site-feedback";
 type Stage=typeof inquiryStages[number];
 type Turn={student:string;coach:string;stage:Stage;refused:boolean};
 export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"global-issue"|"line-of-inquiry";initialCourse?:string;provider:{name:string;disclosure:string}}){
- const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
+ const [exportFormat,setExportFormat]=useState<ExportFormat>("docx");
  const [course,setCourse]=useState(initialCourse);
  const startRef=useRef<HTMLFieldSetElement>(null);
  const [confirmReset,setConfirmReset]=useState(false);

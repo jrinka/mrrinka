@@ -97,7 +97,7 @@ function InfographicSource() {
 
 function InfographicNotes() {
   const [values, setValues] = useState({ audience: "", evidence: "", analysis: "" });
-  const [format, setFormat] = useState<ExportFormat>("txt");
+  const [format, setFormat] = useState<ExportFormat>("docx");
   return <div className="infographic-notes">
     <h3>Try a connected reading</h3>
     <p>Choose the activity tiles or the closing instructions. Use your audience inference to explain why the choices matter.</p>

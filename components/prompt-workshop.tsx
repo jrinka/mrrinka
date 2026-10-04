@@ -6,7 +6,7 @@ import {useState} from "react";
 import {nextPrompt,comparisonPrompts} from "@/lib/comparison-prompts";
 import {downloadRecord} from "@/lib/practice-record";
 export default function PromptWorkshop(){
- const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
+ const [exportFormat,setExportFormat]=useState<ExportFormat>("docx");
  const [prompt,setPrompt]=useState<string>(comparisonPrompts[0]);
  const [allNotes,setAllNotes]=useState<Record<string,Record<string,string>>>({});
  const notes=allNotes[prompt]||{};

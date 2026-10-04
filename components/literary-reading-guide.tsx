@@ -137,7 +137,7 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
 function LiteraryNotes({ example, firstReading }: { example: LiteraryReading; firstReading: string }) {
   const fields = example.fields;
   const [values, setValues] = useState({ contrast: "", evidence: "", analysis: "" });
-  const [format, setFormat] = useState<ExportFormat>("txt");
+  const [format, setFormat] = useState<ExportFormat>("docx");
   return <section className="infographic-notes" aria-label={`${example.title} analysis notebook`}>
     <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
     {example.firstReading && <div><h4>Your first reading</h4><p style={{ whiteSpace: "pre-wrap" }}>{firstReading || "You have not written a first reading yet. You can return to the opening section at any time."}</p></div>}
