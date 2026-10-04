@@ -3,6 +3,19 @@ import assert from "node:assert/strict";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import PassagePractice, { formatOfflineWriting } from "../components/passage-practice";
+import ExportFormatSelect from "../components/export-format";
+
+test("Passage Practice defaults to Word and offers PDF and Markdown without TXT", () => {
+  const html = renderToStaticMarkup(createElement(PassagePractice, {
+    provider: { name: "Test", disclosure: "Test provider" },
+  }));
+  assert.match(html, /<option value="docx" selected="">Word/);
+  assert.match(html, /<option value="pdf">PDF/);
+  assert.match(html, /<option value="md">Markdown/);
+  assert.doesNotMatch(html, /<option value="txt"/);
+  const shared = renderToStaticMarkup(createElement(ExportFormatSelect, { value: "txt", onChange: () => {} }));
+  assert.match(shared, /<option value="txt" selected="">Plain text/);
+});
 
 test("offline writing exports omit an empty revision and preserve existing writing", () => {
   const draft = "  My unfinished analysis\n\nA second observation.";
