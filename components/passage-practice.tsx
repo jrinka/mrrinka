@@ -64,7 +64,7 @@ function extractPassage(raw: string) {
 }
 
 export default function PassagePractice({provider}:{provider:{name:string;disclosure:string}}) {
- const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
+ const [exportFormat,setExportFormat]=useState<ExportFormat>("docx");
   const [passage, setPassage] = useState<Passage | null>(null);
   const [response, setResponse] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -183,7 +183,7 @@ export default function PassagePractice({provider}:{provider:{name:string;disclo
       <section className="offline-tools">
         <h3>Work offline</h3>
         <p>AI feedback is optional. Save your passage and writing to discuss with your teacher.</p>
-        <ExportFormatSelect value={exportFormat} onChange={setExportFormat}/>
+        <ExportFormatSelect value={exportFormat} onChange={setExportFormat} allowedFormats={["pdf","docx","md"]}/>
         <div className="tool-actions">
           <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("extract")}>Save passage</button>
           <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("writing")}>Save my writing</button>
