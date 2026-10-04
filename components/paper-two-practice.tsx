@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
+import InteractivePracticeLabel from "./interactive-practice-label";
+import { useEffect, useRef, useState } from "react";
 import ExportFormatSelect from "./export-format";
 import { downloadRecord, type ExportFormat } from "@/lib/practice-record";
 import {
@@ -8,7 +9,9 @@ import {
   type PaperTwoDraft, type QuestionPool,
 } from "@/lib/paper-two-practice";
 
-export default function PaperTwoPractice() {
+export default function PaperTwoPractice({ focusRequest = 0 }: { focusRequest?: number }) {
+  const heading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => { if (focusRequest) { heading.current?.focus(); heading.current?.scrollIntoView({ block: "start" }); } }, [focusRequest]);
   const [pool, setPool] = useState<QuestionPool>("recent");
   const [questionId, setQuestionId] = useState<string>();
   const [seen, setSeen] = useState<string[]>([]);
@@ -38,7 +41,7 @@ export default function PaperTwoPractice() {
   }
 
   return <section className="paper-two-practice" aria-labelledby="paper-two-practice-title">
-    <header><span className="mono">PAPER 2 / QUESTION TO THESIS</span><h3 id="paper-two-practice-title">Start a comparative argument</h3>
+    <header><InteractivePracticeLabel /><span className="mono">PAPER 2 / QUESTION TO THESIS</span><h3 ref={heading} tabIndex={-1} id="paper-two-practice-title">Start a comparative argument</h3>
       <p>Draw a question, choose two works you have read, and write a thesis that answers it. Aim for a claim you can support, then test it against details from both works.</p>
     </header>
     <div className="p2-question-controls">
