@@ -22,6 +22,10 @@ type FallbackPassage = { title: string; author: string; passage: string };
 
 const wordCount = (text: string) => text.trim().split(/\s+/).filter(Boolean).length;
 
+export function formatOfflineWriting(response: string, revision: string) {
+  return `Your analysis\n${response || "(No analysis written)"}${revision.trim() ? `\n\nYour revision\n${revision}` : ""}`;
+}
+
 function stripBoilerplate(text: string) {
   const start = text.search(/\*\*\*\s*START OF (?:THE|THIS) PROJECT GUTENBERG EBOOK[^\r\n]*\*\*\*/i);
   const end = text.search(/\*\*\*\s*END OF (?:THE|THIS) PROJECT GUTENBERG EBOOK[^\r\n]*\*\*\*/i);
@@ -151,7 +155,7 @@ export default function PassagePractice({provider}:{provider:{name:string;disclo
   function downloadOffline(mode:"extract"|"writing"|"both") {
     if (!passage) return;
     const source=`${passage.title} — ${passage.author}\n${passage.sourceUrl}\n\n${passage.text}`;
-    const writing=`Your analysis\n${response||"(No analysis written)"}\n\nYour revision\n${revision||"(No revision written)"}`;
+    const writing=formatOfflineWriting(response, revision);
     downloadRecord(["Passage Practice — Literature Paper 1 skills",mode!=="writing"?source:"",mode!=="extract"?writing:""].filter(Boolean).join("\n\n"),`passage-${mode}.txt`,exportFormat);
   }
   function download() {
@@ -176,7 +180,16 @@ export default function PassagePractice({provider}:{provider:{name:string;disclo
         </>}
       </section>
 
-      <section className="offline-tools"><h3>Work offline</h3><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><div className="tool-actions"><button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("extract")}>Extract</button><button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("writing")}>My writing</button><button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("both")}>Extract + writing</button></div></section>
+      <section className="offline-tools">
+        <h3>Work offline</h3>
+        <p>AI feedback is optional. Save your passage and writing to discuss with your teacher.</p>
+        <ExportFormatSelect value={exportFormat} onChange={setExportFormat}/>
+        <div className="tool-actions">
+          <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("extract")}>Save passage</button>
+          <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("writing")}>Save my writing</button>
+          <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("both")}>Save passage + writing</button>
+        </div>
+      </section>
       <div aria-live="polite">
         {feedback && <section className="passage-feedback"><span className="mono">FIRST RESPONSE</span><h2>Feedback</h2><p>{feedback}</p><small>AI feedback can be inaccurate. Check it against the passage.</small></section>}
         {revisionFeedback && <section className="passage-feedback"><span className="mono">REFINED RESPONSE</span><h2>Revision feedback</h2><p>{revisionFeedback}</p><small>Keep testing your interpretation against the passage.</small></section>}

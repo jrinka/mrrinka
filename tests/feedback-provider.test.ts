@@ -65,3 +65,25 @@ test("Close Analysis uses Kimi K3 only and never falls back to MiniMax",async()=
  };
  assert.equal(await askCloseAnalysisModel("coach",{draft:"synthetic"}),"Synthetic diagnostic feedback");
 });
+
+test("Passage Practice routes every feedback stage to its credited Kimi K3 provider", async () => {
+  const { POST } = await import("../app/api/practice/feedback/route");
+  const { passagePracticeProvider, askPassagePracticeModel } = await import("../lib/feedback-service");
+  delete process.env.FIREWORKS_API_KEY;
+  process.env.MINIMAX_APIKEY = "test-minimax-key";
+  globalThis.fetch = async () => { assert.fail("Missing Fireworks key must not fall back to MiniMax"); };
+  assert.equal(passagePracticeProvider().name, "Kimi K3");
+  await assert.rejects(() => askPassagePracticeModel("coach", { draft: "synthetic" }), /not configured/);
+  process.env.FIREWORKS_API_KEY = "test-fireworks-key";
+  let calls = 0;
+  globalThis.fetch = async (url, init) => {
+    assert.equal(url, "https://api.fireworks.ai/inference/v1/chat/completions");
+    assert.equal(JSON.parse(String(init?.body)).model, passagePracticeProvider().model);
+    calls++;
+    return Response.json({ choices: [{ message: { content: calls === 2 ? "Which detail supports your reading?" : '{"allowed":true}' }, finish_reason: "stop" }] });
+  };
+  const result = await POST(new Request("http://localhost/api/practice/feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ passage: "The empty room grew darker as the last light faded from the window.", response: "The fading light creates an uncertain mood." }) }));
+  assert.equal(result.status, 200);
+  assert.equal((await result.json()).model, passagePracticeProvider().name);
+  assert.equal(calls, 3);
+});
