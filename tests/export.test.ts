@@ -13,7 +13,9 @@ test("downloadable editable grids include self-contained export controls",()=>{
   const html=readFileSync(`public/downloads/${method}-grid.html`,'utf8');
   assert.ok(html.includes('id="export-notes"'));
   assert.match(html, /addEventListener\(["']click["']/);
-  for(const format of ['txt','md','pdf','docx']) assert.ok(html.includes(`value="${format}"`));
+  for(const format of ['md','pdf','docx']) assert.ok(html.includes(`value="${format}"`));
+  assert.ok(!html.includes('value="txt"'));
+  assert.match(html, /<option value="docx" selected>/);
   assert.ok(html.includes('id="text-title"'));assert.ok(html.includes('id="text-author"'));
   assert.ok(!html.includes('<script src='));
  }
@@ -32,4 +34,23 @@ test("PDF and Word downloads are real documents, not renamed plain text", async 
  assert.equal(word.blob.type,'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
  const zip=new Uint8Array(await word.blob.arrayBuffer());
  assert.equal(Buffer.from(zip.subarray(0,2)).toString(),'PK');
+});
+
+test("shared export menu offers Word, PDF, and Markdown and every caller selects Word initially", async () => {
+ const {createElement}=await import('react');
+ const {renderToStaticMarkup}=await import('react-dom/server');
+ const {default:ExportFormatSelect}=await import('../components/export-format');
+ const {exportFormats}=await import('../lib/practice-record');
+ const {readdirSync}=await import('node:fs');
+ assert.deepEqual(exportFormats.map(format=>format.value),['pdf','docx','md']);
+ const html=renderToStaticMarkup(createElement(ExportFormatSelect,{value:'docx',onChange:()=>{}}));
+ assert.match(html,/<option value="docx" selected="">Word/);
+ assert.doesNotMatch(html,/<option value="txt"/);
+ const callers=readdirSync('components').filter(name=>name.endsWith('.tsx')&&name!=='export-format.tsx').map(name=>({name,source:readFileSync(`components/${name}`,'utf8')})).filter(file=>file.source.includes('<ExportFormatSelect'));
+ assert.equal(callers.length,23);
+ for(const {name,source} of callers){
+  const defaults=[...source.matchAll(/useState<ExportFormat>\(\s*["']([^"']+)["']\s*\)/g)];
+  assert.ok(defaults.length,`${name}: export state must have an explicit initial format`);
+  for(const [,format] of defaults)assert.equal(format,'docx',`${name}: default format`);
+ }
 });

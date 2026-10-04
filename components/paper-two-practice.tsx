@@ -14,7 +14,7 @@ export default function PaperTwoPractice() {
   const [seen, setSeen] = useState<string[]>([]);
   const [visited, setVisited] = useState<string[]>([]);
   const [drafts, setDrafts] = useState<Record<string, PaperTwoDraft>>({});
-  const [format, setFormat] = useState<ExportFormat>("txt");
+  const [format, setFormat] = useState<ExportFormat>("docx");
   const questionRef = useRef<HTMLDivElement>(null);
   const question = paperTwoQuestions.find(q => q.id === questionId);
   const draft = questionId ? drafts[questionId] ?? {} : {};

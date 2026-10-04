@@ -7,4 +7,4 @@ for (const method of ['tpcastt', 'soapstone']) {
   const template = await readFile(`scripts/templates/${method}-grid.html`, 'utf8');
   await writeFile(`public/downloads/${method}-grid.html`, template.replace('<!-- EXPORT_SCRIPT -->', () => `<script type="text/plain" id="export-licenses">${notices}</script><script>${script}</script>`));
 }
-console.log('Built self-contained reading grids with PDF, DOCX, TXT and Markdown exports.');
+console.log('Built self-contained reading grids with PDF, DOCX and Markdown exports.');

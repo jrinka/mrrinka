@@ -117,7 +117,7 @@ export default function NonfictionGuide({ body, href }: { body: string; href: st
 
 function NonfictionNotes() {
   const [values, setValues] = useState({ contrast: "", evidence: "", analysis: "" });
-  const [format, setFormat] = useState<ExportFormat>("txt");
+  const [format, setFormat] = useState<ExportFormat>("docx");
   return <section className="infographic-notes" aria-label="Prose non-fiction analysis notebook">
     <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
     {fields.map(field => <label className="field" key={field.key} htmlFor={`nonfiction-${field.key}`}>{field.label}<span className="hint" id={`nonfiction-${field.key}-hint`}>{field.hint}</span><textarea id={`nonfiction-${field.key}`} aria-describedby={`nonfiction-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}

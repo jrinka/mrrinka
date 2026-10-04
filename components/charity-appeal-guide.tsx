@@ -98,7 +98,7 @@ export default function CharityAppealGuide({ body, href }: { body: string; href:
 
 function CharityNotes() {
   const [values, setValues] = useState({ audience: "", evidence: "", analysis: "" });
-  const [format, setFormat] = useState<ExportFormat>("txt");
+  const [format, setFormat] = useState<ExportFormat>("docx");
   return <section className="infographic-notes" aria-label="Charitable appeal analysis notebook">
     <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
     {fields.map(field => <label className="field" key={field.key} htmlFor={`charity-${field.key}`}>{field.label}<span className="hint" id={`charity-${field.key}-hint`}>{field.hint}</span><textarea id={`charity-${field.key}`} aria-describedby={`charity-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}

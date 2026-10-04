@@ -107,7 +107,7 @@ export default function ElephantAppealGuide({ body, href }: { body: string; href
 
 function ElephantNotes() {
   const [values, setValues] = useState({ audience: "", evidence: "", analysis: "" });
-  const [format, setFormat] = useState<ExportFormat>("txt");
+  const [format, setFormat] = useState<ExportFormat>("docx");
   return <section className="infographic-notes" aria-label="Elephant Sanctuary analysis notebook">
     <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
     {fields.map(field => <label className="field" key={field.key} htmlFor={`elephant-${field.key}`}>{field.label}<span className="hint" id={`elephant-${field.key}-hint`}>{field.hint}</span><textarea id={`elephant-${field.key}`} aria-describedby={`elephant-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}

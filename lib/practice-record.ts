@@ -15,7 +15,6 @@ export type ExportFormat = "txt" | "md" | "pdf" | "docx";
 export const exportFormats: {value:ExportFormat; label:string}[] = [
   {value:"pdf",label:"PDF (.pdf) — for reading and annotation"},
   {value:"docx",label:"Word (.docx) — editable document"},
-  {value:"txt",label:"Plain text (.txt)"},
   {value:"md",label:"Markdown (.md) — (Notion / Obsidian)"},
 ];
 export function prepareRecordDownload(content:string,filename:string,format:"txt"|"md"="txt") {

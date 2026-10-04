@@ -23,7 +23,7 @@ export default function MagicSentence(){
  const sourceUrl=example.source.startsWith("/") ? `https://mrrinka.com${example.source}` : example.source;
  const values=drafts[example.id] ?? emptyValues;
  const setValues=(next:Record<Key,string>)=>setDrafts(current=>({...current,[example.id]:next}));
- const [exportFormat,setExportFormat]=useState<ExportFormat>("txt");
+ const [exportFormat,setExportFormat]=useState<ExportFormat>("docx");
  const [checked,setChecked]=useState(false);
  const sentence=`${values.writer||"[writer]"} ${values.verb||"[verb]"} ${values.choice||"[choice]"} in “${values.quotation||"[selected words]"}” to ${values.purpose.replace(/^to\s+/i,"")||"[meaning / purpose]"}. ${values.explanation||"[Explain how the detail supports the interpretation.]"}`;
  const quote=values.quotation.trim().replace(/^[“"]|[”"]$/g,"");
