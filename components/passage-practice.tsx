@@ -182,7 +182,7 @@ export default function PassagePractice({provider}:{provider:{name:string;disclo
 
       <section className="offline-tools">
         <h3>Work offline</h3>
-        <p>AI feedback is optional. Analyze the passage, save the passage and/or your writing, and bring it to your teacher without requesting AI feedback.</p>
+        <p>AI feedback is optional. Save your passage and writing to discuss with your teacher.</p>
         <ExportFormatSelect value={exportFormat} onChange={setExportFormat}/>
         <div className="tool-actions">
           <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("extract")}>Save passage</button>

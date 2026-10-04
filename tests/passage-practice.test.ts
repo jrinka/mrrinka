@@ -19,7 +19,7 @@ test("passage practice presents the teacher-review path before AI feedback", () 
     provider: { name: "Test", disclosure: "Test provider" },
   }));
   assert.match(html, /AI feedback is optional\./);
-  assert.match(html, /Analyze the passage, save the passage and\/or your writing, and bring it to your teacher without requesting AI feedback\./);
+  assert.match(html, /AI feedback is optional\. Save your passage and writing to discuss with your teacher\./);
   for (const label of ["Save passage", "Save my writing", "Save passage + writing"]) {
     assert.ok(html.includes(`>${label}</button>`));
   }
