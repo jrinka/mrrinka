@@ -15,7 +15,7 @@ export default function IndividualOralGuide({ body, course }: { body: string; co
       <a href="#personal-preparation-tools">Practice timer &amp; notes</a>
       <a href="#structure-and-timing">Timing map</a>
       <Link href={`/practice/io-planning/${course}`}>Planning worksheet</Link>
-      <Link href={`/practice/refineries/global-issue?course=${course}`}>Global Issue Refinery · AI guidance</Link>
+      <Link href={`/practice/refineries/global-issue?course=${course}`}>Global Issue Refinery</Link>
     </nav>
     <nav className={styles.contents} aria-label="Individual Oral guide contents">
       <span className="mono">BUILD YOUR UNDERSTANDING</span>

@@ -8,6 +8,12 @@ const legacySectionIds: Record<string, string> = {
 
 export type GuideSection = { id: string; title: string; body: string };
 
+// Keep short explanations visible; collapse only sustained sections of reading.
+export function isLongGuideSection(body: string): boolean {
+  const words = body.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").trim().split(/\s+/);
+  return words.length >= 280;
+}
+
 export function splitGuideSections(body: string): GuideSection[] {
   const sections: GuideSection[] = [];
   const heading = /^## (.+)\r?$/gm;
