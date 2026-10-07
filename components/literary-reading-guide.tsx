@@ -119,7 +119,7 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
             <div id="literary-first-reading-response" hidden={!showFirstReading}>
               <h4>A possible reading</h4><p>{example.firstReading.model}</p>
               <h4>A complication to keep in view</h4><p>{example.firstReading.complication}</p>
-              <p className="hint">This is a reading to test against the poem, not a score or a judgment of your writing.</p>
+              <p className="hint">This is a reading to test against the {example.poem ? "poem" : "extract"}, not a score or a judgment of your writing.</p>
             </div>
           </section>}
           {section.id === "practice-and-transfer" && <LiteraryNotes example={example} firstReading={firstReading} />}
