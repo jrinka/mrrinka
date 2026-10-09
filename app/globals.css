@@ -1088,17 +1088,19 @@ h3 {
   font-size: 0.625rem;
 }
 .practice-feature-actions { display:flex; align-items:center; justify-content:flex-end; gap:20px; }
-.practice-feature-icon {
+.ai-guidance-badge {
   display: grid;
   place-content: center;
   justify-items: center;
   gap: 2px;
   width: 46px;
   height: 46px;
+  flex-shrink: 0;
+  background: var(--graphite, #25282B);
   border: 1px solid #62676a;
   color: var(--citron);
 }
-.practice-feature-icon .mono { font-size:.6rem; line-height:1; }
+.ai-guidance-badge .mono { font-size:.6rem; line-height:1; }
 .practice-feature strong,
 .practice-feature small {
   display: block;
@@ -2511,7 +2513,7 @@ h3 {
 .guide-copy { max-width: 850px; margin: 32px 0; }
 .resource-section-title { padding: 22px 26px 0; }
 .tool-actions { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:16px 0; }
-.ai-label, .refinery-links small { display:flex; gap:8px; align-items:center; }
+.refinery-links small { display:flex; gap:8px; align-items:center; }
 .refinery-links a, .refinery-links a:nth-child(even) { background:var(--panel-citron); }
 .refinery-links strong, .practice-skill-title strong, .global-directory-list strong { text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:5px; }
 .reference-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:20px 0; }
