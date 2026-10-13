@@ -5,7 +5,7 @@ import {drawWordleWord} from '../recess/wordle-deck';
 import {drawScatterCategories,scatterLetters} from '../recess/scatter';
 import {words,anagrams,ladders,definitions,debates} from '../recess/challenges';
 import {masterpieces,blobPrompts} from '../recess/mini-game-data';
-import {twentyFourBanks,matchPuzzles} from '../recess/math/data';
+import {twentyFourBanks,matchPuzzles,oddsPuzzles,oddsQuestionIndices} from '../recess/math/data';
 
 const storage = new Map<string,string>();
 Object.defineProperty(globalThis,'localStorage',{configurable:true,value:{getItem:(key:string)=>storage.get(key)||null,setItem:(key:string,value:string)=>storage.set(key,value)}});
@@ -85,4 +85,21 @@ test('all word ladders use distinct words and exactly one letter changes per ste
       if(step>0) assert.equal([...word].filter((letter,index)=>letter!==ladder[step-1][index]).length,1,ladder.join(' → '));
     }
   }
+});
+
+
+test('odds difficulty pools partition the bank and rotate independently without repeats',()=>{
+  const easier=oddsQuestionIndices('easier'),challenging=oddsQuestionIndices('challenging');
+  assert.ok(easier.length>0&&challenging.length>0);
+  assert.equal(new Set([...easier,...challenging]).size,oddsPuzzles.length);
+  assert.deepEqual([...easier,...challenging].sort((a,b)=>a-b),oddsQuestionIndices('mixed'));
+  for(const mode of ['easier','challenging','mixed'] as const){
+    const pool=oddsQuestionIndices(mode);
+    const rounds=Array.from({length:pool.length},()=>drawFromBank('odds-'+mode,pool)[0]);
+    assert.deepEqual([...rounds].sort((a,b)=>a-b),pool);
+    if(mode!=='mixed')assert.ok(rounds.every(index=>oddsPuzzles[index].difficulty===mode));
+    assert.notEqual(drawFromBank('odds-'+mode,pool,1,[rounds.at(-1)!])[0],rounds.at(-1));
+  }
+  assert.equal(oddsPuzzles.find(p=>p.title==='One head will do')!.difficulty,'easier');
+  for(const title of ['New information','Balance with a clue','The third token'])assert.equal(oddsPuzzles.find(p=>p.title===title)!.difficulty,'challenging');
 });

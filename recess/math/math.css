@@ -8,3 +8,5 @@
 /* Token sequences need wider cells than single coin or dice labels. */
 .outcome-grid.token-outcomes{max-width:900px;grid-template-columns:repeat(4,minmax(0,1fr))}.outcome-grid.token-outcomes>span{overflow-wrap:anywhere}
 @media(max-width:650px){.outcome-grid.token-outcomes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.odds-level-description{font-size:14px;color:#51514a;line-height:1.5;margin:-10px 0 22px}

@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { feedback, shuffle } from '../logic';
 import {drawFromBank} from '../decks';
-import { twentyFourBanks, oddsPuzzles, matchPuzzles } from './data';
+import { twentyFourBanks, oddsPuzzles, oddsQuestionIndices, matchPuzzles, type OddsMode } from './data';
 import { equationBank, validateEquation, sameEquation, pretty, normalize, parseArithmetic, checkTwentyFour, solveTwentyFour, masksFor, moveMatch, matchTrue, matchText, matchSolutions, segmentNames } from './engine';
 import './math.css';
 
@@ -157,9 +157,27 @@ function MatchRound({index,round,next}:{index:number;round:number;next:()=>void}
     <BreakTimer/>
   </section>;
 }
+const oddsModes:{value:OddsMode;label:string;description:string}[]=[
+  {value:'easier',label:'Easier',description:'Direct counting, simple coin patterns, and independent events.'},
+  {value:'challenging',label:'More challenging',description:'Conditional probability, overlapping events, and draws without replacement.'},
+  {value:'mixed',label:'Mixed',description:'A mixture of both levels.'},
+];
 function OddsGame() {
-  const {index,round,next}=useRound('odds',oddsPuzzles.length);
-  return <><p className="rule">Predict first. Then count the possibilities. No speed bonus for confident guessing.</p><OddsRound key={round} index={index} round={round} next={next}/><Source kind="odds"/></>;
+  const [current,setCurrent]=useState<{difficulty:OddsMode;index:number;round:number}>(()=>({
+    difficulty:'mixed',index:drawFromBank('odds-mixed',oddsQuestionIndices('mixed'))[0],round:1,
+  }));
+  const {difficulty,index,round}=current;
+  function next(mode:OddsMode=difficulty) {
+    const nextIndex=drawFromBank('odds-'+mode,oddsQuestionIndices(mode),1,[index])[0];
+    setCurrent({difficulty:mode,index:nextIndex,round:round+1});
+  }
+  return <><p className="rule">Predict first. Then count the possibilities. No speed bonus for confident guessing.</p>
+    <div className="math-mode" role="group" aria-label="Question difficulty">
+      {oddsModes.map(mode=><button className="control" key={mode.value} aria-pressed={difficulty===mode.value} onClick={()=>{if(difficulty!==mode.value)next(mode.value);}}>{mode.label}</button>)}
+      <span>Changing difficulty starts a new question.</span>
+    </div>
+    <p className="odds-level-description">{oddsModes.find(mode=>mode.value===difficulty)!.description} {oddsQuestionIndices(difficulty).length} questions.</p>
+    <OddsRound key={round} index={index} round={round} next={()=>next()}/><Source kind="odds"/></>;
 }
 function OddsRound({index,round,next}:{index:number;round:number;next:()=>void}) {
   const puzzle=oddsPuzzles[index];const [selected,setSelected]=useState(''),[show,setShow]=useState(false),[hint,setHint]=useState(false),[notes,setNotes]=useState('');
