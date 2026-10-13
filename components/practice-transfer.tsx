@@ -8,11 +8,11 @@ export function ContinueToRefinery({kind,source,prompt="",evidence,draft,disable
  function proceed(){try{
   const id=crypto.randomUUID();
   const transfer:PracticeTransfer={version:1,id,createdAt:Date.now(),kind,source,prompt,evidence,draft};
-  if(!readTransfer(JSON.stringify(transfer),id,kind)){setError("These notes exceed the Refinery’s input limit. Save your complete work as a text file, then bring a shorter selection for feedback.");return;}
+  if(!readTransfer(JSON.stringify(transfer),id,kind)){setError("These notes exceed the Refinery’s input limit. Download your complete work, then bring a shorter selection for feedback.");return;}
   sessionStorage.setItem(transferKey,JSON.stringify(transfer));
   router.push(`/practice/refineries/${kind}?transfer=${id}${course ? `&course=${course}` : ""}`);
- }catch{setError("Your browser could not carry the notes across. Save them as a text file, then copy them into the Refinery.");}}
- return <div className="practice-handoff"><button className="button secondary" type="button" disabled={disabled} onClick={proceed}><Sparkles size={16} aria-hidden="true"/>Continue in the {kind==="analysis"?"Analysis":"Comparison"} Refinery →</button><p className="hint">Carries this exercise into an editable form using temporary storage in this browser tab. Nothing is sent to AI until you request feedback. Save a text copy to keep your work.</p>{error&&<p role="alert">{error}</p>}</div>;
+ }catch{setError("Your browser could not carry the notes across. Download a copy, then copy them into the Refinery.");}}
+ return <div className="practice-handoff"><button className="button secondary" type="button" disabled={disabled} onClick={proceed}><Sparkles size={16} aria-hidden="true"/>Continue in the {kind==="analysis"?"Analysis":"Comparison"} Refinery →</button><p className="hint">Carries this exercise into an editable form using temporary storage in this browser tab. Nothing is sent to AI until you request feedback. Download a copy to keep your work.</p>{error&&<p role="alert">{error}</p>}</div>;
 }
 export function ImportPractice({id,kind,onImport,disabled=false}:{id:string;kind:string;disabled?:boolean;onImport:(value:PracticeTransfer)=>void}){
  const [status,setStatus]=useState<"ready"|"imported"|"unavailable"|"dismissed">("ready");

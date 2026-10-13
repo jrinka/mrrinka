@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { aiChoices, feedbackChoiceLabel, feedbackTargets, guideChoices, type FeedbackTarget } from "@/lib/site-feedback";
+import { aiChoices, feedbackChoiceLabel, feedbackTargets, guideChoices, type FeedbackTarget } from "@/lib/site-feedback-options";
 
 export default function SiteFeedback({ target }: { target: FeedbackTarget }) {
   const [busy, setBusy] = useState(false);
@@ -28,7 +28,7 @@ export default function SiteFeedback({ target }: { target: FeedbackTarget }) {
   }
 
   return <details className="site-feedback">
-    <summary>Feedback</summary>
+    <summary>{feedbackTargets[target].type === "ai" ? "Feedback about this tool" : "Feedback about this page"}</summary>
     <div className="site-feedback-body">
       <p>{feedbackTargets[target].type === "ai" ? "How was this AI guidance?" : "How was this page?"}</p>
       <div className="site-feedback-choices">{choices.map(choice => <button type="button" key={choice} disabled={busy || status.includes("recorded") || status.includes("counted")} onClick={() => void send(choice)}>{feedbackChoiceLabel(choice)}</button>)}</div>

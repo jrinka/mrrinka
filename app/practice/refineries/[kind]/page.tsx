@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import GlobalShell from "@/components/global-shell";
 import InquiryWorkshop from "@/components/inquiry-workshop";
+import RefinerySequence from "@/components/refinery-sequence";
 import Refinery from "@/components/refinery";
 import { refineries, refineryKinds, type RefineryKind } from "@/lib/refineries";
 import { feedbackProvider } from "@/lib/feedback-service";
@@ -18,5 +19,5 @@ export default async function RefineryPage({params,searchParams}:Props) {
   const course=query.course === "literature" || query.course === "language-literature" ? query.course : "";
   const transfer=typeof query.transfer === "string" && /^[a-zA-Z0-9-]{1,64}$/.test(query.transfer) ? query.transfer : "";
   const provider=feedbackProvider();
-  return <GlobalShell><Link className="back" href="/practice">← All practice</Link><div className="global-page-head refinery-page-head"><span className="mono">DRAFT / QUESTION / REFINE</span><h1>{refineries[type].title}</h1><p>{refineries[type].description}</p></div>{type === "global-issue" || type === "line-of-inquiry" ? <InquiryWorkshop key={`${type}-${course}`} kind={type} initialCourse={course} provider={provider} /> : <Refinery key={`${type}-${course}-${transfer}`} kind={type} initialCourse={course} transferId={transfer} provider={provider} />}</GlobalShell>;
+  return <GlobalShell><Link className="back" href="/practice">← All practice</Link><div className="global-page-head refinery-page-head"><span className="mono">DRAFT / QUESTION / REFINE</span><h1>{refineries[type].title}</h1><p>{refineries[type].description}</p></div><RefinerySequence/>{type === "global-issue" || type === "line-of-inquiry" ? <InquiryWorkshop key={`${type}-${course}`} kind={type} initialCourse={course} provider={provider} /> : <Refinery key={`${type}-${course}-${transfer}`} kind={type} initialCourse={course} transferId={transfer} provider={provider} />}</GlobalShell>;
 }

@@ -99,7 +99,7 @@ export default function Practice({
       >
         Assemble & self-check
       </button>
-      <div className="tool-actions"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button type="button" className="button secondary" onClick={download}>Export my writing</button></div>
+      <div className="tool-actions"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button type="button" className="button secondary" onClick={download}>Download my writing</button></div>
       {review && (
         <div className="practice-result" aria-live="polite">
           <h3>

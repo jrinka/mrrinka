@@ -1,5 +1,6 @@
 "use client";
 
+import { PencilLine } from "lucide-react";
 import { useRef, type ReactNode } from "react";
 
 export function openSectionMap(route: HTMLElement | null) {
@@ -19,7 +20,7 @@ export function NotesShortcut({ onSelect }: { onSelect: () => void }) {
       field?.focus({ preventScroll: true });
       field?.closest(".infographic-notes")?.scrollIntoView({ block: "start", behavior: "instant" });
     });
-  }}>My notes</button>;
+  }}><PencilLine size={15} aria-hidden="true"/>My notes</button>;
 }
 
 export default function WorkedExampleNavigation({ children, current, total, hidden = false, showNotes = true, onNotes }: { children: ReactNode; current: number; total: number; hidden?: boolean; showNotes?: boolean; onNotes: () => void }) {

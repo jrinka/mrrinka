@@ -1,5 +1,5 @@
-import { Sparkles } from "lucide-react";
+import StudentInputLabel from "./student-input-label";
 
 export default function InteractivePracticeLabel() {
-  return <span className="interactive-practice-label"><Sparkles size={15} aria-hidden="true" />Interactive practice</span>;
+  return <StudentInputLabel className="interactive-practice-label">Interactive practice</StudentInputLabel>;
 }

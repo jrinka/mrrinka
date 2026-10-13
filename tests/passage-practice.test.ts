@@ -30,9 +30,9 @@ test("passage practice presents the teacher-review path before AI feedback", () 
   }));
   assert.match(html, /AI feedback is optional\./);
   assert.match(html, /AI feedback is optional\. Save your passage and writing to discuss with your teacher\./);
-  for (const label of ["Save passage", "Save my writing", "Save passage + writing"]) {
+  for (const label of ["Download passage", "Download my writing", "Download passage + writing"]) {
     assert.ok(html.includes(`>${label}</button>`));
   }
-  assert.ok(html.indexOf("AI feedback is optional.") < html.indexOf("Request feedback"));
+  assert.ok(html.indexOf("AI feedback is optional.") < html.indexOf("Get feedback on this paragraph"));
   assert.match(html, /nothing is sent to your teacher automatically\./);
 });

@@ -1,5 +1,6 @@
 "use client";
 
+import StudentInputLabel from "./student-input-label";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Markdown from "./markdown";
@@ -109,10 +110,10 @@ function WebpageNotes() {
   const [values, setValues] = useState({ audience: "", evidence: "", analysis: "" });
   const [format, setFormat] = useState<ExportFormat>("docx");
   return <section className="infographic-notes" aria-label="Webpage analysis notebook">
-    <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
+    <StudentInputLabel className="mono notebook-label">YOUR NOTES</StudentInputLabel><h3>Try a connected reading</h3>
     {fields.map(field => <label className="field" key={field.key} htmlFor={`webpage-${field.key}`}>{field.label}<span className="hint" id={`webpage-${field.key}-hint`}>{field.hint}</span><textarea id={`webpage-${field.key}`} aria-describedby={`webpage-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}
-    <p className="hint">Your notes stay while you move between sections. Export before switching examples, leaving or refreshing. This exercise does not send writing to AI.</p>
-    <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`Webpage analysis notes\n\nSource: ${example.title}\nhttps://mrrinka.com${example.views[0].image}\nhttps://mrrinka.com${example.views[1].image}\n\nQuestion from the supplied paper: ${example.question}\n\n${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, "redwoods-webpage-notes.txt", format)}>Export my notes</button></div>
+    <p className="hint">Your notes stay while you move between sections. Download before switching examples, leaving or refreshing. This exercise does not send writing to AI.</p>
+    <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`Webpage analysis notes\n\nSource: ${example.title}\nhttps://mrrinka.com${example.views[0].image}\nhttps://mrrinka.com${example.views[1].image}\n\nQuestion from the supplied paper: ${example.question}\n\n${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, "redwoods-webpage-notes.txt", format)}>Download my notes</button></div>
     <details className="infographic-self-check"><summary>Review your paragraph</summary><ul><li>Have I connected specific wording and visual evidence?</li><li>Have I explained how the page helps visitors imagine or plan the experience?</li><li>Have I read the prices through their headings and categories?</li><li>Have I kept claims about interaction within what the source shows?</li></ul></details>
   </section>;
 }

@@ -50,3 +50,7 @@
 @media print {
   .reader[data-text-only="true"] .source { break-after:auto !important; }
 }
+
+/* Shared interaction: highlight available choices; keep selection persistent. */
+.controls button:not(:disabled):not([aria-pressed="true"]):is(:hover, :focus-visible), .readingMode button:not(:disabled):not([aria-pressed="true"]):is(:hover, :focus-visible) { background:var(--panel-citron); border-color:var(--ink); }
+.controls button[aria-pressed="true"], .readingMode button[aria-pressed="true"] { box-shadow:inset 0 -3px var(--ink); }

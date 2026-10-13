@@ -1,5 +1,6 @@
 "use client";
 
+import StudentInputLabel from "./student-input-label";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Markdown from "./markdown";
 import SourceInformation from "./source-information";
@@ -118,10 +119,10 @@ function DramaNotes() {
   const [values, setValues] = useState({ exchange: "", evidence: "", analysis: "" });
   const [format, setFormat] = useState<ExportFormat>("docx");
   return <section className="infographic-notes" aria-label="Drama analysis notebook">
-    <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
+    <StudentInputLabel className="mono notebook-label">YOUR NOTES</StudentInputLabel><h3>Try a connected reading</h3>
     {fields.map(field => <label className="field" key={field.key} htmlFor={`drama-${field.key}`}>{field.label}<span className="hint" id={`drama-${field.key}-hint`}>{field.hint}</span><textarea id={`drama-${field.key}`} aria-describedby={`drama-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}
-    <p className="hint">Your notes stay here while this page is open. Export before leaving. This exercise does not send writing to AI.</p>
-    <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`Drama analysis notes\n\nSource: ${example.title}\nhttps://mrrinka.com${example.pdf}\n\nQuestion from the supplied paper: ${example.question}\n\n${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, "drama-analysis-notes.txt", format)}>Export my notes</button></div>
+    <p className="hint">Your notes stay here while this page is open. Download before leaving. This exercise does not send writing to AI.</p>
+    <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`Drama analysis notes\n\nSource: ${example.title}\nhttps://mrrinka.com${example.pdf}\n\nQuestion from the supplied paper: ${example.question}\n\n${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, "drama-analysis-notes.txt", format)}>Download my notes</button></div>
     <details className="infographic-self-check"><summary>Review your paragraph</summary><ul><li>Have I analyzed a speech in relation to its reply?</li><li>Have I explained how specific words develop emotional tension?</li><li>Have I distinguished a written direction from a possible performance choice?</li><li>Does my reading account for the unresolved ending?</li></ul></details>
   </section>;
 }

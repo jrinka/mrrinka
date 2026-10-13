@@ -185,9 +185,9 @@ export default function PassagePractice({provider}:{provider:{name:string;disclo
         <p>AI feedback is optional. Save your passage and writing to discuss with your teacher.</p>
         <ExportFormatSelect value={exportFormat} onChange={setExportFormat}/>
         <div className="tool-actions">
-          <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("extract")}>Save passage</button>
-          <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("writing")}>Save my writing</button>
-          <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("both")}>Save passage + writing</button>
+          <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("extract")}>Download passage</button>
+          <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("writing")}>Download my writing</button>
+          <button type="button" className="button secondary" disabled={!passage||loadingPassage} onClick={()=>downloadOffline("both")}>Download passage + writing</button>
         </div>
       </section>
       <div aria-live="polite">
@@ -206,15 +206,15 @@ export default function PassagePractice({provider}:{provider:{name:string;disclo
         >
           <textarea id="passage-response" rows={11} readOnly={submitted} disabled={loadingFeedback || loadingPassage} maxLength={8000} value={response} onChange={(event) => { setResponse(event.target.value); setFeedback(""); }} placeholder="Start with a detail: a word, image, pattern, shift, or structural choice…" />
         </div>
-        <div className="passage-actions"><button className="button" onClick={() => requestFeedback()} disabled={submitted || !passage || !response.trim() || loadingFeedback || loadingPassage}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> {submitted ? "Original submitted" : "Request feedback"}</>}</button><button className={`button secondary ${exported ? "is-confirmed" : ""}`} onClick={download} disabled={!passage&&!response&&!revision} aria-live="polite">{exported ? <><Check size={16} /> Exported / ready</> : <><Download size={16} /> Save record</>}</button></div>
-        <p className="passage-privacy">Feedback stays focused on your analysis of this passage. This tool cannot generate assessment work or act as a chatbot. Your writing is processed by {provider.disclosure}; it is not stored by this site. Do not include names, contact details, student IDs or other personally identifiable information. Save a record for teacher review or documentation; nothing is sent to your teacher automatically.</p>
+        <div className="passage-actions"><button className="button" onClick={() => requestFeedback()} disabled={submitted || !passage || !response.trim() || loadingFeedback || loadingPassage}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> {submitted ? "Original submitted" : "Get feedback on this paragraph"}</>}</button><button className={`button secondary ${exported ? "is-confirmed" : ""}`} onClick={download} disabled={!passage&&!response&&!revision} aria-live="polite">{exported ? <><Check size={16} /> Download ready</> : <><Download size={16} /> Download record</>}</button></div>
+        <p className="passage-privacy">Feedback stays focused on your analysis of this passage. This tool cannot generate assessment work or act as a chatbot. Your writing is processed by {provider.disclosure}; it is not stored by this site. Do not include names, contact details, student IDs or other personally identifiable information. Download a record for teacher review or documentation; nothing is sent to your teacher automatically.</p>
       </section>
 
       {submitted && <section className="passage-panel passage-response passage-revision">
         <header className="passage-panel-head"><div><span className="mono">REFINE / 02</span><h2>Your refined reading</h2></div><span className="mono">{wordCount(revision)} WORDS</span></header>
         <label htmlFor="passage-revision">Use the feedback to revise your analysis. Your original stays above.</label>
         <div className="passage-writing-field"><textarea id="passage-revision" rows={10} maxLength={8000} disabled={loadingFeedback || loadingPassage} value={revision} onChange={event => {setRevision(event.target.value);setRevisionFeedback("");}} /></div>
-        <div className="passage-actions"><button className="button" onClick={() => requestFeedback(true)} disabled={loadingFeedback || !revision.trim() || revision.trim() === response.trim()}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> Request revision feedback</>}</button><button className="button secondary" onClick={download}><Download size={16} /> Save record</button></div>
+        <div className="passage-actions"><button className="button" onClick={() => requestFeedback(true)} disabled={loadingFeedback || !revision.trim() || revision.trim() === response.trim()}>{loadingFeedback ? <><RefreshCw className="spin" size={16} /> Reading…</> : <><Sparkles size={16} /> Get feedback on this revision</>}</button><button className="button secondary" onClick={download}><Download size={16} /> Download record</button></div>
       </section>}
       {error && <p className="error" role="alert">{error}</p>}
       </div>

@@ -3,7 +3,7 @@ import ThemeToggle from "@/components/theme-toggle";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { BookOpen, Library, CalendarDays, Sparkles, FilePenLine, Home, Menu, X, PanelLeftClose, PanelLeftOpen, LayoutGrid } from "lucide-react";
+import { BookOpen, Library, CalendarDays, PencilLine, FilePenLine, Home, Menu, X, PanelLeftClose, PanelLeftOpen, LayoutGrid } from "lucide-react";
 import type { CourseId } from "@/lib/schema";
 const defaults = [{id:"language-literature",short:"IB Lang & Lit",side:"Language & Literature"},{id:"literature",short:"IB Literature",side:"Literature"}];
 export default function InteriorShell({children,courseId,courseLabels=defaults}:{children:React.ReactNode;courseId?:CourseId;courseLabels?:typeof defaults}) {
@@ -19,11 +19,11 @@ export default function InteriorShell({children,courseId,courseLabels=defaults}:
     {href:`${base}/assessment`,label:"Assessments",icon:FilePenLine},
     ...(courseId !== "english-10" ? [{href:`${base}/text-types`,label:"Text types",icon:LayoutGrid}] : []),
   ] : [];
-  const shared=[{href:"/resources",label:"Skills & Methods",icon:Library},{href:"/practice",label:"All practice",icon:Sparkles},{href:"/calendar",label:"My calendar",icon:CalendarDays}];
+  const shared=[{href:"/resources",label:"Skills & Methods",icon:Library},{href:"/practice",label:"All practice",icon:PencilLine},{href:"/calendar",label:"My calendar",icon:CalendarDays}];
   function links(items:typeof shared) {return items.map(item=><Link key={item.href} href={item.href} onClick={()=>setMobileOpen(false)} title={item.label} aria-current={(path===item.href || (item.href!==base && path.startsWith(item.href+"/"))) ? "page":undefined}><item.icon size={18} aria-hidden="true"/><span>{item.label}</span></Link>);}
   return <div className={`interior-site ${collapsed ? "interior-collapsed" : ""}`}>
     <a className="skip-link" href="#content">Skip to content</a>
-    <header className="interior-mobile"><Link href="/" className="wordmark">mr rinka<span>_</span></Link><button ref={mobileToggle} type="button" aria-expanded={mobileOpen} aria-controls="interior-navigation" onClick={()=>setMobileOpen(!mobileOpen)}>{mobileOpen ? <X size={20}/> : <Menu size={20}/>}<span>{mobileOpen ? "Close menu" : "Menu"}</span></button></header>
+    <header className="interior-mobile"><Link href="/" className="wordmark">mr rinka<span>_</span></Link><button ref={mobileToggle} type="button" aria-expanded={mobileOpen} aria-controls="interior-navigation" onKeyDown={event=>{if(event.key==="Escape")setMobileOpen(false);}} onClick={()=>setMobileOpen(!mobileOpen)}>{mobileOpen ? <X size={20}/> : <Menu size={20}/>}<span>{mobileOpen ? "Close menu" : "Menu"}</span></button></header>
     <aside id="interior-navigation" className={`interior-sidebar ${mobileOpen ? "mobile-open" : ""}`} onKeyDown={event=>{if(event.key==="Escape"){setMobileOpen(false);mobileToggle.current?.focus();}}}>
       <Link href="/" className="interior-home" aria-label="Mr. Rinka home"><Home size={20}/><span>mr rinka_</span></Link>
       <button className="interior-collapse" type="button" aria-expanded={!collapsed} aria-label={collapsed ? "Expand navigation" : "Collapse navigation"} onClick={()=>setCollapsed(!collapsed)}>{collapsed ? <PanelLeftOpen size={19}/> : <PanelLeftClose size={19}/>}</button>

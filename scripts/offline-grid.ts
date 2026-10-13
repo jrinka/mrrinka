@@ -12,6 +12,6 @@ button.addEventListener("click", async () => {
   const filename = title.toLowerCase().startsWith("tpcastt") ? "tpcastt-notes" : "soapstone-notes";
   button.disabled = true;
   const succeeded = await downloadRecord(parts.join("\n\n"), filename, format, { title, text: [(document.getElementById("text-title") as HTMLInputElement).value, (document.getElementById("text-author") as HTMLInputElement).value].filter(Boolean).join(" — "), rows });
-  document.getElementById("export-status")!.textContent = succeeded ? `Exported as .${format}` : "Export failed. Your notes are still here.";
+  document.getElementById("export-status")!.textContent = succeeded ? `Download ready: .${format}` : "Download failed. Your notes are still here.";
   button.disabled = false;
 });

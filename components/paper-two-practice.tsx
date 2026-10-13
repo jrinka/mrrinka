@@ -63,8 +63,8 @@ export default function PaperTwoPractice({ focusRequest = 0 }: { focusRequest?: 
         <label className="field">My revised thesis <span className="hint">Optional. Keep the first version so you can see what changed.</span><textarea rows={4} maxLength={3000} value={draft.revision ?? ""} onChange={e => update("revision", e.target.value)} /></label>
       </section>
     </div>}
-    <div className="p2-export"><ExportFormatSelect value={format} onChange={setFormat}/><button type="button" className="button secondary" disabled={!exportable} onClick={() => downloadRecord(formatPaperTwoNotes(drafts), "paper-2-thesis-practice.txt", format)}>Export all my planning</button></div>
-    <p className="hint">Notes stay with each question during this visit. Export before leaving or refreshing. Your writing is not sent to the server.</p>
+    <div className="p2-export"><ExportFormatSelect value={format} onChange={setFormat}/><button type="button" className="button secondary" disabled={!exportable} onClick={() => downloadRecord(formatPaperTwoNotes(drafts), "paper-2-thesis-practice.txt", format)}>Download all my planning</button></div>
+    <p className="hint">Notes stay with each question during this visit. Download before leaving or refreshing. Your writing is not sent to the server.</p>
     <details className="p2-bank-note"><summary>About the question bank</summary><p>Questions come from the supplied IB English A past-paper catalogue, May 2010–May 2025. The recent bank contains 44 questions from 2023–2025, shared by Literature and Language &amp; Literature. The earlier banks retain the original questions and genre limits. Duplicate copies are counted once; only spacing has been standardized. Exam questions © International Baccalaureate Organization.</p></details>
   </section>;
 }

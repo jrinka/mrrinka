@@ -208,7 +208,7 @@ h3 {
   font: 400 0.625rem var(--font-accent);
   letter-spacing: 0.08em;
 }
-.side-toggle:hover {
+.side-toggle:is(:hover, :focus-visible) {
   border-color: var(--citron);
   color: var(--citron);
 }
@@ -284,7 +284,7 @@ h3 {
   min-height: 46px;
   transition: background 140ms ease, color 140ms ease;
 }
-.sidebar nav a:hover {
+.sidebar nav a:is(:hover, :focus-visible) {
   background: #34383b;
 }
 .sidebar nav a[aria-current] {
@@ -389,8 +389,8 @@ h3 {
   scale: 1.015;
   transition: filter 260ms ease, scale 260ms ease;
 }
-.archive-image:hover img,
-.archive-card-art:hover img {
+.archive-image:is(:hover, :focus-visible) img,
+.archive-card-art:is(:hover, :focus-visible) img {
   filter: grayscale(1) contrast(1.15) sepia(0.08);
   scale: 1.03;
 }
@@ -615,7 +615,7 @@ h3 {
   box-shadow: 0 3px 0 #151719;
   transition: transform 100ms ease, box-shadow 100ms ease, background 140ms ease;
 }
-.button:hover:not(:disabled) {
+.button:is(:hover, :focus-visible):not(:disabled) {
   background: #3b4145;
 }
 .button.secondary {
@@ -624,7 +624,7 @@ h3 {
   border-color: #bfc5c4;
   box-shadow: 0 3px 0 #bfc5c4;
 }
-.button.secondary:hover:not(:disabled) {
+.button.secondary:is(:hover, :focus-visible):not(:disabled) {
   background: var(--panel-cool);
 }
 .button:active:not(:disabled) {
@@ -686,13 +686,13 @@ h3 {
   pointer-events: none;
   transition: height 180ms ease;
 }
-.content-card:hover::before,
+.content-card:is(:hover, :focus-visible)::before,
 .content-card:focus-within::before,
-.assessment-card:hover::before,
+.assessment-card:is(:hover, :focus-visible)::before,
 .assessment-card:focus-within::before {
   height: 100%;
 }
-.content-card:hover {
+.content-card:is(:hover, :focus-visible) {
   border-color: #74804e;
   transform: translateY(-3px);
 }
@@ -757,7 +757,7 @@ h3 {
   color: var(--on-graphite);
   text-decoration: none;
 }
-.assessment-toolkit-jump:hover { background: #34383b; }
+.assessment-toolkit-jump:is(:hover, :focus-visible) { background: #34383b; }
 .assessment-toolkit-jump > svg:first-child { color: var(--citron); }
 .assessment-toolkit-jump span { display: grid; }
 .assessment-toolkit-jump small { color: var(--citron); }
@@ -779,7 +779,7 @@ h3 {
 }
 .assessment-card:nth-child(2n) { background: var(--panel-warm); }
 .assessment-card:nth-child(3n) { background: var(--panel-citron); }
-.assessment-card:hover {
+.assessment-card:is(:hover, :focus-visible) {
   transform: translateY(-3px);
   box-shadow: 7px 7px 0 rgba(216, 237, 97, 0.55);
 }
@@ -805,7 +805,7 @@ h3 {
   scale: 1.015;
   transition: filter 260ms ease, scale 260ms ease;
 }
-.assessment-card:hover .assessment-card-image img,
+.assessment-card:is(:hover, :focus-visible) .assessment-card-image img,
 .assessment-card:focus-within .assessment-card-image img {
   filter: grayscale(1) contrast(1.15) sepia(0.07);
   scale: 1.03;
@@ -874,7 +874,7 @@ h3 {
 .dossier-nav > * { padding: 10px 14px; white-space: nowrap; }
 .dossier-nav > span { background: var(--graphite); color: var(--citron); }
 .dossier-nav a { border-right: 1px solid var(--line); text-decoration: none; font-size: 0.76rem; }
-.dossier-nav a:hover { background: var(--citron); }
+.dossier-nav a:is(:hover, :focus-visible) { background: var(--citron); }
 .dossier-toolkit {
   display: grid;
   grid-template-columns: 130px minmax(0, 1fr) auto;
@@ -966,18 +966,12 @@ h3 {
   background-size: 100% 1px;
   transition: background-size 180ms ease;
 }
-.prose a:hover,
-.prose a:focus-visible,
-.back:hover,
-.back:focus-visible,
-.passage-source footer a:hover,
-.passage-source footer a:focus-visible,
-.archive-hero figcaption a:hover,
-.archive-hero figcaption a:focus-visible,
-.archive-card-art figcaption a:hover,
-.archive-card-art figcaption a:focus-visible,
-.footer a:hover,
-.footer a:focus-visible {
+.prose a:is(:hover, :focus-visible),
+.back:is(:hover, :focus-visible),
+.passage-source footer a:is(:hover, :focus-visible),
+.archive-hero figcaption a:is(:hover, :focus-visible),
+.archive-card-art figcaption a:is(:hover, :focus-visible),
+.footer a:is(:hover, :focus-visible) {
   background-size: 100% 2px;
 }
 .article-image {
@@ -1077,7 +1071,7 @@ h3 {
   text-decoration: none;
   transition: transform 160ms ease, border-color 160ms ease;
 }
-.practice-feature:hover {
+.practice-feature:is(:hover, :focus-visible) {
   transform: translateY(-2px);
   border-color: var(--citron);
 }
@@ -1452,7 +1446,7 @@ h3 {
   justify-content: space-between;
   overflow-wrap: anywhere;
 }
-.editor-nav:hover {
+.editor-nav:is(:hover, :focus-visible) {
   background: var(--panel-cool);
 }
 .editor-nav.active {
@@ -1877,7 +1871,7 @@ h3 {
   font-size: 0.875rem;
   text-decoration: none;
 }
-.global-header nav a:hover {
+.global-header nav a:is(:hover, :focus-visible) {
   color: var(--citron);
 }
 .global-header .top-note {
@@ -1949,7 +1943,7 @@ h3 {
   scale: 1.015;
   transition: filter 260ms ease, scale 260ms ease;
 }
-.landing-plate:hover img {
+.landing-plate:is(:hover, :focus-visible) img {
   filter: grayscale(1) contrast(1.15) sepia(0.08);
   scale: 1.03;
 }
@@ -2026,7 +2020,7 @@ h3 {
   text-decoration: none;
   transition: background 150ms ease, padding-left 150ms ease;
 }
-.dispatch-row:hover,
+.dispatch-row:is(:hover, :focus-visible),
 .dispatch-row:focus-visible {
   padding-left: 28px;
   background: var(--citron);
@@ -2074,7 +2068,7 @@ h3 {
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
   transition: transform 150ms ease, border-color 150ms ease;
 }
-.course-gateway:hover {
+.course-gateway:is(:hover, :focus-visible) {
   transform: translateY(-4px);
   border-color: #798546;
 }
@@ -2169,7 +2163,7 @@ h3 {
 .global-directory-group > div:last-child > a:nth-child(even) {
   background: var(--panel-warm);
 }
-.global-directory-group > div:last-child > a:hover { background: var(--citron); }
+.global-directory-group > div:last-child > a:is(:hover, :focus-visible) { background: var(--citron); }
 .global-directory-group a > span { display: grid; gap: 5px; }
 .global-directory-group a strong { font-family: var(--font-literary); font-size: 1.45rem; font-weight: 400; }
 .global-directory-group a small { color: var(--muted); }
@@ -2271,7 +2265,7 @@ h3 {
 .p1-section h2 { margin: 0; }
 .p1-section h2 button { width: 100%; display: flex; align-items: center; text-align: left; gap: 16px; border: 0; padding: 19px 18px; background: var(--panel-cool); color: var(--ink); font-size: 1.12rem; }
 .p1-section h2 button[aria-expanded="true"] { background: var(--panel-citron); }
-.p1-section h2 button:hover { box-shadow: inset 4px 0 var(--citron); }
+.p1-section h2 button:is(:hover, :focus-visible) { box-shadow: inset 4px 0 var(--citron); }
 .p1-section h2 button .mono { color: var(--muted); }
 .p1-toggle { margin-left: auto; font: 1.4rem var(--font-mono); }
 .p1-section-body { padding: 4px 22px 20px; }
@@ -2320,7 +2314,7 @@ h3 {
 
 .e10-unit-index { border-top: 1px solid var(--line); margin-bottom: 42px; }
 .e10-unit-index > a { display: grid; grid-template-columns: 42px minmax(0, 1fr) 20px; gap: 18px; padding: 22px 16px; border-bottom: 1px solid var(--line); text-decoration: none; background: var(--panel-cool); }
-.e10-unit-index > a:hover { background: var(--panel-citron); }
+.e10-unit-index > a:is(:hover, :focus-visible) { background: var(--panel-citron); }
 .e10-unit-index h2 { font-size: 1.35rem; margin-bottom: 5px; }
 .e10-unit-index p { margin: 0; color: var(--muted); font-size: .95rem; }
 .e10-progression { margin: 30px 0 42px; padding: 24px; background: var(--graphite); color: var(--on-graphite); border-left: 4px solid var(--citron); }
@@ -2339,13 +2333,13 @@ h3 {
 .practice-skill-mode { font-size: .68rem; letter-spacing: .06em; color: var(--muted); }
 .practice-course-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; }
 .practice-course-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; font-size: .85rem; }
-.practice-course-links a:hover, .practice-skill-title:hover { color: var(--ink); background: var(--citron); }
+.practice-course-links a:is(:hover, :focus-visible), .practice-skill-title:is(:hover, :focus-visible) { color: var(--ink); background: var(--citron); }
 
 .refinery-directory { margin: 40px 0; }
 .refinery-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 24px 0; }
 .refinery-links a { display: grid; gap: 10px; padding: 22px; border: 1px solid var(--line); background: var(--panel-cool); text-decoration: none; }
 .refinery-links a:nth-child(even) { background: var(--panel-citron); }
-.refinery-links a:hover { border-color: var(--ink); }
+.refinery-links a:is(:hover, :focus-visible) { border-color: var(--ink); }
 .refinery-links strong { font-family: var(--font-literary); font-size: 1.5rem; font-weight: 400; }
 .refinery-links .mono, .refinery-links small { font-size: .7rem; color: var(--muted); }
 .refinery-workspace { max-width: 900px; }
@@ -2374,8 +2368,8 @@ h3 {
 .entry-link h2 { margin: 12px 0 6px; font-family: var(--font-literary); font-size: clamp(1.45rem, 2.1vw, 2rem); font-weight: 400; line-height: 1.1; }
 .entry-link p { margin: 0; padding-right: 12px; color: var(--muted); font-size: .78rem; line-height: 1.45; }
 .entry-link > svg { position: absolute; top: 17px; right: 15px; }
-.entry-link:hover, .entry-link:focus-visible { background: var(--citron); color: var(--ink); border-color: var(--ink); }
-.entry-link:hover p, .entry-link:hover .entry-link-meta, .entry-link:focus-visible p, .entry-link:focus-visible .entry-link-meta { color: var(--ink); }
+.entry-link:is(:hover, :focus-visible), .entry-link:focus-visible { background: var(--citron); color: var(--ink); border-color: var(--ink); }
+.entry-link:is(:hover, :focus-visible) p, .entry-link:is(:hover, :focus-visible) .entry-link-meta, .entry-link:focus-visible p, .entry-link:focus-visible .entry-link-meta { color: var(--ink); }
 .entry-link:last-child:nth-child(odd) { grid-column:1/-1; min-height:100px; }
 .entry-plate { display: flex; min-width: 0; }
 .entry-plate > div { width: 100%; min-height: 100%; }
@@ -2415,7 +2409,7 @@ h3 {
 .interior-sidebar nav { display:grid; gap:5px; }
 .interior-sidebar nav a, .interior-admin, .interior-course-shortcut { display:flex; align-items:center; gap:12px; padding:12px 9px; min-height:44px; font-size:.85rem; text-decoration:none; }
 .interior-sidebar nav a svg, .interior-sidebar > a svg { flex-shrink:0; }
-.interior-sidebar a:hover, .interior-sidebar a[aria-current] { background:var(--citron); color:var(--ink); }
+.interior-sidebar a:is(:hover, :focus-visible), .interior-sidebar a[aria-current] { background:var(--citron); color:var(--ink); }
 .interior-admin { margin-top:auto; }
 .interior-body { min-width:0; }
 .interior-main { width:100%; max-width:1440px; margin:0 auto; min-width:0; padding:40px clamp(22px,3vw,48px) 60px; }
@@ -2569,7 +2563,7 @@ h3 {
 :is(.archive-image,.archive-card-art > div,.assessment-card-image,.card-image,.article-image > div,.landing-plate > div,.guide-plate) { overflow:hidden; }
 :is(.archive-image,.archive-card-art,.assessment-card-image,.card-image,.article-image,.landing-plate,.guide-plate,.featured-photo) img { scale:1; transition:scale 260ms ease,filter 260ms ease; }
 @media(hover:hover) and (prefers-reduced-motion:no-preference) {
- :is(.archive-image,.archive-card-art,.assessment-card-image,.card-image,.article-image,.landing-plate,.guide-plate,.featured-photo):hover img { scale:1.03; }
+ :is(.archive-image,.archive-card-art,.assessment-card-image,.card-image,.article-image,.landing-plate,.guide-plate,.featured-photo):is(:hover, :focus-visible) img { scale:1.03; }
 }
 @media(prefers-reduced-motion:reduce) {
  :is(.archive-image,.archive-card-art,.assessment-card-image,.card-image,.article-image,.landing-plate,.guide-plate,.featured-photo) img { scale:1!important; transition:none; }
@@ -2577,10 +2571,10 @@ h3 {
 /* Dark mode is opt-in; paper remains the default. */
 html[data-theme="dark"] { color-scheme:dark; --paper:#1c2022; --ink:#eeeae0; --muted:#bbc1bb; --line:#505952; --white:#252a2c; --panel-cool:#2c3432; --panel-citron:#353e29; --panel-warm:#34332e; --reading-rule:#505952; }
 html[data-theme="dark"] :focus-visible { outline-color:var(--citron); }
-html[data-theme="dark"] :is(.button:not(.secondary),.interior-sidebar a:hover,.interior-sidebar a[aria-current],.guide-plate-keyword,.intro-example-tabs button[aria-selected=true],.practice-course-links a:hover,.practice-skill-title:hover) { color:var(--graphite); }
+html[data-theme="dark"] :is(.button:not(.secondary),.interior-sidebar a:is(:hover, :focus-visible),.interior-sidebar a[aria-current],.guide-plate-keyword,.intro-example-tabs button[aria-selected=true],.practice-course-links a:is(:hover, :focus-visible),.practice-skill-title:is(:hover, :focus-visible)) { color:var(--graphite); }
 html[data-theme="dark"] .button:not(.secondary) { background:var(--citron); }
-html[data-theme="dark"] .button.secondary:hover { background:var(--panel-cool); }
-html[data-theme="dark"] :is(.content-card:hover,.p1-section h2 button[aria-expanded=true]) { color:var(--ink); }
+html[data-theme="dark"] .button.secondary:not(:disabled):is(:hover, :focus-visible) { background:var(--panel-cool); }
+html[data-theme="dark"] :is(.content-card:is(:hover, :focus-visible),.p1-section h2 button[aria-expanded=true]) { color:var(--ink); }
 html[data-theme="dark"] :is(.assessment-stages span,.assessment-card-credit) { background:var(--panel-cool); color:var(--muted); }
 html[data-theme="dark"] :is(.archive-image,.archive-card-art > div,.assessment-card-image,.landing-plate > div,.guide-plate) { background:#dddcd2; }
 html[data-theme="dark"] :is(.scan-marks,.landing-plate-label,.archive-image > span,.assessment-card-image > .mono) { color:#25282b; }
@@ -2596,7 +2590,7 @@ html[data-theme="dark"] .course-mentor { --course-color:#c89cac; }
 @media(max-width:1100px) { .reading-grid-head { display:none; } .reading-grid-row { grid-template-columns:1fr 1fr; } .reading-grid-row > div:first-child { grid-column:1/-1; } }
 @media(max-width:700px) { .reading-grid-row,.reference-grid,.sentence-fields,.calendar-picker { grid-template-columns:1fr; } .reading-grid-row > div:first-child { grid-column:auto; } .sentence-lab { padding:20px; } .inquiry-draft { position:static; } .entry-footer { flex-wrap:wrap; } }
 
-html[data-theme="dark"] :is(.entry-link:hover,.entry-link:focus-visible,.skip-link), html[data-theme="dark"] :is(.entry-link:hover,.entry-link:focus-visible) :is(p,.entry-link-meta) { color:var(--graphite); }
+html[data-theme="dark"] :is(.entry-link:is(:hover, :focus-visible),.entry-link:focus-visible,.skip-link), html[data-theme="dark"] :is(.entry-link:is(:hover, :focus-visible),.entry-link:focus-visible) :is(p,.entry-link-meta) { color:var(--graphite); }
 
 /* Persistent link cues: underline the destination, keeping card descriptions quiet. */
 :is(.entry-link h2, .assessment-card-copy h2, .card-link h2,
@@ -2617,12 +2611,12 @@ html[data-theme="dark"] :is(.entry-link:hover,.entry-link:focus-visible,.skip-li
 /* Selected and hovered controls must remain legible in both palettes. */
 html[data-theme="dark"] .assessment-code { color:var(--ink); }
 html[data-theme="dark"] .p1-step-buttons button[aria-pressed="true"] { color:var(--citron); }
-html[data-theme="dark"] .global-directory-group > div:last-child > a:is(:hover,:focus-visible) {
+html[data-theme="dark"] .global-directory-group > div:last-child > a:is(:hover, :focus-visible) {
   background:var(--citron);
   color:var(--graphite);
 }
-html[data-theme="dark"] .global-directory-group > div:last-child > a:is(:hover,:focus-visible) small { color:#424a39; }
-html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--graphite); background:var(--citron); }
+html[data-theme="dark"] .global-directory-group > div:last-child > a:is(:hover, :focus-visible) small { color:#424a39; }
+html[data-theme="dark"] .dossier-nav a:is(:hover, :focus-visible) { color:var(--graphite); background:var(--citron); }
 
 /* Working pages: reach the task quickly without hiding the ethical boundary. */
 .refinery-page-head { padding:20px 0 18px; }
@@ -2668,12 +2662,12 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 /* Small, opt-in page feedback; votes never open an inbox or modal. */
 .site-feedback { width: min(100%, 330px); margin: 24px 0 8px auto; border-top: 1px solid var(--line, #b7bcb8); color: var(--ink, #25282b); }
 .site-feedback > summary { width: fit-content; margin: 8px 0 0 auto; cursor: pointer; font-family: var(--font-mono, monospace); font-size: .73rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; }
-.site-feedback > summary:hover, .site-feedback > summary:focus-visible { color: #5c6e0c; }
+.site-feedback > summary:is(:hover, :focus-visible) { color: #5c6e0c; }
 .site-feedback-body { padding: 12px 0 0; }
 .site-feedback-body > p:first-child { margin: 0 0 9px; font-size: .88rem; }
 .site-feedback-choices { display: flex; flex-wrap: wrap; gap: 7px; }
 .site-feedback-choices button { border: 1px solid currentColor; border-radius: 0; background: transparent; color: inherit; padding: 6px 9px; font: inherit; font-size: .75rem; cursor: pointer; }
-.site-feedback-choices button:hover, .site-feedback-choices button:focus-visible { background: #d8ed61; color: #25282b; }
+.site-feedback-choices button:not(:disabled):is(:hover, :focus-visible) { background: #d8ed61; color: #25282b; }
 .site-feedback-choices button:disabled { opacity: .5; cursor: default; }
 .site-feedback-body small { display: block; margin-top: 10px; font-size: .72rem; }
 .site-feedback-status { margin: 10px 0 0; font-size: .8rem; }
@@ -2696,7 +2690,7 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .course-section-tabs a .mono { color: var(--muted); font-size: .7rem; }
 .course-section-tabs a[aria-current="page"] { background: var(--graphite); color: var(--citron); border-color: var(--graphite); }
 .course-section-tabs a[aria-current="page"] .mono { color: var(--citron); }
-.course-section-tabs a:not([aria-current]):is(:hover,:focus-visible) { background: var(--citron); color: var(--graphite); border-color: var(--graphite); }
+.course-section-tabs a:not([aria-current]):is(:hover, :focus-visible) { background: var(--citron); color: var(--graphite); border-color: var(--graphite); }
 @media (max-width: 600px) { .course-section-tabs a { min-width: 0; flex: 1; padding: 11px; } }
 .text-type-index-head { max-width: 990px; padding: clamp(24px, 3vw, 40px); border: 1px solid var(--line); border-top: 5px solid var(--graphite); background: var(--panel-warm); }
 .text-type-index-head > .mono, .text-type-planned > .mono { font-size: .72rem; letter-spacing: .1em; }
@@ -2708,11 +2702,11 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .text-type-available .section-heading .mono { font-size: .7rem; }
 .text-type-links { display: grid; gap: 10px; }
 .text-type-links a { display: grid; grid-template-columns: 36px minmax(0, 1fr) 20px; gap: 14px; align-items: start; padding: 20px; color: var(--ink); background: var(--panel-cool); border: 1px solid var(--line); text-decoration: none; }
-.text-type-links a:hover, .text-type-links a:focus-visible { background: var(--citron); color: var(--graphite); border-color: var(--graphite); }
+.text-type-links a:is(:hover, :focus-visible) { background: var(--citron); color: var(--graphite); border-color: var(--graphite); }
 .text-type-links a > .mono { padding-top: 7px; font-size: .7rem; }
 .text-type-links strong { display: block; font-family: var(--font-literary); font-size: 1.6rem; font-weight: 400; text-decoration: underline; text-underline-offset: 4px; }
 .text-type-links small { display: block; margin-top: 6px; color: var(--muted); font-size: .86rem; line-height: 1.5; }
-.text-type-links a:hover small, .text-type-links a:focus-visible small { color: #424a39; }
+.text-type-links a:is(:hover, :focus-visible) small { color: #424a39; }
 .text-type-planned { padding: 22px; background: var(--panel-citron); border: 1px solid var(--line); border-left: 4px solid var(--citron); }
 .text-type-planned h2 { margin: 10px 0 6px; font-size: 1.25rem; }
 .text-type-planned p { margin: 0; color: var(--muted); font-size: .87rem; line-height: 1.55; }
@@ -2746,7 +2740,7 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .infographic-view-controls { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 12px 0; }
 .infographic-view-controls button { font: inherit; font-size: .75rem; padding: 7px 10px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
 .infographic-view-controls button[aria-pressed="true"] { background: var(--citron); color: #25282b; border-color: #25282b; }
-.infographic-view-controls button:hover { border-color: var(--ink); }
+.infographic-view-controls button:is(:hover, :focus-visible) { border-color: var(--ink); }
 .infographic-source .infographic-crop { position: relative; width: 100%; overflow: hidden; background: #f8f6f4; border: 1px solid var(--line); }
 .infographic-source .infographic-crop img { position: absolute; max-width: none; height: auto; border: 0; transform: none; }
 .infographic-source .text-type-example-note { padding: 5px 16px 12px; }
@@ -2790,7 +2784,7 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .reference-term summary { cursor:pointer; padding:14px 8px; font-weight:600; }
 .reference-term[open] { background:var(--panel-warm); }
 .reference-term > div { padding:0 20px 14px; max-width:85ch; }
-.reference-term summary:hover { text-decoration:underline; text-underline-offset:4px; }
+.reference-term summary:is(:hover, :focus-visible) { text-decoration:underline; text-underline-offset:4px; }
 @media(max-width:700px) { .reference-jumps { grid-template-columns:1fr; } }
 
 .text-type-view-nav { display:flex; flex-wrap:wrap; gap:4px; border-bottom:2px solid var(--ink); margin:24px 0 30px; }
@@ -2861,7 +2855,7 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .guide-disclosure-hint { display:block; margin-top:8px; font-size:.65rem; }
 .guide-long-section[open] .guide-disclosure-hint { display:none; }
 .guide-long-section > .prose { padding:0 20px 12px; }
-.guide-long-section summary:hover h2 { text-decoration:underline; text-underline-offset:4px; }
+.guide-long-section summary:is(:hover, :focus-visible) h2 { text-decoration:underline; text-underline-offset:4px; }
 .guide-long-section summary:focus-visible, .advertisement-overview-copy h2:focus-visible { outline:3px solid var(--ink); outline-offset:4px; }
 .advertisement-question { padding:18px 22px; border-left:4px solid var(--citron); background:var(--panel-warm); font-size:1.05rem; line-height:1.55; }
 .advertisement-question .mono { display:block; font-size:.65rem; margin-bottom:7px; letter-spacing:.07em; }
@@ -2870,7 +2864,7 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 .advertisement-reading-route ol { list-style:none; padding:0; margin:0; }
 .advertisement-reading-route a { display:flex; align-items:baseline; gap:10px; padding:8px 10px; font-size:.85rem; line-height:1.4; text-decoration:none; border:1px solid transparent; }
 .advertisement-reading-route a > .mono { font-size:.67rem; }
-.advertisement-reading-route a:hover { text-decoration:underline; text-underline-offset:3px; }
+.advertisement-reading-route a:is(:hover, :focus-visible) { text-decoration:underline; text-underline-offset:3px; }
 .advertisement-reading-route a[aria-current="step"] { background:var(--citron); color:var(--graphite); border-color:var(--graphite); }
 .advertisement-reading-workspace { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,3vw,42px); align-items:start; scroll-margin-top:24px; }
 .advertisement-viewer { --ad-crop-height:min(44vh,440px); position:sticky; top:20px; max-height:calc(100dvh - 40px); overflow:auto; scrollbar-width:thin; border:1px solid var(--line); background:var(--panel-cool); scroll-margin-top:24px; }
@@ -3064,3 +3058,62 @@ html[data-theme="dark"] .dossier-nav a:is(:hover,:focus-visible) { color:var(--g
 #paper-two-practice-title { scroll-margin-top: 24px; }
 .p2-guidance .p1-section h2 button > .interactive-practice-label { margin-left: auto; flex-wrap: wrap; }
 @media (max-width: 540px) { .practice-shortcuts { align-items: flex-start; flex-direction: column; } .p2-guidance .p1-section h2 button { flex-wrap: wrap; } }
+
+/* Interaction conventions: hover previews an action; a bottom rule marks selection.
+   Keep these selectors scoped to controls so reading surfaces stay quiet. */
+:is(.p1-step-buttons, .intro-example-tabs, .inquiry-ladder, .close-source-list,
+    .infographic-view-controls, .advertisement-view-controls) button:not(:disabled):not([aria-pressed="true"]):not([aria-selected="true"]):not([aria-current]):is(:hover, :focus-visible),
+.notebook-shortcut:is(:hover, :focus-visible) {
+  background: var(--panel-citron);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+:is(.p1-step-buttons, .intro-example-tabs, .inquiry-ladder, .close-source-list,
+    .infographic-view-controls, .advertisement-view-controls, .inquiry-start)
+    :is([aria-pressed="true"], [aria-selected="true"], [aria-current="step"]) {
+  box-shadow: inset 0 -3px currentColor;
+}
+.close-source-list button[aria-pressed="true"] { color: var(--graphite); }
+.close-toolbar select, .close-writing .field input { color: var(--ink); }
+.interior-sidebar :is(button, .theme-toggle):not(:disabled):is(:hover, :focus-visible) {
+  background: var(--citron);
+  color: var(--graphite);
+  border-color: var(--citron);
+}
+summary { cursor: pointer; }
+summary:is(:hover, :focus-visible) { text-decoration: underline; text-underline-offset: 4px; }
+:is(input:not([type="checkbox"]):not([type="radio"]), textarea, select):not(:disabled):not([readonly]):hover {
+  border-color: var(--ink);
+}
+.interior-sidebar select:hover { border-color: var(--citron); }
+.field-requirement { font-size: .75rem; font-weight: 500; color: var(--muted); }
+.field-requirement > span { color: var(--ink); }
+.refinery-ack .field-requirement { white-space: nowrap; }
+.refinery-sequence { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 4px 0 24px; padding: 16px 0; border-block: 1px solid var(--line); }
+.refinery-sequence li { min-width: 0; }
+.refinery-sequence strong, .refinery-sequence span { display: block; }
+.refinery-sequence strong { font-size: .88rem; }
+.refinery-sequence span { font-size: .82rem; color: var(--muted); margin-top: 6px; }
+.student-input-label { display: inline-flex; align-items: center; gap: 6px; }
+.notebook-shortcut { display: inline-flex; align-items: center; gap: 8px; }
+@media (max-width: 650px) { .refinery-sequence { grid-template-columns: 1fr; gap: 12px; } }
+@media (prefers-reduced-motion: reduce) {
+  .button, .content-card, .assessment-card, .course-gateway { transition: none; }
+  .button:active:not(:disabled), .content-card:is(:hover, :focus-visible) { transform: none; }
+}
+
+.field-label .field-requirement { margin-left:.5em; white-space:nowrap; }
+html[data-theme="dark"] .button:not(.secondary):not(:disabled):is(:hover, :focus-visible) { background:#e5f59c; color:var(--graphite); }
+.refinery-sequence { max-width:900px; }
+.interior-sidebar a[aria-current="page"] { box-shadow:inset 3px 0 currentColor; font-weight:600; }
+html[data-theme="dark"] .close-analysis :is(button, a, summary, .close-image-scroll):focus-visible { outline-color:var(--citron); }
+html[data-theme="dark"] .site-feedback > summary:is(:hover, :focus-visible) { color:var(--citron); }
+/* Worked-example navigation follows the same choice and action cues. */
+.text-type-view-nav a:not([aria-current]):is(:hover, :focus-visible),
+.advertisement-reader-pager :is(button, a):not(:disabled):is(:hover, :focus-visible),
+.advertisement-reader-progress button:not(:disabled):is(:hover, :focus-visible),
+.text-type-example-directory a:is(:hover, :focus-visible) {
+  background:var(--panel-citron); color:var(--ink); border-color:var(--ink);
+}
+.text-type-view-nav a[aria-current="page"] { box-shadow:inset 0 -3px var(--citron); }
+.advertisement-dialog-heading button:not(:disabled):is(:hover, :focus-visible) { background:#3b4145; }

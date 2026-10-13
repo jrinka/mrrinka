@@ -40,7 +40,7 @@ function exportStatus(message: string, error = false) {
     status.style.cssText = "position:fixed;bottom:20px;right:20px;z-index:9999;max-width:min(440px,calc(100vw - 40px));padding:16px 20px;background:#25282b;color:#fff;border-left:4px solid #d8ed61;box-shadow:0 3px 15px #0003;font:15px/1.5 sans-serif;display:flex;align-items:center;gap:16px;";
     const text = document.createElement("span");
     text.setAttribute("role", "status"); text.setAttribute("aria-live", "polite");
-    const close = document.createElement("button"); close.type = "button"; close.textContent = "×"; close.setAttribute("aria-label", "Dismiss export message");
+    const close = document.createElement("button"); close.type = "button"; close.textContent = "×"; close.setAttribute("aria-label", "Dismiss download message");
     close.style.cssText = "background:transparent;color:white;border:0;font-size:24px;cursor:pointer;padding:4px;";
     close.onclick = () => { status!.hidden = true; status!.style.display = "none"; };
     status.append(text, close); document.body.append(status);
@@ -64,7 +64,7 @@ export async function downloadRecord(content: string, filename: string, format:E
     return true;
   } catch {
     exporting = false;
-    exportStatus("Couldn’t create the file. Your writing is still here. Try again, or choose plain text.", true);
+    exportStatus("Couldn’t create the file. Your writing is still here. Try again, or choose Markdown.", true);
     return false;
   }
 }

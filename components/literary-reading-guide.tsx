@@ -1,5 +1,6 @@
 "use client";
 
+import StudentInputLabel from "./student-input-label";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
@@ -114,7 +115,7 @@ export default function LiteraryReadingGuide({ body, href, example, exampleHref 
           {index === 0 && example.firstReading && <section className="infographic-notes" aria-label="First reading before the commentary">
             <h3>Try a first reading</h3>
             <label className="field" htmlFor="literary-first-reading">Your provisional reading<span className="hint" id="literary-first-reading-hint">{example.firstReading.prompt}</span><textarea id="literary-first-reading" aria-describedby="literary-first-reading-hint" rows={5} maxLength={6000} value={firstReading} onChange={event => setFirstReading(event.target.value)} /></label>
-            <p className="hint">Write an idea before opening the guidance. Your first reading is included when you export your notebook in Practice &amp; transfer. Export before leaving this page.</p>
+            <p className="hint">Write an idea before opening the guidance. Your first reading is included when you export your notebook in Practice &amp; transfer. Download before leaving this page.</p>
             <button className="button secondary" type="button" disabled={!firstReading.trim()} aria-expanded={showFirstReading} aria-controls="literary-first-reading-response" onClick={() => setShowFirstReading(previous => !previous)}>{showFirstReading ? "Hide the possible reading" : "Compare with a possible reading"}</button>
             <div id="literary-first-reading-response" hidden={!showFirstReading}>
               <h4>A possible reading</h4><p>{example.firstReading.model}</p>
@@ -139,11 +140,11 @@ function LiteraryNotes({ example, firstReading }: { example: LiteraryReading; fi
   const [values, setValues] = useState({ contrast: "", evidence: "", analysis: "" });
   const [format, setFormat] = useState<ExportFormat>("docx");
   return <section className="infographic-notes" aria-label={`${example.title} analysis notebook`}>
-    <span className="mono notebook-label">YOUR NOTES</span><h3>Try a connected reading</h3>
+    <StudentInputLabel className="mono notebook-label">YOUR NOTES</StudentInputLabel><h3>Try a connected reading</h3>
     {example.firstReading && <div><h4>Your first reading</h4><p style={{ whiteSpace: "pre-wrap" }}>{firstReading || "You have not written a first reading yet. You can return to the opening section at any time."}</p></div>}
     {fields.map(field => <label className="field" key={field.key} htmlFor={`literary-${field.key}`}>{field.label}<span className="hint" id={`literary-${field.key}-hint`}>{field.hint}</span><textarea id={`literary-${field.key}`} aria-describedby={`literary-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} /></label>)}
-    <p className="hint">Your notes stay here while this page is open. Export before leaving. This exercise does not send writing to AI.</p>
-    <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`${example.title} analysis notes\n\nSource: ${example.title}\n${example.sources.map(source => source.url.startsWith("/") ? `https://mrrinka.com${source.url}` : source.url).join("\n")}\n\n${example.questionCredit}: ${example.question}\n\n${example.firstReading ? `First reading\n${firstReading || "(Not yet written)"}\n\n` : ""}${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, `${example.filename}.txt`, format)}>Export my notes</button></div>
+    <p className="hint">Your notes stay here while this page is open. Download before leaving. This exercise does not send writing to AI.</p>
+    <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`${example.title} analysis notes\n\nSource: ${example.title}\n${example.sources.map(source => source.url.startsWith("/") ? `https://mrrinka.com${source.url}` : source.url).join("\n")}\n\n${example.questionCredit}: ${example.question}\n\n${example.firstReading ? `First reading\n${firstReading || "(Not yet written)"}\n\n` : ""}${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, `${example.filename}.txt`, format)}>Download my notes</button></div>
     <details className="infographic-self-check"><summary>Review your paragraph</summary><ul>{example.checks.map(check => <li key={check}>{check}</li>)}</ul></details>
   </section>;
 }
