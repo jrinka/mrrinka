@@ -24,9 +24,9 @@ test('assign prompt stays in the original bank and avoids immediate repeats',()=
   }
  }
 });
-test('comparison question is separate bounded context and does not bypass acknowledgment',()=>{
- const input={kind:'comparison',course:'literature',evidence:'Evidence from both works with precise details and context.',draft:'My own comparative claim with sufficient detail.',prompt:comparisonPrompts[0],acknowledged:true};
+test('comparison question is separate bounded context and still requires student writing',()=>{
+ const input={kind:'comparison',course:'literature',evidence:'Evidence from both works with precise details and context.',draft:'My own comparative claim with sufficient detail.',prompt:comparisonPrompts[0]};
  assert.equal(refineryRequest.parse(input).prompt,comparisonPrompts[0]);
  assert.equal(refineryRequest.safeParse({...input,prompt:'x'.repeat(2001)}).success,false);
- assert.equal(refineryRequest.safeParse({...input,acknowledged:false}).success,false);
+ assert.equal(refineryRequest.safeParse({...input,draft:""}).success,false);
 });

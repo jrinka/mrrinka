@@ -2348,8 +2348,6 @@ h3 {
 .refinery-boundary a { color: var(--citron); }
 .refinery-boundary p { line-height: 1.6; }
 .refinery-fields { border: 0; margin: 0; padding: 0; min-width: 0; }
-.refinery-ack { display: flex; gap: 12px; align-items: flex-start; padding: 16px 0; line-height: 1.5; }
-.refinery-ack input { width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px; }
 .refinery-save { padding: 24px 0; }
 @media (max-width: 700px) { .refinery-links { grid-template-columns: 1fr; } }
 
@@ -3088,7 +3086,6 @@ summary:is(:hover, :focus-visible) { text-decoration: underline; text-underline-
 .interior-sidebar select:hover { border-color: var(--citron); }
 .field-requirement { font-size: .75rem; font-weight: 500; color: var(--muted); }
 .field-requirement > span { color: var(--ink); }
-.refinery-ack .field-requirement { white-space: nowrap; }
 .refinery-sequence { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 4px 0 24px; padding: 16px 0; border-block: 1px solid var(--line); }
 .refinery-sequence li { min-width: 0; }
 .refinery-sequence strong, .refinery-sequence span { display: block; }

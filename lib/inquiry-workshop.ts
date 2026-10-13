@@ -12,7 +12,8 @@ export const workshopRequest = z.object({
   draft:z.string().trim().max(3000).default(""),
   message:z.string().trim().min(2).max(3000),
   history:z.array(z.object({student:z.string().max(3000),coach:z.string().max(3000),stage:z.enum(inquiryStages)}).strict()).max(12).default([]),
-  acknowledged:z.literal(true),
+  // Accept and discard the retired field from already-open browser tabs.
+  acknowledged:z.boolean().transform(() => undefined).optional(),
 }).strict().superRefine((value,ctx)=>{
   if (["Test","Revise"].includes(value.stage) && value.draft.length<10)
     ctx.addIssue({code:"custom",path:["draft"],message:"Write your working idea before testing or revising it."});

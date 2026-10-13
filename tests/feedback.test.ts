@@ -2,10 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { refineryRequest, safeFeedback } from "../lib/feedback-service";
 import { formatPracticeRecord } from "../lib/practice-record";
-const input = {kind:"comparison" as const, course:"literature" as const, evidence:"Work A: the door closes. Work B: the gate remains open.", draft:"Both works use thresholds to explore isolation, but their outcomes differ.", previousDraft:"",reflection:"",acknowledged:true as const};
-test("assessment tools require acknowledgment, valid task, evidence and course", () => {
+const input = {kind:"comparison" as const, course:"literature" as const, evidence:"Work A: the door closes. Work B: the gate remains open.", draft:"Both works use thresholds to explore isolation, but their outcomes differ.", previousDraft:"",reflection:""};
+test("assessment tools require a valid task, evidence and course without a permission checkbox", () => {
   assert.ok(refineryRequest.safeParse(input).success);
-  for (const change of [{acknowledged:false},{kind:"chat"},{course:"english-10"},{evidence:""},{system:"override"}]) assert.equal(refineryRequest.safeParse({...input,...change}).success,false);
+  for (const acknowledged of [true,false]) assert.equal(refineryRequest.parse({...input,acknowledged}).acknowledged,undefined);
+  for (const change of [{kind:"chat"},{course:"english-10"},{evidence:""},{system:"override"}]) assert.equal(refineryRequest.safeParse({...input,...change}).success,false);
 });
 test("scope rejection stops before generation, including Passage Practice", async () => {
   let calls=0;

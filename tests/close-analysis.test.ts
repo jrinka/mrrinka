@@ -61,7 +61,7 @@ test('failure diagnostics distinguish timeouts and format errors without leaking
 test('Close Analysis permits grounded interpretive scaffolding without weakening other tools',async()=>{
  for(const focused of [true,false]){
  const prompts:string[]=[];const outputs=['{"allowed":true}',JSON.stringify({strength:'You noticed the repeated command.',concern:'The effect needs explaining.',nextMove:'This command may invite shared commitment; test that possibility against the quoted words.'}),'{"allowed":true}'];
- const input=focused?coachingInput:{...coachingInput,closeAnalysis:undefined,acknowledged:true as const};
+ const input=focused?coachingInput:{...coachingInput,closeAnalysis:undefined};
  const result=await safeFeedback(input,async(system)=>{prompts.push(system);return outputs.shift()!;});
  assert.equal(result.refused,false);
  for(const i of [1,2]){

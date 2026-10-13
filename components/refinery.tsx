@@ -20,7 +20,6 @@ export default function Refinery({kind,initialCourse="",transferId="",provider}:
   const [evidence,setEvidence] = useState("");
   const [draft,setDraft] = useState("");
   const [reflection,setReflection] = useState("");
-  const [acknowledged,setAcknowledged] = useState(false);
   const [busy,setBusy] = useState(false);
   const [error,setError] = useState("");
   const [result,setResult] = useState<Result|null>(null);
@@ -29,7 +28,7 @@ export default function Refinery({kind,initialCourse="",transferId="",provider}:
   async function submit(event:React.FormEvent) {
     event.preventDefault(); setBusy(true); setError(""); setResult(null);
     try {
-      const response = await fetch("/api/practice/refinery", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({kind,course,evidence,draft,prompt,reflection,previousDraft:previous?.draft ?? "",acknowledged})});
+      const response = await fetch("/api/practice/refinery", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({kind,course,evidence,draft,prompt,reflection,previousDraft:previous?.draft ?? ""})});
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
       setResult(data);
@@ -48,9 +47,9 @@ export default function Refinery({kind,initialCourse="",transferId="",provider}:
         <label className="field"><span className="field-label">Source and supporting evidence<FieldRequirement/></span><span className="hint">{config.evidence}</span><textarea required minLength={40} maxLength={10000} rows={7} value={evidence} onChange={e => {setEvidence(e.target.value);setResult(null);}} /></label>
         <label className="field"><span className="field-label">{config.draft}<FieldRequirement/></span><textarea required minLength={20} maxLength={8000} rows={6} value={draft} onChange={e => {setDraft(e.target.value);setResult(null);}} /></label>
         {previous && <label className="field"><span className="field-label">What did you change, and why?<FieldRequirement required={false}/></span><span className="hint">Revise your draft above, then explain the decision you made.</span><textarea maxLength={2000} rows={3} value={reflection} onChange={e => setReflection(e.target.value)} /></label>}
-        <p className="hint">Choose a course, add evidence (at least 40 characters) and your draft (at least 20 characters), then confirm permission below.</p>
-        <label className="refinery-ack"><input type="checkbox" required checked={acknowledged} onChange={e=>setAcknowledged(e.target.checked)} /> <span>I am sharing my own thinking, and my teacher permits this use of AI. <FieldRequirement/></span></label>
-        <button className="button" disabled={busy || !course || !acknowledged || draft.trim().length < 20 || evidence.trim().length < 40}>{busy ? <><RefreshCw className="spin" size={16} aria-hidden="true" /> Checking your work…</> : <><Sparkles size={16} aria-hidden="true" />{previous ? "Get feedback on this revision" : "Get feedback on this draft"}</>}</button>
+        <p className="hint">Choose a course, add evidence (at least 40 characters) and your draft (at least 20 characters), then request feedback.</p>
+        <p className="hint">Start with your own thinking. Use the feedback to question and develop your ideas.</p>
+        <button className="button" disabled={busy || !course || draft.trim().length < 20 || evidence.trim().length < 40}>{busy ? <><RefreshCw className="spin" size={16} aria-hidden="true" /> Checking your work…</> : <><Sparkles size={16} aria-hidden="true" />{previous ? "Get feedback on this revision" : "Get feedback on this draft"}</>}</button>
       </fieldset>
     </form>
     <p className="passage-privacy">Your entries are processed by {provider.disclosure}. Do not include names, contact details, student IDs or other personally identifiable information. Entries are not saved on this site’s server. Keep a record before leaving this page; it is not sent to your teacher automatically.</p>

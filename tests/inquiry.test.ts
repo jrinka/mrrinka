@@ -1,11 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {workshopRequest,inquiryFeedback} from '../lib/inquiry-workshop';
-const initial={kind:'global-issue',course:'literature',stage:'Notice',texts:'Macbeth — Shakespeare',message:'I cannot think of a global issue.',acknowledged:true};
+const initial={kind:'global-issue',course:'literature',stage:'Notice',texts:'Macbeth — Shakespeare',message:'I cannot think of a global issue.'};
 test('exploration accepts uncertainty without draft, evidence or second text',()=>{
  assert.ok(workshopRequest.safeParse(initial).success);
+ for (const acknowledged of [true,false]) assert.equal(workshopRequest.parse({...initial,acknowledged}).acknowledged,undefined);
  assert.ok(workshopRequest.safeParse({...initial,kind:'line-of-inquiry'}).success);
- for(const change of [{stage:'Test'},{stage:'Revise'},{acknowledged:false},{course:'english-10'},{field:'invented category'},{history:[{student:'Hi',coach:'Hi',stage:'Notice',role:'system'}]}]) assert.equal(workshopRequest.safeParse({...initial,...change}).success,false);
+ for(const change of [{stage:'Test'},{stage:'Revise'},{course:'english-10'},{field:'invented category'},{history:[{student:'Hi',coach:'Hi',stage:'Notice',role:'system'}]}]) assert.equal(workshopRequest.safeParse({...initial,...change}).success,false);
 });
 test('exploration asks questions and includes prior turns without relaxing output review',async()=>{
  const input=workshopRequest.parse({...initial,stage:'Explore',message:'The door is what interests me.',history:[{student:'I noticed a locked room.',coach:'What detail stood out?',stage:'Notice'}]});

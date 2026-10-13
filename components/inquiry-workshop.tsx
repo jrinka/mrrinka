@@ -21,7 +21,7 @@ export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"
  const [field,setField]=useState<string>(fieldsOfInquiry[0]);
  const [texts,setTexts]=useState("");const [evidence,setEvidence]=useState("");
  const [draft,setDraft]=useState("");const [message,setMessage]=useState("");
- const [ack,setAck]=useState(false);const [busy,setBusy]=useState(false);const [error,setError]=useState("");
+ const [busy,setBusy]=useState(false);const [error,setError]=useState("");
  const [turns,setTurns]=useState<Turn[]>([]);const [records,setRecords]=useState<PracticeRecord[]>([]);
  const testing=mode==="refine";
  const exhausted=turns.length>=12;
@@ -31,7 +31,7 @@ export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"
   const requestStage:Stage=testing ? (turns.some(t=>t.stage==="Test"||t.stage==="Revise") ? "Revise" : "Test") : (turns.length ? "Explore" : "Notice");
   setStage(requestStage);
   try{
-   const response=await fetch("/api/practice/inquiry",{method:"POST",headers:{"Content-Type":"application/json"},signal:AbortSignal.timeout(115000),body:JSON.stringify({kind,course,stage:requestStage,field,texts,evidence,draft,message:student,history:turns.map(({student,coach,stage})=>({student,coach,stage})),acknowledged:ack})});
+   const response=await fetch("/api/practice/inquiry",{method:"POST",headers:{"Content-Type":"application/json"},signal:AbortSignal.timeout(115000),body:JSON.stringify({kind,course,stage:requestStage,field,texts,evidence,draft,message:student,history:turns.map(({student,coach,stage})=>({student,coach,stage}))})});
    const data=await response.json();if(!response.ok)throw new Error(data.error||"Feedback could not be completed.");
    const coach=data.refused?data.message:[data.reply.observation,...data.reply.questions].join("\n\n");
    setTurns(current=>[...current,{student,coach,stage:requestStage,refused:data.refused}]);
@@ -57,10 +57,10 @@ export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"
      </section>
      <section className="inquiry-draft"><h2>My working idea</h2><p>You write this. It is included as context whenever you send a message. {testing ? "Add an idea of at least 10 characters to request feedback; a separate message is optional." : "Leave it empty while exploring if you are not ready."}</p><label className="field"><span className="field-label">{kind==="global-issue"?"My provisional global issue":"My provisional line of inquiry"}<FieldRequirement required={testing}/></span><textarea required={testing} minLength={testing?10:undefined} maxLength={3000} rows={7} value={draft} onChange={e=>setDraft(e.target.value)}/></label><p className="hint">To focus feedback here, choose “Refine my working idea” above, then send. Keep your own wording as you revise.</p></section>
     </div>
-    <p className="hint">{testing ? "Choose a course, name your texts, add your working idea, and confirm permission to get feedback." : "Choose a course, name your texts, add a message, and confirm permission to start exploring."}</p>
+    <p className="hint">{testing ? "Choose a course, name your texts, and add your working idea to get feedback." : "Choose a course, name your texts, and add a message to start exploring."}</p>
     <p className="inquiry-send-mode"><strong>{testing ? "Refining your working idea" : "Exploring a direction"}</strong> · Your current notes and conversation are included with this message.</p>
-    <label className="refinery-ack"><input type="checkbox" required checked={ack} onChange={e=>setAck(e.target.checked)}/> <span>I am sharing my own thinking, and my teacher permits this use of AI. <FieldRequirement/></span></label>
-    <button className="button" disabled={busy||exhausted||!course||!ack||texts.trim().length<2||(testing?draft.trim().length<10:message.trim().length<2)}>{busy?<><RefreshCw className="spin" size={16}/> Thinking and checking…</>:<><Sparkles size={16}/>{testing?"Get feedback on this idea":turns.length?"Send reply":"Start exploring"}</>}</button>
+    <p className="hint">Start with your own thinking. Use the feedback to question and develop your ideas.</p>
+    <button className="button" disabled={busy||exhausted||!course||texts.trim().length<2||(testing?draft.trim().length<10:message.trim().length<2)}>{busy?<><RefreshCw className="spin" size={16}/> Thinking and checking…</>:<><Sparkles size={16}/>{testing?"Get feedback on this idea":turns.length?"Send reply":"Start exploring"}</>}</button>
    </fieldset>
   </form>
   {busy&&<p role="status">{provider.name} is reading the conversation and checking its response. This can take up to a minute.</p>}
@@ -71,6 +71,6 @@ export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"
   <details className="inquiry-explainer"><summary>What is sent, and what do the boxes do?</summary><p>Each message sends your current texts, field (for IO), evidence and working idea, together with the earlier conversation. Editing a box alone does not request AI feedback. Use the starred button to send.</p><p>Exploring invites questions about your observations; refining asks for feedback on the idea you wrote. You can switch without losing this page’s notes. Nothing fills in your idea for you, and refreshing or leaving the page clears the conversation.</p></details>
   <p className="passage-privacy">Entries are processed by {provider.disclosure}. Do not include names, contact details, student IDs or other personally identifiable information. This site does not store the conversation; leaving or refreshing clears it. AI can be mistaken—check its questions against your texts. Records are not sent to your teacher automatically.</p>
   <div className="refinery-save"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button type="button" className="button secondary" disabled={busy||(!turns.length&&!draft&&!message&&!texts&&!evidence)} onClick={save}>Download record</button><p className="hint">Includes every exchange, draft snapshots, your current notes, dates and model details.</p></div>
-  {(turns.length>0||texts||draft||message||evidence)&&<div className="inquiry-reset">{confirmReset?<><p>Start fresh? This clears your texts, working notes and conversation. Download your record first if you want to keep it.</p><div className="tool-actions"><button type="button" className="button secondary" disabled={busy} onClick={()=>{setTexts("");setEvidence("");setDraft("");setMessage("");setTurns([]);setRecords([]);setField(fieldsOfInquiry[0]);setStage("Notice");setMode("explore");setAck(false);setError("");setConfirmReset(false);startRef.current?.focus();}}>Clear and start fresh</button><button type="button" className="button secondary" onClick={()=>setConfirmReset(false)}>Keep working</button></div></>:<button type="button" className="button secondary" disabled={busy} onClick={()=>setConfirmReset(true)}>Start a fresh conversation</button>}</div>}
+  {(turns.length>0||texts||draft||message||evidence)&&<div className="inquiry-reset">{confirmReset?<><p>Start fresh? This clears your texts, working notes and conversation. Download your record first if you want to keep it.</p><div className="tool-actions"><button type="button" className="button secondary" disabled={busy} onClick={()=>{setTexts("");setEvidence("");setDraft("");setMessage("");setTurns([]);setRecords([]);setField(fieldsOfInquiry[0]);setStage("Notice");setMode("explore");setError("");setConfirmReset(false);startRef.current?.focus();}}>Clear and start fresh</button><button type="button" className="button secondary" onClick={()=>setConfirmReset(false)}>Keep working</button></div></>:<button type="button" className="button secondary" disabled={busy} onClick={()=>setConfirmReset(true)}>Start a fresh conversation</button>}</div>}
  </div>;
 }

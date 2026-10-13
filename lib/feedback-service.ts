@@ -22,7 +22,8 @@ export const refineryRequest = z.object({
   prompt: z.string().trim().max(2000).optional(),
   previousDraft: z.string().max(8000).default(""),
   reflection: z.string().max(2000).default(""),
-  acknowledged: z.literal(true),
+  // Accept and discard the retired field from already-open browser tabs.
+  acknowledged: z.boolean().transform(() => undefined).optional(),
 }).strict().superRefine((value, ctx) => {
   if (value.course === "english-10" && value.kind !== "analysis") ctx.addIssue({code:"custom", message:"Choose an IB course for this assessment."});
 });
