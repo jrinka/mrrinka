@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { feedback } from '../logic';
+import { feedback, shuffle } from '../logic';
 import {drawFromBank} from '../decks';
 import { twentyFourBanks, oddsPuzzles, matchPuzzles } from './data';
 import { equationBank, validateEquation, sameEquation, pretty, normalize, parseArithmetic, checkTwentyFour, solveTwentyFour, masksFor, moveMatch, matchTrue, matchText, matchSolutions, segmentNames } from './engine';
@@ -33,7 +33,7 @@ function Source({ kind }: { kind:'equation'|'24'|'match'|'odds' }) {
     {kind==='equation'?<p>Inspired by <a href="https://faqs.nerdlegame.com/" target="_blank" rel="noopener noreferrer">Nerdle</a>. These are independently generated classroom puzzles, not the official daily game. Invite a reason for each guess. Multiplication and division come first; then addition and subtraction, left to right.</p>
     :kind==='24'?<p>A classroom version of the traditional make-24 arithmetic puzzle. Use all four numbers once with +, −, ×, ÷, and brackets. Try a different route after finding one. See <a href="https://nrich.maths.org/games/countdown?tab=teacher" target="_blank" rel="noopener noreferrer">NRICH’s Countdown</a> for a related target-number activity.</p>
     :kind==='match'?<p>A version of the traditional matchstick-equation puzzle, using seven-segment digits. Move one match between the digit positions shown. The operation and equals sign are fixed; rotating the whole display, adding matches, and making ≠ are outside this version’s rules. Any valid solution counts.</p>
-    :<p>Original questions about fair, independent coins and dice. Ask for a prediction first, then discuss the equally likely outcomes. The highlighted grid explains the exact probability; it is not a simulation.</p>}
+    :<p>Original questions about fair coins, dice, and random token draws. Ask for a prediction first, then discuss the equally likely outcomes. The highlighted grid explains the exact probability; it is not a simulation.</p>}
     <p>The timer is optional. Students can answer aloud, on a whiteboard, or here. Save activity downloads the visible puzzle and work; unrevealed hints and answers stay out.</p>
   </details>;
 }
@@ -163,18 +163,19 @@ function OddsGame() {
 }
 function OddsRound({index,round,next}:{index:number;round:number;next:()=>void}) {
   const puzzle=oddsPuzzles[index];const [selected,setSelected]=useState(''),[show,setShow]=useState(false),[hint,setHint]=useState(false),[notes,setNotes]=useState('');
+  const [choices]=useState(()=>shuffle(puzzle.choices));
   const favorable=puzzle.outcomes.filter(o=>o.favorable).length,total=puzzle.outcomes.length;
   const correct=(choice:string)=>{const [n,d]=choice.split('/').map(Number);return n*total===d*favorable;};
   const answer=puzzle.choices.find(correct)!;
   return <section className="board math-board" aria-label="Probability puzzle"><p className="eyebrow">ROUND {String(round).padStart(2,'0')} / {puzzle.title.toUpperCase()}</p><h2 className="odds-question">{puzzle.question}</h2>
-    <div className="odds-options" role="group" aria-label="Your prediction">{puzzle.choices.map(choice=><button className={`control ${show&&correct(choice)?'odds-correct':''}`} key={choice} aria-pressed={selected===choice} disabled={show} onClick={()=>setSelected(choice)}>{choice}{show&&correct(choice)?' ✓':''}</button>)}</div>
+    <div className="odds-options" role="group" aria-label="Your prediction">{choices.map(choice=><button className={`control ${show&&correct(choice)?'odds-correct':''}`} key={choice} aria-pressed={selected===choice} disabled={show} onClick={()=>setSelected(choice)}>{choice}{show&&correct(choice)?' ✓':''}</button>)}</div>
     <p className="math-prediction">{selected?`Your prediction: ${selected}`:'No prediction recorded yet.'}</p>
     <p className="math-status" role="status">{show?(selected?(correct(selected)?'Your prediction checks out. Here is why.':'A useful wrong turn. Here is what the outcomes show.'):'Here is the outcome count.'):selected?`Your prediction: ${selected}. Ready to test it?`:'Choose an answer, or take a class vote before revealing.'}</p>
     <label className="odds-notes">Your reasoning (optional)<textarea value={notes} onChange={e=>setNotes(e.target.value)} rows={2} maxLength={3000} placeholder="What makes that probability seem right?"/></label>
     <div className="actions"><button className="control" disabled={hint||show} onClick={()=>setHint(true)}>Give me a hint</button><button className="primary" disabled={show} onClick={()=>setShow(true)}>Reveal &amp; explain</button><button className="control" onClick={next}>New question ↻</button></div>
     {hint&&!show&&<p className="math-hint">{puzzle.hint}</p>}
-    {show&&<div className="math-explanation"><h2>{favorable} of {total} = {answer}</h2><p>{puzzle.explanation}</p><p>All boxes below are equally likely. Highlighted boxes meet the condition.{puzzle.outcomes[0].label.includes(',')?' Pairs show first die, second die.':' H = heads; T = tails.'}</p>
-      <div className={`outcome-grid ${total>8?'many-outcomes':''}`} aria-label="Equally likely outcomes">{puzzle.outcomes.map(o=><span key={o.label} className={o.favorable?'favorable':''} aria-label={`${o.label}: ${o.favorable?'meets condition':'does not meet condition'}`}>{o.label}{o.favorable?' ✓':''}</span>)}</div>
+    {show&&<div className="math-explanation"><h2>{favorable} of {total} = {answer}</h2><p>{puzzle.explanation}</p><p>All boxes below are equally likely. Highlighted boxes meet the condition.{puzzle.outcomeKey?` ${puzzle.outcomeKey}`:puzzle.outcomes[0].label.includes(',')?' Pairs show first die, second die.':' H = heads; T = tails.'}</p>
+      <div className={`outcome-grid ${puzzle.outcomeKey?'token-outcomes':total>8?'many-outcomes':''}`} aria-label="Equally likely outcomes">{puzzle.outcomes.map(o=><span key={o.label} className={o.favorable?'favorable':''} aria-label={`${o.label}: ${o.favorable?'meets condition':'does not meet condition'}`}>{o.label}{o.favorable?' ✓':''}</span>)}</div>
     </div>}
     <BreakTimer/>
   </section>;

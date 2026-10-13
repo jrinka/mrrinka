@@ -60,6 +60,35 @@ test('probability answers agree with the illustrated equally likely outcomes',()
   assert.equal(oddsPuzzles.find(p=>p.title==='The six is not guaranteed')!.outcomes.filter(o=>o.favorable).length,11);
 });
 
+test('extended probability bank matches independently counted sample spaces',()=>{
+  const expected:[string,number,number][]=[
+    ['Heads next door',8,16],['One change of direction',6,16],
+    ['Balance with a clue',6,15],['Late arrival',2,16],
+    ['A six and a total',2,11],['Winning with an even total',6,15],
+    ['Even does not settle it',9,18],['A high blue die',7,12],
+    ['Nine narrows the field',2,4],['Which die supplied the six?',6,11],
+    ['No putting it back',6,20],['A different second color',12,20],
+    ['The third token',24,36],['Two reds in three draws',36,60],
+    ['Put it back this time',9,25],['Matching colors',8,20],
+  ];
+  assert.equal(new Set(oddsPuzzles.map(p=>p.title)).size,oddsPuzzles.length);
+  for(const [title,favorable,total] of expected){
+    const puzzle=oddsPuzzles.find(p=>p.title===title);
+    assert.ok(puzzle,title);
+    assert.equal(puzzle.outcomes.length,total,title);
+    assert.equal(puzzle.outcomes.filter(o=>o.favorable).length,favorable,title);
+    assert.equal(puzzle.choices.length,3,title);
+    if(puzzle.outcomes[0].label.includes(' → '))assert.ok(puzzle.outcomeKey?.includes('R1'),title);
+  }
+  for(const puzzle of oddsPuzzles.filter(p=>p.outcomeKey)){
+    for(const outcome of puzzle.outcomes){
+      const labels=outcome.label.split(' → ');
+      assert.ok(labels.every(label=>['R1','R2','R3','B1','B2'].includes(label)));
+      if(puzzle.title!=='Put it back this time')assert.equal(new Set(labels).size,labels.length);
+    }
+  }
+});
+
 test('TXT and Markdown records preserve expressions and backticks exactly',async()=>{
   const {activityRecord}=await import('../recess/exports');
   const work='My working: 8/(3-8/3)\n**not bold**\n```\n';
