@@ -1,0 +1,11 @@
+import {writeFileSync,mkdirSync} from 'node:fs';
+import {buildDocument} from '../src/outline.mjs';
+import {getSections} from '../src/rehearsal.mjs';
+const output=process.argv[2];if(!output)throw new Error('Provide a scratch fixture output directory.');mkdirSync(output,{recursive:true});
+const base='Evidence reference authorial choice audience response and connection to the global issue help explain how meaning develops across the extract and the whole work while leaving room for fresh reasoning during spoken practice and reflection';
+const notes=Array(10).fill(base.split(' ').slice(0,35).join(' '));
+notes[0]='Global issue: the pressure to conform. Compare how the two selections use voice and structure to reveal choices made under social pressure.';
+notes[9]='Bring together the differing perspectives on conformity. Explain what the comparison reveals about the global issue rather than repeating the examples.';
+const sections=getSections();const data={course:'langlit',sections,notes};
+writeFileSync(output+'/outline.docx',buildDocument(data));
+writeFileSync(output+'/rehearsal.docx',buildDocument({...data,elapsed:'10:12',review:[32,169,307,444,580,612].map((end,i,a)=>({end,duration:end-(i?a[i-1]:0),marked:i<5})),reflection:'At 7:24, I rushed the connection between the second extract and the wider body of work. Next time I will choose one precise reference and explain the connection more fully.'}));
