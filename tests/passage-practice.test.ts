@@ -34,5 +34,5 @@ test("passage practice presents the teacher-review path before AI feedback", () 
     assert.ok(html.includes(`>${label}</button>`));
   }
   assert.ok(html.indexOf("AI feedback is optional.") < html.indexOf("Get feedback on this paragraph"));
-  assert.match(html, /nothing is sent to your teacher automatically\./);
+  assert.match(html, /Nothing is sent to your teacher automatically\./);
 });

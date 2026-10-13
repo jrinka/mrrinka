@@ -104,7 +104,7 @@ function InfographicNotes() {
     {infographicNoteFields.map(field => <label className="field" key={field.key} htmlFor={`infographic-${field.key}`}>{field.label}<span className="hint" id={`infographic-${field.key}-hint`}>{field.hint}</span>
       <textarea id={`infographic-${field.key}`} aria-describedby={`infographic-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} />
     </label>)}
-    <p className="hint">Your notes stay here while this page is open. Download before leaving. This exercise does not send writing to AI.</p>
+    <p className="hint">This exercise does not send writing to AI.</p>
     <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`Infographic analysis notes\n\nSource: ${example.title} (${example.year}), Department of Health and Social Care\n${example.source}\n© Crown copyright. Open Government Licence v3.0.\n\nPractice question: ${example.question}\n\n${infographicNoteFields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, "infographic-analysis-notes.txt", format)}>Download my notes</button></div>
     <details className="infographic-self-check"><summary>Review your paragraph</summary><ul>
       <li>Did I distinguish the people shown or discussed from the people being addressed?</li>

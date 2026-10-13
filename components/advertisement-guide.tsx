@@ -170,7 +170,7 @@ function AdvertisementNotes() {
     {fields.map(field => <label className="field" key={field.key} htmlFor={`advertisement-${field.key}`}>{field.label}<span className="hint" id={`advertisement-${field.key}-hint`}>{field.hint}</span>
       <textarea id={`advertisement-${field.key}`} aria-describedby={`advertisement-${field.key}-hint`} rows={field.key === "analysis" ? 6 : 3} maxLength={6000} value={values[field.key]} onChange={event => setValues(previous => ({ ...previous, [field.key]: event.target.value }))} />
     </label>)}
-    <p className="hint">Your notes stay here while this page is open. Download before leaving. This exercise does not send writing to AI.</p>
+    <p className="hint">This exercise does not send writing to AI.</p>
     <div className="tool-actions"><ExportFormatSelect value={format} onChange={setFormat} /><button className="button secondary" type="button" onClick={() => downloadRecord(`Advertisement analysis notes\n\nSource: ${example.title}\n${example.credit}\nhttps://mrrinka.com${example.image}\n\nPractice question: ${example.question}\n\n${fields.map(field => `${field.label}\n${values[field.key] || "(Not yet written)"}`).join("\n\n")}\n\nStudent-authored notes; no AI feedback.`, "advertisement-analysis-notes.txt", format)}>Download my notes</button></div>
     <details className="infographic-self-check"><summary>Review your paragraph</summary><ul>
       <li>Have I supported my audience inference with details from the ad?</li>

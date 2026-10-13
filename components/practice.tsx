@@ -73,8 +73,7 @@ export default function Practice({
         </span>
       </div>
       <p className="muted">
-        Your writing stays in this tab. Download it before leaving; it isn’t
-        submitted or saved to the site.
+        Your writing is not submitted or saved to the site.
       </p>
       {prompts.map((p, i) => (
         <label className="field" key={p.key}>
