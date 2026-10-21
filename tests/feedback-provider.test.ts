@@ -87,3 +87,21 @@ test("Passage Practice routes every feedback stage to its credited Kimi K3 provi
   assert.equal((await result.json()).model, passagePracticeProvider().name);
   assert.equal(calls, 3);
 });
+
+test("HLE uses one DeepSeek call through Fireworks and credits the actual provider", async () => {
+ const { POST } = await import("../app/api/practice/inquiry/route");
+ const { hleProvider } = await import("../lib/feedback-service");
+ process.env.FIREWORKS_API_KEY = "test-fireworks-key";
+ process.env.MINIMAX_APIKEY = "test-minimax-key";
+ let calls=0;
+ globalThis.fetch=async(url,init)=>{
+  calls++; assert.equal(url,"https://api.fireworks.ai/inference/v1/chat/completions");
+  assert.equal((init?.headers as Record<string,string>).Authorization,"Bearer test-fireworks-key");
+  const body=JSON.parse(String(init?.body)); assert.equal(body.model,hleProvider().model); assert.equal(body.reasoning_effort,"low");
+  return Response.json({choices:[{message:{content:JSON.stringify({observation:"A focused inquiry can stay unchanged.",questions:[]})},finish_reason:"stop"}]});
+ };
+ const response=await POST(new Request("http://localhost/api/practice/inquiry",{method:"POST",body:JSON.stringify({kind:"line-of-inquiry",course:"literature",stage:"Test",texts:"An invented work",draft:"How do interruptions present authority?",message:"Is this workable?"})}));
+ assert.equal(response.status,200);const body=await response.json();assert.equal(body.model,hleProvider().name);assert.equal(body.policyVersion,"2026-10-21-hle-coaching-1");assert.equal(calls,1);
+ delete process.env.FIREWORKS_API_KEY;
+ await assert.rejects(()=>askModel("coach",{},4096,25000,hleProvider()),/not configured/);assert.equal(calls,1);
+});

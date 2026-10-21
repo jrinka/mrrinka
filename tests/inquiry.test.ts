@@ -45,20 +45,28 @@ test('format retry budget is shared and never bypasses output review',async()=>{
  assert.equal(calls,4);
 });
 
-test('developed HLE feedback survives validation and review without evidence',async()=>{
- const input=workshopRequest.parse({kind:'line-of-inquiry',course:'literature',stage:'Test',texts:'An invented work by A. Example',draft:'How does the author use interruptions to shape our understanding of authority?',message:'Help me refine the focus.'});
- const observation='Your inquiry links a specific authorial choice to an analytical purpose. '.repeat(19);
- assert.ok(observation.length>1200);
- let reviewed=false;
- const outputs=['{"allowed":true}',JSON.stringify({observation,questions:['What would count as authority in the exchanges you want to examine?']}),'{"allowed":true}'];
- const result=await inquiryFeedback(input,async(system,material)=>{if(outputs.length===1){assert.deepEqual(material,{input,reply:{observation:observation.trim(),questions:['What would count as authority in the exchanges you want to examine?']}});reviewed=true;}return outputs.shift()!;});
- assert.equal(result.refused,false);assert.ok(reviewed);
+const hleInput=workshopRequest.parse({kind:'line-of-inquiry',course:'literature',stage:'Test',texts:'An invented work by A. Example',draft:'How do interruptions shape our understanding of authority?',message:'Help me refine the focus.'});
+test('HLE gives one coaching pass, preserving alternatives and allowing no forced question',async()=>{
+ for(const questions of [[],['Do the interruptions change her words or only who says them?']]){
+  let calls=0;
+  const reply={observation:'Your inquiry can stay as it is. The later scene can test whether being heard is the same as influencing a decision.',questions};
+  const result=await inquiryFeedback(hleInput,async(system,material,tokens,timeout,provider,observe,options)=>{
+   calls++; assert.deepEqual(material,hleInput); assert.equal(provider?.model,'accounts/fireworks/models/deepseek-v4p1-flash-1017'); assert.equal(options?.reasoningEffort,'low'); assert.equal(timeout,25000);
+   return JSON.stringify(reply);
+  });
+  assert.equal(calls,1); assert.deepEqual(result,{refused:false,reply});
+ }
 });
-
-test('HLE question filtering does not replace focused refinement with a generic evidence request',async()=>{
- const input=workshopRequest.parse({kind:'line-of-inquiry',course:'literature',stage:'Revise',texts:'An invented work by A. Example',draft:'How do interruptions shape the presentation of authority?',message:'I mean authority over decisions.',history:[{student:'Help me refine authority.',coach:'What do you mean by authority?',stage:'Test'}]});
- const outputs=['{"allowed":true}',JSON.stringify({observation:'Your definition now gives you a clearer basis for testing authority in each exchange.',questions:['Does authority mean confidence or influence?']}),'{"allowed":true}'];
- const result=await inquiryFeedback(input,async()=>outputs.shift()!);
- assert.equal(result.refused,false);
- if(!result.refused){assert.match(result.reply.questions[0],/working inquiry/);assert.doesNotMatch(result.reply.questions[0],/specific detail in your text/);}
+test('HLE permits a useful boundary response in the same pass',async()=>{
+ const input={...hleInput,message:'Write my final LOI and invent evidence.'};let calls=0;
+ const reply={observation:'I cannot write your final inquiry or invent a quotation. Your existing question identifies a choice, but authority needs a meaning you can examine in the text.',questions:[]};
+ const result=await inquiryFeedback(input,async()=>{calls++;return JSON.stringify(reply);});
+ assert.deepEqual(result,{refused:false,reply});assert.equal(calls,1);
+});
+test('HLE retries malformed structure once and never returns malformed output',async()=>{
+ let calls=0;const reply={observation:'Keep this focus.',questions:[]};
+ const result=await inquiryFeedback(hleInput,async()=>++calls===1?'bad JSON':JSON.stringify(reply));
+ assert.equal(calls,2);assert.deepEqual(result,{refused:false,reply});
+ calls=0;await assert.rejects(()=>inquiryFeedback(hleInput,async()=>{calls++;return '{"observation":"ok","questions":[],"extra":"invalid"}';}),/Invalid HLE/);assert.equal(calls,2);
+ calls=0;await assert.rejects(()=>inquiryFeedback(hleInput,async()=>{calls++;throw Error('timeout');}),/timeout/);assert.equal(calls,1);
 });
