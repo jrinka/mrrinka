@@ -1,3 +1,4 @@
+import AiModelInfo from "@/components/ai-model-info";
 import type { Metadata } from "next";
 import GlobalShell from "@/components/global-shell";
 import PassagePractice from "@/components/passage-practice";
@@ -13,6 +14,7 @@ export default function PassagePracticePage() {
         <h1>Passage Practice</h1>
         <p>Practice Literature Paper 1 close-reading skills with an unfamiliar literary extract. These short exercises are not full exam simulations.</p>
       </div>
+      <AiModelInfo provider={passagePracticeProvider()} />
       <PassagePractice provider={passagePracticeProvider()} />
     </GlobalShell>
   );
