@@ -14,7 +14,7 @@ afterEach(() => {
   globalThis.fetch = originalFetch;
 });
 
-test("a Fireworks key selects K3 and sends the key only to the server-side endpoint", async () => {
+test("a Fireworks key selects DeepSeek and sends the key only to the server-side endpoint", async () => {
   process.env.FIREWORKS_API_KEY = "test-fireworks-key";
   process.env.MINIMAX_APIKEY = "test-minimax-key";
   let called = false;
@@ -23,26 +23,25 @@ test("a Fireworks key selects K3 and sends the key only to the server-side endpo
     assert.equal(url, "https://api.fireworks.ai/inference/v1/chat/completions");
     assert.equal((init?.headers as Record<string, string>).Authorization, "Bearer test-fireworks-key");
     const body = JSON.parse(String(init?.body));
-    assert.equal(body.model, "accounts/fireworks/models/kimi-k3");
+    assert.equal(body.model, "accounts/fireworks/models/deepseek-v4p1-flash-1017");
     assert.equal(body.messages[0].role, "system");
+    assert.equal(body.reasoning_effort, "low");
     return Response.json({ choices: [{ message: { content: '{"allowed":true}' }, finish_reason: "stop" }] });
   };
-  assert.deepEqual(feedbackProvider(), { model:"accounts/fireworks/models/kimi-k3", name:"Kimi K3", disclosure:"Kimi K3, developed by Moonshot AI and hosted by Fireworks" });
+  assert.deepEqual(feedbackProvider(), { model:"accounts/fireworks/models/deepseek-v4p1-flash-1017", name:"DeepSeek V4.1 Flash 1017", disclosure:"DeepSeek V4.1 Flash 1017, developed by DeepSeek and hosted by Fireworks" });
   assert.equal(await askModel("scope", { draft:"test" }), '{"allowed":true}');
   assert.ok(called);
 });
 
-test("without a Fireworks key the existing MiniMax path still works", async () => {
+test("all AI tools require Fireworks and never silently fall back to MiniMax", async () => {
   delete process.env.FIREWORKS_API_KEY;
   process.env.MINIMAX_APIKEY = "test-minimax-key";
-  globalThis.fetch = async (url, init) => {
-    assert.equal(url, "https://api.minimax.chat/v1/text/chatcompletion_v2");
-    assert.equal((init?.headers as Record<string, string>).Authorization, "Bearer test-minimax-key");
-    assert.equal(JSON.parse(String(init?.body)).model, "MiniMax-M3");
-    return Response.json({ choices: [{ messages: [{ content: "Feedback" }] }] });
-  };
-  assert.deepEqual(feedbackProvider(), { model:"MiniMax-M3", name:"M3", disclosure:"M3, developed and hosted by MiniMax" });
-  assert.equal(await askModel("coach", { draft:"test" }), "Feedback");
+  globalThis.fetch = async () => { assert.fail("Missing Fireworks key must not send a request"); };
+  const { hleProvider, passagePracticeProvider } = await import("../lib/feedback-service");
+  for (const provider of [feedbackProvider, closeAnalysisProvider, hleProvider, passagePracticeProvider]) {
+    assert.equal(provider().name, "DeepSeek V4.1 Flash 1017");
+    await assert.rejects(() => askModel("coach", {draft:"synthetic"},4096,30000,provider()), /not configured/);
+  }
 });
 
 test("truncated Fireworks responses fail closed", async () => {
@@ -51,28 +50,28 @@ test("truncated Fireworks responses fail closed", async () => {
   await assert.rejects(() => askModel("coach", { draft:"test" }), /truncated/);
 });
 
-test("Close Analysis uses Kimi K3 only and never falls back to MiniMax",async()=>{
+test("Close Analysis uses DeepSeek V4.1 Flash 1017 only and never falls back to MiniMax",async()=>{
  delete process.env.FIREWORKS_API_KEY;
  process.env.MINIMAX_APIKEY="test-minimax-key";
  globalThis.fetch=async()=>{assert.fail("Missing Fireworks key must not make any request");};
- assert.equal(closeAnalysisProvider().name,"Kimi K3");
+ assert.equal(closeAnalysisProvider().name,"DeepSeek V4.1 Flash 1017");
  await assert.rejects(()=>askCloseAnalysisModel("coach",{draft:"synthetic"}),/not configured/);
  process.env.FIREWORKS_API_KEY="test-fireworks-key";
  globalThis.fetch=async(url,init)=>{
  assert.equal(url,"https://api.fireworks.ai/inference/v1/chat/completions");
- assert.equal(JSON.parse(String(init?.body)).model,"accounts/fireworks/models/kimi-k3");
+ assert.equal(JSON.parse(String(init?.body)).model,"accounts/fireworks/models/deepseek-v4p1-flash-1017");
  return Response.json({choices:[{message:{content:"Synthetic diagnostic feedback"},finish_reason:"stop"}]});
  };
  assert.equal(await askCloseAnalysisModel("coach",{draft:"synthetic"}),"Synthetic diagnostic feedback");
 });
 
-test("Passage Practice routes every feedback stage to its credited Kimi K3 provider", async () => {
+test("Passage Practice routes every feedback stage to its credited DeepSeek V4.1 Flash 1017 provider", async () => {
   const { POST } = await import("../app/api/practice/feedback/route");
   const { passagePracticeProvider, askPassagePracticeModel } = await import("../lib/feedback-service");
   delete process.env.FIREWORKS_API_KEY;
   process.env.MINIMAX_APIKEY = "test-minimax-key";
   globalThis.fetch = async () => { assert.fail("Missing Fireworks key must not fall back to MiniMax"); };
-  assert.equal(passagePracticeProvider().name, "Kimi K3");
+  assert.equal(passagePracticeProvider().name, "DeepSeek V4.1 Flash 1017");
   await assert.rejects(() => askPassagePracticeModel("coach", { draft: "synthetic" }), /not configured/);
   process.env.FIREWORKS_API_KEY = "test-fireworks-key";
   let calls = 0;

@@ -7,7 +7,7 @@ const feedback={strength:'A supported observation.',concern:'A connection needs 
 test('three named stages preserve budgets and safety review without logging content',async()=>{
  const logs:CloseDiagnostic[]=[];const outputs=['{"allowed":true}',JSON.stringify(feedback),'{"allowed":true}'];
  const transport:typeof askModel=async(system,material,maxTokens,timeoutMs,provider,observe)=>{
- assert.ok(system);assert.ok(material);assert.equal(provider?.name,'Kimi K3');
+ assert.ok(system);assert.ok(material);assert.equal(provider?.name,'DeepSeek V4.1 Flash 1017');
  observe?.({outcome:'completed',elapsedMs:7,httpStatus:200,finishReason:'stop',usage:{inputTokens:100,outputTokens:50,totalTokens:150,reasoningTokens:20}});
  return outputs.shift()!;
  };
@@ -34,21 +34,21 @@ test('adapter collects only numeric token counters and normalized finish reason'
  const originalFetch=globalThis.fetch;const old=process.env.FIREWORKS_API_KEY;process.env.FIREWORKS_API_KEY='fake-test-key';
  try{
  globalThis.fetch=async()=>Response.json({choices:[{message:{content:'PRIVATE MODEL REPLY'},finish_reason:'PRIVATE UNKNOWN VALUE'}],usage:{prompt_tokens:20,completion_tokens:10,total_tokens:30,completion_tokens_details:{reasoning_tokens:5},secret:'PRIVATE'}});
- const logs:unknown[]=[];const text=await askModel('PRIVATE SYSTEM','PRIVATE DATA',4096,30000,{model:'accounts/fireworks/models/kimi-k3',name:'Kimi K3',disclosure:'Fireworks'},x=>logs.push(x));
+ const logs:unknown[]=[];const text=await askModel('PRIVATE SYSTEM','PRIVATE DATA',4096,30000,{model:'accounts/fireworks/models/deepseek-v4p1-flash-1017',name:'DeepSeek V4.1 Flash 1017',disclosure:'Fireworks'},x=>logs.push(x));
  assert.equal(text,'PRIVATE MODEL REPLY');assert.equal(JSON.stringify(logs).includes('PRIVATE'),false);
  assert.deepEqual((logs[0] as CloseDiagnostic).usage,{inputTokens:20,outputTokens:10,totalTokens:30,reasoningTokens:5});assert.equal((logs[0] as CloseDiagnostic).finishReason,'other');
  }finally{globalThis.fetch=originalFetch;if(old===undefined)delete process.env.FIREWORKS_API_KEY;else process.env.FIREWORKS_API_KEY=old;}
 });
-test('all Close Analysis stages use low while ordinary feedback retains its default',async()=>{
+test('all Close Analysis stages use low while ordinary feedback also uses low',async()=>{
  const originalFetch=globalThis.fetch;const old=process.env.FIREWORKS_API_KEY;process.env.FIREWORKS_API_KEY='fake-test-key';
  try{
  const bodies:Record<string,unknown>[]=[];const outputs=['{"allowed":true}',JSON.stringify(feedback),'{"allowed":true}','ordinary feedback'];
  globalThis.fetch=async(_url,init)=>{bodies.push(JSON.parse(String(init?.body)));return Response.json({choices:[{message:{content:outputs.shift()},finish_reason:'stop'}]});};
  const logs:CloseDiagnostic[]=[];const trace=createCloseAnalysisTrace('low-test',x=>logs.push(x));
  assert.equal((await safeFeedback(input,trace.ask)).refused,false);await askModel('ordinary system',{draft:'ordinary attempt'});
- assert.deepEqual(bodies.map(x=>x.reasoning_effort),['low','low','low',undefined]);
+ assert.deepEqual(bodies.map(x=>x.reasoning_effort),['low','low','low','low']);
  assert.deepEqual(bodies.map(x=>x.max_tokens),[4096,6000,4096,4096]);
- assert.ok(bodies.every(x=>x.model==='accounts/fireworks/models/kimi-k3'&&!('thinking' in x)));
+ assert.ok(bodies.every(x=>x.model==='accounts/fireworks/models/deepseek-v4p1-flash-1017'&&!('thinking' in x)));
  assert.deepEqual(logs.map(x=>x.reasoningEffort),['low','low','low']);
  }finally{globalThis.fetch=originalFetch;if(old===undefined)delete process.env.FIREWORKS_API_KEY;else process.env.FIREWORKS_API_KEY=old;}
 });
