@@ -1,8 +1,9 @@
 import { z } from "zod";
-import { askModel, hleProvider } from "./feedback-service";
+import { askModel, hleProvider, type ModelObservation } from "./feedback-service";
+import { closeFeedbackFailureCode } from "./close-analysis";
 import type { WorkshopRequest } from "./inquiry-workshop";
 
-export const hlePolicyVersion = "2026-10-21-hle-coaching-1";
+export const hlePolicyVersion = "2026-10-21-hle-coaching-2";
 export const hleReplySchema = z.object({
   observation: z.string().trim().min(1).max(2200),
   questions: z.array(z.string().trim().min(1).max(600)).max(2),
@@ -26,17 +27,51 @@ Normally give 100–180 words of feedback, up to 220 only when needed. A simple 
 
 Return ONLY JSON with exactly these fields: {"observation":"feedback","questions":[]}. No Markdown fences or extra fields.`;
 
-export async function hleFeedback(input: WorkshopRequest, ask: typeof askModel = askModel) {
-  // One substantive pass. One retry is reserved for malformed JSON, not extra grading/review.
+export type HleDiagnostic = {
+  requestId: string; event: "attempt" | "request"; attempt: number;
+  outcome: "completed" | "failed" | "response-format" | "feedback";
+  elapsedMs: number; timeoutMs: number; maxTokens: number;
+  httpStatus?: number; finishReason?: ModelObservation["finishReason"];
+  usage?: ModelObservation["usage"]; failureCode?: ModelObservation["failureCode"];
+};
+
+export async function hleFeedback(input: WorkshopRequest, ask: typeof askModel = askModel,
+  log: (event: HleDiagnostic) => void = event => console.info("HLE diagnostic", JSON.stringify(event))) {
+  const requestId = crypto.randomUUID();
+  const started = performance.now();
+  const timeoutMs = 40000;
+  const maxTokens = 4096;
+  let attempt = 0;
+  const emit = (event: Omit<HleDiagnostic, "requestId" | "timeoutMs" | "maxTokens" | "attempt">) => {
+    try { log({ requestId, timeoutMs, maxTokens, attempt, ...event }); } catch { /* Logging cannot block feedback. */ }
+  };
+  // One substantive pass. Only malformed JSON gets a second attempt.
   const system = `${hleCoachingPrompt}\nJSON schema: ${JSON.stringify(z.toJSONSchema(hleReplySchema))}`;
-  for (let attempt = 0; attempt < 2; attempt++) {
-    const raw = await ask(system, input, 4096, 25000, hleProvider(), undefined, { reasoningEffort: "low" });
-    try {
-      const reply = hleReplySchema.parse(JSON.parse(raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "")));
-      return { refused: false as const, reply };
-    } catch {
-      if (attempt === 1) throw new Error("Invalid HLE coaching response format");
+  try {
+    for (attempt = 1; attempt <= 2; attempt++) {
+      let observation: ModelObservation | undefined;
+      const attemptStarted = performance.now();
+      let raw: string;
+      try {
+        raw = await ask(system, input, maxTokens, timeoutMs, hleProvider(), value => { observation = value; }, { reasoningEffort: "low" });
+      } catch (error) {
+        emit({ ...observation, event: "attempt", outcome: "failed", elapsedMs: Math.round(performance.now() - attemptStarted), failureCode: closeFeedbackFailureCode(error) });
+        throw error;
+      }
+      const parsed = (() => {
+        try { return hleReplySchema.parse(JSON.parse(raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, ""))); }
+        catch { return undefined; }
+      })();
+      emit({ ...observation, event: "attempt", outcome: parsed ? "completed" : "response-format", elapsedMs: Math.round(performance.now() - attemptStarted) });
+      if (parsed) {
+        emit({ event: "request", outcome: "feedback", elapsedMs: Math.round(performance.now() - started) });
+        return { refused: false as const, reply: parsed };
+      }
+      if (attempt === 2) throw new SyntaxError("Invalid HLE coaching response format");
     }
+    throw new Error("HLE coaching did not complete");
+  } catch (error) {
+    emit({ event: "request", outcome: "failed", elapsedMs: Math.round(performance.now() - started), failureCode: closeFeedbackFailureCode(error) });
+    throw error;
   }
-  throw new Error("HLE coaching did not complete");
 }

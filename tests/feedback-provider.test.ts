@@ -101,7 +101,7 @@ test("HLE uses one DeepSeek call through Fireworks and credits the actual provid
   return Response.json({choices:[{message:{content:JSON.stringify({observation:"A focused inquiry can stay unchanged.",questions:[]})},finish_reason:"stop"}]});
  };
  const response=await POST(new Request("http://localhost/api/practice/inquiry",{method:"POST",body:JSON.stringify({kind:"line-of-inquiry",course:"literature",stage:"Test",texts:"An invented work",draft:"How do interruptions present authority?",message:"Is this workable?"})}));
- assert.equal(response.status,200);const body=await response.json();assert.equal(body.model,hleProvider().name);assert.equal(body.policyVersion,"2026-10-21-hle-coaching-1");assert.equal(calls,1);
+ assert.equal(response.status,200);const body=await response.json();assert.equal(body.model,hleProvider().name);assert.equal(body.policyVersion,"2026-10-21-hle-coaching-2");assert.equal(calls,1);
  delete process.env.FIREWORKS_API_KEY;
  await assert.rejects(()=>askModel("coach",{},4096,25000,hleProvider()),/not configured/);assert.equal(calls,1);
 });

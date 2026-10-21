@@ -62,7 +62,7 @@ export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"
     <button className="button" disabled={busy||exhausted||!course||texts.trim().length<2||(testing?draft.trim().length<10:message.trim().length<2)}>{busy?<><RefreshCw className="spin" size={16}/> Thinking and checking…</>:<><Sparkles size={16}/>{testing?"Get feedback on this idea":turns.length?"Send reply":"Start exploring"}</>}</button>
    </fieldset>
   </form>
-  {busy&&<p role="status">{provider.name} is reading the conversation and checking its response. This can take up to a minute.</p>}
+  {busy&&<p role="status">{provider.name} is reading the conversation and checking its response. This may take a little longer during busy periods.</p>}
   {error&&<p role="alert" className="error">{error}</p>}
   {exhausted&&<p role="status">You have reached 12 exchanges. Download your record and take stock before starting a fresh conversation.</p>}
   {turns.length > 0 && <SiteFeedback target={`${kind}-refinery`} />}

@@ -51,7 +51,7 @@ test('HLE gives one coaching pass, preserving alternatives and allowing no force
   let calls=0;
   const reply={observation:'Your inquiry can stay as it is. The later scene can test whether being heard is the same as influencing a decision.',questions};
   const result=await inquiryFeedback(hleInput,async(system,material,tokens,timeout,provider,observe,options)=>{
-   calls++; assert.deepEqual(material,hleInput); assert.equal(provider?.model,'accounts/fireworks/models/deepseek-v4p1-flash-1017'); assert.equal(options?.reasoningEffort,'low'); assert.equal(timeout,25000);
+   calls++; assert.deepEqual(material,hleInput); assert.equal(provider?.model,'accounts/fireworks/models/deepseek-v4p1-flash-1017'); assert.equal(options?.reasoningEffort,'low'); assert.equal(timeout,40000);
    return JSON.stringify(reply);
   });
   assert.equal(calls,1); assert.deepEqual(result,{refused:false,reply});
