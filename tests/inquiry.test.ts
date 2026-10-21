@@ -44,3 +44,21 @@ test('format retry budget is shared and never bypasses output review',async()=>{
  await assert.rejects(()=>inquiryFeedback(workshopRequest.parse(initial),async()=>{calls++;return outputs.shift()!;}),/output-review/);
  assert.equal(calls,4);
 });
+
+test('developed HLE feedback survives validation and review without evidence',async()=>{
+ const input=workshopRequest.parse({kind:'line-of-inquiry',course:'literature',stage:'Test',texts:'An invented work by A. Example',draft:'How does the author use interruptions to shape our understanding of authority?',message:'Help me refine the focus.'});
+ const observation='Your inquiry links a specific authorial choice to an analytical purpose. '.repeat(19);
+ assert.ok(observation.length>1200);
+ let reviewed=false;
+ const outputs=['{"allowed":true}',JSON.stringify({observation,questions:['What would count as authority in the exchanges you want to examine?']}),'{"allowed":true}'];
+ const result=await inquiryFeedback(input,async(system,material)=>{if(outputs.length===1){assert.deepEqual(material,{input,reply:{observation:observation.trim(),questions:['What would count as authority in the exchanges you want to examine?']}});reviewed=true;}return outputs.shift()!;});
+ assert.equal(result.refused,false);assert.ok(reviewed);
+});
+
+test('HLE question filtering does not replace focused refinement with a generic evidence request',async()=>{
+ const input=workshopRequest.parse({kind:'line-of-inquiry',course:'literature',stage:'Revise',texts:'An invented work by A. Example',draft:'How do interruptions shape the presentation of authority?',message:'I mean authority over decisions.',history:[{student:'Help me refine authority.',coach:'What do you mean by authority?',stage:'Test'}]});
+ const outputs=['{"allowed":true}',JSON.stringify({observation:'Your definition now gives you a clearer basis for testing authority in each exchange.',questions:['Does authority mean confidence or influence?']}),'{"allowed":true}'];
+ const result=await inquiryFeedback(input,async()=>outputs.shift()!);
+ assert.equal(result.refused,false);
+ if(!result.refused){assert.match(result.reply.questions[0],/working inquiry/);assert.doesNotMatch(result.reply.questions[0],/specific detail in your text/);}
+});
