@@ -26,11 +26,18 @@ test('unsafe or malformed coaching is never released',async()=>{
  const malformed=['{"allowed":true}','{"observation":"ok","questions":[]}'];
  await assert.rejects(()=>inquiryFeedback(workshopRequest.parse(initial),async()=>malformed.shift()!));
 });
-test('answer options inside questions are replaced before output review',async()=>{
- const responses=['{"allowed":true}',JSON.stringify({observation:'You have a starting observation.',questions:['Is the outcome destruction, awakening, or self-deception?']}),'{"allowed":true}'];
- const result=await inquiryFeedback(workshopRequest.parse({...initial,stage:'Explore'}),async()=>responses.shift()!);
- assert.equal(result.refused,false);
- if(!result.refused){assert.equal(result.reply.questions.length,1);assert.doesNotMatch(result.reply.questions[0],/destruction|awakening|self-deception/);}
+test('global issue preserves useful questions containing or and permits no forced question',async()=>{
+ for(const questions of [[],['Does this detail support your claim, or does it limit it?']]) {
+  const reply={observation:'Your focus is workable; the supplied notes resolve its scope.',questions};
+  const responses=['{"allowed":true}',JSON.stringify(reply),'{"allowed":true}'];
+  const result=await inquiryFeedback(workshopRequest.parse({...initial,stage:'Explore'}),async()=>responses.shift()!);
+  assert.deepEqual(result,{refused:false,reply});
+ }
+});
+test('global issue still rejects supplied assessment answers at output review',async()=>{
+ const responses=['{"allowed":true}',JSON.stringify({observation:'Use this finished issue.',questions:[]}),'{"allowed":false}'];
+ const result=await inquiryFeedback(workshopRequest.parse(initial),async()=>responses.shift()!);
+ assert.equal(result.refused,true);
 });
 
 test('one malformed format retries, then guidance still requires output review',async()=>{
