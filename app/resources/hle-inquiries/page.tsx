@@ -1,4 +1,88 @@
 import Link from "next/link";
 import GlobalShell from "@/components/global-shell";
-export const metadata={title:"HLE: how a line of inquiry develops"};
-export default function Page(){return <GlobalShell><Link className="back" href="/resources">← Skills &amp; Methods</Link><div className="global-page-head"><span className="mono">HLE / WORKED EXAMPLES</span><h1>How an inquiry develops</h1><p>A useful inquiry grows from a pattern you can investigate. It connects a literary choice with a question about meaning that you can explore through an argument.</p></div><aside className="lens-intro"><h2>Learn the move, choose your own direction</h2><p>These are original teaching examples, not questions supplied for your assessed essay. Use a work or body of work studied in your course, check eligibility with your teacher, and develop your own inquiry from your reading. A polished question alone is not a successful HLE.</p></aside><details className="lens-section" open><summary><span>Jane Austen · Lady Susan</span></summary><div className="lens-body"><p><a href="https://www.gutenberg.org/files/946/946-h/946-h.htm">Read the public-domain novella · Project Gutenberg ↗</a></p><ol><li><strong>Notice:</strong> Susan’s first letters describe her circumstances differently to different recipients.</li><li><strong>Too broad:</strong> “How does Austen present women?” offers no manageable focus.</li><li><strong>Locate a choice:</strong> the arrangement of letters gives readers access to contradictions that individual correspondents cannot always see.</li><li><strong>Working inquiry:</strong> How does Austen use contrasting letters in <em>Lady Susan</em> to expose the construction of respectable appearances?</li><li><strong>Test it:</strong> letters I and II provide a starting contrast; later accounts and the concluding change of narrative form can complicate it. The essay must examine language and arrangement, not just catalog lies.</li></ol><p><strong>Why it has potential:</strong> a specific choice in form, a particular text and a question about meaning. The inquiry still leaves the answer to be argued.</p></div></details><details className="lens-section"><summary><span>William Shakespeare · Timon of Athens</span></summary><div className="lens-body"><p><a href="https://www.gutenberg.org/files/1536/1536-h/1536-h.htm">Read the public-domain play · Project Gutenberg ↗</a></p><ol><li><strong>Notice:</strong> the welcoming banquet of Act 1 and the hostile banquet of Act 3 make hospitality change meaning.</li><li><strong>Too broad:</strong> “What is friendship in the play?” risks becoming a theme summary.</li><li><strong>Locate a choice:</strong> Shakespeare restages the social ceremony through a transformed meal and altered speech.</li><li><strong>Working inquiry:</strong> How does Shakespeare use the play’s contrasting banquets to question the relationship between generosity and friendship in <em>Timon of Athens</em>?</li><li><strong>Test it:</strong> examine the staging and language of Acts 1.2 and 3.6, then test the interpretation against the refusals of help between them. Distinguish Timon’s judgment from the play’s wider presentation.</li></ol><p><strong>Why it has potential:</strong> a focused structural comparison supports a discussion of meaning. It can accommodate tensions rather than merely proving that the characters are false friends.</p></div></details><section className="prose guide-copy"><h2>Test your own inquiry</h2><ul><li>Can I identify several precise moments that genuinely develop the question?</li><li>Does answering it require analysis of choices, not just knowledge of the story?</li><li>Could a defensible reading complicate my initial answer?</li><li>Can I develop it within 1,200–1,500 words without covering the entire work equally?</li><li>Have I checked the text’s eligibility and the assessment rules with my teacher?</li></ul></section><p><Link href="/practice/refineries/line-of-inquiry">Explore your own observations in the Line of Inquiry Refinery →</Link></p></GlobalShell>;}
+import styles from "./inquiry-guide.module.css";
+
+export const metadata = { title: "HLE: how a line of inquiry develops" };
+
+const steps = [
+  {
+    title: "Start with an observation",
+    example: "The chair says that everyone has a voice, but Mira never gets to read her letter.",
+    explanation: "This identifies a specific mismatch between what a character says and what happens. It gives the inquiry something concrete to investigate.",
+  },
+  {
+    title: "Trace a pattern",
+    example: "Each statement about participation is followed by another moment in which Mira remains unheard.",
+    explanation: "The repeated contrast connects the opening, middle, and ending. The focus moves from one incident to the way the scene is organized.",
+  },
+  {
+    title: "Locate the writer’s choices",
+    example: "The writer repeats inclusive words such as “every,” “we,” and “everyone,” then places them beside Mira’s unanswered gestures.",
+    explanation: "The focus becomes the relationship between dialogue and action. Naming repetition alone would not explain what is distinctive about this scene.",
+  },
+  {
+    title: "Connect the choices to meaning",
+    example: "The language makes the meeting sound open, while the chair’s actions control who can actually speak.",
+    explanation: "A broad topic such as power becomes a particular tension: the appearance of participation can conceal exclusion. This is a possible reading to investigate.",
+  },
+  {
+    title: "Form a working inquiry",
+    example: "How does the contrast between inclusive language and unanswered gestures in “The Welcome” shape the portrayal of authority?",
+    explanation: "The question brings together the text, a specific relationship between choices, and an area of meaning. An answer would need to explain how the details work together.",
+  },
+];
+
+export default function Page() {
+  return (
+    <GlobalShell>
+      <Link className="back" href="/resources">← Skills &amp; Methods</Link>
+      <div className="global-page-head">
+        <span className="mono">HLE / WORKED EXAMPLE</span>
+        <h1>How an inquiry develops</h1>
+        <p>A line of inquiry develops as a reader connects details, recognizes a pattern, and asks how the writer’s choices shape meaning.</p>
+      </div>
+      <div className={styles.guide}>
+        <p className={styles.introduction}>This worked example shows that process. The short scene below supplies all the context needed to follow the explanation.</p>
+        <section className={styles.source} aria-labelledby="scene-title">
+          <span className="mono">ORIGINAL TEACHING EXAMPLE</span>
+          <h2 id="scene-title">“The Welcome”</h2>
+          <p className={styles.context}>At a neighborhood meeting, Mira waits to read a letter to the committee.</p>
+          <div className={styles.excerpts}>
+            <div><h3>Opening</h3><p>“Every family has a voice here,” the chair said. At the back of the room, Mira held a folded letter.</p></div>
+            <div><h3>Middle</h3><p>“We have heard everyone.” Mira raised her hand. The chair turned to the next item on the agenda.</p></div>
+            <div><h3>Ending</h3><p>“Thank you for speaking so openly.” Chairs scraped. Mira smoothed the creases in her letter, then folded it again.</p></div>
+          </div>
+        </section>
+        <section className={styles.development} aria-labelledby="development-title">
+          <h2 id="development-title">From observation to working inquiry</h2>
+          <ol className={styles.flow}>
+            {steps.map((step, index) => (
+              <li className={styles.step} key={step.title}>
+                <div className={styles.stepHeading}>
+                  <span className={styles.number} aria-hidden="true">{index + 1}</span>
+                  <h3>{step.title}</h3>
+                </div>
+                <div className={styles.stepBody}>
+                  <p className={styles.example}>{step.example}</p>
+                  <div className={styles.explanation}><h4>How the thinking develops</h4><p>{step.explanation}</p></div>
+                </div>
+                {index < steps.length - 1 && <span className={styles.arrow} aria-hidden="true">↓</span>}
+              </li>
+            ))}
+          </ol>
+        </section>
+        <section className={styles.revisit} aria-labelledby="revisit-title">
+          <h2 id="revisit-title">The inquiry can change as the reading develops</h2>
+          <p>Mira’s raised hand complicates a reading of her silence as simple acceptance. She tries to participate, but the chair moves on. Returning to that detail makes the focus more precise: the scene presents an attempt to speak being ignored.</p>
+          <p>The working question leaves room for that distinction. It may stay the same while the argument develops, or change when further evidence shifts the focus.</p>
+          <p className={styles.return}><span aria-hidden="true">↳ </span>Return to the details, reconsider the pattern, and refine the question where needed.</p>
+        </section>
+        <section className={styles.takeaway} aria-labelledby="takeaway-title">
+          <h2 id="takeaway-title">What this shows about an HLE inquiry</h2>
+          <p>Each step narrows the focus while making the reasoning more specific. “Power” is a topic; the relationship between inclusive language and exclusion gives the writer’s choices a clear place in the investigation.</p>
+          <p>This miniature scene illustrates the thinking. In an HLE, the inquiry develops through close reading across a studied work or body of work. The stages can overlap and repeat as the evidence becomes clearer.</p>
+        </section>
+      </div>
+    </GlobalShell>
+  );
+}

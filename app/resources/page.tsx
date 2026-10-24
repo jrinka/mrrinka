@@ -41,7 +41,7 @@ export default function ResourcesPage() {
       {href:"/resources/unpacking-questions",title:"Unpacking Paper 1 & Paper 2 questions",summary:"Worked breakdowns and original comparison prompts to practice with."},
       {href:"/resources/observation-to-analysis",title:"From observation to analysis",summary:"Evidence, meaning and an interactive sentence workshop."},
       {href:"/resources/paper-1-introductions",title:"Paper 1: Introductions & thesis statements",summary:"Step-by-step guidance with literary and non-literary worked examples."},
-      {href:"/resources/hle-inquiries",title:"HLE: how an inquiry develops",summary:"Worked examples with Lady Susan and Timon of Athens."},
+      {href:"/resources/hle-inquiries",title:"HLE: how an inquiry develops",summary:"A short scene and a flowchart showing how observations become a working inquiry."},
     ]},
     {title:"Language & reference",items:[
       {href:"/resources/analysis-reference",title:"Terms for analysis",summary:"Literary, rhetorical and visual terms: definitions, examples and possible analysis."},

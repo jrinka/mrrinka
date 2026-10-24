@@ -1,0 +1,40 @@
+.guide { max-width: 1050px; }
+.introduction { max-width: 72ch; margin: 0 0 28px; }
+.source { padding: 28px; background: var(--panel-warm); border: 1px solid var(--line); border-top: 4px solid var(--citron); }
+.guide h2, .guide h3, .guide h4 { font-family: var(--font-sans); }
+.source h2 { margin: 8px 0; font-size: 1.6rem; }
+.context { margin: 0 0 24px; color: var(--muted); }
+.excerpts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.excerpts > div { border-top: 1px solid var(--ink); padding-top: 14px; }
+.excerpts h3 { margin: 0 0 10px; font-size: .95rem; }
+.excerpts p { margin: 0; }
+.development { margin-top: 40px; }
+.development > h2 { font-size: 1.4rem; margin-bottom: 24px; }
+.flow { list-style: none; padding: 0; margin: 0; }
+.step { position: relative; margin-bottom: 42px; border: 1px solid var(--line); background: var(--white); }
+.stepHeading { display: flex; align-items: center; gap: 14px; padding: 18px 24px; border-bottom: 1px solid var(--line); }
+.number { display: grid; place-items: center; flex: 0 0 32px; height: 32px; background: var(--citron); color: var(--graphite); font-family: var(--font-mono); }
+.stepHeading h3 { font-size: 1.15rem; margin: 0; }
+.stepBody { display: grid; grid-template-columns: 1.1fr 1fr; }
+.example { margin: 0; padding: 24px; font-size: 1.08rem; }
+.explanation { padding: 24px; background: var(--panel-cool); border-left: 1px solid var(--line); }
+.explanation h4 { margin: 0 0 8px; font-size: .85rem; }
+.explanation p { margin: 0; }
+.arrow { position: absolute; left: 27px; bottom: -38px; height: 34px; font-size: 1.6rem; color: var(--muted); }
+.step:last-child { border-top: 4px solid var(--citron); margin-bottom: 28px; }
+.revisit { padding: 24px 28px; border-left: 4px solid var(--citron); background: var(--panel-warm); }
+.revisit h2, .takeaway h2 { font-size: 1.3rem; margin: 0 0 16px; }
+.revisit p, .takeaway p { max-width: 80ch; }
+.return { margin-bottom: 0; font-weight: 600; }
+.takeaway { padding-top: 32px; margin-top: 32px; border-top: 1px solid var(--line); }
+@media (max-width: 760px) {
+  .source { padding: 20px; }
+  .excerpts, .stepBody { grid-template-columns: 1fr; }
+  .stepHeading { padding: 16px; }
+  .example, .explanation { padding: 20px; }
+  .explanation { border-left: 0; border-top: 1px solid var(--line); }
+  .revisit { padding: 20px; }
+}
+@media print {
+  .source, .step, .revisit { break-inside: avoid; }
+}
