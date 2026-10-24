@@ -32,7 +32,7 @@ export default function Refinery({kind,initialCourse="",transferId="",provider}:
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
       setResult(data);
-      const feedback = data.refused ? data.message : `What holds up\n${data.feedback.strength}\n\nWhat needs testing\n${data.feedback.concern}\n\nYour next move\n${data.feedback.nextMove}`;
+      const feedback = data.refused ? data.message : `What works\n${data.feedback.strength}\n\nWhat needs testing\n${data.feedback.concern}\n\nWhat to try next\n${data.feedback.nextMove}`;
       setRecords(current => [...current,{tool:config.title,course,evidence:prompt ? `Question: ${prompt}\n\n${evidence}` : evidence,draft,reflection,feedback,refused:data.refused,model:data.model,modelDisclosure:provider.disclosure,policyVersion:data.policyVersion,createdAt:data.createdAt}]);
     } catch { setError("Feedback could not be completed. Your writing is still here; try again."); }
     finally {setBusy(false);}
@@ -53,7 +53,7 @@ export default function Refinery({kind,initialCourse="",transferId="",provider}:
     </form>
     <p className="passage-privacy">Your entries are processed by {provider.disclosure}. Do not include names, contact details, student IDs or other personally identifiable information. Entries are not saved on this site’s server or sent to your teacher automatically.</p>
     {error && <p role="alert" className="error">{error}</p>}
-    <div aria-live="polite" aria-busy={busy}>{result && <section className="passage-feedback"><span className="mono">FEEDBACK / {records.length.toString().padStart(2,"0")}</span>{result.refused ? <p>{result.message}</p> : <>{[["What holds up",result.feedback?.strength],["What needs testing",result.feedback?.concern],["Your next move",result.feedback?.nextMove]].map(([heading,text])=><section key={heading}><h2>{heading}</h2><p>{text}</p></section>)}</>}<small>AI feedback can be mistaken. Check it against your texts and discuss uncertainties with your teacher.</small></section>}</div>
+    <div aria-live="polite" aria-busy={busy}>{result && <section className="passage-feedback"><span className="mono">FEEDBACK / {records.length.toString().padStart(2,"0")}</span>{result.refused ? <p>{result.message}</p> : <>{[["What works",result.feedback?.strength],["What needs testing",result.feedback?.concern],["What to try next",result.feedback?.nextMove]].map(([heading,text])=><section key={heading}><h2>{heading}</h2><p>{text}</p></section>)}</>}<small>AI feedback can be mistaken. Check it against your texts and discuss uncertainties with your teacher.</small></section>}</div>
     {result && <SiteFeedback target={`${kind}-refinery`} />}
     <div className="refinery-save"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button type="button" className="button secondary" disabled={(!records.length && !draft && !evidence && !prompt && !reflection) || busy} onClick={()=>downloadRecord(`${formatPracticeRecord(records)}\n\nCurrent working notes (may not have feedback)\n\nQuestion: ${prompt || "Not provided"}\n\nEvidence: ${evidence}\n\nDraft: ${draft}\n\nRevision note: ${reflection || "Not provided"}`,`${kind}-refinery-record.txt`,exportFormat)}>Download record</button><p className="hint">Downloads your current notes and any feedback from this visit, with dates and model details for completed requests.</p></div>
   </div>;

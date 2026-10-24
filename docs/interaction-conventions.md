@@ -2,6 +2,30 @@
 
 Use these conventions when adding or revising an interface. Preserve teacher-authored course content, learning tasks, and existing storage behavior.
 
+## Instructional language
+
+Favor instructional language over decorative phrasing across student-facing headings, directions, explanations, interface labels, and feedback. Clarity and economy come first. Name the actual task, concept, or action so students can understand what to do without decoding a slogan or metaphor.
+
+- Make task headings specific: use a concrete verb and its object, such as “Compare the line breaks,” “Select evidence,” or “Check your response.” For reference sections, name the contents directly, such as “Reading scaffolds.” Do not force every heading into an imperative.
+- Replace vague labels such as “move,” “direction,” or “tools” with the particular action or resource meant in that context. Choose wording from the section's actual purpose; the same generic heading may need different replacements on different pages.
+- State the relationship students need to understand. For example, “Use the frame to connect evidence, interpretation, and explanation” identifies what the scaffold does. Keep the reasoning and subject precision when simplifying language.
+- Remove sentences that only announce a benefit, introduce the instruction, or add encouragement without useful information. If the next sentence already tells students what to do, start there. A deletion can be better than a replacement.
+- Avoid catchy slogans, unnecessary introductions, and polished-sounding phrases that add no instructional value. Do not replace one flourish with another or turn a clear instruction into a rhythmic slogan.
+- Preserve established names and conventions, including Refinery, Critical Lenses, and The magic sentence; explain the action clearly around them. Preserve source quotations and figurative language used as material for analysis.
+- During future additions and revisions, check whether each heading names the task or contents and each sentence helps students understand or act. Preserve teacher-authored content unless its revision is authorized.
+
+### Examples for future wording
+
+| Vague or decorative wording | Preferred wording or action |
+| --- | --- |
+| Learn the move, choose your own direction | Use the examples to develop your own inquiry |
+| A detail is the beginning | Explain how the detail creates meaning |
+| Where the line leaves you | Compare the line breaks |
+| The decision waits | Compare the position of the main clause |
+| Field tools | Name the actual task: Check your analysis, Plan your comparison, Reading scaffolds, or Keep an inquiry log |
+| Your next move | What to try next |
+| Build confidence with the vocabulary of analysis. | Delete when the following sentence already explains the flashcard task. |
+
 ## Meaning before appearance
 
 | Cue | Meaning | Shared implementation |

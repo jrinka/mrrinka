@@ -37,7 +37,7 @@ export default function CloseAnalysis({sources,provider,live}:{sources:CloseSour
  const controller=new AbortController();
  const deadline=setTimeout(()=>controller.abort(),130000);
  try{const response=await fetch("/api/practice/close-analysis",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(input),signal:controller.signal});const data=await response.json();if(!response.ok)throw new Error(data.error);
- const feedback=data.refused?data.message:`What holds up\n${data.feedback.strength}\n\nWhat needs testing\n${data.feedback.concern}\n\nYour next move\n${data.feedback.nextMove}`;
+ const feedback=data.refused?data.message:`What works\n${data.feedback.strength}\n\nWhat needs testing\n${data.feedback.concern}\n\nWhat to try next\n${data.feedback.nextMove}`;
  update({records:[...work.records,{tool:"Close Analysis",course:"language-literature",evidence,draft:work.draft,reflection:work.reflection,feedback,refused:data.refused,model:data.model,modelDisclosure:provider.disclosure,policyVersion:data.policyVersion,createdAt:data.createdAt}]});
  }catch(err){setError(controller.signal.aborted?"Feedback took too long. Your writing is still here. You can download it or try again when you’re ready.":err instanceof Error?err.message:"Feedback is unavailable. Your writing is still here.");}finally{clearTimeout(deadline);setBusy(false);}}
  return <div className="close-analysis">
