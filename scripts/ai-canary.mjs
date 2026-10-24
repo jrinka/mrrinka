@@ -3,7 +3,7 @@
 // Public, invented text only. This checks the live student-facing routes without
 // reading student submissions or requiring an API key on the machine running it.
 const base = process.env.AI_CANARY_BASE_URL || "https://mrrinka.com";
-const expectedModel = process.env.AI_CANARY_EXPECT_MODEL || "Kimi K3";
+const expectedModel = process.env.AI_CANARY_EXPECT_MODEL || "DeepSeek V4.1 Flash 1017";
 const verbose = process.argv.includes("--show-replies");
 
 const passage = "At the end of the empty street, the clock stood still. Mara counted its silent hands while the market opened around her. Each seller called out a price, but she listened only for the bell that did not come.";

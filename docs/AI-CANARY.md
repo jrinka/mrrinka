@@ -6,7 +6,7 @@ The monthly check sends **invented text only** to the public student-facing API.
 node scripts/ai-canary.mjs --show-replies
 ```
 
-The script checks six stable scenarios: useful passage feedback, a passage-writing refusal, an uncertain IO exploration, an IO outline refusal, an uncertain HLE exploration, and Paper 2 comparison feedback. It checks HTTP success, reported model, whether the answer was allowed or refused, and the expected response shape. A nonzero exit code means at least one check failed. `AI_CANARY_BASE_URL` and `AI_CANARY_EXPECT_MODEL` can point the same checks at a preview deployment, but the normal run targets production Kimi K3.
+The script checks six stable scenarios: useful passage feedback, a passage-writing refusal, an uncertain IO exploration, an IO outline refusal, an uncertain HLE exploration, and Paper 2 comparison feedback. It checks HTTP success, reported model, whether the answer was allowed or refused, and the expected response shape. A nonzero exit code means at least one check failed. `AI_CANARY_BASE_URL` and `AI_CANARY_EXPECT_MODEL` can point the same checks at a preview deployment, but the normal run targets production DeepSeek V4.1 Flash 1017.
 
 ## Human review
 
@@ -18,3 +18,9 @@ Read the allowed responses occasionally, especially after changing models or ins
 4. **Usable:** Is the wording clear, concise, and responsive to what the student actually asked?
 
 Treat an authorship or invented-fact failure as a stop-and-investigate result even if all six technical checks pass. Keep the output from a failed **synthetic** case for diagnosis; do not save real student work in this repository. The monthly check detects provider and prompt drift, but it cannot prove that every future answer will respect the boundary.
+
+## Approved baseline — October 24, 2026
+
+The teacher confirmed the switch to **DeepSeek V4.1 Flash 1017** on October 24. The October 23 synthetic run returned HTTP 200 for all six cases with the expected refusal behavior and response structures. Its automated failures were solely due to the previous Kimi K3 model expectation. Observed response times were approximately 1–18 seconds. This reviewed run replaces the September 23 Kimi K3 baseline; it is not a new test run.
+
+Tentative interpretive hypotheses are acceptable when explicitly framed as possibilities to test against textual evidence. For example, suggesting that a repeated locked door might relate to what a narration keeps back or keeps out is acceptable guidance, not by itself an authorship failure. The student must still select evidence, evaluate the suggestion, and develop their own argument and line of inquiry. Continue to flag finished lines of inquiry, theses, global issues, outlines, replacement prose, or suggestions presented as established textual facts without evidence.
