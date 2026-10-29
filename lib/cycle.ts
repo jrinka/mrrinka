@@ -22,8 +22,8 @@ export function daySchedule(day:number,wednesday=false){
 }
 export const cycleDays=rotation.map((_,i)=>({day:i+1,parity:(i%2?"EVEN":"ODD") as "ODD"|"EVEN",classes:daySchedule(i+1).filter(x=>x.period!=="Mentoring").map(x=>x.course)}));
 
-const start = "2026-08-11";
-const end = "2026-10-30";
+export const publicationStart = "2026-08-11";
+export const publicationEnd = "2026-10-30";
 const breakStart = "2026-09-25";
 const breakEnd = "2026-10-05";
 
@@ -39,7 +39,7 @@ export type CycleDate = { date: string; cycleDay: number; parity: "ODD" | "EVEN"
 export const cycleDates: CycleDate[] = (() => {
   const result: CycleDate[] = [];
   let index = 0;
-  for (let date = new Date(`${start}T12:00:00Z`); iso(date) <= end; date = new Date(date.getTime() + 86_400_000)) {
+  for (let date = new Date(`${publicationStart}T12:00:00Z`); iso(date) <= publicationEnd; date = new Date(date.getTime() + 86_400_000)) {
     if (!isSchoolDay(date)) continue;
     const cycleDay = (index % 8) + 1;
     result.push({ date: iso(date), cycleDay, parity: cycleDay % 2 ? "ODD" : "EVEN" });
@@ -47,3 +47,8 @@ export const cycleDates: CycleDate[] = (() => {
   }
   return result;
 })();
+
+// An expired publication window must never fall back to a past teaching day.
+export function defaultCalendarDate(today: string) {
+  return cycleDates.find(day => day.date >= today)?.date ?? "";
+}
