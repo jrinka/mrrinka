@@ -23,7 +23,18 @@ export function daySchedule(day:number,wednesday=false){
 export const cycleDays=rotation.map((_,i)=>({day:i+1,parity:(i%2?"EVEN":"ODD") as "ODD"|"EVEN",classes:daySchedule(i+1).filter(x=>x.period!=="Mentoring").map(x=>x.course)}));
 
 export const publicationStart = "2026-08-11";
-export const publicationEnd = "2026-10-30";
+export const publicationEnd = "2026-11-30";
+// ISB 2026–27 calendar; PTC pauses also confirmed by Jason, October 30, 2026.
+// https://resources.finalsite.net/images/v1765417883/isbeijing/etmeoglowpsmtidekcog/Calendar2026-27v4.pdf
+export const calendarClosures: Readonly<Record<string, string>> = {
+  "2026-11-05": "Parent-teacher conferences (PTC)",
+  "2026-11-06": "Parent-teacher conferences (PTC)",
+  "2026-11-19": "Staff professional day",
+  "2026-11-20": "School holiday",
+};
+export const publicationEndLabel = new Intl.DateTimeFormat("en-US", {
+  month: "long", day: "numeric", year: "numeric", timeZone: "UTC",
+}).format(new Date(`${publicationEnd}T12:00:00Z`));
 const breakStart = "2026-09-25";
 const breakEnd = "2026-10-05";
 
@@ -31,7 +42,7 @@ function iso(date: Date) { return date.toISOString().slice(0, 10); }
 function isSchoolDay(date: Date) {
   const value = iso(date);
   const day = date.getUTCDay();
-  return day >= 1 && day <= 5 && !(value >= breakStart && value <= breakEnd);
+  return day >= 1 && day <= 5 && !calendarClosures[value] && !(value >= breakStart && value <= breakEnd);
 }
 
 export type CycleDate = { date: string; cycleDay: number; parity: "ODD" | "EVEN" };
