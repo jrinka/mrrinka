@@ -1,6 +1,6 @@
 "use client";
 
-import { cycleDates, cycleDays } from "@/lib/cycle";
+import { cycleDates, cycleDays, publicationEndLabel } from "@/lib/cycle";
 
 function localIso() {
   const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
@@ -16,7 +16,7 @@ export default function CycleStatus() {
   return (
     <section className="cycle-status" aria-live="polite">
       <span className="mono">{exact ? "TODAY" : "NEXT SCHOOL DAY"}</span>
-      {next ? <><div className="cycle-status-day">D{next.cycleDay}</div><div><strong>{next.parity} DAY</strong><time dateTime={next.date}>{new Intl.DateTimeFormat("en-US", { timeZone: "UTC", weekday: "long", month: "long", day: "numeric" }).format(new Date(`${next.date}T12:00:00Z`))}</time><p>{schedule?.classes.join(" · ")}</p></div></> : <p>The published cycle currently ends October 30.</p>}
+      {next ? <><div className="cycle-status-day">D{next.cycleDay}</div><div><strong>{next.parity} DAY</strong><time dateTime={next.date}>{new Intl.DateTimeFormat("en-US", { timeZone: "UTC", weekday: "long", month: "long", day: "numeric" }).format(new Date(`${next.date}T12:00:00Z`))}</time><p>{schedule?.classes.join(" · ")}</p></div></> : <p>The published cycle currently ends {publicationEndLabel}.</p>}
     </section>
   );
 }
