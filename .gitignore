@@ -16,3 +16,6 @@ recess/.generated.css
 # Local review sources: never publish or commit
 local-sources/
 local-review/
+
+# Unpublished speaking-card prototype build
+prototypes/io-speaking-card/dist/

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Rehearse Individual Oral pacing with a flexible ten-minute target, section checkpoints, and a private rehearsal review.">
+  <title>Individual Oral · Timing Practice</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2325282b'/%3E%3Ccircle cx='16' cy='17' r='10' fill='none' stroke='%23d8ed61' stroke-width='2'/%3E%3Cpath d='M16 10v7l5 3M12 3h8' fill='none' stroke='%23d8ed61' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to timer</a>
+  <header class="topbar">
+    <span class="wordmark">mr rinka<span>.</span></span>
+    <span class="top-context">Assessment practice / Individual Oral</span>
+    <span class="private-label">Private prototype</span>
+  </header>
+  <main id="workspace">
+    <div class="page-heading">
+      <div><p class="eyebrow">01 / Assessment guides</p><h1>Individual Oral <em>timing practice</em></h1></div>
+      <p class="heading-note">Speak from brief notes.<br>Finish the idea, then move on.</p>
+    </div>
+    <section class="principle" aria-label="Timing guidance">
+      <strong>10:00 is a target.</strong>
+      <span>The checkpoints are recommended pacing. They are not required section lengths, and the timer keeps running while you finish naturally.</span>
+    </section>
+    <div class="organizer-bar"><div><strong>Ten-bullet outline <span class="bullet-pattern">1 / 2 / 2 / 2 / 2 / 1</span></strong><p>About 30–35 words per bullet is optional drafting guidance, not an IB requirement or a limit. Shorter cues are welcome. Use prompts you can explain in fresh words. This brief assessment-style card is separate from the detailed preparation worksheet and rehearsal reflection.</p></div><div class="card-actions"><button id="export-outline" class="button light-secondary" type="button">Download Word</button><button id="export-pdf" class="button light-secondary" type="button">Download PDF</button><button id="export-markdown" class="button light-secondary" type="button">Download Markdown</button></div></div>
+    <details class="import-panel"><summary>Import a plain-text outline</summary><p>Use exactly ten nonempty lines (one cue per line), optionally numbered or marked with bullets. Indent wrapped lines. Cues map to the displayed section order. Import replaces the card after confirmation. Only text files are supported; reading happens in this browser.</p><label for="import-outline">Choose outline (.txt or .md)</label> <input id="import-outline" type="file" accept=".txt,.md,text/plain,text/markdown"><p id="import-status" role="status"></p></details>
+    <div id="practice-view" class="practice-grid">
+      <section class="timer-panel" aria-labelledby="timer-heading">
+        <div class="panel-top"><h2 id="timer-heading" class="eyebrow">Rehearsal timer</h2><span id="run-status" class="state-label">Ready</span></div>
+        <div id="elapsed" class="elapsed" role="timer" aria-label="Elapsed rehearsal time" aria-live="off">00:00</div>
+        <p id="target-note" class="target-note">Ten-minute target · no automatic cutoff</p>
+        <div class="pacing-track" aria-hidden="true"><span style="flex:30"></span><span style="flex:135"></span><span style="flex:135"></span><span style="flex:135"></span><span style="flex:135"></span><span style="flex:30"></span><div id="track-cursor" class="track-cursor"></div></div>
+        <div class="track-labels"><span>0:00</span><span>10:00 target</span></div>
+        <div class="timer-controls">
+          <button id="toggle-run" class="button primary" type="button">Start rehearsal</button>
+          <button id="reset" class="button dark-secondary" type="button" disabled>Reset</button>
+        </div>
+        <div class="current-section">
+          <p class="eyebrow">Your current section</p>
+          <h3 id="current-title">Introduction</h3>
+          <p id="current-guidance">Introduce the global issue and your selections.</p>
+          <p id="checkpoint-note" class="checkpoint-note">Recommended transition at 0:30</p>
+          <button id="mark-transition" class="button transition-button" type="button" disabled>Begin first extract</button>
+          <p class="small-muted">Mark each transition when you actually make it. The timer will not move you automatically.</p>
+        </div>
+        <button id="finish" class="button finish-button" type="button" disabled>Finish &amp; review</button>
+      </section>
+      <section class="route-panel" aria-labelledby="route-heading">
+        <div class="route-heading"><div><p class="eyebrow">Recommended route</p><h2 id="route-heading">Six sections. Room to breathe.</h2></div><span class="route-total">10:00</span></div>
+        <label class="course-label" for="course">Course</label>
+        <select id="course"><option value="langlit">Language &amp; Literature</option><option value="literature">Literature</option></select>
+        <p id="course-note" class="course-note">This route puts the literary work first, then the non-literary body of work.</p>
+        <ol id="route-list" class="route-list"></ol>
+        <p class="route-footnote">Your current section follows your marked transitions. You can discuss the whole work or body of work before its extract; mark the same six stages in your chosen order.</p>
+        <label class="order-choice"><input id="whole-first" type="checkbox"> Discuss whole work / body of work before extracts</label>
+      </section>
+    </div>
+    <section id="review-view" class="review-panel" aria-labelledby="review-heading" hidden>
+      <div class="review-top"><div><p class="eyebrow">Rehearsal review</p><h2 id="review-heading" tabindex="-1">Notice the balance.</h2></div><div class="review-total"><span id="review-elapsed">00:00</span><p id="review-target"></p></div></div>
+      <p id="review-summary"></p>
+      <div class="table-scroll"><table><caption class="sr-only">Actual section timings compared with the recommended route</caption><thead><tr><th scope="col">Section</th><th scope="col">Recommended length</th><th scope="col">Actual length</th><th scope="col">Actual end</th></tr></thead><tbody id="review-rows"></tbody></table></div>
+      <p class="review-explanation">Only the transitions you marked are recorded. An unmarked section may have been discussed; this review cannot infer coverage or assess the quality of your analysis.</p>
+      <div class="reflection-grid"><div><p class="eyebrow">Listen for the reasoning</p><p>Where did you explain how an author’s choice shapes meaning? Did each selection receive enough attention?</p></div><div><label for="reflection">One change to test next time</label><p class="reflection-hint">Choose one adjustment to evidence, explanation, balance, or pace.</p><textarea id="reflection" autocomplete="off" rows="3" maxlength="1200" placeholder="For example: leave more time to connect the second extract to the global issue."></textarea></div></div>
+      <details class="review-outline"><summary>Your ten-bullet outline</summary><div id="review-outline"></div></details>
+      <div class="review-actions"><button id="export-rehearsal" class="button graphite" type="button">Export rehearsal record · DOCX</button><button id="new-rehearsal" class="button light-secondary" type="button">Rehearse again</button></div>
+    </section>
+    <div class="practice-notes">
+      <section><p class="eyebrow">Pacing / assessment</p><p>Prepare for a ten-minute oral and follow your teacher’s assessment instructions. Finishing around 9:30–10:30 can give you breathing room in practice; this is not an official timing allowance or a penalty boundary.</p></section>
+      <section><p class="eyebrow">Practice / analysis</p><p>Use brief outline notes and explain your reasoning in fresh words. Rehearse how you develop ideas and connect evidence to the global issue, rather than memorizing a speech.</p></section>
+    </div>
+    <footer><span>Assessment guides / Individual Oral</span><span>Notes, timings, and reflection stay in this tab until you export. Refreshing or closing it clears them. Nothing you enter is uploaded. No audio is recorded.</span></footer>
+    <noscript><p class="principle">Enable JavaScript to use the rehearsal timer.</p></noscript>
+  </main>
+  <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+  <dialog id="import-dialog" aria-labelledby="import-heading"><h2 id="import-heading">Replace your speaking card?</h2><p>The ten imported cues will replace your current card in the displayed section order. Save your current card first if you need it.</p><div class="dialog-actions"><button id="cancel-import" class="button light-secondary" type="button" autofocus>Keep current card</button><button id="confirm-import" class="button graphite" type="button">Replace card</button></div></dialog>
+  <dialog id="reset-dialog" aria-labelledby="reset-heading" aria-describedby="reset-description"><h2 id="reset-heading">Start again?</h2><p id="reset-description">This clears the current rehearsal, marked transitions, and reflection. Your ten-bullet outline stays for the next rehearsal.</p><div class="dialog-actions"><button id="cancel-reset" class="button light-secondary" type="button" autofocus>Keep rehearsal</button><button id="confirm-reset" class="button graphite" type="button">Clear &amp; reset</button></div></dialog>
+</body>
+</html>
