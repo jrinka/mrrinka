@@ -908,6 +908,11 @@ h3 {
   color: var(--muted);
   font-size: 0.75rem;
 }
+.footer-site {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .75rem;
+}
 .back {
   display: flex;
   align-items: center;
@@ -2393,7 +2398,12 @@ h3 {
 .entry-plate { display: flex; min-width: 0; }
 .entry-plate > div { width: 100%; min-height: 100%; }
 .entry-plate img { object-position: 48% 50%; }
-.entry-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: 26px; color: var(--muted); font-size: .62rem; letter-spacing: .04em; }
+.entry-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; margin-top: 26px; color: var(--muted); font-size: .62rem; letter-spacing: .04em; }
+.entry-footer-about { flex: 1; text-align: center; }
+.entry-footer-about p { margin: .25rem auto 0; font-size: .8125rem; line-height: 1.5; letter-spacing: normal; text-wrap: balance; }
+@media (max-width: 700px) {
+  .entry-footer-about { order: 1; flex-basis: 100%; }
+}
 @media (max-width: 900px) {
   .entry-main { grid-template-columns: 1fr; }
   .entry-plate > div { min-height: 230px; }

@@ -50,7 +50,16 @@ export default function Home() {
           </div>
         </figure>
       </main>
-      <footer className="entry-footer mono"><ThemeToggle/><span>ENGLISH / LANGUAGE / LITERATURE</span><Link href="/admin">Teacher editor ↗</Link></footer>
+      <footer className="entry-footer mono">
+        <ThemeToggle />
+        <div className="entry-footer-about">
+          <span>ENGLISH / LANGUAGE / LITERATURE</span>
+          <p id="about-this-site" tabIndex={-1}>
+            This work has been developed independently from and is not endorsed by the International Baccalaureate (IB).
+          </p>
+        </div>
+        <Link href="/admin">Teacher editor ↗</Link>
+      </footer>
     </div>
   );
 }
