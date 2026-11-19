@@ -88,6 +88,34 @@ test("shared references point directly to existing canonical pages", () => {
   }
 });
 
+test("shared guidance can carry a different rubric for each course's Individual Oral", () => {
+  const source = courses.find(c => c.id === "language-literature")!.items.find(i => i.title === "Individual Oral")!;
+  const literature = courses.find(c => c.id === "literature")!.items.find(i => i.title === "Individual Oral")!;
+  const sourceRubrics = source.rubrics;
+  const literatureRubrics = literature.rubrics;
+  const previousPublished = source.published;
+  try {
+    const langLitFile = { id: crypto.randomUUID(), title: "Language and Literature IO", url: "/rubrics/lang-lit-io.docx", description: "" };
+    const literatureFile = { ...langLitFile, id: crypto.randomUUID(), title: "Literature IO", url: "/rubrics/literature-io.docx" };
+    source.rubrics = [langLitFile];
+    literature.rubrics = [literatureFile];
+    const publishedOral = () => publicCourse("literature").items.find(i => i.id === literature.id);
+    assert.deepEqual(publishedOral()?.rubrics, [literatureFile]);
+    assert.equal(publishedOral()?.body, source.body);
+    assert.deepEqual(publicCourse("language-literature").items.find(i => i.id === source.id)?.rubrics, [langLitFile]);
+    literature.rubrics = [];
+    assert.deepEqual(publishedOral()?.rubrics, []);
+    delete literature.rubrics;
+    assert.deepEqual(publishedOral()?.rubrics, [langLitFile]);
+    source.published = false;
+    assert.equal(publishedOral(), undefined);
+  } finally {
+    source.rubrics = sourceRubrics;
+    literature.rubrics = literatureRubrics;
+    source.published = previousPublished;
+  }
+});
+
 test("IB text-type guides have clear course labels and routes back to Paper 1", () => {
   const guides = [
     { course: "language-literature" as const, id: textTypeGuideIds.podcast, label: "Text types" },

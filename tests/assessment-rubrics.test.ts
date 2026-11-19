@@ -24,6 +24,8 @@ test("rubrics render as named downloads and accept published PDF and Word files"
   assert.match(html, /href="\/rubrics\/literature\/paper-1.pdf" download="Paper 1 rubric.pdf"/);
   assert.match(html, /href="\/rubrics\/paper-1.docx" download="Editable rubric.docx"/);
   assert.match(html, /Print copy/);
+  assert.match(html, /Printable PDF/);
+  assert.match(html, /Editable Word/);
   for (const url of ["/rubrics/paper-1", "/rubrics/../report.pdf", "https://example.com/document"]) {
     assert.equal(itemSchema.safeParse({ ...paper, rubrics: [{ ...pdf, url }] }).success, false);
   }

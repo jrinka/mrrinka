@@ -212,6 +212,13 @@ export default function Editor({ login, previewCourses }: Props) {
       setBusy(false);
     }
   }
+  const rubricEditor = item?.section === "assessment" && (
+    <CourseFileEditor
+      collection="rubrics" files={item.rubrics ?? []} preview={preview}
+      onChange={rubrics => updateItem({ rubrics })}
+      onUpload={file => void upload(file, "rubrics")}
+    />
+  );
   return (
     <div className="admin-site">
       <header className="admin-header">
@@ -438,7 +445,7 @@ export default function Editor({ login, previewCourses }: Props) {
               ) : item?.sharedFrom ? (
                 <>
                   <h1>{item.title}</h1>
-                  <p>This page uses shared material. Edit the source once to update every course that uses it.{item.section === "assessment" && " Rubric downloads are shared too."}</p>
+                  <p>Edit the shared source to update the guidance and materials in both courses.</p>
                   <button type="button" className="button" onClick={async () => {
                     if (dirty && !window.confirm("Discard unsaved changes before opening the shared source?")) return;
                     const source = item.sharedFrom!;
@@ -446,6 +453,21 @@ export default function Editor({ login, previewCourses }: Props) {
                     await load(source.courseId);
                     setSelected(source.itemId);
                   }}>Edit shared source</button>
+                  {item.section === "assessment" && (
+                    <>
+                      <label className="toggle">
+                        <input
+                          type="checkbox"
+                          checked={item.rubrics !== undefined}
+                          onChange={e => updateItem({ rubrics: e.target.checked ? [] : undefined })}
+                        />
+                        Use separate rubric downloads for {course.shortTitle}
+                      </label>
+                      {item.rubrics === undefined
+                        ? <p className="hint">This assessment uses the rubrics attached to the shared source.</p>
+                        : rubricEditor}
+                    </>
+                  )}
                 </>
               ) : item ? (
                 <>
@@ -576,13 +598,7 @@ export default function Editor({ login, previewCourses }: Props) {
                       />
                     </label>
                   </details>
-                  {item.section === "assessment" && (
-                    <CourseFileEditor
-                      collection="rubrics" files={item.rubrics ?? []} preview={preview}
-                      onChange={rubrics => updateItem({ rubrics })}
-                      onUpload={file => void upload(file, "rubrics")}
-                    />
-                  )}
+                  {rubricEditor}
                   <CourseFileEditor
                     collection="links" files={item.links} preview={preview}
                     onChange={links => updateItem({ links })}

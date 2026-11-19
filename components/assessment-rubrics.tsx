@@ -5,7 +5,7 @@ export default function AssessmentRubrics({ files }: { files: CourseItem["rubric
   if (!files?.length) return null;
   return (
     <section className="assessment-rubrics" id="assessment-rubrics" tabIndex={-1} aria-labelledby="rubrics-title">
-      <h2 id="rubrics-title">{files.length === 1 ? "Assessment rubric" : "Assessment rubrics"}</h2>
+      <h2 id="rubrics-title">Rubric downloads</h2>
       <ul>
         {files.map(file => {
           const format = file.url.split(".").pop()!.toLowerCase();
@@ -16,7 +16,7 @@ export default function AssessmentRubrics({ files }: { files: CourseItem["rubric
               <a href={file.url} download={`${filename}.${format}`}>
                 <Download size={17} aria-hidden="true" />
                 <span>Download {title || "rubric"}</span>
-                <span className="mono rubric-format">{format.toUpperCase()}</span>
+                <span className="mono rubric-format">{format === "pdf" ? "Printable PDF" : "Editable Word"}</span>
               </a>
               {file.description && <p>{file.description}</p>}
             </li>
