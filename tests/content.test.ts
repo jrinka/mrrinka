@@ -64,10 +64,13 @@ test("shared IB pages read the canonical source and respect publication", () => 
   const reference = courses.find(c => c.id === "literature")!.items.find(i => i.title === "Paper 2")!;
   assert.equal(reference.sharedFrom?.itemId, source.id);
   assert.equal(reference.body, "");
-  const previous = { body: source.body, published: source.published };
+  const previous = { body: source.body, published: source.published, rubrics: source.rubrics };
   try {
     source.body = "A teacher revision to the shared source";
-    assert.equal(publicCourse("literature").items.find(i => i.id === reference.id)?.body, source.body);
+    source.rubrics = [{ id: crypto.randomUUID(), title: "Paper 2 rubric", url: "/rubrics/paper-2.pdf", description: "" }];
+    const published = publicCourse("literature").items.find(i => i.id === reference.id);
+    assert.equal(published?.body, source.body);
+    assert.deepEqual(published?.rubrics, source.rubrics);
     source.published = false;
     assert.equal(publicCourse("literature").items.some(i => i.id === reference.id), false);
   } finally {

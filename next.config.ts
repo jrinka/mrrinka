@@ -4,7 +4,15 @@ const config: NextConfig = {
     return ['literature', 'language-literature'].map(course => ({ source: `/io-resources/${course}-planning.html`, destination: `/practice/io-planning/${course}`, permanent: false }));
   },
   async rewrites() {
-    return [{ source: "/recess", destination: "/recess.html" }];
+    const resourceOrigin = new URL(process.env.R2_PUBLIC_URL || "https://resources.mrrinka.com").origin;
+    return [
+      { source: "/recess", destination: "/recess.html" },
+      // A same-origin file URL lets the browser honor the rubric link's download filename.
+      {
+        source: "/rubrics/uploaded/:file([0-9a-f-]{36}\\.pdf)",
+        destination: `${resourceOrigin}/resources/:file`,
+      },
+    ];
   },
   images: {
     remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],

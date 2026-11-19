@@ -8,6 +8,7 @@ import RefineryLinks from "@/components/refinery-links";
 import { assessmentRefinery } from "@/lib/refineries";
 import Practice from "@/components/practice";
 import PaperOneDossier from "@/components/paper-one-dossier";
+import AssessmentRubrics from "@/components/assessment-rubrics";
 import IndividualOralGuide from "@/components/individual-oral-guide";
 import TextTypeIndex from "@/components/text-type-index";
 import TextTypeGuide from "@/components/text-type-guide";
@@ -229,6 +230,7 @@ export default async function CoursePage({ params, searchParams }: Props) {
           </Link>
           <h1>{item.title}</h1>
           <p className="intro">{item.summary}</p>
+          {item.section === "assessment" && <AssessmentRubrics files={item.rubrics} />}
           {item.image && item.section !== "assessment" && (
             <figure className="article-image">
               <div>
@@ -247,7 +249,7 @@ export default async function CoursePage({ params, searchParams }: Props) {
               )}
             </figure>
           )}
-          {item.section === "assessment" && item.title === "Individual Oral" && courseId !== "english-10" ? <IndividualOralGuide body={item.body} course={courseId} /> : item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier paperTwo={item.title === "Paper 2"} body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <TextTypeGuide body={item.body} itemId={item.id} href={`${base}/text-types/${item.id}`} showExample={(await searchParams).view === "example"} exampleChoice={(await searchParams).example === "microdramas" ? "microdramas" : (await searchParams).example === "divisions" ? "divisions" : (await searchParams).example === "wwf" ? "wwf" : (await searchParams).example === "cycling" ? "cycling" : (await searchParams).example === "paperweight" ? "paperweight" : (await searchParams).example === "caught" ? "caught" : (await searchParams).example === "comic" ? "comic" : (await searchParams).example === "bay-at-nice" ? "bay-at-nice" : undefined} /> : <Markdown>{item.body}</Markdown>}
+          {item.section === "assessment" && item.title === "Individual Oral" && courseId !== "english-10" ? <IndividualOralGuide body={item.body} course={courseId} hasRubrics={Boolean(item.rubrics?.length)} /> : item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier hasRubrics={Boolean(item.rubrics?.length)} paperTwo={item.title === "Paper 2"} body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <TextTypeGuide body={item.body} itemId={item.id} href={`${base}/text-types/${item.id}`} showExample={(await searchParams).view === "example"} exampleChoice={(await searchParams).example === "microdramas" ? "microdramas" : (await searchParams).example === "divisions" ? "divisions" : (await searchParams).example === "wwf" ? "wwf" : (await searchParams).example === "cycling" ? "cycling" : (await searchParams).example === "paperweight" ? "paperweight" : (await searchParams).example === "caught" ? "caught" : (await searchParams).example === "comic" ? "comic" : (await searchParams).example === "bay-at-nice" ? "bay-at-nice" : undefined} /> : <Markdown>{item.body}</Markdown>}
           {item.section === "assessment" && courseId !== "english-10" && (
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>

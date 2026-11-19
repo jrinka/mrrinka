@@ -17,6 +17,6 @@ export function publicCourse(id: CourseId) {
     const source = getCourse(item.sharedFrom.courseId).items.find(i => i.id === item.sharedFrom!.itemId);
     // A missing, unpublished, or chained source must never expose stale copied content.
     if (!source?.published || source.sharedFrom) return [];
-    return [{ ...item, title: source.title, summary: source.summary, body: source.body, links: source.links }];
+    return [{ ...item, title: source.title, summary: source.summary, body: source.body, links: source.links, rubrics: source.rubrics }];
   }) };
 }

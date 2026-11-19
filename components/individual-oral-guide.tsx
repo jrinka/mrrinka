@@ -7,7 +7,7 @@ import { IOTimingMap, IOPracticeTimer, IORehearsalNotes } from "./individual-ora
 import IOSectionControls from "./individual-oral-sections";
 import styles from "./individual-oral.module.css";
 
-export default function IndividualOralGuide({ body, course }: { body: string; course: IOCourse }) {
+export default function IndividualOralGuide({ body, course, hasRubrics = false }: { body: string; course: IOCourse; hasRubrics?: boolean }) {
   const sections = splitGuideSections(body);
   return <div className={styles.guide} data-io-guide>
     <nav className="practice-shortcuts" aria-label="Individual Oral practice shortcuts">
@@ -37,6 +37,7 @@ export default function IndividualOralGuide({ body, course }: { body: string; co
         <h2 id={`${section.id}-title`}>{section.title}</h2>{["structure-and-timing", "personal-preparation-tools"].includes(section.id) && <InteractivePracticeLabel />}{section.id === "find-and-test-a-global-issue" && <span className="mono">AI guidance</span>}</summary>
         <div className={styles.sectionBody}>
         {section.id === "structure-and-timing" && <IOTimingMap course={course} />}
+        {section.id === "criteria" && hasRubrics && <p><a href="#assessment-rubrics">See rubric downloads</a></p>}
         <Markdown>{section.body}</Markdown>
         {section.id === "personal-preparation-tools" && <><IOPracticeTimer course={course} /><IORehearsalNotes key={course} course={course} /></>}
         {section.id === "find-and-test-a-global-issue" && <aside className={styles.tool}><span className="mono">AI guidance</span><h3>Explore or test your issue</h3><p>Bring a studied text and an observation, or your own provisional issue and supporting evidence. The Global Issue Refinery asks questions to help you develop your thinking. Use it when I permit this AI support.</p><Link className="button secondary" href={`/practice/refineries/global-issue?course=${course}`}>Open the Global Issue Refinery →</Link></aside>}

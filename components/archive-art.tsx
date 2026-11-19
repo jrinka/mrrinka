@@ -6,6 +6,7 @@ type Plate = {
   alt: string;
   title: string;
   source: string;
+  verifiedWorkLink?: boolean;
   collection: string;
   position?: string;
 };
@@ -120,7 +121,8 @@ const plates: Record<CourseId, Record<"hero" | ArchiveSection, Plate>> = {
       src: "/archive/printing-workshop-stradanus.jpg",
       alt: "Wood engraving of printers setting type, inking, proofing, and operating a press",
       title: "The printing workshop",
-      source: "https://wellcomecollection.org/works/czcn5src",
+      source: "https://wellcomecollection.org/works/w9rzuxd3",
+      verifiedWorkLink: true,
       collection: "Wellcome Collection",
       position: "50% 48%",
     },
@@ -155,6 +157,8 @@ const plates: Record<CourseId, Record<"hero" | ArchiveSection, Plate>> = {
   },
 };
 
+export const printingWorkshop = plates["english-10"].hero;
+
 function Credit({ plate }: { plate: Plate }) {
   const met = plate.collection.includes("Metropolitan");
   const license = met ? "CC0" : "PDM";
@@ -165,7 +169,7 @@ function Credit({ plate }: { plate: Plate }) {
       <span className="credit-license">{license}</span>
       <span aria-hidden="true"> / </span>
       <a
-        href={met ? plate.source : "https://wellcomecollection.org/"}
+        href={met || plate.verifiedWorkLink ? plate.source : "https://wellcomecollection.org/"}
         rel="noopener noreferrer"
         title={detail}
         aria-label={detail}
