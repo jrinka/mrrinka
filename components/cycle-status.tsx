@@ -16,7 +16,7 @@ export default function CycleStatus() {
   return (
     <section className="cycle-status" aria-live="polite">
       <span className="mono">{exact ? "TODAY" : "NEXT SCHOOL DAY"}</span>
-      {next ? <><div className="cycle-status-day">D{next.cycleDay}</div><div><strong>{next.parity} DAY</strong><time dateTime={next.date}>{new Intl.DateTimeFormat("en-US", { timeZone: "UTC", weekday: "long", month: "long", day: "numeric" }).format(new Date(`${next.date}T12:00:00Z`))}</time><p>{schedule?.classes.join(" · ")}</p></div></> : <p>The published cycle currently ends {publicationEndLabel}.</p>}
+      {next ? <><div className="cycle-status-day">D{next.cycleDay}</div><div><strong>{next.parity} DAY</strong><time dateTime={next.date}>{new Intl.DateTimeFormat("en-US", { timeZone: "UTC", weekday: "long", month: "long", day: "numeric" }).format(new Date(`${next.date}T12:00:00Z`))}</time><p>{next.halfDay ? "Half day · Class and dismissal times awaiting confirmation." : schedule?.classes.join(" · ")}</p></div></> : <p>The published cycle currently ends {publicationEndLabel}.</p>}
     </section>
   );
 }
