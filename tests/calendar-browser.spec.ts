@@ -1,17 +1,18 @@
 import {test, expect} from "@playwright/test";
+const calendarUrl = `${process.env.CALENDAR_BASE_URL ?? "http://127.0.0.1:3000"}/calendar`;
 
 for (const [instant, expired] of [
-  ["2026-11-30T15:59:00Z", false],
-  ["2026-11-30T16:00:00Z", true],
-  ["2026-12-02T04:00:00Z", true],
+  ["2026-12-18T15:59:00Z", false],
+  ["2026-12-18T16:00:00Z", true],
+  ["2026-12-21T04:00:00Z", true],
 ] as const) {
   test(`calendar publication state at ${instant}`, async ({page}) => {
     await page.clock.setFixedTime(new Date(instant));
-    await page.goto("http://127.0.0.1:3000/calendar");
+    await page.goto(calendarUrl);
     const picker = page.getByLabel("Choose a date");
     const selected = page.locator(".calendar-selected");
-    await expect(page.getByRole("status")).toContainText("November 30, 2026");
-    await expect(picker).toHaveAttribute("max", "2026-11-30");
+    await expect(page.getByRole("status")).toContainText("December 18, 2026");
+    await expect(picker).toHaveAttribute("max", "2026-12-18");
     if (expired) {
       await expect(page.getByRole("status")).toContainText("No current schedule is available");
       await expect(picker).toHaveValue("");
@@ -24,8 +25,9 @@ for (const [instant, expired] of [
       await expect(selected).toContainText("Choose a published date");
       await expect(selected).not.toContainText("Loading");
     } else {
-      await expect(picker).toHaveValue("2026-11-30");
-      await expect(selected.locator(".schedule-list")).toBeVisible();
+      await expect(picker).toHaveValue("2026-12-18");
+      await expect(selected).toContainText("Half day");
+      await expect(page.locator(".schedule-list")).toHaveCount(0);
       await expect(page.getByRole("status")).not.toContainText("expired");
     }
     await page.setViewportSize({width:390,height:844});
@@ -36,7 +38,7 @@ for (const [instant, expired] of [
 for (const [today, next] of [["2026-10-31","2026-11-02"],["2026-11-05","2026-11-09"],["2026-11-06","2026-11-09"],["2026-11-19","2026-11-23"],["2026-11-20","2026-11-23"]]) {
   test(`next school day on ${today}`, async ({page}) => {
     await page.clock.setFixedTime(new Date(`${today}T04:00:00Z`));
-    await page.goto("http://127.0.0.1:3000/calendar");
+    await page.goto(calendarUrl);
     await expect(page.getByLabel("Choose a date")).toHaveValue(next);
     await expect(page.getByRole("status")).not.toContainText("expired");
   });
@@ -44,7 +46,7 @@ for (const [today, next] of [["2026-10-31","2026-11-02"],["2026-11-05","2026-11-
 
 test("navigate from October through November, inspect closures and Wednesday bells", async ({page}) => {
   await page.clock.setFixedTime(new Date("2026-10-30T04:00:00Z"));
-  await page.goto("http://127.0.0.1:3000/calendar");
+  await page.goto(calendarUrl);
   const picker = page.getByLabel("Choose a date");
   const selected = page.locator(".calendar-selected");
   await expect(picker).toHaveValue("2026-10-30");
@@ -65,3 +67,33 @@ test("navigate from October through November, inspect closures and Wednesday bel
   await page.setViewportSize({width:390,height:844});
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+for (const width of [1440, 390]) {
+  test(`December rotation and half-day display at ${width}px`, async ({page}) => {
+    await page.setViewportSize({width, height:900});
+    await page.clock.setFixedTime(new Date("2026-12-01T04:00:00Z"));
+    const errors: string[] = [];
+    page.on("pageerror", error => errors.push(error.message));
+    await page.goto(calendarUrl);
+    const picker = page.getByLabel("Choose a date");
+    const selected = page.locator(".calendar-selected");
+    for (const [date, day] of [["01",6],["02",7],["03",8],["04",1],["07",2],["08",3],["09",4],["10",5],["11",6],["14",7],["15",8],["16",1],["17",2],["18",3]] as const) {
+      await picker.fill(`2026-12-${date}`);
+      await expect(selected).toContainText(`DAY ${day} ·`);
+      if (date !== "18") await expect(selected.locator(".schedule-list")).toBeVisible();
+    }
+    await expect(selected).toContainText("Half day");
+    await expect(selected).toContainText("once confirmed");
+    await expect(page.locator(".schedule-list")).toHaveCount(0);
+    await expect(selected).not.toContainText("Regular bell times");
+    await expect(selected).not.toContainText("10:30");
+    await expect(selected).not.toContainText("11:30");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.screenshot({path:`/tmp/calendar-half-day-${width}.png`, fullPage:true});
+    await picker.fill("2026-12-16");
+    await expect(selected).toContainText("P2 · 09:40–11:00");
+    await expect(selected.locator(".schedule-list")).not.toContainText("Mentoring");
+    await expect(page.locator(".cycle-grid-section")).toBeVisible();
+    expect(errors).toEqual([]);
+  });
+}

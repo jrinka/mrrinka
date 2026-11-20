@@ -23,7 +23,7 @@ export function daySchedule(day:number,wednesday=false){
 export const cycleDays=rotation.map((_,i)=>({day:i+1,parity:(i%2?"EVEN":"ODD") as "ODD"|"EVEN",classes:daySchedule(i+1).filter(x=>x.period!=="Mentoring").map(x=>x.course)}));
 
 export const publicationStart = "2026-08-11";
-export const publicationEnd = "2026-11-30";
+export const publicationEnd = "2026-12-18";
 // ISB 2026–27 calendar; PTC pauses also confirmed by Jason, October 30, 2026.
 // https://resources.finalsite.net/images/v1765417883/isbeijing/etmeoglowpsmtidekcog/Calendar2026-27v4.pdf
 export const calendarClosures: Readonly<Record<string, string>> = {
@@ -45,7 +45,7 @@ function isSchoolDay(date: Date) {
   return day >= 1 && day <= 5 && !calendarClosures[value] && !(value >= breakStart && value <= breakEnd);
 }
 
-export type CycleDate = { date: string; cycleDay: number; parity: "ODD" | "EVEN" };
+export type CycleDate = { date: string; cycleDay: number; parity: "ODD" | "EVEN"; halfDay?: true };
 
 export const cycleDates: CycleDate[] = (() => {
   const result: CycleDate[] = [];
@@ -53,7 +53,10 @@ export const cycleDates: CycleDate[] = (() => {
   for (let date = new Date(`${publicationStart}T12:00:00Z`); iso(date) <= publicationEnd; date = new Date(date.getTime() + 86_400_000)) {
     if (!isSchoolDay(date)) continue;
     const cycleDay = (index % 8) + 1;
-    result.push({ date: iso(date), cycleDay, parity: cycleDay % 2 ? "ODD" : "EVEN" });
+    result.push({ date: iso(date), cycleDay, parity: cycleDay % 2 ? "ODD" : "EVEN",
+      // Semester 1 ends on a half day. Its special timetable is not yet confirmed.
+      ...(iso(date) === "2026-12-18" ? { halfDay: true as const } : {}),
+    });
     index += 1;
   }
   return result;
