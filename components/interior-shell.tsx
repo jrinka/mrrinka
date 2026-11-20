@@ -34,6 +34,12 @@ export default function InteriorShell({children,courseId,courseLabels=defaults}:
       <ThemeToggle/>
       <Link className="interior-admin" href="/admin" title="Teacher editor"><FilePenLine size={18}/><span>Teacher editor</span></Link>
     </aside>
-    <div className="interior-body"><main id="content" className="interior-main">{children}</main><footer className="footer mono"><span>MRRINKA.COM</span><span>{courseId ? <>“We read books to find out who we are.” — <a href="https://www.theguardian.com/books/2018/jan/24/a-life-in-quotes-ursula-k-le-guin">Ursula K. Le Guin</a></> : "ENGLISH / LANGUAGE / LITERATURE"}</span></footer></div>
+    <div className="interior-body">
+      <main id="content" className="interior-main">{children}</main>
+      <footer className="footer mono">
+        <span className="footer-site">MRRINKA.COM <Link href="/#about-this-site">About this site</Link></span>
+        <span>{courseId ? <>“We read books to find out who we are.” — <a href="https://www.theguardian.com/books/2018/jan/24/a-life-in-quotes-ursula-k-le-guin">Ursula K. Le Guin</a></> : "ENGLISH / LANGUAGE / LITERATURE"}</span>
+      </footer>
+    </div>
   </div>;
 }

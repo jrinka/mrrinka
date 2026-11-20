@@ -23,6 +23,7 @@ Visit `http://127.0.0.1:3000`. For a stable local production preview, use `npm r
 - Saves compare the loaded file SHA with GitHub. If another edit landed, export your unsaved copy and reload to merge the changes rather than overwriting them.
 - Drafts are excluded from public course pages. This repository is public, so draft source text is still visible on GitHub. Do not store confidential material here.
 - Uploads support PDF, PNG, JPG, WebP, and TXT up to 50 MB, uploaded directly to Cloudflare R2. Uploaded files are public immediately even if their page is a draft. Use HTTPS links to shared documents for other formats or larger files. Existing `/uploads/` links remain valid.
+- Assessment pages have a **Rubric downloads** section in the teacher editor. Upload a PDF or add the path to a PDF or editable Word file in `public/rubrics/` (for example, `/rubrics/paper-2.docx`). The student download links appear below the assessment summary once files are attached. For shared assessments, use **Edit shared source** to update both courses.
 - The starter close-reading and paragraph activities run in the browser. Writing is not submitted or persisted; students can download or copy it.
 - To add content with Codex, pull the latest repository first and edit the same course JSON files. Preserve stable IDs and existing user edits. New custom practice components can be added in code and registered in the schema/editor.
 
