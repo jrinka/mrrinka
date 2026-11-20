@@ -3,10 +3,10 @@ import '@fontsource-variable/dm-sans';
 import '@fontsource/space-mono/latin-400.css';
 import '@fontsource/space-mono/latin-700.css';
 import '@fontsource/archivo-black/latin-400.css';
-import '@fontsource/sorts-mill-goudy/latin-400.css';
 import './.generated.css';
 import './zine.css';
 import './hosting.css';
+import '../styles/wordmark.css';
 import BrainBreak from './page';
 
 createRoot(document.getElementById('root')!).render(<BrainBreak />);

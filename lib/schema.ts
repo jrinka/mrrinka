@@ -51,6 +51,12 @@ export const resourceSchema = z.object({
   url: safeUrl.refine(Boolean, "Add a link."),
   description: z.string().max(400),
 });
+const rubricSchema = resourceSchema.extend({
+  url: z.string().trim().max(500).regex(
+    /^\/rubrics\/(?:[a-z0-9_-]+\/)*[a-z0-9][a-z0-9._-]*\.(?:pdf|docx)$/i,
+    "Use a PDF or DOCX path under /rubrics/, or upload a rubric PDF.",
+  ),
+});
 export const itemSchema = z
   .object({
     id: z.string().uuid(),
@@ -65,6 +71,7 @@ export const itemSchema = z
     imageCredit: z.string().max(150),
     imageSource: safeUrl,
     links: z.array(resourceSchema).max(30),
+    rubrics: z.array(rubricSchema).max(30).optional(),
     relatedIds: z.array(z.string().uuid()).max(30),
     practiceKind: z.enum(["none", "paragraph", "close-reading"]),
   })

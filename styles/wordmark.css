@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("./space-grotesk-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+h1.site-wordmark {
+  font-family: "Space Grotesk", Arial, sans-serif;
+  font-size: clamp(2.1rem, 3.8vw, 3.3rem);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: 1.1;
+}
+
+.site-wordmark > span {
+  color: var(--citron, #d8ed61);
+}

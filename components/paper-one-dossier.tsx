@@ -19,7 +19,7 @@ const steps = [
 ];
 const source = "https://www.cdc.gov/tobacco/campaign/tips/resources/ads/pdf-print-ads/beckys-tip-print-ad-7x10.pdf";
 
-export default function PaperOneDossier({ body, workedExample = true, literatureExample = false, refinery, paperTwo = false }: { body: string; workedExample?: boolean; literatureExample?:boolean; refinery?:RefineryKind; paperTwo?:boolean }) {
+export default function PaperOneDossier({ body, workedExample = true, literatureExample = false, refinery, paperTwo = false, hasRubrics = false }: { body: string; hasRubrics?: boolean; workedExample?: boolean; literatureExample?:boolean; refinery?:RefineryKind; paperTwo?:boolean }) {
   const sections = body.split(/^## /m).filter(Boolean).map((part) => {
     const [title, ...text] = part.split("\n");
     // Preserve existing links and companion panels when instructional headings change.
@@ -60,6 +60,7 @@ export default function PaperOneDossier({ body, workedExample = true, literature
             <h2><button type="button" aria-expanded={open.includes(section.id)} aria-controls={`${section.id}-body`} onClick={() => { setActive(section.id); setOpen(previous => previous.includes(section.id) ? previous.filter(id => id !== section.id) : [...previous, section.id]); }}><span className="mono">{String(index + 1).padStart(2, "0")}</span>{section.title}{paperTwo && section.id === "practice" && <InteractivePracticeLabel />}<span className="p1-toggle" aria-hidden="true">{open.includes(section.id) ? "−" : "+"}</span></button></h2>
             <div id={`${section.id}-body`} hidden={!open.includes(section.id)} className="p1-section-body">
               {(workedExample || literatureExample) && <a className="p1-companion-jump" href="#worked-example" onClick={() => setActive(section.id)}>See this in the {literatureExample ? "poem" : "advertisement"} ↓</a>}
+              {section.id === "criteria" && hasRubrics && <p><a href="#assessment-rubrics">See rubric downloads</a></p>}
               <Markdown>{section.text}</Markdown>
               {section.id === "practice" && literatureExample && <LiteraturePractice/>}
               {section.id === "practice" && paperTwo && <PaperTwoPractice focusRequest={practiceFocus}/>}

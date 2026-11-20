@@ -60,6 +60,20 @@
           "description": "The official course and assessment guide from the International Baccalaureate."
         }
       ],
+      "rubrics": [
+        {
+          "id": "85a3126b-64be-53e1-a884-c9f3b9c25861",
+          "title": "Paper 1 rubric",
+          "url": "/rubrics/ib-english-a/paper-1.pdf",
+          "description": ""
+        },
+        {
+          "id": "abdc4d5a-61f2-585f-b32f-04a325febac5",
+          "title": "Paper 1 rubric",
+          "url": "/rubrics/ib-english-a/paper-1.docx",
+          "description": ""
+        }
+      ],
       "relatedIds": [
         "bfa6c8ee-0901-4cc2-b3fb-2070394d9432",
         "3b2c5f46-1f83-4d14-8d7a-d146a0284ccd",
@@ -79,6 +93,20 @@
       "imageCredit": "Two bookbinders at work · Wellcome Collection",
       "imageSource": "https://wellcomecollection.org/works/zpz9h3uu",
       "links": [],
+      "rubrics": [
+        {
+          "id": "477ef7d5-3988-5a19-88fe-00d81fb6e6e9",
+          "title": "Paper 2 rubric",
+          "url": "/rubrics/ib-english-a/paper-2.pdf",
+          "description": ""
+        },
+        {
+          "id": "8a63f99a-7b17-5429-866a-348961ea9b57",
+          "title": "Paper 2 rubric",
+          "url": "/rubrics/ib-english-a/paper-2.docx",
+          "description": ""
+        }
+      ],
       "relatedIds": [],
       "practiceKind": "none"
     },
@@ -94,6 +122,20 @@
       "imageCredit": "A camera obscura shown in use and in diagram · Wellcome Collection",
       "imageSource": "https://wellcomecollection.org/works/e36q6455",
       "links": [],
+      "rubrics": [
+        {
+          "id": "67708155-227a-5926-824b-2f316cc2e307",
+          "title": "Language and Literature Individual Oral rubric",
+          "url": "/rubrics/ib-english-a/individual-oral-language-and-literature.pdf",
+          "description": ""
+        },
+        {
+          "id": "f271b75d-069c-5523-a197-749de685e72a",
+          "title": "Language and Literature Individual Oral rubric",
+          "url": "/rubrics/ib-english-a/individual-oral-language-and-literature.docx",
+          "description": ""
+        }
+      ],
       "relatedIds": [],
       "practiceKind": "none"
     },

@@ -1,3 +1,4 @@
+import { printingWorkshop } from "@/components/archive-art";
 import ThemeToggle from "@/components/theme-toggle";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +9,7 @@ const sharedLinks = [
   { title: "Skills & Methods", note: "General English resources for reading, analysis, and writing.", label: "FOR EVERY COURSE", href: "/resources" },
   { title: "Practice", note: "Passages, workshops, and refineries.", label: "READ / WRITE / REVISE", href: "/practice" },
   { title: "My calendar", note: "The day cycle and class meetings.", label: "8-DAY CYCLE", href: "/calendar" },
-  { title: "Recess", note: "Quick word games, drawing challenges, and classroom brain breaks by Mr. Rinka.", label: "CLASSROOM / BRAIN BREAKS", href: "/recess" },
+  { title: "Brain Break", note: "Word games, drawing challenges, and number puzzles for the class.", label: "CLASSROOM GAMES", href: "/recess" },
 ];
 
 export default function Home() {
@@ -25,7 +26,7 @@ export default function Home() {
     <div className="global-site entry-site">
       <a className="skip-link" href="#content">Skip to content</a>
       <header className="entry-header">
-        <h1>Mr. Rinka<span aria-hidden="true">_</span></h1>
+        <h1 className="site-wordmark">Mr. Rinka<span aria-hidden="true">_</span></h1>
         <p><span lang="la">LEGE · SCRIBE · COGITA</span></p>
       </header>
       <main id="content" className="entry-main">
@@ -43,13 +44,22 @@ export default function Home() {
         </nav>
         <figure className="landing-plate entry-plate">
           <div>
-            <Image src="/archive/printing-workshop-stradanus.jpg" alt="An engraving of compositors setting type, proofing copy, and operating a printing press" fill sizes="(max-width: 900px) 100vw, 40vw" priority />
+            <Image src={printingWorkshop.src} alt={printingWorkshop.alt} fill sizes="(max-width: 900px) 100vw, 40vw" priority />
             <span className="landing-plate-label">PLATE / 00 — IMPRESS</span>
-            <figcaption><a href="https://wellcomecollection.org/" rel="noopener noreferrer" title="The printing workshop. Public Domain Mark. Source: Wellcome Collection.">WELLCOME</a></figcaption>
+            <figcaption><a href={printingWorkshop.source} rel="noopener noreferrer" aria-label="Printing workshop engraving after Stradanus at Wellcome Collection" title="The printing workshop, after Stradanus. Wellcome Collection. Public Domain Mark.">WELLCOME</a></figcaption>
           </div>
         </figure>
       </main>
-      <footer className="entry-footer mono"><ThemeToggle/><span>ENGLISH / LANGUAGE / LITERATURE</span><Link href="/admin">Teacher editor ↗</Link></footer>
+      <footer className="entry-footer mono">
+        <ThemeToggle />
+        <div className="entry-footer-about">
+          <span>ENGLISH / LANGUAGE / LITERATURE</span>
+          <p id="about-this-site" tabIndex={-1}>
+            This work has been developed independently from and is not endorsed by the International Baccalaureate (IB).
+          </p>
+        </div>
+        <Link href="/admin">Teacher editor ↗</Link>
+      </footer>
     </div>
   );
 }

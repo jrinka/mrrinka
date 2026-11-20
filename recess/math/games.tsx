@@ -34,7 +34,7 @@ function Source({ kind }: { kind:'equation'|'24'|'match'|'odds' }) {
     :kind==='24'?<p>A classroom version of the traditional make-24 arithmetic puzzle. Use all four numbers once with +, −, ×, ÷, and brackets. Try a different route after finding one. See <a href="https://nrich.maths.org/games/countdown?tab=teacher" target="_blank" rel="noopener noreferrer">NRICH’s Countdown</a> for a related target-number activity.</p>
     :kind==='match'?<p>A version of the traditional matchstick-equation puzzle, using seven-segment digits. Move one match between the digit positions shown. The operation and equals sign are fixed; rotating the whole display, adding matches, and making ≠ are outside this version’s rules. Any valid solution counts.</p>
     :<p>Original questions about fair coins, dice, and random token draws. Ask for a prediction first, then discuss the equally likely outcomes. The highlighted grid explains the exact probability; it is not a simulation.</p>}
-    <p>The timer is optional. Students can answer aloud, on a whiteboard, or here. Save activity downloads the visible puzzle and work; unrevealed hints and answers stay out.</p>
+    <p>The timer is optional. Students can answer aloud, on a whiteboard, or here. Choose Download activity to keep the visible puzzle and your work.</p>
   </details>;
 }
 function useRound(key:string, size:number) {
