@@ -64,10 +64,13 @@ test("shared IB pages read the canonical source and respect publication", () => 
   const reference = courses.find(c => c.id === "literature")!.items.find(i => i.title === "Paper 2")!;
   assert.equal(reference.sharedFrom?.itemId, source.id);
   assert.equal(reference.body, "");
-  const previous = { body: source.body, published: source.published };
+  const previous = { body: source.body, published: source.published, rubrics: source.rubrics };
   try {
     source.body = "A teacher revision to the shared source";
-    assert.equal(publicCourse("literature").items.find(i => i.id === reference.id)?.body, source.body);
+    source.rubrics = [{ id: crypto.randomUUID(), title: "Paper 2 rubric", url: "/rubrics/paper-2.pdf", description: "" }];
+    const published = publicCourse("literature").items.find(i => i.id === reference.id);
+    assert.equal(published?.body, source.body);
+    assert.deepEqual(published?.rubrics, source.rubrics);
     source.published = false;
     assert.equal(publicCourse("literature").items.some(i => i.id === reference.id), false);
   } finally {
@@ -82,6 +85,34 @@ test("shared references point directly to existing canonical pages", () => {
     assert.ok(target, `${item.title}: missing shared source`);
     assert.equal(target.sharedFrom, undefined, "Shared references must not form chains or cycles");
     assert.equal(target.section, item.section);
+  }
+});
+
+test("shared guidance can carry a different rubric for each course's Individual Oral", () => {
+  const source = courses.find(c => c.id === "language-literature")!.items.find(i => i.title === "Individual Oral")!;
+  const literature = courses.find(c => c.id === "literature")!.items.find(i => i.title === "Individual Oral")!;
+  const sourceRubrics = source.rubrics;
+  const literatureRubrics = literature.rubrics;
+  const previousPublished = source.published;
+  try {
+    const langLitFile = { id: crypto.randomUUID(), title: "Language and Literature IO", url: "/rubrics/lang-lit-io.docx", description: "" };
+    const literatureFile = { ...langLitFile, id: crypto.randomUUID(), title: "Literature IO", url: "/rubrics/literature-io.docx" };
+    source.rubrics = [langLitFile];
+    literature.rubrics = [literatureFile];
+    const publishedOral = () => publicCourse("literature").items.find(i => i.id === literature.id);
+    assert.deepEqual(publishedOral()?.rubrics, [literatureFile]);
+    assert.equal(publishedOral()?.body, source.body);
+    assert.deepEqual(publicCourse("language-literature").items.find(i => i.id === source.id)?.rubrics, [langLitFile]);
+    literature.rubrics = [];
+    assert.deepEqual(publishedOral()?.rubrics, []);
+    delete literature.rubrics;
+    assert.deepEqual(publishedOral()?.rubrics, [langLitFile]);
+    source.published = false;
+    assert.equal(publishedOral(), undefined);
+  } finally {
+    source.rubrics = sourceRubrics;
+    literature.rubrics = literatureRubrics;
+    source.published = previousPublished;
   }
 });
 

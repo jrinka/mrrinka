@@ -10,7 +10,7 @@ The original layout font imports are replaced by equivalent Fontsource packages 
 
 Generated output is ignored by Git; edit the source here. Do not copy deployment credentials, `.openai` configuration, caches, or dependencies from the original project.
 
-The landing page lists word games, drawing/observation games, then number games. Its main headline uses the teaching site's Sorts Mill Goudy serif, bundled locally with its font license. Game numbers and controls remain stable.
+The landing page lists word games, drawing/observation games, then number games. Its title shares the home page’s locally bundled Space Grotesk wordmark.
 
 Wordle uses `wordle-deck.ts` to keep the default bank in the same index order on opening, new rounds, and teacher-bank selection. Reordering the default word list in teacher setup therefore preserves its saved rotation; custom banks retain a separate deck.
 

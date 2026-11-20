@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Plus, Save, Upload, X } from "lucide-react";
+import { ArrowUpRight, Plus, Save } from "lucide-react";
 import Markdown from "./markdown";
+import CourseFileEditor from "./course-file-editor";
 import {
   courseIds,
   courseSectionName,
@@ -28,7 +29,6 @@ export default function Editor({ login, previewCourses }: Props) {
   const [error, setError] = useState("");
   const [showPreview, setShowPreview] = useState(false);
   const [commitUrl, setCommitUrl] = useState("");
-  const uploadRef = useRef<HTMLInputElement>(null);
   const editRevision = useRef(0);
   const load = useCallback(
     async (id: CourseId) => {
@@ -162,13 +162,14 @@ export default function Editor({ login, previewCourses }: Props) {
       setBusy(false);
     }
   }
-  async function upload(file: File) {
+  async function upload(file: File, collection: "links" | "rubrics") {
     if (!item || preview) return;
     const targetId = item.id;
     setBusy(true);
     setError("");
     try {
       if (!file.size || file.size > 50_000_000) throw new Error("Choose a file up to 50 MB.");
+      if (collection === "rubrics" && !/\.pdf$/i.test(file.name)) throw new Error("Choose a PDF to upload as a rubric.");
       const response = await fetch("/api/admin/upload", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "start", name: file.name, size: file.size }),
@@ -185,24 +186,16 @@ export default function Editor({ login, previewCourses }: Props) {
       });
       const data = await confirmation.json();
       if (!confirmation.ok) throw new Error(data.error);
+      const url = collection === "rubrics" ? data.rubricPath : data.url;
+      if (typeof url !== "string") throw new Error("The file could not be attached to this page.");
+      const attachment = { id: crypto.randomUUID(), title: file.name, url, description: "" };
       setCourse((current) =>
         current
           ? {
               ...current,
               items: current.items.map((i) =>
                 i.id === targetId
-                  ? {
-                      ...i,
-                      links: [
-                        ...i.links,
-                        {
-                          id: crypto.randomUUID(),
-                          title: file.name,
-                          url: data.url,
-                          description: "",
-                        },
-                      ],
-                    }
+                  ? { ...i, [collection]: [...(i[collection] ?? []), attachment] }
                   : i,
               ),
             }
@@ -217,9 +210,15 @@ export default function Editor({ login, previewCourses }: Props) {
       setError(e instanceof Error ? e.message : "Upload failed.");
     } finally {
       setBusy(false);
-      if (uploadRef.current) uploadRef.current.value = "";
     }
   }
+  const rubricEditor = item?.section === "assessment" && (
+    <CourseFileEditor
+      collection="rubrics" files={item.rubrics ?? []} preview={preview}
+      onChange={rubrics => updateItem({ rubrics })}
+      onUpload={file => void upload(file, "rubrics")}
+    />
+  );
   return (
     <div className="admin-site">
       <header className="admin-header">
@@ -446,7 +445,7 @@ export default function Editor({ login, previewCourses }: Props) {
               ) : item?.sharedFrom ? (
                 <>
                   <h1>{item.title}</h1>
-                  <p>This page uses shared material. Edit the source once to update every course that uses it.</p>
+                  <p>Edit the shared source to update the guidance and materials in both courses.</p>
                   <button type="button" className="button" onClick={async () => {
                     if (dirty && !window.confirm("Discard unsaved changes before opening the shared source?")) return;
                     const source = item.sharedFrom!;
@@ -454,6 +453,21 @@ export default function Editor({ login, previewCourses }: Props) {
                     await load(source.courseId);
                     setSelected(source.itemId);
                   }}>Edit shared source</button>
+                  {item.section === "assessment" && (
+                    <>
+                      <label className="toggle">
+                        <input
+                          type="checkbox"
+                          checked={item.rubrics !== undefined}
+                          onChange={e => updateItem({ rubrics: e.target.checked ? [] : undefined })}
+                        />
+                        Use separate rubric downloads for {course.shortTitle}
+                      </label>
+                      {item.rubrics === undefined
+                        ? <p className="hint">This assessment uses the rubrics attached to the shared source.</p>
+                        : rubricEditor}
+                    </>
+                  )}
                 </>
               ) : item ? (
                 <>
@@ -584,112 +598,12 @@ export default function Editor({ login, previewCourses }: Props) {
                       />
                     </label>
                   </details>
-                  <section className="editor-details">
-                    <h2>Materials & links</h2>
-                    <p className="muted">
-                      Link to a reading, shared document, or an external
-                      practice tool. Uploaded files become public; don’t upload
-                      private material.
-                    </p>
-                    {item.links.map((l, i) => (
-                      <div className="link-editor" key={l.id}>
-                        <label className="field">
-                          <span>Link title</span>
-                          <input
-                            value={l.title}
-                            onChange={(e) =>
-                              updateItem({
-                                links: item.links.map((x, n) =>
-                                  n === i ? { ...x, title: e.target.value } : x,
-                                ),
-                              })
-                            }
-                          />
-                        </label>
-                        <label className="field">
-                          <span>URL</span>
-                          <input
-                            value={l.url}
-                            onChange={(e) =>
-                              updateItem({
-                                links: item.links.map((x, n) =>
-                                  n === i ? { ...x, url: e.target.value } : x,
-                                ),
-                              })
-                            }
-                          />
-                        </label>
-                        <label className="field">
-                          <span>Description</span>
-                          <input
-                            value={l.description}
-                            onChange={(e) =>
-                              updateItem({
-                                links: item.links.map((x, n) =>
-                                  n === i
-                                    ? { ...x, description: e.target.value }
-                                    : x,
-                                ),
-                              })
-                            }
-                          />
-                        </label>
-                        <button
-                          className="text-button"
-                          onClick={() =>
-                            updateItem({
-                              links: item.links.filter((x) => x.id !== l.id),
-                            })
-                          }
-                        >
-                          <X size={14} /> Remove link
-                        </button>
-                      </div>
-                    ))}
-                    <div className="actions">
-                      <button
-                        className="button secondary"
-                        onClick={() =>
-                          updateItem({
-                            links: [
-                              ...item.links,
-                              {
-                                id: crypto.randomUUID(),
-                                title: "",
-                                url: "",
-                                description: "",
-                              },
-                            ],
-                          })
-                        }
-                      >
-                        <Plus size={16} />
-                        Add link
-                      </button>
-                      <button
-                        className="button secondary"
-                        disabled={preview}
-                        onClick={() => uploadRef.current?.click()}
-                      >
-                        <Upload size={16} />
-                        Upload file
-                      </button>
-                      <input
-                        hidden
-                        ref={uploadRef}
-                        type="file"
-                        accept=".pdf,.png,.jpg,.jpeg,.webp,.txt"
-                        onChange={(e) => {
-                          const f = e.target.files?.[0];
-                          if (f) void upload(f);
-                        }}
-                      />
-                    </div>
-                    <small className="hint">
-                      PDF, images, or plain text · Up to 50 MB. Use a
-                      shared-document link for larger files.
-                    </small>
-                  </section>
+                  {rubricEditor}
+                  <CourseFileEditor
+                    collection="links" files={item.links} preview={preview}
+                    onChange={links => updateItem({ links })}
+                    onUpload={file => void upload(file, "links")}
+                  />
                   <label className="field">
                     <span>Built-in practice activity</span>
                     <select

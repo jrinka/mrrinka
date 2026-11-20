@@ -27,7 +27,10 @@ export async function POST(request: Request) {
         await client.send(new DeleteObjectCommand({Bucket:bucket,Key}));
         return Response.json({error:'The uploaded file did not match its size or file type.'},{status:400});
       }
-      return Response.json({url:`${publicUrl}/${Key}`});
+      return Response.json({
+        url: `${publicUrl}/${Key}`,
+        ...(ticket.ext === 'pdf' && { rubricPath: `/rubrics/uploaded/${Key.slice('resources/'.length)}` }),
+      });
     }
     if (body.action !== 'start' || typeof body.name !== 'string' || body.name.length > 240)
       return Response.json({error:'Invalid upload request.'},{status:400});
