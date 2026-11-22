@@ -51,7 +51,23 @@ export default function PracticePage() {
           ))}</div>
         </section>
       </div>
-      <aside className="lens-intro"><h2>A poem for today</h2><p>Choose one detail, a shift, and a question to carry into your next reading.</p><a href="https://www.poetryfoundation.org/poems">Poetry Foundation · Poem of the Day ↗</a><p className="hint">Read on the Poetry Foundation’s site. For a guided first reading, <Link href="/resources/reading-methods/tpcastt">try TPCASTT</Link>.</p></aside><p className="intro">Need a method before you start? <Link href="/resources">Explore Skills &amp; Methods.</Link></p>
+      <section aria-label="Independent reading practice">
+        <aside className="lens-intro">
+          <h2>A poem for today</h2>
+          <p>Read the Poem of the Day. Choose one striking detail, identify a shift, and write one question the poem raises.</p>
+          <a href="https://www.poetryfoundation.org/poems/poem-of-the-day">Poetry Foundation · Poem of the Day ↗</a>
+          <p className="hint">For a guided reading, <Link href="/resources/reading-methods/tpcastt">try TPCASTT</Link>.</p>
+        </aside>
+        <aside className="lens-intro">
+          <h2>An argument for today</h2>
+          <p>Choose an opinion column from either source. Apply SOAPSTone, then explain how one specific choice helps the writer achieve their purpose.</p>
+          <a href="https://www.nytimes.com/section/opinion">The New York Times · Opinion ↗</a>
+          <p className="hint">ISB students have complimentary NYT subscriptions.</p>
+          <a href="https://www.theguardian.com/us/commentisfree">The Guardian · Opinion ↗</a>
+          <p className="hint">For a guided reading, <Link href="/resources/reading-methods/soapstone">try SOAPSTone</Link>.</p>
+        </aside>
+      </section>
+      <p className="intro">Need a method before you start? <Link href="/resources">Explore Skills &amp; Methods.</Link></p>
     </GlobalShell>
   );
 }
