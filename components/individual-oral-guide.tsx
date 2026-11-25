@@ -20,8 +20,6 @@ export default function IndividualOralGuide({ body, course, hasRubrics = false }
     <nav className={styles.contents} aria-label="Individual Oral guide contents">
       <span className="mono">BUILD YOUR UNDERSTANDING</span>
       <ol>{sections.map(section => <li key={section.id}><a href={`#${section.id}`}>{section.title}</a></li>)}</ol>
-      <a className={styles.quickLink} href="#structure-and-timing">See the timing map →</a>
-      <a className={styles.quickLink} href="#analysis-planning-sheets">Open the planning sheets →</a>
     </nav>
     <div className={styles.reading}>
       <aside className={styles.course} aria-label="Your course requirements">

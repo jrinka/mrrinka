@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { courseSchema, courseSectionName, itemSchema } from "../lib/schema";
 import { courses, publicCourse } from "../lib/content";
-import { textTypeGuideIds } from "../lib/text-type-guides";
+import { getTextTypeExample, textTypeGuideIds } from "../lib/text-type-guides";
 test("all course seeds have valid references and working activities", () => {
   for (const course of courses) {
     assert.ok(courseSchema.safeParse(course).success);
@@ -141,9 +141,27 @@ test("IB text-type guides have clear course labels and routes back to Paper 1", 
     const paperOne = pages.find(item => item.title === "Paper 1" && item.section === "assessment");
     assert.equal(guide?.section, "text-types");
     assert.ok(guide?.body.includes(`/courses/${course}/assessment/${paperOne?.id}`));
-    assert.ok(paperOne?.body.includes(`/courses/${course}/text-types/${id}`));
+    if (course === "literature") assert.ok(paperOne?.body.includes(`/courses/${course}/text-types/${id}`));
   }
+  const paperOne = publicCourse("language-literature").items.find(item => item.section === "assessment" && item.title === "Paper 1");
+  const stepTwo = paperOne?.body.match(/^### 2\..*\n([\s\S]*?)\n### 3\./m)?.[1];
+  assert.ok(stepTwo);
+  assert.deepEqual([...stepTwo.matchAll(/\]\(([^)]+)\)/g)].map(match => match[1]), ["/courses/language-literature/text-types"]);
   const english = structuredClone(courses.find(course => course.id === "english-10")!);
   english.items.push({ ...english.items[0], id: crypto.randomUUID(), section: "text-types" });
   assert.equal(courseSchema.safeParse(english).success, false);
+});
+
+test("numbered worked examples match the published guide headings in order", () => {
+  for (const id of Object.values(textTypeGuideIds)) {
+    const example = getTextTypeExample(id)!;
+    const guide = publicCourse(example.courseId).items.find(item => item.id === id);
+    assert.ok(guide, id);
+    assert.ok(guide.body.includes("## Worked example\n"), guide.title);
+    const additional = example.additional ?? [];
+    const markers = [...guide.body.matchAll(/^## Additional worked example: (.+)$/gm)].map(match => match[1]);
+    assert.deepEqual(additional.map(item => item.marker), markers, guide.title);
+    assert.equal(new Set(additional.map(item => item.key)).size, additional.length, guide.title);
+    for (const { shortTitle } of [example, ...additional]) assert.ok(shortTitle.trim(), guide.title);
+  }
 });

@@ -1786,7 +1786,8 @@ h3 {
     min-height:0;
     padding: 18px;
   }
-  .practice-feature-index { display: none; }
+  .practice-feature-index { grid-column: 1 / -1; writing-mode: horizontal-tb; transform: none; }
+  .practice-feature { row-gap: 6px; }
   .passage-console { grid-template-columns: 1fr; }
   .passage-response { position: static; }
   .passage-source blockquote {
@@ -2357,26 +2358,27 @@ h3 {
 .practice-skill-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .practice-skill-title strong { font-family: var(--font-literary); font-size: 1.65rem; font-weight: 400; }
 .practice-skill p { margin: 8px 0 16px; color: var(--muted); }
-.practice-skill-mode { font-size: .68rem; letter-spacing: .06em; color: var(--muted); }
 .practice-course-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; }
 .practice-course-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; font-size: .85rem; }
 .practice-course-links a:is(:hover, :focus-visible), .practice-skill-title:is(:hover, :focus-visible) { color: var(--ink); background: var(--citron); }
 
-.refinery-directory { margin: 40px 0; }
+.practice-reading { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 36px; margin:32px 0; padding:24px 0; border-block:1px solid var(--line); }
+.practice-reading h2 { margin:0 0 8px; font-size:1.25rem; }
+.practice-reading p { margin:0 0 8px; }
+.practice-reading a, .refinery-related a, .practice-routine-links a { text-decoration:underline; text-underline-offset:3px; }
+.refinery-directory { margin: 32px 0; }
 .refinery-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 24px 0; }
-.refinery-links a { display: grid; gap: 10px; padding: 22px; border: 1px solid var(--line); background: var(--panel-cool); text-decoration: none; }
-.refinery-links a:nth-child(even) { background: var(--panel-citron); }
-.refinery-links a:is(:hover, :focus-visible) { border-color: var(--ink); }
+.refinery-choice { display:flex; flex-direction:column; min-width:0; border:1px solid var(--line); background:var(--panel-citron); }
+.refinery-card { flex:1; display:grid; align-content:start; gap:10px; padding:22px; text-decoration:none; }
+.refinery-choice:is(:hover, :focus-within) { border-color:var(--ink); }
+.refinery-related { display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 16px; padding:12px 22px; border-top:1px solid var(--line); font-size:.9rem; }
+.refinery-related a:is(:hover, :focus-visible), .practice-reading a:is(:hover, :focus-visible) { text-decoration-thickness:2px; }
 .refinery-links strong { font-family: var(--font-literary); font-size: 1.5rem; font-weight: 400; }
-.refinery-links .mono, .refinery-links small { font-size: .7rem; color: var(--muted); }
+.refinery-links .mono { font-size: .7rem; color: var(--muted); }
 .refinery-workspace { max-width: 900px; }
-.refinery-boundary { padding: 24px; border-left: 4px solid var(--citron); background: var(--graphite); color: var(--on-graphite); margin: 24px 0; }
-.refinery-boundary h2 { margin-top: 0; }
-.refinery-boundary a { color: var(--citron); }
-.refinery-boundary p { line-height: 1.6; }
 .refinery-fields { border: 0; margin: 0; padding: 0; min-width: 0; }
 .refinery-save { padding: 24px 0; }
-@media (max-width: 700px) { .refinery-links { grid-template-columns: 1fr; } }
+@media (max-width: 700px) { .refinery-links, .practice-reading { grid-template-columns: 1fr; } }
 
 /* One front door: each primary destination appears once. */
 .entry-site { max-width: 1500px; margin: 0 auto; padding: clamp(22px, 3.5vw, 52px); }
@@ -2536,8 +2538,6 @@ h3 {
 .guide-copy { max-width: 850px; margin: 32px 0; }
 .resource-section-title { padding: 22px 26px 0; }
 .tool-actions { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:16px 0; }
-.refinery-links small { display:flex; gap:8px; align-items:center; }
-.refinery-links a, .refinery-links a:nth-child(even) { background:var(--panel-citron); }
 .refinery-links strong, .practice-skill-title strong, .global-directory-list strong { text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:5px; }
 .reference-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:20px 0; }
 .reference-card { padding:22px; border:1px solid var(--line); background:var(--panel-warm); }
@@ -2651,13 +2651,8 @@ html[data-theme="dark"] .dossier-nav a:is(:hover, :focus-visible) { color:var(--
 .refinery-page-head { padding:20px 0 18px; }
 .refinery-page-head h1 { font-size:clamp(2.1rem,4vw,3.3rem); margin:12px 0 8px; }
 .refinery-page-head p { margin:0; }
-.refinery-boundary-compact { padding:16px 20px; margin:18px 0; }
-.refinery-boundary-compact p { margin:0 0 8px; }
-.refinery-boundary-compact summary { cursor:pointer; font-size:.85rem; text-decoration:underline; text-underline-offset:3px; }
-.refinery-boundary-compact details[open] p { margin:12px 0 0; }
 .inquiry-start { margin:18px 0 12px; }
 .inquiry-mode-note { margin:0 0 18px; padding:0; background:none; color:var(--muted); }
-.inquiry-send-mode { padding:12px 0; border-bottom:1px solid var(--line); }
 .inquiry-reset { padding:0 0 24px; }
 .transfer-notice { padding:18px 22px; margin:20px 0; background:var(--panel-citron); border:1px solid var(--line); }
 .transfer-notice p { margin:0; }
@@ -2817,7 +2812,8 @@ html[data-theme="dark"] .dossier-nav a:is(:hover, :focus-visible) { color:var(--
 @media(max-width:700px) { .reference-jumps { grid-template-columns:1fr; } }
 
 .text-type-view-nav { display:flex; flex-wrap:wrap; gap:4px; border-bottom:2px solid var(--ink); margin:24px 0 30px; }
-.text-type-view-nav a { padding:14px 24px; border:1px solid var(--line); text-decoration:underline; text-underline-offset:4px; background:var(--panel-warm); }
+.example-tab-label { align-self:center; margin:0 8px; font-size:.8rem; color:var(--muted); }
+.text-type-view-nav a { padding:12px 16px; border:1px solid var(--line); text-decoration:underline; text-underline-offset:4px; background:var(--panel-warm); }
 .text-type-view-nav a[aria-current="page"] { background:var(--graphite); color:var(--citron); text-decoration:none; }
 .text-type-overview { max-width:1000px; }
 .text-type-view-heading { margin-bottom:28px; }
@@ -3117,14 +3113,8 @@ summary:is(:hover, :focus-visible) { text-decoration: underline; text-underline-
 .interior-sidebar select:hover { border-color: var(--citron); }
 .field-requirement { font-size: .75rem; font-weight: 500; color: var(--muted); }
 .field-requirement > span { color: var(--ink); }
-.refinery-sequence { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; margin: 4px 0 24px; padding: 16px 0; border-block: 1px solid var(--line); }
-.refinery-sequence li { min-width: 0; }
-.refinery-sequence strong, .refinery-sequence span { display: block; }
-.refinery-sequence strong { font-size: .88rem; }
-.refinery-sequence span { font-size: .82rem; color: var(--muted); margin-top: 6px; }
 .student-input-label { display: inline-flex; align-items: center; gap: 6px; }
 .notebook-shortcut { display: inline-flex; align-items: center; gap: 8px; }
-@media (max-width: 650px) { .refinery-sequence { grid-template-columns: 1fr; gap: 12px; } }
 @media (prefers-reduced-motion: reduce) {
   .button, .content-card, .assessment-card, .course-gateway { transition: none; }
   .button:active:not(:disabled), .content-card:is(:hover, :focus-visible) { transform: none; }
@@ -3132,7 +3122,6 @@ summary:is(:hover, :focus-visible) { text-decoration: underline; text-underline-
 
 .field-label .field-requirement { margin-left:.5em; white-space:nowrap; }
 html[data-theme="dark"] .button:not(.secondary):not(:disabled):is(:hover, :focus-visible) { background:#e5f59c; color:var(--graphite); }
-.refinery-sequence { max-width:900px; }
 .interior-sidebar a[aria-current="page"] { box-shadow:inset 3px 0 currentColor; font-weight:600; }
 html[data-theme="dark"] .close-analysis :is(button, a, summary, .close-image-scroll):focus-visible { outline-color:var(--citron); }
 html[data-theme="dark"] .site-feedback > summary:is(:hover, :focus-visible) { color:var(--citron); }

@@ -2,7 +2,7 @@
 import FieldRequirement from "./field-requirement";
 import ExportFormatSelect from "./export-format";
 import type {ExportFormat} from "@/lib/practice-record";
-import RefineryBoundary from "./refinery-boundary";
+import RefineryBoundary, { RefineryDataNotice } from "./refinery-boundary";
 import { useRef, useState } from "react";
 import { Sparkles, RefreshCw } from "lucide-react";
 import { fieldsOfInquiry, inquiryStages } from "@/lib/inquiry-options";
@@ -57,8 +57,11 @@ export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"
      </section>
      <section className="inquiry-draft"><h2>My working idea</h2><p>{testing ? "Write at least 10 characters. A separate message is optional." : "Leave this empty until you have an idea to test. Choose “Refine my working idea” when you are ready."}</p><label className="field"><span className="field-label">{kind==="global-issue"?"My provisional global issue":"My provisional line of inquiry"}<FieldRequirement required={testing}/></span><textarea required={testing} minLength={testing?10:undefined} maxLength={3000} rows={7} value={draft} onChange={e=>setDraft(e.target.value)}/></label></section>
     </div>
-    <p className="inquiry-send-mode"><strong>{testing ? "Refining your working idea" : "Exploring a direction"}</strong> · Your current notes and conversation are included with this message.</p>
-    <p className="hint">Start with your own thinking. Use the feedback to question and develop your ideas.</p>
+    <details className="inquiry-explainer">
+      <summary>What is sent for feedback?</summary>
+      <p>Your message includes your texts, evidence, working idea, and earlier exchanges{kind === "global-issue" ? ", plus your field of inquiry" : ""}. Editing a field keeps it on this page until you request feedback.</p>
+    </details>
+    <RefineryDataNotice provider={provider.disclosure} />
     <button className="button" disabled={busy||exhausted||!course||texts.trim().length<2||(testing?draft.trim().length<10:message.trim().length<2)}>{busy?<><RefreshCw className="spin" size={16}/> Thinking and checking…</>:<><Sparkles size={16}/>{testing?"Get feedback on this idea":turns.length?"Send reply":"Start exploring"}</>}</button>
    </fieldset>
   </form>
@@ -67,9 +70,7 @@ export default function InquiryWorkshop({kind,initialCourse="",provider}:{kind:"
   {exhausted&&<p role="status">You have reached 12 exchanges. Download your record and take stock before starting a fresh conversation.</p>}
   {turns.length > 0 && <SiteFeedback target={`${kind}-refinery`} />}
 
-  <details className="inquiry-explainer"><summary>What is sent for feedback?</summary><p>Your texts, field of inquiry (for IO), evidence, working idea, and earlier conversation are sent only when you press the feedback or reply button. Editing a field does not send it.</p></details>
-  <p className="passage-privacy">Entries are processed by {provider.disclosure}. Do not include names, contact details, student IDs or other personally identifiable information. This site does not store the conversation. AI can be mistaken—check its questions against your texts. Records are not sent to your teacher automatically.</p>
-  <div className="refinery-save"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button type="button" className="button secondary" disabled={busy||(!turns.length&&!draft&&!message&&!texts&&!evidence)} onClick={save}>Download record</button><p className="hint">Includes every exchange, draft snapshots, your current notes, dates and model details.</p></div>
+  <div className="refinery-save"><ExportFormatSelect value={exportFormat} onChange={setExportFormat}/><button type="button" className="button secondary" disabled={busy||(!turns.length&&!draft&&!message&&!texts&&!evidence)} onClick={save}>Download record</button><p className="hint">Download before you leave to keep your conversation, drafts, and notes, including dates and model details.</p></div>
   {(turns.length>0||texts||draft||message||evidence)&&<div className="inquiry-reset">{confirmReset?<><p>Start fresh? This clears your texts, working notes and conversation. Download your record first if you want to keep it.</p><div className="tool-actions"><button type="button" className="button secondary" disabled={busy} onClick={()=>{setTexts("");setEvidence("");setDraft("");setMessage("");setTurns([]);setRecords([]);setField(fieldsOfInquiry[0]);setStage("Notice");setMode("explore");setError("");setConfirmReset(false);startRef.current?.focus();}}>Clear and start fresh</button><button type="button" className="button secondary" onClick={()=>setConfirmReset(false)}>Keep working</button></div></>:<button type="button" className="button secondary" disabled={busy} onClick={()=>setConfirmReset(true)}>Start a fresh conversation</button>}</div>}
  </div>;
 }

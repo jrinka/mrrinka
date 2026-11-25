@@ -51,13 +51,7 @@ Keep text beside symbols. Do not use the AI sparkle to mean generic practice. A 
 
 ## Refineries
 
-All four refineries share this orientation:
-
-1. Bring your thinking: add texts, evidence, and a draft or question.
-2. Get feedback: deliberately request AI guidance.
-3. Revise and keep a copy: make your own changes, then download the record.
-
-This is an orientation, not a locked wizard. Analysis and Comparison retain evidence/draft feedback. Global Issue and Line of Inquiry retain exploratory conversation and a separate working idea. Changing modes preserves both fields. Required and optional labels follow the selected mode. Refining a working idea keeps the action label “Get feedback on this idea” after the first turn.
+Each refinery opens with a short instruction about the evidence or idea to bring. Keep assessment guidance in its disclosure, identify the provider beside the feedback action, and explain storage beside Download. Analysis and Comparison retain evidence/draft feedback. Global Issue and Line of Inquiry retain exploratory conversation and a separate working idea. Changing modes preserves both fields. Required and optional labels follow the selected mode. Refining a working idea keeps the action label “Get feedback on this idea” after the first turn.
 
 Use “Get feedback on this draft/paragraph/idea” and “Get feedback on this revision” where applicable. “Send reply” remains appropriate for an ongoing exploratory conversation. “Feedback about this tool/page” is the separate site-quality voting control.
 

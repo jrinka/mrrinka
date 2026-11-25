@@ -20,6 +20,7 @@ import {
   archiveKeyword,
 } from "@/components/archive-art";
 import { publicCourse, courses } from "@/lib/content";
+import { retiredPracticeGuides } from "@/lib/practice-guides";
 import {
   isCourseId,
   courseSectionName,
@@ -170,12 +171,20 @@ export default async function CoursePage({ params, searchParams }: Props) {
     ? course.items.find((i) => i.id === path[1] && i.section === section)
     : undefined;
   if (path[1] && !item) notFound();
+  const sectionItems = course.items.filter(candidate =>
+    candidate.section === section && (section !== "practice" || !retiredPracticeGuides.has(candidate.id)));
+  if (section === "practice") {
+    const guide = item && retiredPracticeGuides.get(item.id);
+    if (guide) redirect(guide);
+    if (!item && !sectionItems.length) redirect("/practice");
+  }
   const sharedGuides:Record<string,string>={"From observation to analysis":"/resources/observation-to-analysis","SOAPSTone: a rhetorical reading scaffold":"/resources/reading-methods/soapstone","TPCASTT: a poetry reading scaffold":"/resources/reading-methods/tpcastt"};
   if(item?.section==="resources"&&sharedGuides[item.title])redirect(sharedGuides[item.title]);
   const base = `/courses/${courseId}`;
   const isLangLitPaperOne =
     courseId === "language-literature" && item?.title === "Paper 1";
   const href = (i: CourseItem) => `${base}/${i.section}/${i.id}`;
+  const query = item?.section === "text-types" ? await searchParams : {};
   const featured = course.items.find((i) => i.id === course.featuredId);
   function card(i: CourseItem, n: number) {
     return (
@@ -249,7 +258,7 @@ export default async function CoursePage({ params, searchParams }: Props) {
               )}
             </figure>
           )}
-          {item.section === "assessment" && item.title === "Individual Oral" && courseId !== "english-10" ? <IndividualOralGuide body={item.body} course={courseId} hasRubrics={Boolean(item.rubrics?.length)} /> : item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier hasRubrics={Boolean(item.rubrics?.length)} paperTwo={item.title === "Paper 2"} body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <TextTypeGuide body={item.body} itemId={item.id} href={`${base}/text-types/${item.id}`} showExample={(await searchParams).view === "example"} exampleChoice={(await searchParams).example === "microdramas" ? "microdramas" : (await searchParams).example === "divisions" ? "divisions" : (await searchParams).example === "wwf" ? "wwf" : (await searchParams).example === "cycling" ? "cycling" : (await searchParams).example === "paperweight" ? "paperweight" : (await searchParams).example === "caught" ? "caught" : (await searchParams).example === "comic" ? "comic" : (await searchParams).example === "bay-at-nice" ? "bay-at-nice" : undefined} /> : <Markdown>{item.body}</Markdown>}
+          {item.section === "assessment" && item.title === "Individual Oral" && courseId !== "english-10" ? <IndividualOralGuide body={item.body} course={courseId} hasRubrics={Boolean(item.rubrics?.length)} /> : item.section === "assessment" && courseId !== "english-10" ? <PaperOneDossier hasRubrics={Boolean(item.rubrics?.length)} paperTwo={item.title === "Paper 2"} body={item.body} workedExample={isLangLitPaperOne} literatureExample={courseId === "literature" && item.title === "Paper 1"} refinery={assessmentRefinery(item.title)} /> : item.section === "text-types" && hasTextTypeExample(courseId, item.id) ? <TextTypeGuide body={item.body} itemId={item.id} href={`${base}/text-types/${item.id}`} showExample={query.view === "example"} exampleChoice={typeof query.example === "string" ? query.example : undefined} /> : <Markdown>{item.body}</Markdown>}
           {item.section === "assessment" && courseId !== "english-10" && (
             <aside className="dossier-toolkit">
               <span className="mono">METHODS / SHARED</span>
@@ -312,9 +321,9 @@ export default async function CoursePage({ params, searchParams }: Props) {
           {section === "resources" && <p className="intro"><Link href="/resources/critical-lenses">Critical Lenses — explore different ways of reading ↗</Link></p>}
           {section === "practice" && <RefineryLinks kind={courseId === "english-10" ? "analysis" : undefined} />}
           <div className="cards">
-            {course.items.filter((i) => i.section === section).map(card)}
+            {sectionItems.map(card)}
           </div>
-          {!course.items.some((i) => i.section === section) && (
+          {!sectionItems.length && (
             <div className="empty">
               Materials will appear here as they are added.
             </div>
