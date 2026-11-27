@@ -20,6 +20,8 @@ Scattergories now has 128 categories: 96 broad everyday prompts (including Somet
 
 All 60 Word Ladder example paths have been checked for equal word lengths and one-letter steps. COLD → CORD → CARD → WARD → WARM remains. The BOOK and HILL routes were revised, and the SMILE route through STILE was replaced with SCORE → SHORE → SHARE → SHARK → SPARK. Alternative real-word routes are still accepted with teacher checking.
 
+Word Ladder now has three independently rotating levels. Classic retains the original 60 pairs and their saved rotation. Stretch adds 30 five-letter pairs with at least four differing positions. Expert adds 30 pairs with a required checkpoint and at least six moves across the two legs. Students can build any valid route and undo moves. A teacher can uncover an example one move at a time during paper or projected play. The move targets are the lengths of the supplied solutions.
+
 ## The Numbers Department
 
 Four further games live in `math/`: Equation Pending (generated six/eight-character equations), Twenty-Four, Somehow (validated banks and exact arithmetic), One Small Adjustment (seven-segment match moves), and What Are the Odds? (original questions with enumerated outcome grids). Arithmetic uses a bounded parser and exact fractions, never `eval`. Tests validate every shipped puzzle and the equation generator. Timers are optional and do not lock out play. Hints and explanations appear only after a player requests them. Any true one-match equation and any valid make-24 expression are accepted. Equation swaps use a narrower, documented commutative-operation rule.
