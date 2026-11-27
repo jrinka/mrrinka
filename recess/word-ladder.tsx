@@ -68,7 +68,7 @@ function LadderBoard({ level, puzzle, next }: { level: LadderLevel; puzzle: Ladd
   const count = `${moves} ${moves === 1 ? 'move' : 'moves'}`;
   return <section className="board challenge-board ladder-board" aria-label={`${level} ladder`}>
     <p className="eyebrow">{level.toUpperCase()} · {start.length} LETTERS</p>
-    <h2 className="ladder-target" aria-label={`${start} to ${target}`}>{start} <span aria-hidden="true">→</span> {target}</h2>
+    <h2 className="ladder-target" aria-label={`${start} to ${target}`}>{start} <span>→</span> {target}</h2>
     {checkpoint && <p className={'ladder-checkpoint' + (atCheckpoint ? ' reached' : '')}>
       {atCheckpoint ? <>Checkpoint <strong>{checkpoint}</strong> reached ✓</> :
         <>Checkpoint · Reach <strong>{checkpoint}</strong> before <strong>{target}</strong>.</>}
