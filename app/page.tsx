@@ -9,7 +9,7 @@ const sharedLinks = [
   { title: "Skills & Methods", note: "General English resources for reading, analysis, and writing.", label: "FOR EVERY COURSE", href: "/resources" },
   { title: "Practice", note: "Try a passage, draw a Paper 2 question, or rehearse your IO.", label: "READ / WRITE / REVISE", href: "/practice" },
   { title: "My calendar", note: "The day cycle and class meetings.", label: "8-DAY CYCLE", href: "/calendar" },
-  { title: "Brain Break", note: "Word games, drawing challenges, and number puzzles for the class.", label: "CLASSROOM GAMES", href: "/recess" },
+  { title: "Recess", note: "Word games, drawing challenges, and number puzzles for the class.", label: "CLASSROOM GAMES", href: "/recess" },
 ];
 
 export default function Home() {
